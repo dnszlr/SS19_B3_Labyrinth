@@ -9,10 +9,11 @@ import Backend.Figure.Figure;
 public class Gameboard {
 
 	private MazeCard freeCard;
-	private MazeCard[][] map = new MazeCard[7][7];
+	private MazeCard[][] map;
 
 	public Gameboard() {
 		
+		this.map = new MazeCard[7][7];
 	}
 
 	private MazeCard generateNewMaze(List<Treasure> treasures) {

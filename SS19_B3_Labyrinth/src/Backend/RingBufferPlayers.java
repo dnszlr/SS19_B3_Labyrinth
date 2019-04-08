@@ -12,7 +12,7 @@ public class RingBufferPlayers {
 
 	public RingBufferPlayers() {
 		
-		
+		this.figures = new ArrayList<Figure>();
 	}
 
 	public boolean addFigure(Figure figure) {
