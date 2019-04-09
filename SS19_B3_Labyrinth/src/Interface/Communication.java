@@ -3,6 +3,11 @@ package Interface;
 import Backend.Color;
 
 public interface Communication {
+	
+	/**
+	 * Interface der Klasse Communikation welche von Manager implementiert wird.
+	 * @return
+	 */
 
 	public String[][] getMap();
 
@@ -31,5 +36,9 @@ public interface Communication {
 	public boolean saveGame(String path);
 
 	public boolean loadGame(String path);
+	
+	/**
+	 * Siehe Klasse Manager für genauere Beschreibung der Methoden
+	 */
 
 }
