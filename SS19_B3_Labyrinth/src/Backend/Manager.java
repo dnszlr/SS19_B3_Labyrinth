@@ -1,7 +1,6 @@
 package Backend;
 
 import java.util.ArrayList;
-
 import Backend.Cards.ObjectCard;
 import Backend.Map.Gameboard;
 import Interface.Communication;
@@ -19,7 +18,7 @@ public class Manager implements Communication {
 	private Treasure treasure;
 	private Gameboard gameboard;
 	private RingBufferPlayers players;
-	private ArrayList<ObjectCard> objectCards;
+	private ArrayList<ObjectCard> objectCards = new ArrayList<ObjectCard>();
 	private boolean isMoveFigure;
 	private boolean isPlaceMaceCard;
 
