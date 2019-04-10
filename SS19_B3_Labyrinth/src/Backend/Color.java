@@ -6,10 +6,10 @@ public enum Color {
 	 *Die Attribute des Enums Color mit einer (x,y) Position
 	 */
 	RED(0,0),
-	GREEN(0,0),
-	BLUE(0,0),
-	YELLOW(0,0);
-	private static int[] pos;
+	GREEN(6,0),
+	BLUE(6,6),
+	YELLOW(0,6);
+	private int[] pos;
 
 	/**
 	 * Konstruktor für die Klasse Color.
