@@ -11,8 +11,6 @@ public interface Communication {
 
 	public String[][] getMap();
 
-	public boolean moveFigure(Color color, int[] pos);
-
 	public String[] getPlayers();
 
 	public String getActivePlayer();
@@ -31,11 +29,16 @@ public interface Communication {
 
 	public String hasWon();
 
-	public boolean endGame();
+	public boolean endRound();
 
 	public boolean saveGame(String path);
 
 	public boolean loadGame(String path);
+	
+	public String getFreeMazeCard();
+	
+	public String rotateGear(String direction);
+
 	
 	/**
 	 * Siehe Klasse Manager für genauere Beschreibung der Methoden
