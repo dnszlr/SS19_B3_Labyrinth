@@ -103,7 +103,7 @@ public class Manager implements Communication {
 	}
 
 	/**
-	 * Methode um das Spiel zu beenden.
+	 * Methode um eine Runde zu beenden.
 	 */
 	@Override
 	public boolean endRound() {
