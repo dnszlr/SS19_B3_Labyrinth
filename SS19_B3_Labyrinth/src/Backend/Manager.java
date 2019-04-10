@@ -25,15 +25,20 @@ public class Manager implements Communication {
 	/**
 	 * Getter von der Map des Gameboards.
 	 */
-	@Override
 	public String[][] getMap() {
 		return null;
 	}
 
 	/**
+	 * Bewegt die Figur an einen bestimmten Index des Arrays.
+	 */
+	public boolean moveFigure(Color color, int[] pos) {
+		return false;
+	}
+
+	/**
 	 * Getter für die Spieler.
 	 */
-	@Override
 	public String[] getPlayers() {
 		return null;
 	}
@@ -41,7 +46,6 @@ public class Manager implements Communication {
 	/**
 	 * Getter für den Spieler der gerade am Zug ist.
 	 */
-	@Override
 	public String getActivePlayer() {
 		return null;
 	}
@@ -49,7 +53,6 @@ public class Manager implements Communication {
 	/**
 	 * Getter für die Treasure Karte des Spielers der gerade am Zug ist.
 	 */
-	@Override
 	public String getActivePlayerTreasureCard() {
 		return null;
 	}
@@ -57,7 +60,6 @@ public class Manager implements Communication {
 	/**
 	 * Getter für die bereits gefunden Treasures.
 	 */
-	@Override
 	public String getFoundTreasures(Color color) {
 		return null;
 	}
@@ -65,7 +67,6 @@ public class Manager implements Communication {
 	/**
 	 * Methode um Spieler dem Spiel hinzuzufügen.
 	 */
-	@Override
 	public String addPlayer(String name, Color color) {
 		return null;
 	}
@@ -73,7 +74,6 @@ public class Manager implements Communication {
 	/**
 	 * Methode um das Spiel zu starten.
 	 */
-	@Override
 	public String startGame() {
 		return null;
 	}
@@ -81,7 +81,6 @@ public class Manager implements Communication {
 	/**
 	 * Methode um die Wegkarten zu bewegen.
 	 */
-	@Override
 	public boolean moveGears(String position) {
 		return false;
 	}
@@ -89,7 +88,6 @@ public class Manager implements Communication {
 	/**
 	 * Methode um die Spielfiguren zu bewegen.
 	 */
-	@Override
 	public boolean moveFigure(int[] position) {
 		return false;
 	}
@@ -97,7 +95,6 @@ public class Manager implements Communication {
 	/**
 	 * Methode um den Sieger zu ermitteln.
 	 */
-	@Override
 	public String hasWon() {
 		return null;
 	}
@@ -105,15 +102,13 @@ public class Manager implements Communication {
 	/**
 	 * Methode um das Spiel zu beenden.
 	 */
-	@Override
-	public boolean endRound() {
+	public boolean endGame() {
 		return false;
 	}
 
 	/**
 	 * Methode um das Spiel zu speichern.
 	 */
-	@Override
 	public boolean saveGame(String path) {
 		return false;
 	}
@@ -121,22 +116,8 @@ public class Manager implements Communication {
 	/**
 	 * Methode um ein gespeichertes Spiel zu laden.
 	 */
-	@Override
 	public boolean loadGame(String path) {
 		return false;
-	}
-	/**
-	 * Methode um eine freie Labyrint Karte zu erhalten.
-	 */
-	@Override
-	public String getFreeMazeCard() {
-		return null;
-	}
-
-	@Override
-	public String rotateGear(String direction) {
-		
-		return null;
 	}
 
 }

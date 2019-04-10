@@ -1,6 +1,7 @@
 package Backend;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Backend.Figure.Figure;
 
@@ -9,7 +10,7 @@ public class RingBufferPlayers {
 	 * Attribute der Klasse RingBufferPlayers
 	 */
 	private int readPointer;
-	private ArrayList<Figure> figures;
+	private List<Figure> figures;
 	private Figure ActivePlayer;
 
 	/**
