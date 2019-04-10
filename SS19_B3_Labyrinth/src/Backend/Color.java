@@ -9,7 +9,7 @@ public enum Color {
 	GREEN(0,0),
 	BLUE(0,0),
 	YELLOW(0,0);
-	private static int[] pos;
+	private int[] pos;
 
 	/**
 	 * Konstruktor für die Klasse Color.

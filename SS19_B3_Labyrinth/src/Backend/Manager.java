@@ -21,6 +21,8 @@ public class Manager implements Communication {
 	private ArrayList<ObjectCard> objectCards = new ArrayList<ObjectCard>();
 	private boolean isMoveFigure;
 	private boolean isPlaceMaceCard;
+	
+	
 
 	/**
 	 * Getter von der Map des Gameboards.
