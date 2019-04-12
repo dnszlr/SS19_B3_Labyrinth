@@ -23,17 +23,17 @@ public interface Communication {
 
 	public String startGame();
 
-	public boolean moveGears(String position);
+	public String moveGears(String position);
 
 	public boolean moveFigure(int[] position);
 
 	public String hasWon();
 
-	public boolean endRound();
+	public String endRound();
 
-	public boolean saveGame(String path);
+	public String saveGame(String path, String type);
 
-	public boolean loadGame(String path);
+	public String loadGame(String path, String type);
 	
 	public String getFreeMazeCard();
 	

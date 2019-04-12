@@ -9,14 +9,14 @@ public enum Color {
 	GREEN(6,0),
 	BLUE(6,6),
 	YELLOW(0,6);
-	private int[] pos;
+	private final int[] pos = {0, 6};
 
 	/**
 	 * Konstruktor für die Klasse Color.
 	 * @param x
 	 * @param y
 	 */
-	private Color (int x, int y) {
+	private Color(int x, int y) {
 	}
 
 	/**

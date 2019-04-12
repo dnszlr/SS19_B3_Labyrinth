@@ -82,8 +82,8 @@ public class Manager implements Communication {
 	 * Methode um die Wegkarten zu bewegen.
 	 */
 	@Override
-	public boolean moveGears(String position) {
-		return false;
+	public String moveGears(String position) {
+		return null;
 	}
 
 	/**
@@ -106,24 +106,24 @@ public class Manager implements Communication {
 	 * Methode um eine Runde zu beenden.
 	 */
 	@Override
-	public boolean endRound() {
-		return false;
+	public String endRound() {
+		return null;
 	}
 
 	/**
 	 * Methode um das Spiel zu speichern.
 	 */
 	@Override
-	public boolean saveGame(String path) {
-		return false;
+	public String saveGame(String path, String type) {
+		return null;
 	}
 
 	/**
 	 * Methode um ein gespeichertes Spiel zu laden.
 	 */
 	@Override
-	public boolean loadGame(String path) {
-		return false;
+	public String loadGame(String path, String type) {
+		return null;
 	}
 	/**
 	 * Methode um eine freie Labyrintkarte zu erfragen.
