@@ -58,7 +58,7 @@ public class Manager implements Communication {
 	 * Getter für die bereits gefunden Treasures.
 	 */
 	@Override
-	public String getFoundTreasures(Color color) {
+	public String getFoundTreasures(String color) {
 		return null;
 	}
 
@@ -66,7 +66,7 @@ public class Manager implements Communication {
 	 * Methode um Spieler dem Spiel hinzuzufügen.
 	 */
 	@Override
-	public String addPlayer(String name, Color color) {
+	public String addPlayer(String name, String color) {
 		return null;
 	}
 

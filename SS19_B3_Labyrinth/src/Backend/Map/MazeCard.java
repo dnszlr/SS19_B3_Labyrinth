@@ -25,6 +25,10 @@ public abstract class MazeCard {
 	 * @param treasure
 	 */
 	public MazeCard(int[] wall, Color color, Treasure treasure) {
+		
+		this.wall = wall;
+		this.color = color;
+		this.treasure = treasure;
 	}
 	
 	/**
@@ -41,14 +45,14 @@ public abstract class MazeCard {
 	 * @return
 	 */
 	public int[] getWall() {
-		return null;
+		return this.wall;
 	}
 	/**
 	 * Getter um einen Treasure zu bekommen
 	 * @return
 	 */
 	public Treasure getTreasure() {
-		return null;
+		return this.treasure;
 	}
 	/**
 	 * Getter um die Nachbarn der aktuellen Posititon in eine bestimme Richtung zu erhalten.
@@ -56,6 +60,7 @@ public abstract class MazeCard {
 	 * @return
 	 */
 	public MazeCard getNeighboring(Direction direction) {
+		
 		return null;
 	}
 	/**
@@ -63,14 +68,14 @@ public abstract class MazeCard {
 	 * @return
 	 */
 	public Color getColor() {
-		return null;
+		return this.color;
 	}
 	/**
 	 * Getter um die Figuren zu erfragen.
 	 * @return
 	 */
 	public ArrayList<Figure> getFigures() {
-		return null;
+		return this.figures;
 	}
 	/**
 	 * Setter um die Nachbarkarten zu setzen. Karte und Richtung bestimmbar.

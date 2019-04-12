@@ -46,7 +46,8 @@ public class Figure {
 	 */
 
 	public String getName() {
-		return null;
+		
+		return this.name;
 	}
 
 	/**
@@ -56,7 +57,8 @@ public class Figure {
 	 */
 
 	public Color getColor() {
-		return null;
+		
+		return this.color;
 	}
 
 	/**
@@ -66,7 +68,8 @@ public class Figure {
 	 */
 
 	public ObjectCard getTreasureCard() {
-		return null;
+		
+		return this.treasureCard;
 	}
 
 	/**
@@ -76,7 +79,8 @@ public class Figure {
 	 */
 
 	public int[] getPos() {
-		return null;
+		
+		return this.pos;
 	}
 
 	/**
@@ -86,6 +90,7 @@ public class Figure {
 	 */
 
 	public String getFoundCard() {
+		
 		return null;
 	}
 

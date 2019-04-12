@@ -18,6 +18,8 @@ public class ObjectCard {
 	 */
 
 	public ObjectCard(Treasure treasure) {
+		
+		this.treasure = treasure;
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package Backend;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import Backend.Figure.Figure;
 
@@ -10,7 +11,7 @@ public class RingBufferPlayers {
 	 */
 	private int readPointer;
 	private ArrayList<Figure> figures;
-	private Figure ActivePlayer;
+	private Figure activePlayer;
 
 	/**
 	 * Konstuktor der Klasse RingBufferPlayers
@@ -29,7 +30,18 @@ public class RingBufferPlayers {
 	 */
 
 	public boolean addFigure(Figure figure) {
-		return false;
+		boolean test = false;
+		for(Figure i : figures) {
+			if(figure.equals(i)) {
+				test = false;
+			}else {
+				test = true;
+			}
+		}
+		if(test = true) {
+			figures.add(figure);
+		}
+		return test;
 	}
 
 	/**
@@ -39,7 +51,8 @@ public class RingBufferPlayers {
 	 */
 
 	public Figure getActivePlayer() {
-		return null;
+		
+		return this.activePlayer;
 	}
 
 	/**
@@ -49,7 +62,15 @@ public class RingBufferPlayers {
 	 */
 
 	public Figure nextPlayer() {
-		return null;
+		int counter = 0;
+		Figure nextFigure = null;
+		for(Figure i : figures) {
+			counter++;
+			if(this.activePlayer.equals(i)) {
+				nextFigure = figures.get(counter++);
+			}
+		}
+		return nextFigure;
 	}
 
 	/**
@@ -57,7 +78,9 @@ public class RingBufferPlayers {
 	 */
 
 	public void shufflePlayers() {
-
+		
+		Collections.shuffle(this.figures);
+		
 	}
 
 }

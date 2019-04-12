@@ -17,9 +17,9 @@ public interface Communication {
 
 	public String getActivePlayerTreasureCard();
 
-	public String getFoundTreasures(Color color);
+	public String getFoundTreasures(String color);
 
-	public String addPlayer(String name, Color color);
+	public String addPlayer(String name, String color);
 
 	public String startGame();
 
