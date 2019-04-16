@@ -1,5 +1,8 @@
 package Backend.Figure;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import Backend.Color;
 import Backend.Cards.ObjectCard;
 
@@ -24,6 +27,8 @@ public class Figure {
 	public Figure(String name, Color color) {
 
 		this.cardstack = new CardsStack();
+		this.name = name;
+		this.color = color;
 	}
 
 	/**
@@ -37,6 +42,9 @@ public class Figure {
 	public Figure(String name, Color color, int[] pos) {
 
 		this.cardstack = new CardsStack();
+		this.name = name;
+		this.color = color;
+		this.setPos(pos);
 	}
 
 	/**
@@ -46,7 +54,7 @@ public class Figure {
 	 */
 
 	public String getName() {
-		
+
 		return this.name;
 	}
 
@@ -57,7 +65,7 @@ public class Figure {
 	 */
 
 	public Color getColor() {
-		
+
 		return this.color;
 	}
 
@@ -68,7 +76,7 @@ public class Figure {
 	 */
 
 	public ObjectCard getTreasureCard() {
-		
+
 		return this.treasureCard;
 	}
 
@@ -79,7 +87,7 @@ public class Figure {
 	 */
 
 	public int[] getPos() {
-		
+
 		return this.pos;
 	}
 
@@ -89,8 +97,8 @@ public class Figure {
 	 * @return
 	 */
 
-	public String getFoundCard() {
-		
+	public String getFoundCards() {
+
 		return null;
 	}
 
@@ -102,6 +110,8 @@ public class Figure {
 
 	public void setPos(int[] pos) {
 
+		this.pos = pos;
+
 	}
 
 	/**
@@ -110,6 +120,8 @@ public class Figure {
 	 * @param card
 	 */
 	public void addCard(ObjectCard card) {
+
+		cardstack.addCard(card);
 
 	}
 
@@ -120,7 +132,8 @@ public class Figure {
 	 */
 
 	public ObjectCard drawCard() {
-		return null;
+
+		return cardstack.drawCard();
 	}
 
 	/**
@@ -131,7 +144,9 @@ public class Figure {
 	 */
 
 	public boolean isFound(ObjectCard card) {
-		return false;
+		
+		return cardstack.isAllFound();
+
 	}
 
 	/**
@@ -141,7 +156,9 @@ public class Figure {
 	 */
 
 	public boolean isAllFound() {
-		return false;
+
+		return cardstack.isAllFound();
+
 	}
 
 	/**
@@ -162,14 +179,14 @@ public class Figure {
 		/**
 		 * Attribute der Klasse CardsStack
 		 */
-		private ObjectCard[] foundCards;
-		private ObjectCard[] objectsCards;
+		private ArrayList<ObjectCard> foundCards;
+		private ArrayList<ObjectCard> objectsCards;
 
 		/**
 		 * Konstruktor für die Klasse CardsStack
 		 */
 
-		public CardsStack() {
+		private CardsStack() {
 
 		}
 
@@ -179,8 +196,9 @@ public class Figure {
 		 * @param card
 		 */
 
-		public void addCard(ObjectCard card) {
+		private void addCard(ObjectCard card) {
 
+			objectsCards.add(card);
 		}
 
 		/**
@@ -189,8 +207,11 @@ public class Figure {
 		 * @return
 		 */
 
-		public ObjectCard drawCard() {
-			return null;
+		private ObjectCard drawCard() {
+
+			ObjectCard drawCard = objectsCards.get(0);
+			objectsCards.remove(0);
+			return drawCard;
 		}
 
 		/**
@@ -200,8 +221,16 @@ public class Figure {
 		 * @return
 		 */
 
-		public boolean cardFound(ObjectCard card) {
-			return false;
+		private boolean cardFound(ObjectCard card) {
+			boolean result = false;
+			for (ObjectCard i : foundCards) {
+				if (result == false) {
+					if (i.equals(card)) {
+						result = true;
+					}
+				}
+			}
+			return result;
 		}
 
 		/**
@@ -210,8 +239,12 @@ public class Figure {
 		 * @return
 		 */
 
-		public boolean isAllFound() {
-			return false;
+		private boolean isAllFound() {
+			boolean result = false;
+			if (objectsCards.size() == 0) {
+				result = true;
+			}
+			return result;
 		}
 
 		/**
@@ -221,6 +254,7 @@ public class Figure {
 
 		@Override
 		public String toString() {
+
 			return null;
 		}
 

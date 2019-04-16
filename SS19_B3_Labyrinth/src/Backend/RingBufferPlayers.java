@@ -9,7 +9,7 @@ public class RingBufferPlayers {
 	/**
 	 * Attribute der Klasse RingBufferPlayers
 	 */
-	private int readPointer;
+	private int readPointer = 0;
 	private ArrayList<Figure> figures;
 	private Figure activePlayer;
 
@@ -20,6 +20,8 @@ public class RingBufferPlayers {
 	public RingBufferPlayers() {
 
 		this.figures = new ArrayList<Figure>();
+		
+		
 	}
 
 	/**
@@ -62,7 +64,7 @@ public class RingBufferPlayers {
 	 */
 
 	public Figure nextPlayer() {
-		int counter = 0;
+		int counter = this.readPointer;
 		Figure nextFigure = null;
 		for(Figure i : figures) {
 			counter++;

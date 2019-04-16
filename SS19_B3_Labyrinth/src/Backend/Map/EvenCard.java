@@ -13,8 +13,8 @@ public class EvenCard extends MazeCard {
 	 * @param color
 	 * @param treasure
 	 */
-	public EvenCard(Color color, Treasure treasure) {
-		super(null, color, treasure);
+	public EvenCard() {
+		super(new int[] { 1, 0, 1, 0 }, null, null);
 
 	}
 
@@ -24,6 +24,14 @@ public class EvenCard extends MazeCard {
 	@Override
 	public void rotateLeft() {
 
+		for (int i = 0; i < wall.length; i++) {
+			if (wall[i] == 0) {
+				wall[i] = 1;
+			} else {
+				wall[i] = 0;
+			}
+		}
+
 	}
 
 	/**
@@ -31,6 +39,14 @@ public class EvenCard extends MazeCard {
 	 */
 	@Override
 	public void rotateRight() {
+
+		for (int i = 0; i < wall.length; i++) {
+			if (wall[i] == 0) {
+				wall[i] = 1;
+			} else {
+				wall[i] = 0;
+			}
+		}
 
 	}
 }

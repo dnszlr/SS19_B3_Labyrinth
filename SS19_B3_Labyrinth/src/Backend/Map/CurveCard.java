@@ -1,5 +1,7 @@
 package Backend.Map;
 
+import java.util.Arrays;
+
 import Backend.Color;
 import Backend.Treasure;
 
@@ -7,12 +9,17 @@ import Backend.Treasure;
  * Klasse CurveCard erbt von Klasse @MazeCard
  */
 public class CurveCard extends MazeCard {
+
 	/**
 	 * Konstruktor der Klasse CurveCard
 	 */
-	public CurveCard() {
-		super(null, null, null);
+	public CurveCard(Color color, Treasure treasure) {
+		super(new int[] { 1, 1, 0, 0 }, color, treasure);
 
+	}
+
+	public CurveCard(Treasure treasure) {
+		super(new int[] { 1, 1, 0, 0 }, null, treasure);
 	}
 
 	/**
@@ -20,7 +27,15 @@ public class CurveCard extends MazeCard {
 	 */
 	@Override
 	public void rotateLeft() {
-
+		if (Arrays.equals(this.wall, new int[] { 1, 1, 0, 0 })) {
+			this.wall = new int[] { 1, 0, 0, 1 };
+		} else if (Arrays.equals(this.wall, new int[] { 1, 0, 0, 1 })) {
+			this.wall = new int[] { 0, 0, 1, 1 };
+		} else if (Arrays.equals(this.wall, new int[] { 0, 0, 1, 1 })) {
+			this.wall = new int[] { 0, 1, 1, 0 };
+		} else if (Arrays.equals(this.wall, new int[] { 0, 1, 1, 0 })) {
+			this.wall = new int[] { 1, 1, 0, 0 };
+		}
 	}
 
 	/**
@@ -28,7 +43,15 @@ public class CurveCard extends MazeCard {
 	 */
 	@Override
 	public void rotateRight() {
-
+		if (Arrays.equals(this.wall, new int[] { 1, 1, 0, 0 })) {
+			this.wall = new int[] { 0, 1, 1, 0 };
+		} else if (Arrays.equals(this.wall, new int[] { 0, 1, 1, 0 })) {
+			this.wall = new int[] { 0, 0, 1, 1 };
+		} else if (Arrays.equals(this.wall, new int[] { 0, 0, 1, 1 })) {
+			this.wall = new int[] { 1, 0, 0, 1 };
+		} else if (Arrays.equals(this.wall, new int[] { 1, 0, 0, 1 })) {
+			this.wall = new int[] { 1, 1, 0, 0 };
+		}
 	}
 
 }

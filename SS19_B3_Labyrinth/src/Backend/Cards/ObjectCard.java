@@ -18,8 +18,9 @@ public class ObjectCard {
 	 */
 
 	public ObjectCard(Treasure treasure) {
-		
+
 		this.treasure = treasure;
+		this.found = false;
 	}
 
 	/**
@@ -27,16 +28,19 @@ public class ObjectCard {
 	 * 
 	 * @return
 	 */
-
 	public boolean isFound() {
-		return false;
+
+		return found;
 	}
 
 	/**
 	 * Methode um zu überprüfen ob ein bestimmter Schatz schon gefunden wurde
 	 */
-
 	public void found(Treasure treasure) {
+
+		if (this.treasure.equals(treasure)) {
+			this.found = true;
+		}
 
 	}
 
@@ -46,8 +50,12 @@ public class ObjectCard {
 	 */
 
 	@Override
-	public boolean equals(Object obj) {
-		return false;
+	public boolean equals(Object o) {
+		boolean result = false;
+		if (this.treasure.equals(o)) {
+			result = true;
+		}
+		return result;
 	}
 
 	/**
@@ -57,7 +65,7 @@ public class ObjectCard {
 
 	@Override
 	public String toString() {
-		return null;
+		return "The Treasure is: " + this.treasure + " Found: " + this.found;
 	}
 
 }
