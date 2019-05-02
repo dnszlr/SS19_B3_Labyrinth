@@ -9,7 +9,7 @@ public class RingBufferPlayers {
 	/**
 	 * Attribute der Klasse RingBufferPlayers
 	 */
-	private int readPointer = 0;
+	private int readPointer;
 	private ArrayList<Figure> figures;
 	private Figure activePlayer;
 
@@ -20,8 +20,7 @@ public class RingBufferPlayers {
 	public RingBufferPlayers() {
 
 		this.figures = new ArrayList<Figure>();
-		
-		
+
 	}
 
 	/**
@@ -33,15 +32,19 @@ public class RingBufferPlayers {
 
 	public boolean addFigure(Figure figure) {
 		boolean test = false;
-		for(Figure i : figures) {
-			if(figure.equals(i)) {
+		for (Figure i : figures) {
+			if (figure.equals(i)) {
 				test = false;
-			}else {
+			} else {
 				test = true;
 			}
 		}
-		if(test = true) {
+		if (test = true) {
 			figures.add(figure);
+			if (figures.size() == 1) {
+				this.activePlayer = figure;
+			}
+
 		}
 		return test;
 	}
@@ -53,7 +56,7 @@ public class RingBufferPlayers {
 	 */
 
 	public Figure getActivePlayer() {
-		
+
 		return this.activePlayer;
 	}
 
@@ -64,14 +67,14 @@ public class RingBufferPlayers {
 	 */
 
 	public Figure nextPlayer() {
-		int counter = this.readPointer;
-		Figure nextFigure = null;
-		for(Figure i : figures) {
-			counter++;
-			if(this.activePlayer.equals(i)) {
-				nextFigure = figures.get(counter++);
-			}
+		if (this.readPointer < figures.size() - 1) {
+			this.readPointer++;
+		} else {
+			this.readPointer = 0;
 		}
+
+		Figure nextFigure = figures.get(this.readPointer);
+		this.activePlayer = nextFigure;
 		return nextFigure;
 	}
 
@@ -80,9 +83,9 @@ public class RingBufferPlayers {
 	 */
 
 	public void shufflePlayers() {
-		
+
 		Collections.shuffle(this.figures);
-		
+
 	}
 
 }

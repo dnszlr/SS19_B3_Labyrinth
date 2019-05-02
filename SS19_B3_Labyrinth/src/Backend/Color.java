@@ -10,7 +10,7 @@ public enum Color {
 	GREEN(6,0),
 	BLUE(6,6),
 	YELLOW(0,6);
-	private final int[] pos = new int[7];
+	private final int[] pos = new int[3];
 	/**
 	 * Konstruktor für die Klasse Color.
 	 * @param x

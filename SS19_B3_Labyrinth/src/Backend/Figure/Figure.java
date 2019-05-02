@@ -145,7 +145,7 @@ public class Figure {
 
 	public boolean isFound(ObjectCard card) {
 		
-		return cardstack.isAllFound();
+		return cardstack.cardFound(card);
 
 	}
 
@@ -223,9 +223,11 @@ public class Figure {
 
 		private boolean cardFound(ObjectCard card) {
 			boolean result = false;
-			for (ObjectCard i : foundCards) {
+			for (ObjectCard i : objectsCards) {
 				if (result == false) {
 					if (i.equals(card)) {
+						foundCards.add(i);
+						objectsCards.remove(i);
 						result = true;
 					}
 				}
