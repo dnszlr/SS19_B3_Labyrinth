@@ -34,7 +34,7 @@ public class ObjectCard {
 	}
 
 	/**
-	 * Methode um zu überprüfen ob ein bestimmter Schatz schon gefunden wurde
+	 * Methode um eine Karte als gefunden zu markieren.
 	 */
 	public void found(Treasure treasure) {
 
@@ -49,14 +49,14 @@ public class ObjectCard {
 	 * Inhaltsgleichheit.
 	 */
 
-	@Override
-	public boolean equals(Object o) {
-		boolean result = false;
-		if (this.treasure.equals(o)) {
-			result = true;
-		}
-		return result;
-	}
+//	@Override
+//	public boolean equals(Object o) { //falsch
+//		boolean result = false;
+//		if (this.treasure.equals(o)) {
+//			result = true;
+//		}
+//		return result;
+//	}
 
 	/**
 	 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen

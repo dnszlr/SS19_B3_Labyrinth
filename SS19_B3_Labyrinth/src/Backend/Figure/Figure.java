@@ -98,8 +98,10 @@ public class Figure {
 	 */
 
 	public String getFoundCards() {
+		
+		
 
-		return null;
+		return this.cardstack.foundCards.toString(); //Auf was zugreifen? --> CardsStack foundCards aber wie?
 	}
 
 	/**
@@ -110,7 +112,7 @@ public class Figure {
 
 	public void setPos(int[] pos) {
 
-		this.pos = pos;
+		this.pos = pos; //Mehr funktionalität?!
 
 	}
 
@@ -132,8 +134,10 @@ public class Figure {
 	 */
 
 	public ObjectCard drawCard() {
+		
+		this.treasureCard = cardstack.drawCard();
 
-		return cardstack.drawCard();
+		return this.treasureCard;
 	}
 
 	/**
@@ -187,6 +191,9 @@ public class Figure {
 		 */
 
 		private CardsStack() {
+			
+			foundCards = new ArrayList<ObjectCard>();
+			objectsCards = new ArrayList<ObjectCard>(); 
 
 		}
 
@@ -221,17 +228,19 @@ public class Figure {
 		 * @return
 		 */
 
-		private boolean cardFound(ObjectCard card) {
+		private boolean cardFound(ObjectCard card) { //ist das so sauber?
 			boolean result = false;
+			ObjectCard found = null;
 			for (ObjectCard i : objectsCards) {
 				if (result == false) {
 					if (i.equals(card)) {
-						foundCards.add(i);
-						objectsCards.remove(i);
+						found = i;
 						result = true;
 					}
 				}
 			}
+			foundCards.add(found);
+			objectsCards.remove(found);
 			return result;
 		}
 

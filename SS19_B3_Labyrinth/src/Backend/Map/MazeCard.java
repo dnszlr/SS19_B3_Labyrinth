@@ -32,6 +32,7 @@ public abstract class MazeCard {
 		this.color = color;
 		this.treasure = treasure;
 		this.neighboring = new MazeCard[4];
+		this.figures = new ArrayList<Figure>();
 	}
 
 	/**
@@ -134,27 +135,29 @@ public abstract class MazeCard {
 	}
 
 	/**
-	 * Methode um eine Figure zum Spiel hinzuzufügen.
+	 * Methode um eine Figure einer Karte hinzuzufügen.
 	 * 
 	 * @param figure
 	 */
 	public void addFigure(Figure figure) {
+		
+		figures.add(figure);
 
-		if (figures.size() <= 4) {
-			figures.add(figure);
-		} else {
-			try {
-				throw new ArrayIndexOutOfBoundsException("The maximum amount of players is 4!");
-			} catch (Exception e) {
-
-				e.printStackTrace();
-			}
-		}
+//		if (figures.size() <= 4) {
+//			figures.add(figure);
+//		} else {
+//			try {
+//				throw new ArrayIndexOutOfBoundsException("The maximum amount of players is 4!");
+//			} catch (Exception e) {
+//
+//				e.printStackTrace();
+//			}
+//		} warscheinlich falsch!
 
 	}
 
 	/**
-	 * Methode um alle Figuren zum Spiel hinzuzufügen.
+	 * Methode um alle Figuren einer Karte hinzuzufügen.
 	 * 
 	 * @param figures
 	 */
@@ -165,25 +168,28 @@ public abstract class MazeCard {
 	}
 
 	/**
-	 * Methode um eine Figure von Spiel zu entfernen.
+	 * Methode um eine Figure von einer Karte zu entfernen.
 	 * 
 	 * @param figure
 	 * @return
 	 */
 	public boolean removeFigure(Figure figure) {
 		boolean result = false;
-		int counter = 0;
+		Figure found = null;
 		for (Figure i : figures) {
-			if (i.equals(figure)) {
-				figures.remove(counter);
+			if (result == false) {
+				if (i.equals(figure)) {
+					found = i;
+					result = true;
+				}
 			}
-			counter++;
 		}
+		figures.remove(found);
 		return result;
 	}
 
 	/**
-	 * Methode um alle Figuren von Spiel zu entfernen.
+	 * Methode um alle Figuren von der Karte zu entfernen.
 	 */
 	public void removeFigures() {
 
@@ -213,9 +219,9 @@ public abstract class MazeCard {
 	 */
 	public boolean isStartFromFigure() {
 		boolean result = false;
-		if(this instanceof CurveCard) {
-			for(Figure i : figures) {
-				if(this.getColor().equals(i.getColor())) {
+		if (this instanceof CurveCard) {
+			for (Figure i : figures) {
+				if (this.getColor().equals(i.getColor())) {
 					result = true;
 				}
 			}
