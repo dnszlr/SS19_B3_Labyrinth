@@ -14,8 +14,38 @@ public class CurveCard extends MazeCard {
 	 * Konstruktor der Klasse CurveCard
 	 */
 	public CurveCard(Color color, Treasure treasure) {
-		super(new int[] { 1, 1, 0, 0 }, color, treasure);
-		 
+
+		super(new int[4], color, treasure);
+		if (color == null || treasure == null) {
+			int random = (int) (Math.random() * 4 + 1);
+			if (random == 1) {
+				this.wall = new int[] { 1, 0, 0, 1 };
+			} else if (random == 2) {
+				this.wall = new int[] { 1, 1, 0, 0 };
+			} else if (random == 3) {
+				this.wall = new int[] { 0, 1, 1, 0 };
+			} else {
+				this.wall = new int[] { 0, 0, 1, 1 };
+			}
+
+		} else {
+
+			switch (color) {
+			case RED:
+				this.wall = new int[] { 1, 0, 0, 1 };
+				break;
+			case YELLOW:
+				this.wall = new int[] { 1, 1, 0, 0 };
+				break;
+			case BLUE:
+				this.wall = new int[] { 0, 1, 1, 0 };
+				break;
+			case GREEN:
+				this.wall = new int[] { 0, 0, 1, 1 };
+				break;
+			}
+		}
+
 	}
 
 	/**

@@ -1,7 +1,5 @@
 package Backend.Map;
 
-import Backend.Treasure;
-
 /**
  * Klasse EvenCard erbt von Klasse @MazeCard
  */
@@ -13,8 +11,13 @@ public class EvenCard extends MazeCard {
 	 * @param treasure
 	 */
 	public EvenCard() {
-		super(new int[] { 1, 0, 1, 0 }, null, null);
-
+		super(new int[4], null, null);
+		int random = (int) (Math.random() * 2 + 1);
+		if (random == 1) {
+			this.wall = new int[] { 1, 0, 1, 0 };
+		} else {
+			this.wall = new int[] { 0, 1, 0, 1 };
+		}
 	}
 
 	/**

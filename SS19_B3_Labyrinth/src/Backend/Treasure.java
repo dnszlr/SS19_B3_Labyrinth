@@ -4,9 +4,10 @@ public enum Treasure {
 	/**
 	 * Attribute des Enums Treasure
 	 */
-	helmet, menorah, owl, ghost, sorceress, sword, emerald, rat,dragon, ring, spider, bat,
-	gnome, moth, skull, key, crown, chest, map, lizard, spook, moneybag, book, scarab;
+	book, moneybag, map, crown, skull, ring, chest, emerald, sword, menorah, helmet,
 	
-
+	
+	owl, ghost, sorceress, rat, dragon,
+	spider, bat, gnome, moth, key, lizard, spook, scarab;
 
 }

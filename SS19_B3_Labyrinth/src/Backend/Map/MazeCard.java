@@ -13,7 +13,7 @@ public abstract class MazeCard {
 	/**
 	 * Attribute der Klasse MazeCard
 	 */
-	protected int[] wall = new int[4];
+	protected int[] wall;
 	private MazeCard[] neighboring;
 	private Treasure treasure;
 	private Color color;
@@ -73,16 +73,16 @@ public abstract class MazeCard {
 	public MazeCard getNeighboring(Direction direction) {
 		MazeCard result = null;
 		switch (direction) {
-		case west:
+		case north:
 			result = this.neighboring[0];
 			break;
-		case north:
+		case east:
 			result = this.neighboring[1];
 			break;
-		case east:
+		case south:
 			result = this.neighboring[2];
 			break;
-		case south:
+		case west:
 			result = this.neighboring[3];
 			break;
 		}
@@ -117,16 +117,16 @@ public abstract class MazeCard {
 	public void setNeighboring(MazeCard card, Direction direction) {
 
 		switch (direction) {
-		case west:
+		case north:
 			this.neighboring[0] = card;
 			break;
-		case north:
+		case east:
 			this.neighboring[1] = card;
 			break;
-		case east:
+		case south:
 			this.neighboring[2] = card;
 			break;
-		case south:
+		case west:
 			this.neighboring[3] = card;
 			break;
 
@@ -140,7 +140,7 @@ public abstract class MazeCard {
 	 * @param figure
 	 */
 	public void addFigure(Figure figure) {
-		
+
 		figures.add(figure);
 
 //		if (figures.size() <= 4) {
