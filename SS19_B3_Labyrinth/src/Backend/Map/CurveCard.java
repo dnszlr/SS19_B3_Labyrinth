@@ -15,7 +15,7 @@ public class CurveCard extends MazeCard {
 	 */
 	public CurveCard(Color color, Treasure treasure) {
 		super(new int[] { 1, 1, 0, 0 }, color, treasure);
-		
+		 
 	}
 
 	/**
