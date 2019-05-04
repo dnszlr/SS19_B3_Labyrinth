@@ -49,14 +49,21 @@ public class ObjectCard {
 	 * Inhaltsgleichheit.
 	 */
 
-//	@Override
-//	public boolean equals(Object o) { //falsch
-//		boolean result = false;
-//		if (this.treasure.equals(o)) {
-//			result = true;
-//		}
-//		return result;
-//	}
+	@Override
+	public boolean equals(Object o) {
+		boolean result = false;
+		ObjectCard object;
+		if (o instanceof ObjectCard) {
+			if (!o.equals(null)) {
+				object = (ObjectCard) o;
+
+				if (this.treasure.equals(object.treasure) && this.found == object.found) {
+					result = true;
+				}
+			}
+		}
+		return result;
+	}
 
 	/**
 	 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen

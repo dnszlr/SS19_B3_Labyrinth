@@ -228,7 +228,7 @@ public class Figure {
 		 * @return
 		 */
 
-		private boolean cardFound(ObjectCard card) { //ist das so sauber?
+		private boolean cardFound(ObjectCard card) { 
 			boolean result = false;
 			ObjectCard found = null;
 			for (ObjectCard i : objectsCards) {

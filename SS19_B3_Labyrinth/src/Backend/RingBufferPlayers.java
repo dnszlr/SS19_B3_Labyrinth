@@ -31,6 +31,7 @@ public class RingBufferPlayers {
 	 */
 
 	public boolean addFigure(Figure figure) {
+		
 		boolean test = false;
 		for (Figure i : figures) {
 			if (figure.equals(i)) {
@@ -67,6 +68,7 @@ public class RingBufferPlayers {
 	 */
 
 	public Figure nextPlayer() {
+		
 		if (this.readPointer < figures.size() - 1) {
 			this.readPointer++;
 		} else {

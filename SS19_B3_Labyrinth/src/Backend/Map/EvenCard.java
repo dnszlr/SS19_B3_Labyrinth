@@ -1,6 +1,5 @@
 package Backend.Map;
 
-import Backend.Color;
 import Backend.Treasure;
 
 /**
