@@ -1,8 +1,6 @@
 package Backend.Figure;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import Backend.Color;
 import Backend.Cards.ObjectCard;
 
@@ -98,10 +96,8 @@ public class Figure {
 	 */
 
 	public String getFoundCards() {
-		
-		
 
-		return this.cardstack.foundCards.toString(); //Auf was zugreifen? --> CardsStack foundCards aber wie?
+		return this.cardstack.foundCards.toString(); // Auf was zugreifen? --> CardsStack foundCards aber wie?
 	}
 
 	/**
@@ -112,7 +108,7 @@ public class Figure {
 
 	public void setPos(int[] pos) {
 
-		this.pos = pos; //Mehr funktionalität?!
+		this.pos = pos; // Mehr funktionalität?!
 
 	}
 
@@ -134,10 +130,10 @@ public class Figure {
 	 */
 
 	public ObjectCard drawCard() {
-		
-		this.treasureCard = cardstack.drawCard();
 
-		return this.treasureCard;
+		ObjectCard drawnCard = cardstack.drawCard();
+
+		return drawnCard;
 	}
 
 	/**
@@ -148,7 +144,7 @@ public class Figure {
 	 */
 
 	public boolean isFound(ObjectCard card) {
-		
+
 		return cardstack.cardFound(card);
 
 	}
@@ -191,9 +187,9 @@ public class Figure {
 		 */
 
 		private CardsStack() {
-			
+
 			foundCards = new ArrayList<ObjectCard>();
-			objectsCards = new ArrayList<ObjectCard>(); 
+			objectsCards = new ArrayList<ObjectCard>();
 
 		}
 
@@ -228,7 +224,7 @@ public class Figure {
 		 * @return
 		 */
 
-		private boolean cardFound(ObjectCard card) { 
+		private boolean cardFound(ObjectCard card) {
 			boolean result = false;
 			ObjectCard found = null;
 			for (ObjectCard i : objectsCards) {

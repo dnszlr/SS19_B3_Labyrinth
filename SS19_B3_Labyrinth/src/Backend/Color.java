@@ -17,6 +17,8 @@ public enum Color {
 	 * @param y
 	 */
 	private Color(int x, int y) {
+		pos[0] = x;
+		pos[1] = y;
 	}
 
 	/**

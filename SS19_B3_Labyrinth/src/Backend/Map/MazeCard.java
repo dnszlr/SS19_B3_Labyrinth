@@ -157,7 +157,7 @@ public abstract class MazeCard {
 	}
 
 	/**
-	 * Methode um alle Figuren einer Karte hinzuzufügen.
+	 * Methode um alle Figuren von figures einer Karte hinzuzufügen.
 	 * 
 	 * @param figures
 	 */
@@ -202,7 +202,7 @@ public abstract class MazeCard {
 	 * 
 	 * @return
 	 */
-	public boolean isStart() {
+	public boolean isStart() { //Richtige Methode?
 		boolean result = false;
 		if (this instanceof CurveCard) {
 			if (this.color != null) {
@@ -217,7 +217,7 @@ public abstract class MazeCard {
 	 * 
 	 * @return
 	 */
-	public boolean isStartFromFigure() {
+	public boolean isStartFromFigure() { //?? richtige Methode?
 		boolean result = false;
 		if (this instanceof CurveCard) {
 			for (Figure i : figures) {
