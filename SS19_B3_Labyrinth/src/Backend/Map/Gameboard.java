@@ -113,10 +113,10 @@ public class Gameboard {
 					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
 					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
 					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
-				} else if (i == 0 & j == 0 || i == 0 & j == this.map[i].length - 1
-						|| i == this.map.length - 1 & j == this.map[i].length - 1
-						|| i == this.map.length - 1 & j == 0) {
-					this.map[0][0].setNeighboring(this.map[1][0], Direction.east); // Noch dynamisch machen.
+				} else if (i == 0 && j == 0 || i == 0 && j == this.map[i].length - 1
+						|| i == this.map.length - 1 && j == this.map[i].length - 1
+						|| i == this.map.length - 1 && j == 0) {
+					this.map[0][0].setNeighboring(this.map[1][0], Direction.east); 
 					this.map[0][0].setNeighboring(this.map[0][1], Direction.south);
 					this.map[6][0].setNeighboring(this.map[5][0], Direction.west);
 					this.map[6][0].setNeighboring(this.map[6][1], Direction.south);
@@ -178,7 +178,7 @@ public class Gameboard {
 	public MazeCard moveGears(PositionsCard move, MazeCard card) { // Variable für FreeCard erstellen oder direkt mit
 																	// this arbeiten und diese zurückgeben?
 		MazeCard mover = this.freeCard;
-		MazeCard[][] safer = new MazeCard[7][7];
+		MazeCard[] safer = new MazeCard[7];
 		switch (move) {
 		case A2:
 			if (this.map[1][6].getFigures().size() > 0) {
@@ -186,10 +186,10 @@ public class Gameboard {
 			}
 			mover = getMapCard(3, 6);
 			for (int i = 0; i < this.map[1].length - 1; i++) {
-				safer[1][i + 1] = this.map[1][i];
+				safer[i + 1] = this.map[1][i];
 			}
-			safer[1][0] = card;
-			this.map = safer;
+			safer[0] = card;
+			this.map[1] = safer;
 
 			break;
 
@@ -199,24 +199,24 @@ public class Gameboard {
 			}
 			mover = getMapCard(3, 6);
 			for (int i = 0; i < this.map[3].length - 1; i++) {
-				safer[3][i + 1] = this.map[3][i];
+				safer[i + 1] = this.map[3][i];
 			}
-			safer[3][0] = card;
-			this.map = safer;
+			safer[0] = card;
+			this.map[3] = safer;
 
 			break;
 
 		case A6:
-			
+
 			if (this.map[5][6].getFigures().size() > 0) {
 				mover.addFigures(this.map[5][6].getFigures());
 			}
-			mover = getMapCard(3, 6);
+			mover = getMapCard(5, 6);
 			for (int i = 0; i < this.map[5].length - 1; i++) {
-				safer[5][i + 1] = this.map[5][i];
+				safer[i + 1] = this.map[5][i];
 			}
-			safer[5][0] = card;
-			this.map = safer;
+			safer[0] = card;
+			this.map[5] = safer;
 
 			break;
 
@@ -224,144 +224,124 @@ public class Gameboard {
 			if (this.map[1][0].getFigures().size() > 0) {
 				mover.addFigures(this.map[1][0].getFigures());
 			}
-			for (int i = this.map[1].length - 1; i >= 0; i--) {
-				if (i == this.map[1].length - 1) {
-					this.map[1][i] = card;
-				} else if (i > 0) {
-					this.map[1][i - 1] = this.map[1][i];
-				} else {
-					mover = this.map[1][0];
-				}
+			mover = getMapCard(1, 0);
+			for (int i = this.map[1].length - 1; i > 0; i--) {
+				safer[i - 1] = this.map[1][i];
 			}
-
+			safer[6] = card;
+			this.map[1] = safer;
 			break;
 
 		case G4:
-			if (temp[3][0].getFigures().size() > 0) {
-				mover.addFigures(temp[3][0].getFigures());
+			if (this.map[3][0].getFigures().size() > 0) {
+				mover.addFigures(this.map[3][0].getFigures());
 			}
-			for (int i = this.map[3].length - 1; i >= 0; i--) {
-				if (i == this.map[3].length - 1) {
-					this.map[3][i] = card;
-				} else if (i > 0) {
-					this.map[3][i - 1] = temp[3][i];
-				} else {
-					mover = this.map[3][0];
-				}
+			mover = getMapCard(3, 0);
+			for (int i = this.map[3].length - 1; i > 0; i--) {
+				safer[i - 1] = this.map[3][i];
 			}
+			safer[6] = card;
+			this.map[3] = safer;
 
 			break;
 		case G6:
-			if (temp[5][0].getFigures().size() > 0) {
-				mover.addFigures(temp[5][0].getFigures());
+			if (this.map[5][0].getFigures().size() > 0) {
+				mover.addFigures(this.map[5][0].getFigures());
 			}
-			for (int i = this.map[5].length - 1; i >= 0; i--) {
-				if (i == this.map[5].length - 1) {
-					this.map[5][i] = card;
-				} else if (i > 0) {
-					this.map[5][i - 1] = temp[5][i];
-				} else {
-					mover = this.map[5][0];
-				}
+			mover = getMapCard(5, 0);
+			for (int i = this.map[5].length - 1; i > 0; i--) {
+				safer[i - 1] = this.map[5][i];
 			}
+			safer[6] = card;
+			this.map[5] = safer;
 
 			break;
 
 		case B1:
-			if (temp[6][1].getFigures().size() > 0) {
-				mover.addFigures(temp[6][1].getFigures());
+			if (this.map[6][1].getFigures().size() > 0) {
+				mover.addFigures(this.map[6][1].getFigures());
 			}
-			for (int i = 0; i < this.map.length; i++) {
-
-				if (i == 0) {
-					this.map[i][1] = card;
-				} else if (i < this.map.length - 1) {
-					this.map[i + 1][1] = temp[i][1];
-				} else {
-					mover = temp[6][1];
-				}
+			mover = getMapCard(6, 1);
+			for (int i = 0; i < this.map.length - 1; i++) {
+				safer[i + 1] = this.map[i][1];
 			}
+			safer[0] = card;
+			for(int i = 0; i < this.map.length; i++) {
+				this.map[i][1] = safer[i];
+			}
+			
 
 			break;
 
 		case D1:
-			if (temp[6][3].getFigures().size() > 0) {
-				mover.addFigures(temp[6][3].getFigures());
+			if (this.map[6][3].getFigures().size() > 0) {
+				mover.addFigures(this.map[6][3].getFigures());
 			}
-			for (int i = 0; i < this.map.length; i++) {
-
-				if (i == 0) {
-					this.map[i][3] = card;
-				} else if (i < this.map.length - 1) {
-					this.map[i + 1][3] = temp[i][3];
-				} else {
-					mover = temp[6][3];
-				}
+			mover = getMapCard(6, 3);
+			for (int i = 0; i < this.map.length - 1; i++) {
+				safer[i + 1] = this.map[i][3];
+			}
+			safer[0] = card;
+			for(int i = 0; i < this.map.length; i++) {
+				this.map[i][3] = safer[i];
 			}
 
 			break;
 		case F1:
-			if (temp[6][5].getFigures().size() > 0) {
-				mover.addFigures(temp[6][5].getFigures());
+			if (this.map[6][5].getFigures().size() > 0) {
+				mover.addFigures(this.map[6][5].getFigures());
 			}
-			for (int i = 0; i < this.map.length; i++) {
-
-				if (i == 0) {
-					this.map[i][5] = card;
-				} else if (i < this.map.length - 1) {
-					this.map[i + 1][5] = temp[i][5];
-				} else {
-					mover = temp[6][5];
-				}
+			mover = getMapCard(6, 5);
+			for (int i = 0; i < this.map.length - 1; i++) {
+				safer[i + 1]= this.map[i][5];
+			}
+			safer[0] = card;
+			for(int i = 0; i < this.map.length; i++) {
+				this.map[i][5] = safer[i];
 			}
 
 			break;
-		case B7:
-			if (temp[0][1].getFigures().size() > 0) {
-				mover.addFigures(temp[0][1].getFigures());
-			}
-			for (int i = this.map.length - 1; i >= 0; i--) {
 
-				if (i == this.map.length - 1) {
-					this.map[1][i] = card;
-				} else if (i > 0) {
-					this.map[i - 1][1] = temp[i][1];
-				} else {
-					mover = temp[0][1];
-				}
+		case B7:
+			if (this.map[0][1].getFigures().size() > 0) {
+				mover.addFigures(this.map[0][1].getFigures());
+			}
+			mover = getMapCard(0, 1);
+			for (int i = this.map.length - 1; i > 0; i--) {
+				safer[i - 1] = this.map[i][1];
+			}
+			safer[6] = card;
+			for(int i = 0; i < this.map.length; i++) {
+				this.map[i][1] = safer[i];
 			}
 
 			break;
 
 		case D7:
-			if (temp[0][3].getFigures().size() > 0) {
-				mover.addFigures(temp[0][3].getFigures());
+			if (this.map[0][3].getFigures().size() > 0) {
+				mover.addFigures(this.map[0][3].getFigures());
 			}
-			for (int i = this.map.length - 1; i >= 0; i--) {
-
-				if (i == this.map.length - 1) {
-					this.map[3][i] = card;
-				} else if (i > 0) {
-					this.map[i - 1][3] = temp[i][3];
-				} else {
-					mover = temp[0][3];
-				}
+			mover = getMapCard(0, 3);
+			for (int i = this.map.length - 1; i > 0; i--) {
+				safer[i - 1] = this.map[i][3];
+			}
+			safer[6] = card;
+			for(int i = 0; i < this.map.length; i++) {
+				this.map[i][3] = safer[i];
 			}
 
 			break;
 		case F7:
-			if (temp[0][5].getFigures().size() > 0) {
-				mover.addFigures(temp[0][5].getFigures());
+			if (this.map[0][5].getFigures().size() > 0) {
+				mover.addFigures(this.map[0][5].getFigures());
 			}
-			for (int i = this.map.length - 1; i >= 0; i--) {
-
-				if (i == this.map.length - 1) {
-					this.map[5][i] = card;
-				} else if (i > 0) {
-					this.map[i - 1][5] = temp[i][5];
-				} else {
-					mover = temp[0][5];
-				}
+			mover = getMapCard(0, 5);
+			for (int i = this.map.length - 1; i > 0; i--) {
+				safer[i - 1] = this.map[i][5];
+			}
+			safer[6] = card;
+			for(int i = 0; i < this.map.length; i++) {
+				this.map[i][5] = safer[i];
 			}
 
 			break;

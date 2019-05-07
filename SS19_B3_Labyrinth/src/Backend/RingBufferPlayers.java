@@ -2,7 +2,6 @@ package Backend;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
 import Backend.Figure.Figure;
 
 public class RingBufferPlayers {

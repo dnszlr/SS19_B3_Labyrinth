@@ -3,6 +3,7 @@ package Backend;
 import java.util.ArrayList;
 import Backend.Cards.ObjectCard;
 import Backend.Map.Gameboard;
+import Backend.Map.MazeCard;
 import Interface.Communication;
 
 public class Manager implements Communication {
@@ -17,8 +18,8 @@ public class Manager implements Communication {
 	private Color color;
 	private Treasure treasure;
 	private Gameboard gameboard;
-	private RingBufferPlayers players;
-	private ArrayList<ObjectCard> objectCards = new ArrayList<ObjectCard>();
+	private RingBufferPlayers players = new RingBufferPlayers();
+	private ArrayList<ObjectCard> objectCards;
 	private boolean isMoveFigure;
 	private boolean isPlaceMaceCard;
 
@@ -26,8 +27,12 @@ public class Manager implements Communication {
 	 * Getter von der Map des Gameboards.
 	 */
 	@Override
-	public String[][] getMap() { // CSV FÜR SPEICHERN UND LADEN UND DESWEGEN ALLES ANS STRING ZURÜCKGEBEN? CLUNI
-									// FOLIEN s290-291
+	public String[][] getMap() {
+		
+			gameboard.					
+		
+									// CSV FÜR SPEICHERN UND LADEN UND DESWEGEN ALLES ANS STRING ZURÜCKGEBEN? CLUNI
+									// FOLIEN s260?
 		return null;
 	}
 
@@ -36,6 +41,7 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String[] getPlayers() {
+
 		return null;
 	}
 
@@ -44,6 +50,8 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String getActivePlayer() {
+
+		players.getActivePlayer();
 		return null;
 	}
 
@@ -52,6 +60,7 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String getActivePlayerTreasureCard() {
+		players.getActivePlayer().getTreasureCard();
 		return null;
 	}
 
@@ -60,6 +69,9 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String getFoundTreasures(String color) {
+
+		Color player = Color.valueOf(color);
+
 		return null;
 	}
 
@@ -68,6 +80,12 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String addPlayer(String name, String color) {
+
+		if (!name.equals(null)
+				&& (color.equals("RED") || color.equals("BLUE") || color.equals("YELLOW") || color.equals("GREEN"))) {
+			Color playerColor = Color.valueOf(color);
+			this.players.addFigure(new Figure(name, playerColor));
+		}
 
 		return null;
 	}
@@ -85,6 +103,8 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String moveGears(String position) {
+
+		gameboard.moveGears(PositionsCard.valueOf(position), gameboard.getFreeCard());
 		return null;
 	}
 
@@ -101,7 +121,11 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String hasWon() {
-		return null;
+		String result = "notWon";
+		if (players.getActivePlayer().isAllFound() == true) {
+			result = "hasWon";
+		}
+		return result;
 	}
 
 	/**
@@ -133,6 +157,8 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String getFreeMazeCard() {
+
+		gameboard.getFreeCard();
 		return null;
 	}
 
@@ -141,6 +167,13 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String rotateGear(String direction) {
+		// Exception schreiben falls Direction nicht left oder right.
+		if (direction.toLowerCase().equals("left")) {
+			gameboard.getFreeCard().rotateLeft();
+		} else if (direction.toLowerCase().equals("right")) {
+			gameboard.getFreeCard().rotateRight();
+		}
+
 		return null;
 	}
 
