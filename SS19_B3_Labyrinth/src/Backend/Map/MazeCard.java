@@ -198,7 +198,7 @@ public abstract class MazeCard {
 	}
 
 	/**
-	 * ??
+	 * Methode um zu fragen ob die Karte eine Startpunkt ist.
 	 * 
 	 * @return
 	 */
@@ -213,7 +213,7 @@ public abstract class MazeCard {
 	}
 
 	/**
-	 * ??
+	 * Methode um zu fragen ob die Karte ein Startpunkt einer spezifischen Figur ist.
 	 * 
 	 * @return
 	 */

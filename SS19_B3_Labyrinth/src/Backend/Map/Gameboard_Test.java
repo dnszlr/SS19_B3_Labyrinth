@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import Backend.Color;
+import Backend.PositionsCard;
 import Backend.Figure.Figure;
 
 public class Gameboard_Test {
@@ -42,6 +43,16 @@ public class Gameboard_Test {
 		gameboard.placeFigures(figures);
 		
 		assertEquals(gameboard.getMapCard(figure1.getPos()[0], figure1.getPos()[1]).getColor(),figure1.getColor());
+		
+	}
+	
+	@Test
+	public void checkMoveGears() {
+		MazeCard atm = gameboard.getMapCard(3, 3);
+		gameboard.moveGears(PositionsCard.A4, gameboard.getFreeCard());
+		System.out.println(atm.toString());
+		System.out.println(gameboard.getMapCard(3, 4).toString());
+		
 		
 	}
 
