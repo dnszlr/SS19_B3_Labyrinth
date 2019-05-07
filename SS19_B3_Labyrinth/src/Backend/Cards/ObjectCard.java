@@ -72,7 +72,7 @@ public class ObjectCard {
 
 	@Override
 	public String toString() {
-		return "The Treasure is: " + this.treasure + " Found: " + this.found;
+		return "" + this.treasure + "" + this.found;
 	}
 
 }

@@ -420,35 +420,27 @@ public class Gameboard {
 
 		MazeCard current = getMapCard(currentPos[0], currentPos[1]);
 		MazeCard old = getMapCard(oldPos[0], oldPos[1]);
-		if (currentPos[0] == oldPos[0]) {
-			if (currentPos[1] < oldPos[1]) {
-				if (current.getWall()[0] == 0 && old.getWall()[2] == 0) {
-					result = true;
-				}
-				// Von Wall Index 0 = North
-			} else if (currentPos[1] > oldPos[1]) {
-				if (current.getWall()[2] == 0 && old.getWall()[0] == 0) {
-					result = true;
-				}
-				// Von Wall Index 2 = South
-			}
 
-		} else if (currentPos[1] == oldPos[1]) {
-			if (currentPos[0] < oldPos[0]) {
-				if (current.getWall()[3] == 0 && old.getWall()[1] == 0) {
-					result = true;
-				}
-				// Von Wall Index 3 = West
-			} else if (currentPos[0] > oldPos[0]) {
-				if (current.getWall()[1] == 0 && old.getWall()[3] == 0) {
-					result = true;
-				}
-				// Von Wall Index 1 = East
+		if (current.equals(old.getNeighboring(Direction.north))) {
+			if (current.getWall()[0] == 0 && old.getWall()[2] == 0) {
+				result = true;
 			}
-
+		} else if (current.equals(old.getNeighboring(Direction.east))) {
+			if (current.getWall()[1] == 0 && old.getWall()[3] == 0) {
+				result = true;
+			}
+		} else if (current.equals(old.getNeighboring(Direction.south))) {
+			if (current.getWall()[2] == 0 && old.getWall()[0] == 0) {
+				result = true;
+			}
+		} else if (current.equals(old.getNeighboring(Direction.west))) {
+			if (current.getWall()[3] == 0 && old.getWall()[1] == 0) {
+				result = true;
+			}
 		}
 
 		return result;
+
 	}
 
 }

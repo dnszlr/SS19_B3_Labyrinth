@@ -169,7 +169,7 @@ public class Figure {
 
 	@Override
 	public String toString() {
-		return null;
+		return ""+ this.name + "" + this.color + "" + this.treasureCard + "" + this.cardstack + "" + this.pos;
 	}
 
 	/**
@@ -263,7 +263,7 @@ public class Figure {
 		@Override
 		public String toString() {
 
-			return null;
+			return "" + this.objectsCards + "" + this.foundCards;
 		}
 
 	}

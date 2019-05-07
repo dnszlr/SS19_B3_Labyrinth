@@ -235,6 +235,8 @@ public abstract class MazeCard {
 	@Override
 	public String toString() {
 
-		return "MazeCard: " + Arrays.toString(this.wall) + " " + this.color + " " + this.treasure;
+//		return "MazeCard: " + Arrays.toString(this.wall) + " " + this.color + " " + this.treasure;
+		return "" + this.wall + " " + this.color + " " + this.treasure;
+
 	}
 }

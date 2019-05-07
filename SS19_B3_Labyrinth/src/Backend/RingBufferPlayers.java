@@ -18,7 +18,7 @@ public class RingBufferPlayers {
 	 */
 
 	public RingBufferPlayers() {
-
+		this.readPointer = 0;
 		this.figures = new ArrayList<Figure>();
 
 	}
@@ -32,22 +32,22 @@ public class RingBufferPlayers {
 
 	public boolean addFigure(Figure figure) {
 		
-		boolean test = false;
+		boolean result = false;
 		for (Figure i : figures) {
 			if (figure.equals(i)) {
-				test = false;
+				result = false;
 			} else {
-				test = true;
+				result = true;
 			}
 		}
-		if (test = true) {
+		if (result = true) {
 			figures.add(figure);
 			if (figures.size() == 1) {
 				this.activePlayer = figure;
 			}
 
 		}
-		return test;
+		return result;
 	}
 
 	/**
