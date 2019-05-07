@@ -26,7 +26,8 @@ public class Manager implements Communication {
 	 * Getter von der Map des Gameboards.
 	 */
 	@Override
-	public String[][] getMap() {
+	public String[][] getMap() { // CSV FÜR SPEICHERN UND LADEN UND DESWEGEN ALLES ANS STRING ZURÜCKGEBEN? CLUNI
+									// FOLIEN s290-291
 		return null;
 	}
 
@@ -67,6 +68,7 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String addPlayer(String name, String color) {
+
 		return null;
 	}
 
@@ -125,6 +127,7 @@ public class Manager implements Communication {
 	public String loadGame(String path, String type) {
 		return null;
 	}
+
 	/**
 	 * Methode um eine freie Labyrintkarte zu erfragen.
 	 */
@@ -132,6 +135,7 @@ public class Manager implements Communication {
 	public String getFreeMazeCard() {
 		return null;
 	}
+
 	/**
 	 * Methode um ein Feld zu drehen.
 	 */

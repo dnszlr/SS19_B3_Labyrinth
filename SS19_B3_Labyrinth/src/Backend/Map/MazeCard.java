@@ -202,7 +202,7 @@ public abstract class MazeCard {
 	 * 
 	 * @return
 	 */
-	public boolean isStart() { //Richtige Methode?
+	public boolean isStart() { 
 		boolean result = false;
 		if (this instanceof CurveCard) {
 			if (this.color != null) {
@@ -217,7 +217,7 @@ public abstract class MazeCard {
 	 * 
 	 * @return
 	 */
-	public boolean isStartFromFigure() { //?? richtige Methode?
+	public boolean isStartFromFigure() { 
 		boolean result = false;
 		if (this instanceof CurveCard) {
 			for (Figure i : figures) {
