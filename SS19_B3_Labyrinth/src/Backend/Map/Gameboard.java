@@ -405,69 +405,65 @@ public class Gameboard {
 		MazeCard current = getMapCard(currentPos[0], currentPos[1]);
 		MazeCard old = getMapCard(oldPos[0], oldPos[1]);
 		while (!old.equals(current) && found == false && notFound == true) {
-			if (old.getWall()[0] == 0 && old.getNeighboring(Direction.north).getWall()[2] == 0) {
-				if (old.getNeighboring(Direction.north) != null) {
-					MazeCard north = old.getNeighboring(Direction.north);
-					if (north.equals(current)) {
-						found = true;
+			if (old.getNeighboring(Direction.north) != null && old.getWall()[0] == 0
+					&& old.getNeighboring(Direction.north).getWall()[2] == 0) {
+
+				MazeCard north = old.getNeighboring(Direction.north);
+				if (north.equals(current)) {
+					found = true;
+				} else {
+					if (north.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+						notFound = true;
 					} else {
-						if (north.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
-							notFound = true;
-						} else {
-							int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
-							moveFigure(currentPos, older, figure);
-						}
+						int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
+						moveFigure(currentPos, older, figure);
 					}
 				}
 
-			} else if (old.getWall()[1] == 0 && old.getWall()[3] == 0) {
-				if (old.getNeighboring(Direction.east) != null) {
-					MazeCard east = old.getNeighboring(Direction.east);
+			} else if (old.getNeighboring(Direction.east) != null && old.getWall()[1] == 0
+					&& old.getNeighboring(Direction.east).getWall()[3] == 0) {
 
-					if (east.equals(current)) {
-						found = true;
+				MazeCard east = old.getNeighboring(Direction.east);
+
+				if (east.equals(current)) {
+					found = true;
+				} else {
+					if (east.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+						notFound = true;
 					} else {
-						if (east.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
-							notFound = true;
-						} else {
-							int[] older = new int[] { oldPos[0] + 1, oldPos[1]};
-							moveFigure(currentPos, older, figure);
-						}
+						int[] older = new int[] { oldPos[0] + 1, oldPos[1] };
+						moveFigure(currentPos, older, figure);
 					}
 				}
 
-			} else if (old.getWall()[2] == 0 && old.getWall()[0] == 0) {
-				if (old.getNeighboring(Direction.south) != null) {
-					MazeCard south = old.getNeighboring(Direction.south);
+			} else if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0 && old.getWall()[0] == 0) {
 
-					if (south.equals(current)) {
-						found = true;
+				MazeCard south = old.getNeighboring(Direction.south);
+				if (south.equals(current)) {
+					found = true;
+				} else {
+					if (south.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+						notFound = true;
 					} else {
-						if (south.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
-							notFound = true;
-						} else {
-							int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
-							moveFigure(currentPos, older, figure);
-						}
-
+						int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
+						moveFigure(currentPos, older, figure);
 					}
+
 				}
 
-			} else if (old.getWall()[3] == 0 && old.getWall()[1] == 0) {
-				if (old.getNeighboring(Direction.west) != null) {
-					MazeCard west = old.getNeighboring(Direction.west);
+			} else if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0 && old.getWall()[1] == 0) {
 
-					if (west.equals(current)) {
-						found = true;
+				MazeCard west = old.getNeighboring(Direction.west);
+				if (west.equals(current)) {
+					found = true;
+				} else {
+					if (west.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+						notFound = true;
 					} else {
-						if (west.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
-							notFound = true;
-						} else {
-							int[] older = new int[] { oldPos[0] - 1, oldPos[1]};
-							moveFigure(currentPos, older, figure);
-						}
-
+						int[] older = new int[] { oldPos[0] - 1, oldPos[1] };
+						moveFigure(currentPos, older, figure);
 					}
+
 				}
 
 			} else {
