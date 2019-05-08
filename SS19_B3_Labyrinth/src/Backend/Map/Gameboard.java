@@ -436,7 +436,7 @@ public class Gameboard {
 					}
 				}
 
-			} else if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0 && old.getWall()[0] == 0) {
+			} else if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0 && old.getNeighboring(Direction.south).getWall()[0] == 0) {
 
 				MazeCard south = old.getNeighboring(Direction.south);
 				if (south.equals(current)) {
@@ -451,7 +451,7 @@ public class Gameboard {
 
 				}
 
-			} else if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0 && old.getWall()[1] == 0) {
+			} else if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0 && old.getNeighboring(Direction.east).getWall()[1] == 0) {
 
 				MazeCard west = old.getNeighboring(Direction.west);
 				if (west.equals(current)) {
