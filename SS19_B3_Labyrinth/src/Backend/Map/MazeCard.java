@@ -220,13 +220,13 @@ public abstract class MazeCard {
 	}
 
 	/**
-	 * ï¿½berschreiben der Methode "toString" von Object.
+	 * Überschreiben der Methode "toString" von Object.
 	 */
 	@Override
 	public String toString() {
 
 //		return "MazeCard: " + Arrays.toString(this.wall) + " " + this.color + " " + this.treasure;
-		return "" + this.wall + " " + this.color + " " + this.treasure;
+		return "" + this.getClass().getSimpleName() + Arrays.toString(this.wall) + " " + this.color + " " + this.treasure;
 
 	}
 }

@@ -34,6 +34,30 @@ public class Gameboard_Test {
 		Gameboard gameboard = new Gameboard();
 
 		System.out.println(gameboard);
+		int EvenCard = 0;
+		int CurveCard = 0;
+		int CrotchCard = 0;
+		for(int i = 0; i < 7; i++) {
+			for(int j = 0; j < 7; j++) {
+				
+				if(gameboard.getMapCard(i,j) instanceof EvenCard){
+					EvenCard++;
+				}
+				if(gameboard.getMapCard(i,j) instanceof CurveCard){
+					CurveCard++;
+				}
+				if(gameboard.getMapCard(i,j) instanceof CrotchCard){
+					CrotchCard++;
+				}
+				
+			}
+		}
+		
+		System.out.println("EvenCards: " + EvenCard);
+		System.out.println("CurveCard: " + CurveCard);
+		System.out.println("CrotchCards: " + CrotchCard);
+		
+		assertTrue(EvenCard+CurveCard+CrotchCard == 49);
 	}
 
 	@Test

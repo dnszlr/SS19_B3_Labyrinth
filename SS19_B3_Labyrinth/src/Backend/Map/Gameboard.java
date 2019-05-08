@@ -61,7 +61,7 @@ public class Gameboard {
 	 * Methode um ein neue Labyrinthkarte zu generieren.
 	 * 
 	 * @param treasures
-	 * @return generatedMaze 
+	 * @return generatedMaze
 	 */
 	private MazeCard generateNewMaze(List<Treasure> treasures) {
 		int randomTreasure;
@@ -82,13 +82,13 @@ public class Gameboard {
 		return generatedMaze;
 
 	}
- 
+
 	/**
-	 *  erstellt liste mit karten die frei auf dem feld verteilbar sind 
-	 * @return freeCards 
+	 * erstellt liste mit karten die frei auf dem feld verteilbar sind
+	 * 
+	 * @return freeCards
 	 */
-	
-	
+
 	private List<MazeCard> generateFreeCards() {
 
 		List<MazeCard> freeCards = new ArrayList<MazeCard>();
@@ -111,7 +111,7 @@ public class Gameboard {
 	}
 
 	/**
-	 *  methode um für jede karte die nachbarn zu ermitteln 
+	 * methode um für jede karte die nachbarn zu ermitteln
 	 */
 	private void setAllNeighbours() {
 
@@ -178,13 +178,12 @@ public class Gameboard {
 	}
 
 	/**
-	 * Methode um die Labyrinthkarten zu verschieben.
-	 * gibt neue freecard 
-	 * nach jedem schieben bekommt jeder neue nachbarn
+	 * Methode um die Labyrinthkarten zu verschieben. gibt neue freecard nach jedem
+	 * schieben bekommt jeder neue nachbarn
 	 * 
 	 * @param move
 	 * @param card
-	 * @return mover 
+	 * @return mover
 	 */
 	public MazeCard moveGears(PositionsCard move, MazeCard card) { // Variable f�r FreeCard erstellen oder direkt mit
 																	// this arbeiten und diese zur�ckgeben?
@@ -382,7 +381,7 @@ public class Gameboard {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return maze 
+	 * @return maze
 	 */
 	public MazeCard getMapCard(int x, int y) {
 
@@ -397,9 +396,9 @@ public class Gameboard {
 	 * @param currentPos
 	 * @param oldPos
 	 * @param figure
-	 * @return found 
+	 * @return found
 	 */
-	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) {
+	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) { // breitensuche?
 		boolean found = false;
 		boolean notFound = true;
 
@@ -408,35 +407,57 @@ public class Gameboard {
 		while (!old.equals(current) && found == false && notFound == true) {
 			if (old.getWall()[0] == 0 && old.getNeighboring(Direction.north).getWall()[2] == 0) {
 				MazeCard north = old.getNeighboring(Direction.north);
-				north.addFigure(figure);
+
 				if (north.equals(current)) {
 					found = true;
 				} else {
-					moveFigure(currentPos, figure.getPos(), figure);
+					if (north.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+						notFound = true;
+					} else {
+						north.addFigure(figure);
+						moveFigure(currentPos, north.getFigures().get(0).getPos(), figure);
+					}
 				}
 			} else if (old.getWall()[1] == 0 && old.getWall()[3] == 0) {
 				MazeCard east = old.getNeighboring(Direction.east);
-				east.addFigure(figure);
+
 				if (east.equals(current)) {
 					found = true;
 				} else {
-					moveFigure(currentPos, figure.getPos(), figure);
+					if (east.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+						notFound = true;
+					} else {
+						east.addFigure(figure);
+						moveFigure(currentPos, east.getFigures().get(0).getPos(), figure);
+					}
 				}
 			} else if (old.getWall()[2] == 0 && old.getWall()[0] == 0) {
 				MazeCard south = old.getNeighboring(Direction.south);
-				south.addFigure(figure);
+
 				if (south.equals(current)) {
 					found = true;
 				} else {
-					moveFigure(currentPos, figure.getPos(), figure);
+					if (south.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+						notFound = true;
+					} else {
+						south.addFigure(figure);
+						moveFigure(currentPos, south.getFigures().get(0).getPos(), figure);
+					}
+
 				}
 			} else if (old.getWall()[3] == 0 && old.getWall()[1] == 0) {
 				MazeCard west = old.getNeighboring(Direction.west);
-				west.addFigure(figure);
+
 				if (west.equals(current)) {
 					found = true;
 				} else {
-					moveFigure(currentPos, figure.getPos(), figure);
+					if (west.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+						notFound = true;
+					} else {
+						west.addFigure(figure);
+						moveFigure(currentPos, west.getFigures().get(0).getPos(), figure);
+					}
+
 				}
 
 			} else {
