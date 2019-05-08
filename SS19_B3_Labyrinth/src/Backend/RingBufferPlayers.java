@@ -23,10 +23,10 @@ public class RingBufferPlayers {
 	}
 
 	/**
-	 * Methode um einen Spieler dem Spiel hinzuzufügen
+	 * Methode um einen Spieler dem Spiel hinzuzufï¿½gen gibt zurÃ¼ck ob die figur erfolgreich hinzugefÃ¼gt worden ist 
 	 * 
 	 * @param figure
-	 * @return
+	 * @return result 
 	 */
 
 	public boolean addFigure(Figure figure) {
@@ -52,7 +52,7 @@ public class RingBufferPlayers {
 	/**
 	 * Methode um den aktuellen Spieler zu ermitteln
 	 * 
-	 * @return
+	 * @return activePlayer
 	 */
 
 	public Figure getActivePlayer() {
@@ -61,9 +61,9 @@ public class RingBufferPlayers {
 	}
 
 	/**
-	 * Methode um den nächsten Spieler zu ermitteln der an der Reihe ist.
+	 * Methode um den nï¿½chsten Spieler zu ermitteln der an der Reihe ist.
 	 * 
-	 * @return
+	 * @return nextFigure
 	 */
 
 	public Figure nextPlayer() {

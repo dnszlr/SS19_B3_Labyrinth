@@ -24,9 +24,9 @@ public class ObjectCard {
 	}
 
 	/**
-	 * Methode um zu überprüfen ob der Spieler etwas gefunden hat
+	 * Methode um zu ï¿½berprï¿½fen ob der Spieler etwas gefunden hat
 	 * 
-	 * @return
+	 * @return found 
 	 */
 	public boolean isFound() {
 
@@ -45,7 +45,7 @@ public class ObjectCard {
 	}
 
 	/**
-	 * Überschreiben der Object Methode "equals" Vergleicht zwei Objekte auf
+	 * ï¿½berschreiben der Object Methode "equals" Vergleicht zwei Objekte auf
 	 * Inhaltsgleichheit.
 	 */
 
@@ -66,7 +66,7 @@ public class ObjectCard {
 	}
 
 	/**
-	 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen
+	 * ï¿½berschreiben der Object Methode "toString". Umwandlung des Objektes in einen
 	 * String.
 	 */
 

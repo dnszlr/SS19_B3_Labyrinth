@@ -8,7 +8,7 @@ import Backend.Treasure;
 public class CrotchCard extends MazeCard {
 
 	/**
-	 * Konstuktor für die Klasse CrotchCard
+	 * Konstuktor fï¿½r die Klasse CrotchCard
 	 * 
 	 * @param treasure
 	 */
@@ -69,7 +69,7 @@ public class CrotchCard extends MazeCard {
 	}
 
 	/**
-	 * Überschreiben der rotateLeft Methode von MazeCard.
+	 * ï¿½berschreiben der rotateLeft Methode von MazeCard.
 	 */
 	@Override
 	public void rotateRight() {
@@ -92,7 +92,7 @@ public class CrotchCard extends MazeCard {
 	}
 
 	/**
-	 * Überschreiben der rotateRight Methode von MazeCard.
+	 * ï¿½berschreiben der rotateRight Methode von MazeCard. 
 	 */
 	@Override
 	public void rotateLeft() {

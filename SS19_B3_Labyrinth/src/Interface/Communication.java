@@ -6,7 +6,6 @@ public interface Communication {
 	
 	/**
 	 * Interface der Klasse Communikation welche von Manager implementiert wird.
-	 * @return
 	 */
 
 	public String[][] getMap();
@@ -41,7 +40,7 @@ public interface Communication {
 
 	
 	/**
-	 * Siehe Klasse Manager für genauere Beschreibung der Methoden
+	 * Siehe Klasse Manager fï¿½r genauere Beschreibung der Methoden
 	 */
 
 }

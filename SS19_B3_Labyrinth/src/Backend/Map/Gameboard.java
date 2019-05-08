@@ -61,7 +61,7 @@ public class Gameboard {
 	 * Methode um ein neue Labyrinthkarte zu generieren.
 	 * 
 	 * @param treasures
-	 * @return
+	 * @return generatedMaze 
 	 */
 	private MazeCard generateNewMaze(List<Treasure> treasures) {
 		int randomTreasure;
@@ -82,7 +82,13 @@ public class Gameboard {
 		return generatedMaze;
 
 	}
-
+ 
+	/**
+	 *  erstellt liste mit karten die frei auf dem feld verteilbar sind 
+	 * @return freeCards 
+	 */
+	
+	
 	private List<MazeCard> generateFreeCards() {
 
 		List<MazeCard> freeCards = new ArrayList<MazeCard>();
@@ -104,6 +110,9 @@ public class Gameboard {
 
 	}
 
+	/**
+	 *  methode um fÃ¼r jede karte die nachbarn zu ermitteln 
+	 */
 	private void setAllNeighbours() {
 
 		for (int i = 0; i < this.map.length; i++) {
@@ -170,13 +179,15 @@ public class Gameboard {
 
 	/**
 	 * Methode um die Labyrinthkarten zu verschieben.
+	 * gibt neue freecard 
+	 * nach jedem schieben bekommt jeder neue nachbarn
 	 * 
 	 * @param move
 	 * @param card
-	 * @return
+	 * @return mover 
 	 */
-	public MazeCard moveGears(PositionsCard move, MazeCard card) { // Variable für FreeCard erstellen oder direkt mit
-																	// this arbeiten und diese zurückgeben?
+	public MazeCard moveGears(PositionsCard move, MazeCard card) { // Variable fï¿½r FreeCard erstellen oder direkt mit
+																	// this arbeiten und diese zurï¿½ckgeben?
 		MazeCard mover = this.freeCard;
 		MazeCard[] safer = new MazeCard[7];
 		switch (move) {
@@ -359,7 +370,7 @@ public class Gameboard {
 	/**
 	 * Getter um die aktuell freie Karte zu erhalten.
 	 * 
-	 * @return
+	 * @return freeCard
 	 */
 	public MazeCard getFreeCard() {
 
@@ -371,7 +382,7 @@ public class Gameboard {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return
+	 * @return maze 
 	 */
 	public MazeCard getMapCard(int x, int y) {
 
@@ -381,12 +392,12 @@ public class Gameboard {
 	}
 
 	/**
-	 * Methode um zu erfragen ob ein Zug möglich wäre?!?!.
+	 * Methode um zu erfragen ob ein Zug mï¿½glich wï¿½re?!?!.
 	 * 
 	 * @param currentPos
 	 * @param oldPos
 	 * @param figure
-	 * @return
+	 * @return found 
 	 */
 	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) {
 		boolean found = false;

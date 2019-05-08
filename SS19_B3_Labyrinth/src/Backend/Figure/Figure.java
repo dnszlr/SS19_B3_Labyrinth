@@ -38,7 +38,7 @@ public class Figure {
 	 * @param pos
 	 */
 
-//	public Figure(String name, Color color, int[] pos) { Wird dieser Konstruktor überhaupt benötigt, wenn man sich von pos von Color holt?
+//	public Figure(String name, Color color, int[] pos) { Wird dieser Konstruktor ï¿½berhaupt benï¿½tigt, wenn man sich von pos von Color holt?
 //
 //		this.cardstack = new CardsStack();
 //		this.name = name;
@@ -47,9 +47,9 @@ public class Figure {
 //	}
 
 	/**
-	 * Getter für das Attribut name.
+	 * Getter fï¿½r das Attribut name.
 	 * 
-	 * @return
+	 * @return name 
 	 */
 
 	public String getName() {
@@ -58,9 +58,9 @@ public class Figure {
 	}
 
 	/**
-	 * Getter für das Attribut color.
+	 * Getter fï¿½r das Attribut color.
 	 * 
-	 * @return
+	 * @return color 
 	 */
 
 	public Color getColor() {
@@ -69,9 +69,9 @@ public class Figure {
 	}
 
 	/**
-	 * Getter für das Attribut treasureCard.
+	 * Getter fï¿½r das Attribut treasureCard.
 	 * 
-	 * @return
+	 * @return tresureCard
 	 */
 
 	public ObjectCard getTreasureCard() {
@@ -80,9 +80,9 @@ public class Figure {
 	}
 
 	/**
-	 * Getter für das Attribut pos.
+	 * Getter fï¿½r das Attribut pos.
 	 * 
-	 * @return
+	 * @return pos 
 	 */
 
 	public int[] getPos() {
@@ -91,9 +91,9 @@ public class Figure {
 	}
 
 	/**
-	 * Getter für die gefundenen Karten.
+	 * Getter fï¿½r die gefundenen Karten.
 	 * 
-	 * @return
+	 * @return cardstack.foundCards.toString()
 	 */
 
 	public String getFoundCards() {
@@ -102,19 +102,19 @@ public class Figure {
 	}
 
 	/**
-	 * Setter für das Attribut pos.
+	 * Setter fï¿½r das Attribut pos.
 	 * 
 	 * @param pos
 	 */
 
 	public void setPos(int[] pos) {
 
-		this.pos = pos; // Mehr funktionalität?!
+		this.pos = pos; // Mehr funktionalitï¿½t?!
 
 	}
 
 	/**
-	 * Methode um eine Karte hinzuzufügen.
+	 * Methode um eine Karte hinzuzufï¿½gen.
 	 * 
 	 * @param card
 	 */
@@ -127,7 +127,7 @@ public class Figure {
 	/**
 	 * Methode um eine Karte zu ziehen.
 	 * 
-	 * @return
+	 * @return drawnCard 
 	 */
 
 	public ObjectCard drawCard() {
@@ -141,7 +141,7 @@ public class Figure {
 	 * Methode um abzufragen ob eine Karte gefunden wurde.
 	 * 
 	 * @param card
-	 * @return
+	 * @return cardstack.cardFound(card)
 	 */
 
 	public boolean isFound(ObjectCard card) {
@@ -153,7 +153,7 @@ public class Figure {
 	/**
 	 * Methode um herauszufinden ob alle Karten gefunden wurden
 	 * 
-	 * @return
+	 * @return cardstack.isAllFound()
 	 */
 
 	public boolean isAllFound() {
@@ -163,7 +163,7 @@ public class Figure {
 	}
 
 	/**
-	 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen
+	 * ï¿½berschreiben der Object Methode "toString". Umwandlung des Objektes in einen
 	 * String.
 	 */
 
@@ -184,7 +184,7 @@ public class Figure {
 		private ArrayList<ObjectCard> objectsCards;
 
 		/**
-		 * Konstruktor für die Klasse CardsStack
+		 * Konstruktor fï¿½r die Klasse CardsStack
 		 */
 
 		private CardsStack() {
@@ -195,7 +195,7 @@ public class Figure {
 		}
 
 		/**
-		 * Methode um eine Karte dem CardStack hinzuzufügen
+		 * Methode um eine Karte dem CardStack hinzuzufï¿½gen
 		 * 
 		 * @param card
 		 */
@@ -208,7 +208,7 @@ public class Figure {
 		/**
 		 * Methode um eine Karte vom CardStack zu ziehen.
 		 * 
-		 * @return
+		 * @return drawCard 
 		 */
 
 		private ObjectCard drawCard() {
@@ -219,10 +219,10 @@ public class Figure {
 		}
 
 		/**
-		 * Methode um zu überprüfen ob eine Karte gefunden wurde.
+		 * Methode um zu ï¿½berprï¿½fen ob eine Karte gefunden wurde.
 		 * 
 		 * @param card
-		 * @return
+		 * @return result 
 		 */
 
 		private boolean cardFound(ObjectCard card) {
@@ -242,9 +242,9 @@ public class Figure {
 		}
 
 		/**
-		 * Methode um zu überprüfen ob alle Karten gefunden wurde
+		 * Methode um zu ï¿½berprï¿½fen ob alle Karten gefunden wurde
 		 * 
-		 * @return
+		 * @return result 
 		 */
 
 		private boolean isAllFound() {
@@ -256,7 +256,7 @@ public class Figure {
 		}
 
 		/**
-		 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen
+		 * ï¿½berschreiben der Object Methode "toString". Umwandlung des Objektes in einen
 		 * String.
 		 */
 

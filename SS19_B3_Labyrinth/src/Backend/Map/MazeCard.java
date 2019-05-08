@@ -48,7 +48,7 @@ public abstract class MazeCard {
 	/**
 	 * Methode um die Position der Wand zu erfragen
 	 * 
-	 * @return
+	 * @return wall 
 	 */
 	public int[] getWall() {
 		return this.wall;
@@ -57,7 +57,7 @@ public abstract class MazeCard {
 	/**
 	 * Getter um einen Treasure zu bekommen
 	 * 
-	 * @return
+	 * @return treasure 
 	 */
 	public Treasure getTreasure() {
 		return this.treasure;
@@ -68,7 +68,7 @@ public abstract class MazeCard {
 	 * erhalten.
 	 * 
 	 * @param direction
-	 * @return
+	 * @return result 
 	 */
 	public MazeCard getNeighboring(Direction direction) {
 		MazeCard result = null;
@@ -93,7 +93,7 @@ public abstract class MazeCard {
 	/**
 	 * Getter um die Farbe zu erfragen.
 	 * 
-	 * @return
+	 * @return color 
 	 */
 	public Color getColor() {
 		return this.color;
@@ -102,7 +102,7 @@ public abstract class MazeCard {
 	/**
 	 * Getter um die Figuren zu erfragen.
 	 * 
-	 * @return
+	 * @return figures 
 	 */
 	public ArrayList<Figure> getFigures() {
 		return this.figures;
@@ -135,7 +135,7 @@ public abstract class MazeCard {
 	}
 
 	/**
-	 * Methode um eine Figure einer Karte hinzuzufügen.
+	 * Methode um eine Figure einer Karte hinzuzufï¿½gen.
 	 * 
 	 * @param figure
 	 */
@@ -146,7 +146,7 @@ public abstract class MazeCard {
 	}
 
 	/**
-	 * Methode um alle Figuren von figures einer Karte hinzuzufügen.
+	 * Methode um alle Figuren von figures einer Karte hinzuzufï¿½gen.
 	 * 
 	 * @param figures
 	 */
@@ -160,7 +160,7 @@ public abstract class MazeCard {
 	 * Methode um eine Figure von einer Karte zu entfernen.
 	 * 
 	 * @param figure
-	 * @return
+	 * @return result 
 	 */
 	public boolean removeFigure(Figure figure) {
 		boolean result = false;
@@ -189,7 +189,7 @@ public abstract class MazeCard {
 	/**
 	 * Methode um zu fragen ob die Karte eine Startpunkt ist.
 	 * 
-	 * @return
+	 * @return result 
 	 */
 	public boolean isStart() {
 		boolean result = false;
@@ -205,7 +205,7 @@ public abstract class MazeCard {
 	 * Methode um zu fragen ob die Karte ein Startpunkt einer spezifischen Figur
 	 * ist.
 	 * 
-	 * @return
+	 * @return result 
 	 */
 	public boolean isStartFromFigure() {
 		boolean result = false;
@@ -220,7 +220,7 @@ public abstract class MazeCard {
 	}
 
 	/**
-	 * Überschreiben der Methode "toString" von Object.
+	 * ï¿½berschreiben der Methode "toString" von Object.
 	 */
 	@Override
 	public String toString() {
