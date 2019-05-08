@@ -61,7 +61,7 @@ public class RingBufferPlayers {
 	}
 
 	/**
-	 * Methode um den n�chsten Spieler zu ermitteln der an der Reihe ist.
+	 * Methode um den n�chsten Spieler zu ermitteln der an der Reihe ist. 
 	 * 
 	 * @return nextFigure
 	 */
