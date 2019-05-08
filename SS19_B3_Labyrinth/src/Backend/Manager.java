@@ -21,18 +21,15 @@ public class Manager implements Communication {
 	private RingBufferPlayers players = new RingBufferPlayers();
 	private ArrayList<ObjectCard> objectCards;
 	private boolean isMoveFigure;
-	private boolean isPlaceMaceCard;
+	private boolean isPlaceMazeCard;
 
 	/**
 	 * Getter von der Map des Gameboards.
 	 */
 	@Override
 	public String[][] getMap() {
-		
-			gameboard.					
-		
-									// CSV FÜR SPEICHERN UND LADEN UND DESWEGEN ALLES ANS STRING ZURÜCKGEBEN? CLUNI
-									// FOLIEN s260?
+
+		// CSV FÜR SPEICHERN UND LADEN UND DESWEGEN ALLES ANS STRING ZURÜCKGEBEN? FOLIEN s260?
 		return null;
 	}
 
@@ -41,6 +38,7 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String[] getPlayers() {
+		String[] players;
 
 		return null;
 	}
@@ -79,7 +77,9 @@ public class Manager implements Communication {
 	 * Methode um Spieler dem Spiel hinzuzufügen.
 	 */
 	@Override
-	public String addPlayer(String name, String color) {
+	public String addPlayer(String name, String color) { // Fragen, weil im RingBuffer addFigure mit figure übergeben
+															// wird und nicht mit name und color, wie ein Objekt davon
+															// erzeugen, wenn Manager die Figure nicht kennt?
 
 		if (!name.equals(null)
 				&& (color.equals("RED") || color.equals("BLUE") || color.equals("YELLOW") || color.equals("GREEN"))) {
@@ -113,7 +113,15 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public boolean moveFigure(int[] position) {
-		return false;
+
+		boolean result = false;
+
+		result = gameboard.moveFigure(position, players.getActivePlayer().getPos(), players.getActivePlayer());
+		if (result == true) {
+			gameboard.getMapCard(position[0], position[1]).addFigure(players.getActivePlayer());
+		}
+
+		return result;
 	}
 
 	/**
@@ -123,7 +131,7 @@ public class Manager implements Communication {
 	public String hasWon() {
 		String result = "notWon";
 		if (players.getActivePlayer().isAllFound() == true) {
-			result = "hasWon";
+			result = "hasWon " + players.getActivePlayer().getName();
 		}
 		return result;
 	}
@@ -133,6 +141,8 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String endRound() {
+
+		players.nextPlayer();
 		return null;
 	}
 

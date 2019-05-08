@@ -72,7 +72,7 @@ public class CrotchCard extends MazeCard {
 	 * Überschreiben der rotateLeft Methode von MazeCard.
 	 */
 	@Override
-	public void rotateLeft() {
+	public void rotateRight() {
 		boolean test = false;
 		for (int i = 0; i < this.wall.length; i++) {
 			if (test == false) {
@@ -95,7 +95,7 @@ public class CrotchCard extends MazeCard {
 	 * Überschreiben der rotateRight Methode von MazeCard.
 	 */
 	@Override
-	public void rotateRight() {
+	public void rotateLeft() {
 		boolean test = false;
 		for (int i = 0; i < this.wall.length; i++) {
 			if (test == false) {

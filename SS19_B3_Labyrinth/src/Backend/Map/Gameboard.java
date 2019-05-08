@@ -116,7 +116,7 @@ public class Gameboard {
 				} else if (i == 0 && j == 0 || i == 0 && j == this.map[i].length - 1
 						|| i == this.map.length - 1 && j == this.map[i].length - 1
 						|| i == this.map.length - 1 && j == 0) {
-					this.map[0][0].setNeighboring(this.map[1][0], Direction.east); 
+					this.map[0][0].setNeighboring(this.map[1][0], Direction.east);
 					this.map[0][0].setNeighboring(this.map[0][1], Direction.south);
 					this.map[6][0].setNeighboring(this.map[5][0], Direction.west);
 					this.map[6][0].setNeighboring(this.map[6][1], Direction.south);
@@ -136,9 +136,9 @@ public class Gameboard {
 					this.map[i][j].setNeighboring(this.map[i][j - 1], Direction.north);
 					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
 					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
-				} else if (i > 0 && j < this.map[i].length - 1 && j == this.map[i].length) {
+				} else if (i > 0 && i < this.map.length - 1 && j == this.map[i].length - 1) {
 					this.map[i][j].setNeighboring(this.map[i][j - 1], Direction.north);
-					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
+					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
 					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
 				}
 			}
@@ -266,10 +266,9 @@ public class Gameboard {
 				safer[i + 1] = this.map[i][1];
 			}
 			safer[0] = card;
-			for(int i = 0; i < this.map.length; i++) {
+			for (int i = 0; i < this.map.length; i++) {
 				this.map[i][1] = safer[i];
 			}
-			
 
 			break;
 
@@ -282,7 +281,7 @@ public class Gameboard {
 				safer[i + 1] = this.map[i][3];
 			}
 			safer[0] = card;
-			for(int i = 0; i < this.map.length; i++) {
+			for (int i = 0; i < this.map.length; i++) {
 				this.map[i][3] = safer[i];
 			}
 
@@ -293,10 +292,10 @@ public class Gameboard {
 			}
 			mover = getMapCard(6, 5);
 			for (int i = 0; i < this.map.length - 1; i++) {
-				safer[i + 1]= this.map[i][5];
+				safer[i + 1] = this.map[i][5];
 			}
 			safer[0] = card;
-			for(int i = 0; i < this.map.length; i++) {
+			for (int i = 0; i < this.map.length; i++) {
 				this.map[i][5] = safer[i];
 			}
 
@@ -311,7 +310,7 @@ public class Gameboard {
 				safer[i - 1] = this.map[i][1];
 			}
 			safer[6] = card;
-			for(int i = 0; i < this.map.length; i++) {
+			for (int i = 0; i < this.map.length; i++) {
 				this.map[i][1] = safer[i];
 			}
 
@@ -326,7 +325,7 @@ public class Gameboard {
 				safer[i - 1] = this.map[i][3];
 			}
 			safer[6] = card;
-			for(int i = 0; i < this.map.length; i++) {
+			for (int i = 0; i < this.map.length; i++) {
 				this.map[i][3] = safer[i];
 			}
 
@@ -340,7 +339,7 @@ public class Gameboard {
 				safer[i - 1] = this.map[i][5];
 			}
 			safer[6] = card;
-			for(int i = 0; i < this.map.length; i++) {
+			for (int i = 0; i < this.map.length; i++) {
 				this.map[i][5] = safer[i];
 			}
 
@@ -390,30 +389,53 @@ public class Gameboard {
 	 * @return
 	 */
 	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) {
-		boolean result = false;
+		boolean found = false;
+		boolean notFound = true;
 
 		MazeCard current = getMapCard(currentPos[0], currentPos[1]);
 		MazeCard old = getMapCard(oldPos[0], oldPos[1]);
+		while (!old.equals(current) && found == false && notFound == true) {
+			if (old.getWall()[0] == 0 && old.getNeighboring(Direction.north).getWall()[2] == 0) {
+				MazeCard north = old.getNeighboring(Direction.north);
+				north.addFigure(figure);
+				if (north.equals(current)) {
+					found = true;
+				} else {
+					moveFigure(currentPos, figure.getPos(), figure);
+				}
+			} else if (old.getWall()[1] == 0 && old.getWall()[3] == 0) {
+				MazeCard east = old.getNeighboring(Direction.east);
+				east.addFigure(figure);
+				if (east.equals(current)) {
+					found = true;
+				} else {
+					moveFigure(currentPos, figure.getPos(), figure);
+				}
+			} else if (old.getWall()[2] == 0 && old.getWall()[0] == 0) {
+				MazeCard south = old.getNeighboring(Direction.south);
+				south.addFigure(figure);
+				if (south.equals(current)) {
+					found = true;
+				} else {
+					moveFigure(currentPos, figure.getPos(), figure);
+				}
+			} else if (old.getWall()[3] == 0 && old.getWall()[1] == 0) {
+				MazeCard west = old.getNeighboring(Direction.west);
+				west.addFigure(figure);
+				if (west.equals(current)) {
+					found = true;
+				} else {
+					moveFigure(currentPos, figure.getPos(), figure);
+				}
 
-		if (current.equals(old.getNeighboring(Direction.north))) {
-			if (current.getWall()[0] == 0 && old.getWall()[2] == 0) {
-				result = true;
+			} else {
+				notFound = false;
+
 			}
-		} else if (current.equals(old.getNeighboring(Direction.east))) {
-			if (current.getWall()[1] == 0 && old.getWall()[3] == 0) {
-				result = true;
-			}
-		} else if (current.equals(old.getNeighboring(Direction.south))) {
-			if (current.getWall()[2] == 0 && old.getWall()[0] == 0) {
-				result = true;
-			}
-		} else if (current.equals(old.getNeighboring(Direction.west))) {
-			if (current.getWall()[3] == 0 && old.getWall()[1] == 0) {
-				result = true;
-			}
+
 		}
 
-		return result;
+		return found;
 
 	}
 

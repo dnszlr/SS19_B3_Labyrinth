@@ -38,7 +38,7 @@ public class Figure {
 	 * @param pos
 	 */
 
-//	public Figure(String name, Color color, int[] pos) {
+//	public Figure(String name, Color color, int[] pos) { Wird dieser Konstruktor überhaupt benötigt, wenn man sich von pos von Color holt?
 //
 //		this.cardstack = new CardsStack();
 //		this.name = name;

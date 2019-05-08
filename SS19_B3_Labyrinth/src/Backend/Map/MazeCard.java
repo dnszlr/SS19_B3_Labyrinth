@@ -143,17 +143,6 @@ public abstract class MazeCard {
 
 		figures.add(figure);
 
-//		if (figures.size() <= 4) {
-//			figures.add(figure);
-//		} else {
-//			try {
-//				throw new ArrayIndexOutOfBoundsException("The maximum amount of players is 4!");
-//			} catch (Exception e) {
-//
-//				e.printStackTrace();
-//			}
-//		} warscheinlich falsch!
-
 	}
 
 	/**
@@ -202,7 +191,7 @@ public abstract class MazeCard {
 	 * 
 	 * @return
 	 */
-	public boolean isStart() { 
+	public boolean isStart() {
 		boolean result = false;
 		if (this instanceof CurveCard) {
 			if (this.color != null) {
@@ -213,11 +202,12 @@ public abstract class MazeCard {
 	}
 
 	/**
-	 * Methode um zu fragen ob die Karte ein Startpunkt einer spezifischen Figur ist.
+	 * Methode um zu fragen ob die Karte ein Startpunkt einer spezifischen Figur
+	 * ist.
 	 * 
 	 * @return
 	 */
-	public boolean isStartFromFigure() { 
+	public boolean isStartFromFigure() {
 		boolean result = false;
 		if (this instanceof CurveCard) {
 			for (Figure i : figures) {

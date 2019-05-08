@@ -52,7 +52,7 @@ public class CurveCard extends MazeCard {
 	 * Überschreiben der Methode rotateLeft von MazeCard.
 	 */
 	@Override
-	public void rotateLeft() {
+	public void rotateRight() {
 		if (Arrays.equals(this.wall, new int[] { 1, 1, 0, 0 })) {
 			this.wall = new int[] { 1, 0, 0, 1 };
 		} else if (Arrays.equals(this.wall, new int[] { 1, 0, 0, 1 })) {
@@ -68,7 +68,7 @@ public class CurveCard extends MazeCard {
 	 * Überschreiben der Methode rotateRight von MazeCard.
 	 */
 	@Override
-	public void rotateRight() {
+	public void rotateLeft() {
 		if (Arrays.equals(this.wall, new int[] { 1, 1, 0, 0 })) {
 			this.wall = new int[] { 0, 1, 1, 0 };
 		} else if (Arrays.equals(this.wall, new int[] { 0, 1, 1, 0 })) {
