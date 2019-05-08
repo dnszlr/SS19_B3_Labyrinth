@@ -12,7 +12,7 @@ public enum Color {
 	YELLOW(0,6);
 	private final int[] pos = new int[2];  
 	/**
-	 * Konstruktor für die Klasse Color.
+	 * Konstruktor fï¿½r die Klasse Color.
 	 * @param x
 	 * @param y
 	 */
@@ -22,8 +22,8 @@ public enum Color {
 	}
 
 	/**
-	 * Getter für das Attribut pos.
-	 * @return
+	 * Getter fï¿½r das Attribut pos.
+	 * @return pos 
 	 */
 	public int[] getPos() {
 		return pos;
