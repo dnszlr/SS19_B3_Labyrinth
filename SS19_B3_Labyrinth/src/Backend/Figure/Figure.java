@@ -1,6 +1,8 @@
 package Backend.Figure;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import Backend.Color;
 import Backend.Cards.ObjectCard;
 
@@ -18,8 +20,8 @@ public class Figure {
 	/**
 	 * Konstruktor der Klasse Figure.
 	 * 
-	 * @param name
-	 * @param color
+	 * @param String
+	 * @param Color
 	 */
 
 	public Figure(String name, Color color) {
@@ -47,9 +49,9 @@ public class Figure {
 //	}
 
 	/**
-	 * Getter fï¿½r das Attribut name.
+	 * Getter für das Attribut name.
 	 * 
-	 * @return name 
+	 * @return String 
 	 */
 
 	public String getName() {
@@ -58,9 +60,9 @@ public class Figure {
 	}
 
 	/**
-	 * Getter fï¿½r das Attribut color.
+	 * Getter für das Attribut color.
 	 * 
-	 * @return color 
+	 * @return Color
 	 */
 
 	public Color getColor() {
@@ -69,9 +71,9 @@ public class Figure {
 	}
 
 	/**
-	 * Getter fï¿½r das Attribut treasureCard.
+	 * Getter für das Attribut treasureCard.
 	 * 
-	 * @return tresureCard
+	 * @return ObjectCard
 	 */
 
 	public ObjectCard getTreasureCard() {
@@ -80,9 +82,9 @@ public class Figure {
 	}
 
 	/**
-	 * Getter fï¿½r das Attribut pos.
+	 * Getter für das Attribut pos.
 	 * 
-	 * @return pos 
+	 * @return int 
 	 */
 
 	public int[] getPos() {
@@ -91,32 +93,32 @@ public class Figure {
 	}
 
 	/**
-	 * Getter fï¿½r die gefundenen Karten.
+	 * Getter für die gefundenen Karten.
 	 * 
-	 * @return cardstack.foundCards.toString()
+	 * @return String
 	 */
 
 	public String getFoundCards() {
 
-		return this.cardstack.foundCards.toString(); // Auf was zugreifen? --> CardsStack foundCards aber wie?
+		return this.cardstack.foundCards.toString();
 	}
 
 	/**
-	 * Setter fï¿½r das Attribut pos.
+	 * Setter für das Attribut pos.
 	 * 
-	 * @param pos
+	 * @param int
 	 */
 
 	public void setPos(int[] pos) {
 
-		this.pos = pos; // Mehr funktionalitï¿½t?!
+		this.pos = pos; //
 
 	}
 
 	/**
-	 * Methode um eine Karte hinzuzufï¿½gen.
+	 * Methode um eine Karte hinzuzufügen.
 	 * 
-	 * @param card
+	 * @param ObjectCard
 	 */
 	public void addCard(ObjectCard card) {
 
@@ -127,7 +129,7 @@ public class Figure {
 	/**
 	 * Methode um eine Karte zu ziehen.
 	 * 
-	 * @return drawnCard 
+	 * @return ObjectCard
 	 */
 
 	public ObjectCard drawCard() {
@@ -140,20 +142,20 @@ public class Figure {
 	/**
 	 * Methode um abzufragen ob eine Karte gefunden wurde.
 	 * 
-	 * @param card
-	 * @return cardstack.cardFound(card)
+	 * @param ObjectCard
+	 * @return boolean
 	 */
 
 	public boolean isFound(ObjectCard card) {
 
-		return cardstack.cardFound(card);
+		return this.cardstack.cardFound(card);
 
 	}
 
 	/**
 	 * Methode um herauszufinden ob alle Karten gefunden wurden
 	 * 
-	 * @return cardstack.isAllFound()
+	 * @return boolean
 	 */
 
 	public boolean isAllFound() {
@@ -163,13 +165,13 @@ public class Figure {
 	}
 
 	/**
-	 * ï¿½berschreiben der Object Methode "toString". Umwandlung des Objektes in einen
+	 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen
 	 * String.
 	 */
 
 	@Override
 	public String toString() {
-		return ""+ this.name + "" + this.color + "" + this.treasureCard + "" + this.cardstack + "" + this.pos;
+		return "" + this.name + ";" + "" + this.color + ";" +  "" + this.treasureCard + ";" + "" + this.cardstack + ";" + "" + Arrays.toString(this.pos);
 	}
 
 	/**
@@ -184,7 +186,7 @@ public class Figure {
 		private ArrayList<ObjectCard> objectsCards;
 
 		/**
-		 * Konstruktor fï¿½r die Klasse CardsStack
+		 * Konstruktor für die Klasse CardsStack
 		 */
 
 		private CardsStack() {
@@ -195,9 +197,9 @@ public class Figure {
 		}
 
 		/**
-		 * Methode um eine Karte dem CardStack hinzuzufï¿½gen
+		 * Methode um eine Karte dem CardStack hinzuzufügen
 		 * 
-		 * @param card
+		 * @param ObjectCard
 		 */
 
 		private void addCard(ObjectCard card) {
@@ -208,7 +210,7 @@ public class Figure {
 		/**
 		 * Methode um eine Karte vom CardStack zu ziehen.
 		 * 
-		 * @return drawCard 
+		 * @return ObjectCard
 		 */
 
 		private ObjectCard drawCard() {
@@ -219,10 +221,10 @@ public class Figure {
 		}
 
 		/**
-		 * Methode um zu ï¿½berprï¿½fen ob eine Karte gefunden wurde.
+		 * Methode um zu Überprüfen ob eine Karte gefunden wurde.
 		 * 
-		 * @param card
-		 * @return result 
+		 * @param ObjectCard
+		 * @return boolean
 		 */
 
 		private boolean cardFound(ObjectCard card) {
@@ -242,9 +244,9 @@ public class Figure {
 		}
 
 		/**
-		 * Methode um zu ï¿½berprï¿½fen ob alle Karten gefunden wurde
+		 * Methode um zu Überprüfen ob alle Karten gefunden wurde
 		 * 
-		 * @return result 
+		 * @return boolean
 		 */
 
 		private boolean isAllFound() {
@@ -256,14 +258,14 @@ public class Figure {
 		}
 
 		/**
-		 * ï¿½berschreiben der Object Methode "toString". Umwandlung des Objektes in einen
+		 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen
 		 * String.
 		 */
 
 		@Override
 		public String toString() {
 
-			return "" + this.objectsCards + "" + this.foundCards;
+			return "" + this.objectsCards.toString() + ";" +"" + this.foundCards.toString();
 		}
 
 	}

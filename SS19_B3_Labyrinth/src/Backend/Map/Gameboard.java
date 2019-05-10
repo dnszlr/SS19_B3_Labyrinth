@@ -18,7 +18,7 @@ public class Gameboard {
 	private MazeCard[][] map;
 
 	/**
-	 * Konstruktor der Klasse Gameboard
+	 * Konstruktor der Klasse Gameboard.
 	 */
 	public Gameboard() {
 
@@ -60,8 +60,8 @@ public class Gameboard {
 	/**
 	 * Methode um ein neue Labyrinthkarte zu generieren.
 	 * 
-	 * @param treasures
-	 * @return generatedMaze
+	 * @param Treasure
+	 * @return MazeCard
 	 */
 	private MazeCard generateNewMaze(List<Treasure> treasures) {
 		int randomTreasure;
@@ -84,9 +84,9 @@ public class Gameboard {
 	}
 
 	/**
-	 * erstellt liste mit karten die frei auf dem feld verteilbar sind
+	 * Erstellt eine Liste mit Karten die frei auf dem Feld verteilbar sind.
 	 * 
-	 * @return freeCards
+	 * @return MazeCard
 	 */
 
 	private List<MazeCard> generateFreeCards() {
@@ -111,7 +111,7 @@ public class Gameboard {
 	}
 
 	/**
-	 * methode um fÃ¼r jede karte die nachbarn zu ermitteln
+	 * Methode um für jede Karte die Nachbarkarten zu ermitteln
 	 */
 	private void setAllNeighbours() {
 
@@ -158,7 +158,7 @@ public class Gameboard {
 	/**
 	 * Methode um die Figuren auf dem Spielfeld zu platzieren.
 	 * 
-	 * @param figures
+	 * @param Figure
 	 */
 	public void placeFigures(Figure[] figures) {
 
@@ -181,9 +181,9 @@ public class Gameboard {
 	 * Methode um die Labyrinthkarten zu verschieben. gibt neue freecard nach jedem
 	 * schieben bekommt jeder neue nachbarn
 	 * 
-	 * @param move
-	 * @param card
-	 * @return mover
+	 * @param PositionCard
+	 * @param MazeCard
+	 * @return MazeCard
 	 */
 	public MazeCard moveGears(PositionsCard move, MazeCard card) { // Variable fï¿½r FreeCard erstellen oder direkt mit
 																	// this arbeiten und diese zurï¿½ckgeben?
@@ -369,7 +369,7 @@ public class Gameboard {
 	/**
 	 * Getter um die aktuell freie Karte zu erhalten.
 	 * 
-	 * @return freeCard
+	 * @return MazeCard
 	 */
 	public MazeCard getFreeCard() {
 
@@ -381,7 +381,7 @@ public class Gameboard {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return maze
+	 * @return MazeCard
 	 */
 	public MazeCard getMapCard(int x, int y) {
 
@@ -391,14 +391,14 @@ public class Gameboard {
 	}
 
 	/**
-	 * Methode um zu erfragen ob ein Zug mï¿½glich wï¿½re?!?!.
+	 * Methode um zu erfragen ob ein Zug möglich wäre.
 	 * 
 	 * @param currentPos
 	 * @param oldPos
 	 * @param figure
-	 * @return found
+	 * @return boolean
 	 */
-	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) { // breitensuche?
+	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) {
 		boolean found = false;
 		boolean notFound = true;
 

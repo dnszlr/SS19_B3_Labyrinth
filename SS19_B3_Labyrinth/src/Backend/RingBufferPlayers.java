@@ -6,14 +6,14 @@ import Backend.Figure.Figure;
 
 public class RingBufferPlayers {
 	/**
-	 * Attribute der Klasse RingBufferPlayers
+	 * Attribute der Klasse RingBufferPlayers.
 	 */
 	private int readPointer;
 	private ArrayList<Figure> figures;
 	private Figure activePlayer;
 
 	/**
-	 * Konstuktor der Klasse RingBufferPlayers
+	 * Konstuktor der Klasse RingBufferPlayers.
 	 */
 
 	public RingBufferPlayers() {
@@ -23,10 +23,10 @@ public class RingBufferPlayers {
 	}
 
 	/**
-	 * Methode um einen Spieler dem Spiel hinzuzufï¿½gen gibt zurÃ¼ck ob die figur erfolgreich hinzugefÃ¼gt worden ist 
+	 * Methode um einen Spieler dem Spiel hinzuzufügen gibt zurück ob die Figur erfolgreich hinzugefügt worden ist.
 	 * 
-	 * @param figure
-	 * @return result 
+	 * @param Figure
+	 * @return boolean 
 	 */
 
 	public boolean addFigure(Figure figure) {
@@ -50,9 +50,9 @@ public class RingBufferPlayers {
 	}
 
 	/**
-	 * Methode um den aktuellen Spieler zu ermitteln
+	 * Methode um den aktuellen Spieler zu ermitteln.
 	 * 
-	 * @return activePlayer
+	 * @return Figure
 	 */
 
 	public Figure getActivePlayer() {
@@ -61,9 +61,9 @@ public class RingBufferPlayers {
 	}
 
 	/**
-	 * Methode um den nï¿½chsten Spieler zu ermitteln der an der Reihe ist. 
+	 * Methode um den nächsten Spieler zu ermitteln der an der Reihe ist. 
 	 * 
-	 * @return nextFigure
+	 * @return Figure
 	 */
 
 	public Figure nextPlayer() {

@@ -1,7 +1,11 @@
 package Backend;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import Backend.Cards.ObjectCard;
+import Backend.Figure.Figure;
 import Backend.Map.Gameboard;
 import Backend.Map.MazeCard;
 import Interface.Communication;
@@ -18,7 +22,7 @@ public class Manager implements Communication {
 	private Color color;
 	private Treasure treasure;
 	private Gameboard gameboard;
-	private RingBufferPlayers players = new RingBufferPlayers();
+	private RingBufferPlayers players;
 	private ArrayList<ObjectCard> objectCards;
 	private boolean isMoveFigure;
 	private boolean isPlaceMazeCard;
@@ -29,8 +33,14 @@ public class Manager implements Communication {
 	@Override
 	public String[][] getMap() {
 
-		// CSV FÜR SPEICHERN UND LADEN UND DESWEGEN ALLES ANS STRING ZURÜCKGEBEN? FOLIEN s260?
-		return null;
+		String[][] map = new String[Color.YELLOW.getPos()[0]][Color.GREEN.getPos()[1]];
+		for (int i = 0; i <= map.length; i++) {
+			for (int j = 0; j <= map[i].length; j++) {
+				map[i][j] = gameboard.getMapCard(i, j).toString();
+			}
+		}
+
+		return map;
 	}
 
 	/**
@@ -38,9 +48,20 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String[] getPlayers() {
-		String[] players;
+		List<String> getPlayers = new ArrayList<String>();
 
-		return null;
+		for (int i = 0; i <= Color.YELLOW.getPos()[0]; i++) {
+			for (int j = 0; j <= Color.GREEN.getPos()[1]; j++) {
+				if (gameboard.getMapCard(i, j).getFigures().size() > 0) {
+					for (int y = 0; y < gameboard.getMapCard(i, j).getFigures().size(); y++) {
+						getPlayers.add(gameboard.getMapCard(i, j).getFigures().get(y).toString());
+					}
+				}
+			}
+		}
+		String[] players = getPlayers.toArray(new String[0]);
+		return players;
+
 	}
 
 	/**
@@ -49,8 +70,8 @@ public class Manager implements Communication {
 	@Override
 	public String getActivePlayer() {
 
-		players.getActivePlayer();
-		return null;
+		String activePlayer = players.getActivePlayer().toString();
+		return activePlayer;
 	}
 
 	/**
@@ -58,8 +79,8 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String getActivePlayerTreasureCard() {
-		players.getActivePlayer().getTreasureCard();
-		return null;
+		String activePlayerTreasureCard = players.getActivePlayer().getTreasureCard().toString();
+		return activePlayerTreasureCard;
 	}
 
 	/**
@@ -67,27 +88,35 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String getFoundTreasures(String color) {
+		Figure safer = players.getActivePlayer();
+		Color playerColor = Color.valueOf(color);
+		while (!players.getActivePlayer().getColor().equals(playerColor)) {
+			players.nextPlayer();
+		}
+		String foundCards = players.getActivePlayer().getFoundCards();
+		while (!players.getActivePlayer().equals(safer)) {
+			players.nextPlayer();
+		}
 
-		Color player = Color.valueOf(color);
+		return foundCards;
 
-		return null;
 	}
 
 	/**
 	 * Methode um Spieler dem Spiel hinzuzufügen.
 	 */
 	@Override
-	public String addPlayer(String name, String color) { // Fragen, weil im RingBuffer addFigure mit figure übergeben
-															// wird und nicht mit name und color, wie ein Objekt davon
-															// erzeugen, wenn Manager die Figure nicht kennt?
+	public String addPlayer(String name, String color) {
 
-		if (!name.equals(null)
-				&& (color.equals("RED") || color.equals("BLUE") || color.equals("YELLOW") || color.equals("GREEN"))) {
+		String addPlayer = "Wrong color or name";
+		if (!name.equals(null) && (color.toLowerCase().equals("red") || color.toLowerCase().equals("blue")
+				|| color.toLowerCase().equals("yellow") || color.toLowerCase().equals("green"))) {
 			Color playerColor = Color.valueOf(color);
 			this.players.addFigure(new Figure(name, playerColor));
+			addPlayer = new Figure(name, playerColor).toString();
 		}
 
-		return null;
+		return addPlayer;
 	}
 
 	/**
@@ -95,7 +124,14 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String startGame() {
-		return null;
+
+		this.gameboard = new Gameboard();
+		this.players = new RingBufferPlayers();
+		for (Treasure i : Treasure.values()) {
+			objectCards.add(new ObjectCard(i));
+		}
+		String startGame = getMap() + ";" + getPlayers() + ";" + objectCards.toString();
+		return startGame;
 	}
 
 	/**
@@ -105,7 +141,7 @@ public class Manager implements Communication {
 	public String moveGears(String position) {
 
 		gameboard.moveGears(PositionsCard.valueOf(position), gameboard.getFreeCard());
-		return null;
+		return gameboard.getFreeCard().toString();
 	}
 
 	/**
@@ -131,7 +167,7 @@ public class Manager implements Communication {
 	public String hasWon() {
 		String result = "notWon";
 		if (players.getActivePlayer().isAllFound() == true) {
-			result = "hasWon " + players.getActivePlayer().getName();
+			result = players.getActivePlayer().toString();
 		}
 		return result;
 	}
@@ -143,12 +179,13 @@ public class Manager implements Communication {
 	public String endRound() {
 
 		players.nextPlayer();
-		return null;
+		return players.getActivePlayer().toString();
 	}
 
 	/**
 	 * Methode um das Spiel zu speichern.
 	 */
+	// SPEICHERN UND LADEN UND DESWEGEN ALLES ANS STRING ZURÜCKGEBEN? FOLIEN s269?
 	@Override
 	public String saveGame(String path, String type) {
 		return null;
@@ -168,8 +205,8 @@ public class Manager implements Communication {
 	@Override
 	public String getFreeMazeCard() {
 
-		gameboard.getFreeCard();
-		return null;
+		String freeCard = gameboard.getFreeCard().toString();
+		return freeCard;
 	}
 
 	/**
@@ -177,14 +214,19 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String rotateGear(String direction) {
+		String rotateGear = null;
 		// Exception schreiben falls Direction nicht left oder right.
 		if (direction.toLowerCase().equals("left")) {
 			gameboard.getFreeCard().rotateLeft();
+			rotateGear = gameboard.getFreeCard().toString();
 		} else if (direction.toLowerCase().equals("right")) {
 			gameboard.getFreeCard().rotateRight();
+			rotateGear = gameboard.getFreeCard().toString();
+		} else {
+			rotateGear = "Wrong direction use left or right";
 		}
 
-		return null;
+		return rotateGear;
 	}
 
 }

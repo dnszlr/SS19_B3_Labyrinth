@@ -22,9 +22,9 @@ public abstract class MazeCard {
 	/**
 	 * Konstruktor der Klasse MazeCard
 	 * 
-	 * @param wall
-	 * @param color
-	 * @param treasure
+	 * @param int
+	 * @param Color
+	 * @param MazeCard
 	 */
 	public MazeCard(int[] wall, Color color, Treasure treasure) {
 
@@ -48,7 +48,7 @@ public abstract class MazeCard {
 	/**
 	 * Methode um die Position der Wand zu erfragen
 	 * 
-	 * @return wall 
+	 * @return int 
 	 */
 	public int[] getWall() {
 		return this.wall;
@@ -57,7 +57,7 @@ public abstract class MazeCard {
 	/**
 	 * Getter um einen Treasure zu bekommen
 	 * 
-	 * @return treasure 
+	 * @return Treasure 
 	 */
 	public Treasure getTreasure() {
 		return this.treasure;
@@ -67,8 +67,8 @@ public abstract class MazeCard {
 	 * Getter um die Nachbarn der aktuellen Posititon in eine bestimme Richtung zu
 	 * erhalten.
 	 * 
-	 * @param direction
-	 * @return result 
+	 * @param Direction
+	 * @return MazeCard 
 	 */
 	public MazeCard getNeighboring(Direction direction) {
 		MazeCard result = null;
@@ -226,7 +226,7 @@ public abstract class MazeCard {
 	public String toString() {
 
 //		return "MazeCard: " + Arrays.toString(this.wall) + " " + this.color + " " + this.treasure;
-		return "" + this.getClass().getSimpleName() + Arrays.toString(this.wall) + " " + this.color + " " + this.treasure;
+		return "" + this.getClass().getSimpleName() + ";" + Arrays.toString(this.wall) + ";" + " " + this.color + ";" + " " + this.treasure;
 
 	}
 }
