@@ -16,12 +16,13 @@ public class Gameboard {
 	 */
 	private MazeCard freeCard;
 	private MazeCard[][] map;
-
+	private List<MazeCard> visited;
+	
 	/**
 	 * Konstruktor der Klasse Gameboard.
 	 */
 	public Gameboard() {
-
+		visited = new ArrayList<MazeCard>();
 		this.map = new MazeCard[7][7];
 		this.map[Color.RED.getPos()[0]][Color.RED.getPos()[1]] = new CurveCard(Color.RED, null);
 		this.map[Color.YELLOW.getPos()[0]][Color.YELLOW.getPos()[1]] = new CurveCard(Color.YELLOW, null);
@@ -185,8 +186,8 @@ public class Gameboard {
 	 * @param MazeCard
 	 * @return MazeCard
 	 */
-	public MazeCard moveGears(PositionsCard move, MazeCard card) { 
-																	
+	public MazeCard moveGears(PositionsCard move, MazeCard card) {
+
 		MazeCard newFreeCard = null;
 		MazeCard[] safer = new MazeCard[7];
 		switch (move) {
@@ -394,13 +395,14 @@ public class Gameboard {
 	 * @param figure
 	 * @return boolean
 	 */
+
+
 	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) {
 		boolean found = false;
-		boolean notFound = true;
-		List<MazeCard> visited = new ArrayList<MazeCard>();
+		boolean notFound = false;
 		MazeCard current = getMapCard(currentPos[0], currentPos[1]);
 		MazeCard old = getMapCard(oldPos[0], oldPos[1]);
-		while (!old.equals(current) && found == false && notFound == true) {
+		while (!old.equals(current) && found == false && notFound == false) {
 			if (old.getNeighboring(Direction.north) != null && old.getWall()[0] == 0
 					&& old.getNeighboring(Direction.north).getWall()[2] == 0) {
 
@@ -425,10 +427,11 @@ public class Gameboard {
 				if (east.equals(current)) {
 					found = true;
 				} else {
-					if (east.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+					if (visited.contains(east)) {
 						notFound = true;
 					} else {
 						int[] older = new int[] { oldPos[0] + 1, oldPos[1] };
+						visited.add(east);
 						moveFigure(currentPos, older, figure);
 					}
 				}
@@ -440,10 +443,11 @@ public class Gameboard {
 				if (south.equals(current)) {
 					found = true;
 				} else {
-					if (south.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+					if (visited.contains(south)) {
 						notFound = true;
 					} else {
 						int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
+						visited.add(south);
 						moveFigure(currentPos, older, figure);
 					}
 
@@ -456,24 +460,31 @@ public class Gameboard {
 				if (west.equals(current)) {
 					found = true;
 				} else {
-					if (west.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+					if (visited.contains(west)) {
 						notFound = true;
 					} else {
 						int[] older = new int[] { oldPos[0] - 1, oldPos[1] };
+						visited.add(west);
 						moveFigure(currentPos, older, figure);
 					}
 
 				}
 
 			} else {
-				notFound = false;
+				notFound = true;
+				
 
 			}
 
 		}
-
+		if(current.equals(old)) {
+			visited.clear();
+		}
+		
 		return found;
 
 	}
+	
+	
 
 }
