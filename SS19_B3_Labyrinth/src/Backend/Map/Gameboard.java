@@ -185,16 +185,16 @@ public class Gameboard {
 	 * @param MazeCard
 	 * @return MazeCard
 	 */
-	public MazeCard moveGears(PositionsCard move, MazeCard card) { // Variable f�r FreeCard erstellen oder direkt mit
-																	// this arbeiten und diese zur�ckgeben?
-		MazeCard mover = this.freeCard;
+	public MazeCard moveGears(PositionsCard move, MazeCard card) { 
+																	
+		MazeCard newFreeCard = null;
 		MazeCard[] safer = new MazeCard[7];
 		switch (move) {
 		case A2:
 			if (this.map[1][6].getFigures().size() > 0) {
-				mover.addFigures(this.map[1][6].getFigures());
+				card.addFigures(this.map[1][6].getFigures());
 			}
-			mover = getMapCard(3, 6);
+			newFreeCard = getMapCard(1, 6);
 			for (int i = 0; i < this.map[1].length - 1; i++) {
 				safer[i + 1] = this.map[1][i];
 			}
@@ -205,9 +205,9 @@ public class Gameboard {
 
 		case A4:
 			if (this.map[3][6].getFigures().size() > 0) {
-				mover.addFigures(this.map[3][6].getFigures());
+				card.addFigures(this.map[3][6].getFigures());
 			}
-			mover = getMapCard(3, 6);
+			newFreeCard = getMapCard(3, 6);
 			for (int i = 0; i < this.map[3].length - 1; i++) {
 				safer[i + 1] = this.map[3][i];
 			}
@@ -219,9 +219,9 @@ public class Gameboard {
 		case A6:
 
 			if (this.map[5][6].getFigures().size() > 0) {
-				mover.addFigures(this.map[5][6].getFigures());
+				card.addFigures(this.map[5][6].getFigures());
 			}
-			mover = getMapCard(5, 6);
+			newFreeCard = getMapCard(5, 6);
 			for (int i = 0; i < this.map[5].length - 1; i++) {
 				safer[i + 1] = this.map[5][i];
 			}
@@ -232,9 +232,9 @@ public class Gameboard {
 
 		case G2:
 			if (this.map[1][0].getFigures().size() > 0) {
-				mover.addFigures(this.map[1][0].getFigures());
+				card.addFigures(this.map[1][0].getFigures());
 			}
-			mover = getMapCard(1, 0);
+			newFreeCard = getMapCard(1, 0);
 			for (int i = this.map[1].length - 1; i > 0; i--) {
 				safer[i - 1] = this.map[1][i];
 			}
@@ -244,9 +244,9 @@ public class Gameboard {
 
 		case G4:
 			if (this.map[3][0].getFigures().size() > 0) {
-				mover.addFigures(this.map[3][0].getFigures());
+				card.addFigures(this.map[3][0].getFigures());
 			}
-			mover = getMapCard(3, 0);
+			newFreeCard = getMapCard(3, 0);
 			for (int i = this.map[3].length - 1; i > 0; i--) {
 				safer[i - 1] = this.map[3][i];
 			}
@@ -256,9 +256,9 @@ public class Gameboard {
 			break;
 		case G6:
 			if (this.map[5][0].getFigures().size() > 0) {
-				mover.addFigures(this.map[5][0].getFigures());
+				card.addFigures(this.map[5][0].getFigures());
 			}
-			mover = getMapCard(5, 0);
+			newFreeCard = getMapCard(5, 0);
 			for (int i = this.map[5].length - 1; i > 0; i--) {
 				safer[i - 1] = this.map[5][i];
 			}
@@ -269,9 +269,9 @@ public class Gameboard {
 
 		case B1:
 			if (this.map[6][1].getFigures().size() > 0) {
-				mover.addFigures(this.map[6][1].getFigures());
+				card.addFigures(this.map[6][1].getFigures());
 			}
-			mover = getMapCard(6, 1);
+			newFreeCard = getMapCard(6, 1);
 			for (int i = 0; i < this.map.length - 1; i++) {
 				safer[i + 1] = this.map[i][1];
 			}
@@ -284,9 +284,9 @@ public class Gameboard {
 
 		case D1:
 			if (this.map[6][3].getFigures().size() > 0) {
-				mover.addFigures(this.map[6][3].getFigures());
+				card.addFigures(this.map[6][3].getFigures());
 			}
-			mover = getMapCard(6, 3);
+			newFreeCard = getMapCard(6, 3);
 			for (int i = 0; i < this.map.length - 1; i++) {
 				safer[i + 1] = this.map[i][3];
 			}
@@ -298,9 +298,9 @@ public class Gameboard {
 			break;
 		case F1:
 			if (this.map[6][5].getFigures().size() > 0) {
-				mover.addFigures(this.map[6][5].getFigures());
+				card.addFigures(this.map[6][5].getFigures());
 			}
-			mover = getMapCard(6, 5);
+			newFreeCard = getMapCard(6, 5);
 			for (int i = 0; i < this.map.length - 1; i++) {
 				safer[i + 1] = this.map[i][5];
 			}
@@ -313,9 +313,9 @@ public class Gameboard {
 
 		case B7:
 			if (this.map[0][1].getFigures().size() > 0) {
-				mover.addFigures(this.map[0][1].getFigures());
+				card.addFigures(this.map[0][1].getFigures());
 			}
-			mover = getMapCard(0, 1);
+			newFreeCard = getMapCard(0, 1);
 			for (int i = this.map.length - 1; i > 0; i--) {
 				safer[i - 1] = this.map[i][1];
 			}
@@ -328,9 +328,9 @@ public class Gameboard {
 
 		case D7:
 			if (this.map[0][3].getFigures().size() > 0) {
-				mover.addFigures(this.map[0][3].getFigures());
+				card.addFigures(this.map[0][3].getFigures());
 			}
-			mover = getMapCard(0, 3);
+			newFreeCard = getMapCard(0, 3);
 			for (int i = this.map.length - 1; i > 0; i--) {
 				safer[i - 1] = this.map[i][3];
 			}
@@ -342,9 +342,9 @@ public class Gameboard {
 			break;
 		case F7:
 			if (this.map[0][5].getFigures().size() > 0) {
-				mover.addFigures(this.map[0][5].getFigures());
+				card.addFigures(this.map[0][5].getFigures());
 			}
-			mover = getMapCard(0, 5);
+			newFreeCard = getMapCard(0, 5);
 			for (int i = this.map.length - 1; i > 0; i--) {
 				safer[i - 1] = this.map[i][5];
 			}
@@ -354,15 +354,11 @@ public class Gameboard {
 			}
 
 			break;
-
-		default:
-			mover = this.freeCard;
-			System.out.println("You can't move the gear at this position");
 		}
 
 		setAllNeighbours();
-
-		return mover;
+		this.freeCard = newFreeCard;
+		return this.freeCard;
 
 	}
 
@@ -401,7 +397,7 @@ public class Gameboard {
 	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) {
 		boolean found = false;
 		boolean notFound = true;
-
+		List<MazeCard> visited = new ArrayList<MazeCard>();
 		MazeCard current = getMapCard(currentPos[0], currentPos[1]);
 		MazeCard old = getMapCard(oldPos[0], oldPos[1]);
 		while (!old.equals(current) && found == false && notFound == true) {
@@ -412,10 +408,11 @@ public class Gameboard {
 				if (north.equals(current)) {
 					found = true;
 				} else {
-					if (north.equals(getMapCard(figure.getPos()[0], figure.getPos()[1]))) {
+					if (visited.contains(north)) {
 						notFound = true;
 					} else {
-						int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
+						int[] older = new int[] { oldPos[0], oldPos[1] - 1 };
+						visited.add(north);
 						moveFigure(currentPos, older, figure);
 					}
 				}
@@ -436,7 +433,8 @@ public class Gameboard {
 					}
 				}
 
-			} else if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0 && old.getNeighboring(Direction.south).getWall()[0] == 0) {
+			} else if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0
+					&& old.getNeighboring(Direction.south).getWall()[0] == 0) {
 
 				MazeCard south = old.getNeighboring(Direction.south);
 				if (south.equals(current)) {
@@ -451,7 +449,8 @@ public class Gameboard {
 
 				}
 
-			} else if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0 && old.getNeighboring(Direction.east).getWall()[1] == 0) {
+			} else if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0
+					&& old.getNeighboring(Direction.west).getWall()[1] == 0) {
 
 				MazeCard west = old.getNeighboring(Direction.west);
 				if (west.equals(current)) {

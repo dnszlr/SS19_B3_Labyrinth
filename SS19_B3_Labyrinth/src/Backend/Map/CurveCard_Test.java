@@ -15,109 +15,134 @@ import Backend.Figure.Figure;
 
 public class CurveCard_Test {
 
-	CurveCard tester;
+	CurveCard red;
+	CurveCard blue;
+	CurveCard yellow;
+	CurveCard green;
 	CurveCard north;
 	CurveCard east;
 	CurveCard south;
 	CurveCard west;
-	Figure adder;
-	Figure adderer;
+	Figure adder1;
+	Figure adder2;
 	ArrayList<Figure> added = new ArrayList<Figure>();
 	
 	
 
 	@Before
 	public void initialize() {
-		tester = new CurveCard(Color.RED, null);
-		north = new CurveCard(Color.RED, null);
+		red = new CurveCard(Color.RED, null);
+		blue = new CurveCard(Color.BLUE, null);
+		yellow = new CurveCard(Color.YELLOW, null);
+		green = new CurveCard(Color.GREEN, null);
+		north = new CurveCard(null, Treasure.book);
 		east = new CurveCard(null, Treasure.bat);
 		south = new CurveCard(null, null);
 		west = new CurveCard(Color.GREEN, Treasure.chest);
-		adder = new Figure("hans", Color.RED);
-		adderer = new Figure("torben", Color.GREEN);
+		adder1 = new Figure("hans", Color.RED);
+		adder2= new Figure("torben", Color.GREEN);
 	}
 
 	@Test
 	public void checkRotateLeft() {
 		
-		System.out.println(Arrays.toString(tester.getWall()));
-		tester.rotateLeft();
-		System.out.println(Arrays.toString(tester.getWall()));
+		System.out.println(Arrays.toString(red.getWall()));
+		red.rotateLeft();
+		System.out.println(Arrays.toString(red.getWall()));
+		red.rotateLeft();
+		System.out.println(Arrays.toString(red.getWall()));
+		red.rotateLeft();
+		System.out.println(Arrays.toString(red.getWall()));
+		red.rotateLeft();
+		System.out.println(Arrays.toString(red.getWall()));
 	}
 
 	@Test
 	public void checkRotateRight() {
 		
-		System.out.println(Arrays.toString(tester.getWall()));
-		tester.rotateRight();
-		System.out.println(Arrays.toString(tester.getWall()));
+		System.out.println(Arrays.toString(red.getWall()));
+		red.rotateRight();
+		System.out.println(Arrays.toString(red.getWall()));
+		red.rotateRight();
+		System.out.println(Arrays.toString(red.getWall()));
+		red.rotateRight();
+		System.out.println(Arrays.toString(red.getWall()));
+		red.rotateRight();
+		System.out.println(Arrays.toString(red.getWall()));
 	}
 	
 	@Test
 	public void checkSetAndGetNeighbours() {
-		tester.setNeighboring(north, Direction.north);
-		tester.setNeighboring(east, Direction.east);
-		tester.setNeighboring(south, Direction.south);
-		tester.setNeighboring(west, Direction.west);
+		red.setNeighboring(north, Direction.north);
+		red.setNeighboring(east, Direction.east);
+		red.setNeighboring(south, Direction.south);
+		red.setNeighboring(west, Direction.west);
 		
-		assertTrue(tester.getNeighboring(Direction.north).equals(north));
+		assertTrue(red.getNeighboring(Direction.north).equals(north));
+		assertTrue(red.getNeighboring(Direction.east).equals(east));
+		assertTrue(red.getNeighboring(Direction.south).equals(south));
+		assertTrue(red.getNeighboring(Direction.west).equals(west));
 	}
 	
 	@Test
 	public void checkAddFigure() {
 		
-		int size = tester.getFigures().size();
-		tester.addFigure(adder);
-		assertFalse(size == tester.getFigures().size());
+		int size = red.getFigures().size();
+		red.addFigure(adder1);
+		assertFalse(size == red.getFigures().size());
 	}
 	
 	@Test
 	public void checkAddFigures() {
-		added.add(adder);
-		added.add(adderer);
+		added.add(adder1);
+		added.add(adder2);
 		
-		int size = tester.getFigures().size();
-		tester.addFigures(added);
-		assertFalse(size == tester.getFigures().size());
+		int size = red.getFigures().size();
+		red.addFigures(added);
+		blue.addFigures(added);
+		assertFalse(size == red.getFigures().size());
 	}
 	
 	@Test
 	public void checkRemoveFigure() {
 		
-		tester.addFigure(adder);
-		tester.addFigure(adderer);
-		int size = tester.getFigures().size();
-		tester.removeFigure(adder);
-		assertFalse(size == tester.getFigures().size());
+		red.addFigure(adder1);
+		red.addFigure(adder2);
+		int size = red.getFigures().size();
+		red.removeFigure(adder1);
+		assertFalse(size == red.getFigures().size());
 		
 	}
 	
 	@Test
 	public void checkRemoveFigures() {
-		tester.addFigure(adder);
-		tester.addFigure(adderer);
+		red.addFigure(adder1);
+		red.addFigure(adder2);
 		
-		tester.removeFigures();
-		assertTrue(tester.getFigures().size() == 0);
+		red.removeFigures();
+		assertTrue(red.getFigures().size() == 0);
 	}
 	
 	 @Test
 	 public void checkIsStart() {
-		 assertTrue(north.isStart());
+		 assertTrue(red.isStart());
 	 }
 	 
 	 @Test
 	 public void checkIsStartFromFigure() {
-		 tester.addFigure(adder);
-		 tester.addFigure(adderer);
+		 red.addFigure(adder1);
+		 red.addFigure(adder2);
 		 
-		 assertTrue(tester.isStartFromFigure());
+		 assertTrue(red.isStartFromFigure());
 		 
 	 }
 	 
 	 @Test
 	 public void checkToString() {
-		 System.out.println(tester.toString());
+		 System.out.println(red.toString());
+		 System.out.println(green.toString());
+		 System.out.println(yellow.toString());
+		 System.out.println(blue.toString());
 	 }
 	
 	

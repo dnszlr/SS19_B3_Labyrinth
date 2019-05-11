@@ -48,7 +48,7 @@ public abstract class MazeCard {
 	/**
 	 * Methode um die Position der Wand zu erfragen
 	 * 
-	 * @return int 
+	 * @return int
 	 */
 	public int[] getWall() {
 		return this.wall;
@@ -57,7 +57,7 @@ public abstract class MazeCard {
 	/**
 	 * Getter um einen Treasure zu bekommen
 	 * 
-	 * @return Treasure 
+	 * @return Treasure
 	 */
 	public Treasure getTreasure() {
 		return this.treasure;
@@ -68,7 +68,7 @@ public abstract class MazeCard {
 	 * erhalten.
 	 * 
 	 * @param Direction
-	 * @return MazeCard 
+	 * @return MazeCard
 	 */
 	public MazeCard getNeighboring(Direction direction) {
 		MazeCard result = null;
@@ -93,7 +93,7 @@ public abstract class MazeCard {
 	/**
 	 * Getter um die Farbe zu erfragen.
 	 * 
-	 * @return color 
+	 * @return color
 	 */
 	public Color getColor() {
 		return this.color;
@@ -102,7 +102,7 @@ public abstract class MazeCard {
 	/**
 	 * Getter um die Figuren zu erfragen.
 	 * 
-	 * @return figures 
+	 * @return figures
 	 */
 	public ArrayList<Figure> getFigures() {
 		return this.figures;
@@ -160,7 +160,7 @@ public abstract class MazeCard {
 	 * Methode um eine Figure von einer Karte zu entfernen.
 	 * 
 	 * @param figure
-	 * @return result 
+	 * @return result
 	 */
 	public boolean removeFigure(Figure figure) {
 		boolean result = false;
@@ -189,7 +189,7 @@ public abstract class MazeCard {
 	/**
 	 * Methode um zu fragen ob die Karte eine Startpunkt ist.
 	 * 
-	 * @return result 
+	 * @return result
 	 */
 	public boolean isStart() {
 		boolean result = false;
@@ -205,7 +205,7 @@ public abstract class MazeCard {
 	 * Methode um zu fragen ob die Karte ein Startpunkt einer spezifischen Figur
 	 * ist.
 	 * 
-	 * @return result 
+	 * @return result
 	 */
 	public boolean isStartFromFigure() {
 		boolean result = false;
@@ -226,7 +226,8 @@ public abstract class MazeCard {
 	public String toString() {
 
 //		return "MazeCard: " + Arrays.toString(this.wall) + " " + this.color + " " + this.treasure;
-		return "" + this.getClass().getSimpleName() + ";" + Arrays.toString(this.wall) + ";" + " " + this.color + ";" + " " + this.treasure;
+		return "" + this.getClass().getSimpleName() + ";" + Arrays.toString(this.wall) + ";" + this.figures.toString()
+				+ ";" + Arrays.toString(this.neighboring) + ";" + " " + this.color + ";" + " " + this.treasure;
 
 	}
 }

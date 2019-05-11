@@ -1,6 +1,6 @@
 package Interface;
 
-import Backend.Color;
+import java.io.IOException;
 
 public interface Communication {
 	
@@ -30,7 +30,7 @@ public interface Communication {
 
 	public String endRound();
 
-	public String saveGame(String path, String type);
+	public String saveGame(String path, String type) throws IOException;
 
 	public String loadGame(String path, String type);
 	

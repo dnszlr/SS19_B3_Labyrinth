@@ -44,8 +44,7 @@ public class Figure_Test {
 	public void testDrawCard() {
 		
 		figure.drawCard();
-		assertFalse(figure.getTreasureCard().equals(null));
-		assertTrue(figure.getTreasureCard().equals(card1)); // noch false, weil equals Methode in ObjectCard nicht richtig funktioniert!
+		assertTrue(figure.getTreasureCard().equals(card1));
 		figure.drawCard();
 		assertTrue(figure.getTreasureCard().equals(card2));
 	}
@@ -69,6 +68,15 @@ public class Figure_Test {
 		boolean result = figure.isAllFound();
 		
 		assertTrue(result);
+		
+	}
+	
+	@Test
+	public void testToString() {
+		
+		
+		assertEquals("Dennis;RED;null;[bat;false, book;false, chest;false, crown;false];[];[0, 0]", figure.toString());
+		
 		
 	}
 

@@ -16,7 +16,7 @@ public class CurveCard extends MazeCard {
 	public CurveCard(Color color, Treasure treasure) {
 
 		super(new int[4], color, treasure);
-		if (color == null || treasure == null) {
+		if (color == null) {
 			int random = (int) (Math.random() * 4 + 1);
 			if (random == 1) {
 				this.wall = new int[] { 1, 0, 0, 1 };

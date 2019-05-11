@@ -33,25 +33,9 @@ public class Figure {
 	}
 
 	/**
-	 * Konstruktor der Klasse Figure.
-	 * 
-	 * @param name
-	 * @param color
-	 * @param pos
-	 */
-
-//	public Figure(String name, Color color, int[] pos) { Wird dieser Konstruktor ï¿½berhaupt benï¿½tigt, wenn man sich von pos von Color holt?
-//
-//		this.cardstack = new CardsStack();
-//		this.name = name;
-//		this.color = color;
-//		this.setPos(pos);
-//	}
-
-	/**
 	 * Getter für das Attribut name.
 	 * 
-	 * @return String 
+	 * @return String
 	 */
 
 	public String getName() {
@@ -84,7 +68,7 @@ public class Figure {
 	/**
 	 * Getter für das Attribut pos.
 	 * 
-	 * @return int 
+	 * @return int
 	 */
 
 	public int[] getPos() {
@@ -134,9 +118,9 @@ public class Figure {
 
 	public ObjectCard drawCard() {
 
-		ObjectCard drawnCard = cardstack.drawCard();
+		this.treasureCard = cardstack.drawCard();
 
-		return drawnCard;
+		return this.treasureCard;
 	}
 
 	/**
@@ -171,7 +155,8 @@ public class Figure {
 
 	@Override
 	public String toString() {
-		return "" + this.name + ";" + "" + this.color + ";" +  "" + this.treasureCard + ";" + "" + this.cardstack + ";" + "" + Arrays.toString(this.pos);
+		return "" + this.name + ";" + "" + this.color + ";" + "" + this.treasureCard + ";" + "" + this.cardstack + ";"
+				+ "" + Arrays.toString(this.pos);
 	}
 
 	/**
@@ -265,7 +250,7 @@ public class Figure {
 		@Override
 		public String toString() {
 
-			return "" + this.objectsCards.toString() + ";" +"" + this.foundCards.toString();
+			return "" + this.objectsCards.toString() + ";" + "" + this.foundCards.toString();
 		}
 
 	}

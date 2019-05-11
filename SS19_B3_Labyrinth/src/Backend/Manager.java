@@ -1,13 +1,14 @@
 package Backend;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-
 import Backend.Cards.ObjectCard;
 import Backend.Figure.Figure;
 import Backend.Map.Gameboard;
-import Backend.Map.MazeCard;
 import Interface.Communication;
 
 public class Manager implements Communication {
@@ -49,16 +50,23 @@ public class Manager implements Communication {
 	@Override
 	public String[] getPlayers() {
 		List<String> getPlayers = new ArrayList<String>();
-
-		for (int i = 0; i <= Color.YELLOW.getPos()[0]; i++) {
-			for (int j = 0; j <= Color.GREEN.getPos()[1]; j++) {
-				if (gameboard.getMapCard(i, j).getFigures().size() > 0) {
-					for (int y = 0; y < gameboard.getMapCard(i, j).getFigures().size(); y++) {
-						getPlayers.add(gameboard.getMapCard(i, j).getFigures().get(y).toString());
-					}
-				}
-			}
+		Figure safer = players.getActivePlayer();
+		players.nextPlayer();
+		getPlayers.add(players.getActivePlayer().toString());
+		while (!players.getActivePlayer().equals(safer)) {
+			players.nextPlayer();
+			getPlayers.add(players.getActivePlayer().toString());
 		}
+
+//		for (int i = 0; i <= Color.YELLOW.getPos()[0]; i++) {
+//			for (int j = 0; j <= Color.GREEN.getPos()[1]; j++) {
+//				if (gameboard.getMapCard(i, j).getFigures().size() > 0) {
+//					for (int y = 0; y < gameboard.getMapCard(i, j).getFigures().size(); y++) {
+//						getPlayers.add(gameboard.getMapCard(i, j).getFigures().get(y).toString());
+//					}
+//				}
+//			}
+//		}
 		String[] players = getPlayers.toArray(new String[0]);
 		return players;
 
@@ -130,6 +138,7 @@ public class Manager implements Communication {
 		for (Treasure i : Treasure.values()) {
 			objectCards.add(new ObjectCard(i));
 		}
+		Collections.shuffle(objectCards);
 		String startGame = getMap() + ";" + getPlayers() + ";" + objectCards.toString();
 		return startGame;
 	}
@@ -150,14 +159,14 @@ public class Manager implements Communication {
 	@Override
 	public boolean moveFigure(int[] position) {
 
-		boolean result = false;
+		this.isPlaceMazeCard = false;
 
-		result = gameboard.moveFigure(position, players.getActivePlayer().getPos(), players.getActivePlayer());
-		if (result == true) {
+		this.isPlaceMazeCard = gameboard.moveFigure(position, players.getActivePlayer().getPos(), players.getActivePlayer());
+		if (this.isPlaceMazeCard == true) {
 			gameboard.getMapCard(position[0], position[1]).addFigure(players.getActivePlayer());
 		}
 
-		return result;
+		return this.isPlaceMazeCard;
 	}
 
 	/**
@@ -184,10 +193,22 @@ public class Manager implements Communication {
 
 	/**
 	 * Methode um das Spiel zu speichern.
+	 * 
+	 * @throws IOException
 	 */
-	// SPEICHERN UND LADEN UND DESWEGEN ALLES ANS STRING ZURÜCKGEBEN? FOLIEN s269?
+	// SPEICHERN UND LADEN FOLIEN s269
 	@Override
-	public String saveGame(String path, String type) {
+	public String saveGame(String path, String type) throws IOException {
+		PrintWriter pw = null;
+		try {
+			DataAccessSER dataAccessSer = new DataAccessSER();
+			dataAccessSer.writeToStream(new PrintWriter(type));
+			pw = new PrintWriter(new FileWriter(path));
+			dataAccessSer.writeToStream(pw);
+		}
+		finally {
+			if(pw != null) pw.close();
+		}
 		return null;
 	}
 

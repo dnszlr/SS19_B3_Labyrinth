@@ -61,7 +61,14 @@ public class RingBufferPlayers_Test {
 		
 		buffer.shufflePlayers();
 		assertNotSame(bufferNew, buffer); 
-		//Sinnlos? Da bei random theoretisch auch die selben Werte Random wieder gewählt werden können. Dann wäre das Ergebnis trotzdem false!
+		
+		
+	}
+	
+	@Test
+	public void testGetActivePlayer() {
+		
+		assertEquals(red, buffer.getActivePlayer());
 		
 	}
 
