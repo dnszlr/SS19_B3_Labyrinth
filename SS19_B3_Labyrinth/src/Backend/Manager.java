@@ -3,6 +3,7 @@ package Backend;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +12,7 @@ import Backend.Figure.Figure;
 import Backend.Map.Gameboard;
 import Interface.Communication;
 
-public class Manager implements Communication {
+public class Manager implements Communication, Serializable {
 
 	/**
 	 * Klasse Manager implementiert das Interface Communication.
@@ -45,7 +46,7 @@ public class Manager implements Communication {
 	}
 
 	/**
-	 * Getter für die Spieler.
+	 * Getter fï¿½r die Spieler.
 	 */
 	@Override
 	public String[] getPlayers() {
@@ -73,7 +74,7 @@ public class Manager implements Communication {
 	}
 
 	/**
-	 * Getter für den Spieler der gerade am Zug ist.
+	 * Getter fï¿½r den Spieler der gerade am Zug ist.
 	 */
 	@Override
 	public String getActivePlayer() {
@@ -83,7 +84,7 @@ public class Manager implements Communication {
 	}
 
 	/**
-	 * Getter für die Treasure Karte des Spielers der gerade am Zug ist.
+	 * Getter fï¿½r die Treasure Karte des Spielers der gerade am Zug ist.
 	 */
 	@Override
 	public String getActivePlayerTreasureCard() {
@@ -92,7 +93,7 @@ public class Manager implements Communication {
 	}
 
 	/**
-	 * Getter für die bereits gefunden Treasures.
+	 * Getter fï¿½r die bereits gefunden Treasures.
 	 */
 	@Override
 	public String getFoundTreasures(String color) {
@@ -111,7 +112,7 @@ public class Manager implements Communication {
 	}
 
 	/**
-	 * Methode um Spieler dem Spiel hinzuzufügen.
+	 * Methode um Spieler dem Spiel hinzuzufï¿½gen.
 	 */
 	@Override
 	public String addPlayer(String name, String color) {
