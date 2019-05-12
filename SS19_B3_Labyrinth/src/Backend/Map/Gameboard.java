@@ -16,12 +16,13 @@ public class Gameboard {
 	 */
 	private MazeCard freeCard;
 	private MazeCard[][] map;
-	private MazeCard check;
+	private int[][] visited;
+
 	/**
 	 * Konstruktor der Klasse Gameboard.
 	 */
 	public Gameboard() {
-
+		visited = new int[7][7];
 		this.map = new MazeCard[7][7];
 		this.map[Color.RED.getPos()[0]][Color.RED.getPos()[1]] = new CurveCard(Color.RED, null);
 		this.map[Color.YELLOW.getPos()[0]][Color.YELLOW.getPos()[1]] = new CurveCard(Color.YELLOW, null);
@@ -397,87 +398,68 @@ public class Gameboard {
 
 	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) {
 		boolean found = false;
-		boolean notFound = true;
-
+		boolean notFound = false;
 		MazeCard current = getMapCard(currentPos[0], currentPos[1]);
 		MazeCard old = getMapCard(oldPos[0], oldPos[1]);
-		while (!old.equals(current) && found == false && notFound == true) {
-			if (old.getNeighboring(Direction.north) != null && old.getWall()[0] == 0
-					&& old.getNeighboring(Direction.north).getWall()[2] == 0) {
 
-				MazeCard north = old.getNeighboring(Direction.north);
-				if (north.equals(current)) {
-					found = true;
-				} else {
-					if (north.equals(this.check)) {
-						notFound = true;
+		if (this.visited[oldPos[0]][oldPos[1]] != 1) {
+			this.visited[oldPos[0]][oldPos[1]] = 1;
+		}
+		if (old.equals(current)) {
+			found = true;
+		} else {
+
+			while (!old.equals(current) && found == false && notFound == false) {
+
+				if (old.getNeighboring(Direction.north) != null && old.getWall()[0] == 0
+						&& old.getNeighboring(Direction.north).getWall()[2] == 0) {
+					if (this.visited[oldPos[0]][oldPos[1] - 1] != 1) {
+						int[] older = new int[] { oldPos[0], oldPos[1] - 1 };
+						found = moveFigure(currentPos, older, figure);
+
 					} else {
-						check = north;
-						int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
-						moveFigure(currentPos, older, figure);
+						notFound = true;
 					}
-				}
 
-			} else if (old.getNeighboring(Direction.east) != null && old.getWall()[1] == 0
-					&& old.getNeighboring(Direction.east).getWall()[3] == 0) {
-
-				MazeCard east = old.getNeighboring(Direction.east);
-
-				if (east.equals(current)) {
-					found = true;
-				} else {
-					if (east.equals(this.check)) {
-						notFound = true;
-					} else {
-						east = check;
+				} else if (old.getNeighboring(Direction.east) != null && old.getWall()[1] == 0
+						&& old.getNeighboring(Direction.east).getWall()[3] == 0) {
+					if (this.visited[oldPos[0] + 1][oldPos[1]] != 1) {
 						int[] older = new int[] { oldPos[0] + 1, oldPos[1] };
-						moveFigure(currentPos, older, figure);
-					}
-				}
+						found = moveFigure(currentPos, older, figure);
 
-			}else if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0
-					&& old.getNeighboring(Direction.south).getWall()[0] == 0) {
-
-				MazeCard south = old.getNeighboring(Direction.south);
-				if (south.equals(current)) {
-					found = true;
-				} else {
-					if (south.equals(this.check)) {
-						notFound = true;
 					} else {
-						south = check;
+						notFound = true;
+					}
+
+				} else if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0
+						&& old.getNeighboring(Direction.south).getWall()[0] == 0) {
+					if (this.visited[oldPos[0]][oldPos[1] + 1] != 1) {
 						int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
-						moveFigure(currentPos, older, figure);
-					}
-
-				}
-
-			} else if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0
-					&& old.getNeighboring(Direction.east).getWall()[1] == 0) {
-
-				MazeCard west = old.getNeighboring(Direction.west);
-				if (west.equals(current)) {
-					found = true;
-				} else {
-					if (west.equals(this.check)) {
-						notFound = true;
+						found = moveFigure(currentPos, older, figure);
 					} else {
-						west = check;
-						int[] older = new int[] { oldPos[0] - 1, oldPos[1] };
-						moveFigure(currentPos, older, figure);
+						notFound = true;
 					}
 
-				}
+				} else if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0
+						&& old.getNeighboring(Direction.east).getWall()[1] == 0) {
+					if (this.visited[oldPos[0] - 1][oldPos[1]] != 1) {
+						int[] older = new int[] { oldPos[0] - 1, oldPos[1] };
+						found = moveFigure(currentPos, older, figure);
+					} else {
+						notFound = true;
+					}
 
-			} else {
-				notFound = false;
+				} else {
+					notFound = true;
+				}
 
 			}
-
 		}
-
+		
 		return found;
 
 	}
+	
+
 
 }
