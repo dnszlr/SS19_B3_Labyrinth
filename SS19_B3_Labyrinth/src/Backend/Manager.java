@@ -10,9 +10,10 @@ import java.util.List;
 import Backend.Cards.ObjectCard;
 import Backend.Figure.Figure;
 import Backend.Map.Gameboard;
+import Backend.Map.MazeCard;
 import Interface.Communication;
 
-public class Manager implements Communication, Serializable {
+public class Manager implements Communication {
 
 	/**
 	 * Klasse Manager implementiert das Interface Communication.
@@ -24,21 +25,23 @@ public class Manager implements Communication, Serializable {
 	private Color color;
 	private Treasure treasure;
 	private Gameboard gameboard;
-	private RingBufferPlayers players;
+	private RingBufferPlayers players = new RingBufferPlayers();;
 	private ArrayList<ObjectCard> objectCards;
 	private boolean isMoveFigure;
 	private boolean isPlaceMazeCard;
 
 	/**
-	 * Getter von der Map des Gameboards.
+	 * Getter der Map des Gameboards.
 	 */
 	@Override
 	public String[][] getMap() {
 
-		String[][] map = new String[Color.YELLOW.getPos()[0]][Color.GREEN.getPos()[1]];
-		for (int i = 0; i <= map.length; i++) {
-			for (int j = 0; j <= map[i].length; j++) {
-				map[i][j] = gameboard.getMapCard(i, j).toString();
+		String[][] map = new String[7][7];
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				MazeCard card = gameboard.getMapCard(i, j);
+				String cardAtm = card.toString();
+				map[i][j] = cardAtm;
 			}
 		}
 
@@ -46,35 +49,24 @@ public class Manager implements Communication, Serializable {
 	}
 
 	/**
-	 * Getter fï¿½r die Spieler.
+	 * Getter für die Spieler die am Spiel teilnehmen.
 	 */
 	@Override
 	public String[] getPlayers() {
 		List<String> getPlayers = new ArrayList<String>();
 		Figure safer = players.getActivePlayer();
-		players.nextPlayer();
-		getPlayers.add(players.getActivePlayer().toString());
-		while (!players.getActivePlayer().equals(safer)) {
-			players.nextPlayer();
+		do {
 			getPlayers.add(players.getActivePlayer().toString());
-		}
+			players.nextPlayer();
+		} while (!players.getActivePlayer().equals(safer));
 
-//		for (int i = 0; i <= Color.YELLOW.getPos()[0]; i++) {
-//			for (int j = 0; j <= Color.GREEN.getPos()[1]; j++) {
-//				if (gameboard.getMapCard(i, j).getFigures().size() > 0) {
-//					for (int y = 0; y < gameboard.getMapCard(i, j).getFigures().size(); y++) {
-//						getPlayers.add(gameboard.getMapCard(i, j).getFigures().get(y).toString());
-//					}
-//				}
-//			}
-//		}
 		String[] players = getPlayers.toArray(new String[0]);
 		return players;
 
 	}
 
 	/**
-	 * Getter fï¿½r den Spieler der gerade am Zug ist.
+	 * Getter für den Spieler der gerade am Zug ist.
 	 */
 	@Override
 	public String getActivePlayer() {
@@ -84,7 +76,7 @@ public class Manager implements Communication, Serializable {
 	}
 
 	/**
-	 * Getter fï¿½r die Treasure Karte des Spielers der gerade am Zug ist.
+	 * Getter für die Treasure Karte des Spielers der gerade am Zug ist.
 	 */
 	@Override
 	public String getActivePlayerTreasureCard() {
@@ -93,7 +85,7 @@ public class Manager implements Communication, Serializable {
 	}
 
 	/**
-	 * Getter fï¿½r die bereits gefunden Treasures.
+	 * Getter für die bereits gefunden Treasures.
 	 */
 	@Override
 	public String getFoundTreasures(String color) {
@@ -121,8 +113,9 @@ public class Manager implements Communication, Serializable {
 		if (!name.equals(null) && (color.toLowerCase().equals("red") || color.toLowerCase().equals("blue")
 				|| color.toLowerCase().equals("yellow") || color.toLowerCase().equals("green"))) {
 			Color playerColor = Color.valueOf(color);
-			this.players.addFigure(new Figure(name, playerColor));
-			addPlayer = new Figure(name, playerColor).toString();
+			Figure newPlayer = new Figure(name, playerColor);
+			this.players.addFigure(newPlayer);
+			addPlayer = newPlayer.toString();
 		}
 
 		return addPlayer;
@@ -133,14 +126,28 @@ public class Manager implements Communication, Serializable {
 	 */
 	@Override
 	public String startGame() {
-
+		
+		this.objectCards = new ArrayList<ObjectCard>();
 		this.gameboard = new Gameboard();
-		this.players = new RingBufferPlayers();
 		for (Treasure i : Treasure.values()) {
 			objectCards.add(new ObjectCard(i));
 		}
 		Collections.shuffle(objectCards);
-		String startGame = getMap() + ";" + getPlayers() + ";" + objectCards.toString();
+
+		while (objectCards.size() > 0) {
+
+			players.getActivePlayer().addCard(objectCards.get(0));
+			objectCards.remove(0);
+			if (players.getActivePlayer().getTreasureCard() == null) {
+				players.getActivePlayer().drawCard();
+
+			}
+
+			players.nextPlayer();
+
+		}
+
+		String startGame = getMap() + ";" + objectCards.toString();
 		return startGame;
 	}
 
@@ -162,7 +169,8 @@ public class Manager implements Communication, Serializable {
 
 		this.isPlaceMazeCard = false;
 
-		this.isPlaceMazeCard = gameboard.moveFigure(position, players.getActivePlayer().getPos(), players.getActivePlayer());
+		this.isPlaceMazeCard = gameboard.moveFigure(position, players.getActivePlayer().getPos(),
+				players.getActivePlayer());
 		if (this.isPlaceMazeCard == true) {
 			gameboard.getMapCard(position[0], position[1]).addFigure(players.getActivePlayer());
 		}
@@ -206,9 +214,9 @@ public class Manager implements Communication, Serializable {
 			dataAccessSer.writeToStream(new PrintWriter(type));
 			pw = new PrintWriter(new FileWriter(path));
 			dataAccessSer.writeToStream(pw);
-		}
-		finally {
-			if(pw != null) pw.close();
+		} finally {
+			if (pw != null)
+				pw.close();
 		}
 		return null;
 	}

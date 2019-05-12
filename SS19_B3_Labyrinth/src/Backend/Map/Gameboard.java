@@ -16,13 +16,12 @@ public class Gameboard {
 	 */
 	private MazeCard freeCard;
 	private MazeCard[][] map;
-	private List<MazeCard> visited;
-	
+	private MazeCard check;
 	/**
 	 * Konstruktor der Klasse Gameboard.
 	 */
 	public Gameboard() {
-		visited = new ArrayList<MazeCard>();
+
 		this.map = new MazeCard[7][7];
 		this.map[Color.RED.getPos()[0]][Color.RED.getPos()[1]] = new CurveCard(Color.RED, null);
 		this.map[Color.YELLOW.getPos()[0]][Color.YELLOW.getPos()[1]] = new CurveCard(Color.YELLOW, null);
@@ -396,13 +395,13 @@ public class Gameboard {
 	 * @return boolean
 	 */
 
-
 	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) {
 		boolean found = false;
-		boolean notFound = false;
+		boolean notFound = true;
+
 		MazeCard current = getMapCard(currentPos[0], currentPos[1]);
 		MazeCard old = getMapCard(oldPos[0], oldPos[1]);
-		while (!old.equals(current) && found == false && notFound == false) {
+		while (!old.equals(current) && found == false && notFound == true) {
 			if (old.getNeighboring(Direction.north) != null && old.getWall()[0] == 0
 					&& old.getNeighboring(Direction.north).getWall()[2] == 0) {
 
@@ -410,11 +409,11 @@ public class Gameboard {
 				if (north.equals(current)) {
 					found = true;
 				} else {
-					if (visited.contains(north)) {
+					if (north.equals(this.check)) {
 						notFound = true;
 					} else {
-						int[] older = new int[] { oldPos[0], oldPos[1] - 1 };
-						visited.add(north);
+						check = north;
+						int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
 						moveFigure(currentPos, older, figure);
 					}
 				}
@@ -427,64 +426,58 @@ public class Gameboard {
 				if (east.equals(current)) {
 					found = true;
 				} else {
-					if (visited.contains(east)) {
+					if (east.equals(this.check)) {
 						notFound = true;
 					} else {
+						east = check;
 						int[] older = new int[] { oldPos[0] + 1, oldPos[1] };
-						visited.add(east);
 						moveFigure(currentPos, older, figure);
 					}
 				}
 
-			} else if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0
+			}else if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0
 					&& old.getNeighboring(Direction.south).getWall()[0] == 0) {
 
 				MazeCard south = old.getNeighboring(Direction.south);
 				if (south.equals(current)) {
 					found = true;
 				} else {
-					if (visited.contains(south)) {
+					if (south.equals(this.check)) {
 						notFound = true;
 					} else {
+						south = check;
 						int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
-						visited.add(south);
 						moveFigure(currentPos, older, figure);
 					}
 
 				}
 
 			} else if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0
-					&& old.getNeighboring(Direction.west).getWall()[1] == 0) {
+					&& old.getNeighboring(Direction.east).getWall()[1] == 0) {
 
 				MazeCard west = old.getNeighboring(Direction.west);
 				if (west.equals(current)) {
 					found = true;
 				} else {
-					if (visited.contains(west)) {
+					if (west.equals(this.check)) {
 						notFound = true;
 					} else {
+						west = check;
 						int[] older = new int[] { oldPos[0] - 1, oldPos[1] };
-						visited.add(west);
 						moveFigure(currentPos, older, figure);
 					}
 
 				}
 
 			} else {
-				notFound = true;
-				
+				notFound = false;
 
 			}
 
 		}
-		if(current.equals(old)) {
-			visited.clear();
-		}
-		
+
 		return found;
 
 	}
-	
-	
 
 }

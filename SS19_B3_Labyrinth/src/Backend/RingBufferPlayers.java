@@ -23,14 +23,15 @@ public class RingBufferPlayers {
 	}
 
 	/**
-	 * Methode um einen Spieler dem Spiel hinzuzufügen gibt zurück ob die Figur erfolgreich hinzugefügt worden ist.
+	 * Methode um einen Spieler dem Spiel hinzuzufügen gibt zurück ob die Figur
+	 * erfolgreich hinzugefügt worden ist.
 	 * 
 	 * @param Figure
-	 * @return boolean 
+	 * @return boolean
 	 */
 
 	public boolean addFigure(Figure figure) {
-		
+
 		boolean result = false;
 		for (Figure i : figures) {
 			if (figure.equals(i)) {
@@ -41,6 +42,7 @@ public class RingBufferPlayers {
 		}
 		if (result = true) {
 			figures.add(figure);
+
 			if (figures.size() == 1) {
 				this.activePlayer = figure;
 			}
@@ -61,13 +63,13 @@ public class RingBufferPlayers {
 	}
 
 	/**
-	 * Methode um den nächsten Spieler zu ermitteln der an der Reihe ist. 
+	 * Methode um den nächsten Spieler zu ermitteln der an der Reihe ist.
 	 * 
 	 * @return Figure
 	 */
 
 	public Figure nextPlayer() {
-		
+
 		if (this.readPointer < figures.size() - 1) {
 			this.readPointer++;
 		} else {

@@ -22,7 +22,7 @@ public abstract class MazeCard {
 	/**
 	 * Konstruktor der Klasse MazeCard
 	 * 
-	 * @param int
+	 * @param          int
 	 * @param Color
 	 * @param MazeCard
 	 */
@@ -224,10 +224,11 @@ public abstract class MazeCard {
 	 */
 	@Override
 	public String toString() {
-
-//		return "MazeCard: " + Arrays.toString(this.wall) + " " + this.color + " " + this.treasure;
-		return "" + this.getClass().getSimpleName() + ";" + Arrays.toString(this.wall) + ";" + this.figures.toString()
-				+ ";" + Arrays.toString(this.neighboring) + ";" + " " + this.color + ";" + " " + this.treasure;
+		
+		String MazeCard = getClass().getSimpleName() + ";" + Arrays.toString(getWall()) + ";"
+				+ this.figures.toString() + ";" + "" + getColor() + ";" + "" + getFigures() + ";" + ""
+				+ getTreasure();
+		return MazeCard;
 
 	}
 }

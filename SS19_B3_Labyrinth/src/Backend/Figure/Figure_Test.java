@@ -35,8 +35,8 @@ public class Figure_Test {
 	public void TestAddCard() {
 
 		figure.addCard(card1);
-
-		assertTrue(figure.isAllFound() == false);
+		boolean result = figure.isAllFound();
+		assertFalse(result);
 
 	}
 	

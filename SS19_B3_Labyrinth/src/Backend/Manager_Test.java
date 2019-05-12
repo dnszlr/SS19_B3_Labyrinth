@@ -12,82 +12,111 @@ public class Manager_Test {
 	@Before
 	public void initialize() {
 		manager = new Manager();
+		manager.addPlayer("Player1", "RED");
+		manager.addPlayer("Player2", "BLUE");
+		manager.addPlayer("Player3", "GREEN");
+
 	}
 
 	@Test
-	public void checkGetGetMap() {
+	public void testGetMap() {
+		manager.startGame();
+		String[][] map = manager.getMap();
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 7; j++) {
+				assertTrue(map[i][j] != null);
+			}
+		}
+
+	}
+
+	@Test
+	public void testGetPlayers() {
+
+		String[] players = manager.getPlayers();
+		assertTrue(players.length == 3);
+	}
+
+	@Test
+	public void testGetActivePlayer() {
+		String player1 = manager.getActivePlayer();
+		String activePlayer = manager.getPlayers()[0];
+		System.out.println(player1);
+		System.out.println(activePlayer);
+		assertEquals(player1, activePlayer);
+
+	}
+
+	@Test
+	public void testGetActivePlayerTreasureCard() {
+		manager.startGame();
+		String activePlayerTreasureCard = manager.getActivePlayerTreasureCard();
+		System.out.println(activePlayerTreasureCard);
+	}
+
+	@Test
+	public void testGetFoundTreasures() {
+		manager.startGame();
+		String found = manager.getFoundTreasures("GREEN");
+		assertTrue(found.equals("[]"));
+	}
+
+	@Test
+	public void testAddPlayer() {
+		String player4 = manager.addPlayer("Player4", "YELLOW");
+		String check = manager.getPlayers()[3];
+		assertEquals(player4, check);
+	}
+
+	@Test
+	public void testStartGame() {
+		manager.startGame(); // wie testen?
+	}
+
+	@Test
+	public void testMoveGears() {
+		manager.startGame();
+		String[][] map = manager.getMap();
+		manager.moveGears("A2");
+		String[][] map2 = manager.getMap();
+		assertEquals(manager.getFreeMazeCard(), map[1][6]);
+		assertEquals(map[1][5], map2[1][6]);
+
+	}
+
+	@Test
+	public void testHasWon() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void checkGetPlayers() {
+	public void testEndRound() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void checkGetActivePlayer() {
+	public void testGetFreeMazeCard() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void checkGetActivePlayerTreasureCard() {
+	public void testRotateGears() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void checkGetFoundTreasures() {
+	public void testSaveGame() {
 		fail("Not yet implemented");
 	}
-	
+
 	@Test
-	public void checkAddPlayer() {
+	public void testLoadGame() {
 		fail("Not yet implemented");
 	}
-	
+
 	@Test
-	public void checkStartGame() {
+	public void testMoveFigure() {
 		fail("Not yet implemented");
 	}
-	
-	@Test
-	public void checkMoveGears() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void checkMoveFigure() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void checkHasWon() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void checkEndRound() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void checkSaveGame() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void checkLoadGame() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void checkGetFreeMazeCard() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	public void checkRotateGears() {
-		fail("Not yet implemented");
-	}
-	
-	
+
 }
