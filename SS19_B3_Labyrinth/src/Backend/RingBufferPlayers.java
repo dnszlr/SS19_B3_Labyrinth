@@ -32,20 +32,15 @@ public class RingBufferPlayers {
 
 	public boolean addFigure(Figure figure) {
 
-		boolean result = false;
-		for (Figure i : figures) {
-			if (figure.equals(i)) {
-				result = false;
-			} else {
-				result = true;
-			}
+		boolean result = true;
+		if (figures.contains(figure)) {
+			result = false;
 		}
-		if (result = true) {
+		if (this.activePlayer == null) {
+			this.activePlayer = figure;
+		}
+		if (result == true) {
 			figures.add(figure);
-
-			if (figures.size() == 1) {
-				this.activePlayer = figure;
-			}
 
 		}
 		return result;

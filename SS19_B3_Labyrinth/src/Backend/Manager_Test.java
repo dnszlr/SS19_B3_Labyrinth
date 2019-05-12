@@ -41,8 +41,8 @@ public class Manager_Test {
 	public void testGetActivePlayer() {
 		String player1 = manager.getActivePlayer();
 		String activePlayer = manager.getPlayers()[0];
-		System.out.println(player1);
-		System.out.println(activePlayer);
+//		System.out.println(player1);
+//		System.out.println(activePlayer);
 		assertEquals(player1, activePlayer);
 
 	}
@@ -86,22 +86,39 @@ public class Manager_Test {
 
 	@Test
 	public void testHasWon() {
-		fail("Not yet implemented");
+		manager.startGame();
+		assertTrue(manager.hasWon().equals("notWon"));
+
 	}
 
 	@Test
 	public void testEndRound() {
-		fail("Not yet implemented");
+		manager.startGame();
+		String player = manager.getPlayers()[1];
+		String nextPlayer = manager.endRound();
+		System.out.println(nextPlayer);
+		assertEquals(nextPlayer, player);
 	}
 
 	@Test
 	public void testGetFreeMazeCard() {
-		fail("Not yet implemented");
+		manager.startGame();
+		String[][] map = manager.getMap();
+		manager.moveGears("A6");
+		assertEquals(manager.getFreeMazeCard(), map[5][6]);
 	}
 
 	@Test
 	public void testRotateGears() {
-		fail("Not yet implemented");
+		manager.startGame();
+		String freeCard = manager.getFreeMazeCard();
+		String rotateRight = manager.rotateGear("right");
+		assertNotEquals(freeCard, rotateRight);
+		String rotateLeft = manager.rotateGear("left");
+		assertEquals(freeCard, rotateLeft);
+		String rotateWrong = manager.rotateGear("lft");
+		System.out.println(rotateWrong);
+		assertTrue(rotateWrong.equals("Wrong direction use left or right"));
 	}
 
 	@Test

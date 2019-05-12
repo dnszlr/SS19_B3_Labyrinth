@@ -31,7 +31,7 @@ public class RingBufferPlayers_Test {
 	@Test
 	public void testAddFigure() {
 		
-		assertTrue (buffer.addFigure(yellow));
+		assertFalse (buffer.addFigure(yellow));
 	}
 
 	@Test

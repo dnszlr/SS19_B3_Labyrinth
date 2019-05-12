@@ -39,9 +39,9 @@ public class Manager implements Communication {
 		String[][] map = new String[7][7];
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
-				MazeCard card = gameboard.getMapCard(i, j);
-				String cardAtm = card.toString();
-				map[i][j] = cardAtm;
+
+				String card = gameboard.getMapCard(i, j).toString();
+				map[i][j] = card;
 			}
 		}
 
@@ -55,6 +55,7 @@ public class Manager implements Communication {
 	public String[] getPlayers() {
 		List<String> getPlayers = new ArrayList<String>();
 		Figure safer = players.getActivePlayer();
+
 		do {
 			getPlayers.add(players.getActivePlayer().toString());
 			players.nextPlayer();
@@ -126,7 +127,7 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public String startGame() {
-		
+
 		this.objectCards = new ArrayList<ObjectCard>();
 		this.gameboard = new Gameboard();
 		for (Treasure i : Treasure.values()) {
