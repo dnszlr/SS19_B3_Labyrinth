@@ -40,6 +40,8 @@ public class ObjectCard {
 
 		if (this.treasure.equals(treasure)) {
 			this.found = true;
+		}else {
+			this.found = false;
 		}
 
 	}

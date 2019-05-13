@@ -164,16 +164,16 @@ public abstract class MazeCard {
 	 */
 	public boolean removeFigure(Figure figure) {
 		boolean result = false;
-		Figure found = null;
+		
 		for (Figure i : figures) {
 			if (result == false) {
 				if (i.equals(figure)) {
-					found = i;
+					figures.remove(figure);
 					result = true;
 				}
 			}
 		}
-		figures.remove(found);
+		
 		return result;
 	}
 

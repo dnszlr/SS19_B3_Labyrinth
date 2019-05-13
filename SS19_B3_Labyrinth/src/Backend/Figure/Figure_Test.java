@@ -28,6 +28,7 @@ public class Figure_Test {
 		figure.addCard(card2);
 		figure.addCard(card3);
 		figure.addCard(card4);
+		figure.drawCard();
 
 	}
 
@@ -44,26 +45,27 @@ public class Figure_Test {
 	public void testDrawCard() {
 		
 		figure.drawCard();
-		assertTrue(figure.getTreasureCard().equals(card1));
-		figure.drawCard();
 		assertTrue(figure.getTreasureCard().equals(card2));
+		figure.drawCard();
+		assertTrue(figure.getTreasureCard().equals(card3));
 	}
 	
 	@Test
 	public void testCardFound() {
 		
-		boolean result = figure.isFound(card1);
-		
-		
-		assertTrue(result);
+		assertTrue(figure.getTreasureCard().equals(card1));
+		assertTrue(figure.isFound(card1));
 	}
 	
 	@Test
 	public void testIsAllFound() {
 		
 		figure.isFound(card1);
+		figure.drawCard();
 		figure.isFound(card2);
+		figure.drawCard();
 		figure.isFound(card3);
+		figure.drawCard();
 		figure.isFound(card4);
 		boolean result = figure.isAllFound();
 		
@@ -75,7 +77,7 @@ public class Figure_Test {
 	public void testToString() {
 		
 		
-		assertEquals("Dennis;RED;null;[bat;false, book;false, chest;false, crown;false];[];[0, 0]", figure.toString());
+		assertEquals("Dennis;RED;bat;false;[book;false, chest;false, crown;false];[];[0, 0]", figure.toString());
 		
 		
 	}

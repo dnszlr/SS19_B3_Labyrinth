@@ -168,16 +168,9 @@ public class Gameboard_Test {
 		
 		figure1.setPos(new int[] {3,3});
 
-		int[] north = { 3, 2 };
-		int[] east = { 4, 3 };
-		int[] south = { 3, 4 };
 		int[] west = { 2, 3 };
-		
 
-//		assertTrue(gameboard.moveFigure(north, figure1.getPos(), figure1));
-		assertTrue(gameboard.moveFigure(east, figure1.getPos(), figure1));
-//		assertTrue(gameboard.moveFigure(south, figure1.getPos(), figure1));
-//		assertTrue(gameboard.moveFigure(west, figure1.getPos(), figure1));
+		gameboard.moveFigure(west, figure1.getPos(), figure1);
 
 	}
 

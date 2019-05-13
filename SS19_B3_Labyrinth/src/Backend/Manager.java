@@ -10,10 +10,9 @@ import java.util.List;
 import Backend.Cards.ObjectCard;
 import Backend.Figure.Figure;
 import Backend.Map.Gameboard;
-import Backend.Map.MazeCard;
 import Interface.Communication;
 
-public class Manager implements Communication {
+public class Manager implements Communication, Serializable {
 
 	/**
 	 * Klasse Manager implementiert das Interface Communication.
@@ -29,6 +28,7 @@ public class Manager implements Communication {
 	private ArrayList<ObjectCard> objectCards;
 	private boolean isMoveFigure;
 	private boolean isPlaceMazeCard;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Getter der Map des Gameboards.
@@ -105,7 +105,7 @@ public class Manager implements Communication {
 	}
 
 	/**
-	 * Methode um Spieler dem Spiel hinzuzufï¿½gen.
+	 * Methode um Spieler dem Spiel hinzuzufügen.
 	 */
 	@Override
 	public String addPlayer(String name, String color) {
@@ -134,7 +134,10 @@ public class Manager implements Communication {
 			objectCards.add(new ObjectCard(i));
 		}
 		Collections.shuffle(objectCards);
-
+		Figure[] participants = new Figure[getPlayers().length];
+		for (int i = 0; i < participants.length; i++) {
+			participants[i] = players.nextPlayer();
+		}
 		while (objectCards.size() > 0) {
 
 			players.getActivePlayer().addCard(objectCards.get(0));
@@ -147,6 +150,8 @@ public class Manager implements Communication {
 			players.nextPlayer();
 
 		}
+
+		gameboard.placeFigures(participants);
 
 		String startGame = getMap() + ";" + objectCards.toString();
 		return startGame;
@@ -167,16 +172,28 @@ public class Manager implements Communication {
 	 */
 	@Override
 	public boolean moveFigure(int[] position) {
-
-		this.isPlaceMazeCard = false;
-
-		this.isPlaceMazeCard = gameboard.moveFigure(position, players.getActivePlayer().getPos(),
-				players.getActivePlayer());
-		if (this.isPlaceMazeCard == true) {
+		boolean result = false;
+		if (gameboard.moveFigure(position, players.getActivePlayer().getPos(), players.getActivePlayer())) {
+			gameboard.getMapCard(players.getActivePlayer().getPos()[0], players.getActivePlayer().getPos()[1])
+					.removeFigure(players.getActivePlayer());
 			gameboard.getMapCard(position[0], position[1]).addFigure(players.getActivePlayer());
+			players.getActivePlayer().setPos(position);
+			players.getActivePlayer().getTreasureCard()
+					.found(gameboard.getMapCard(position[0], position[1]).getTreasure());
+			if (players.getActivePlayer().getTreasureCard().isFound()) {
+				players.getActivePlayer().isFound(players.getActivePlayer().getTreasureCard());
+				if (hasWon().equals(players.getActivePlayer().getName())) {
+					players = new RingBufferPlayers();
+					startGame();
+				} else {
+					players.getActivePlayer().drawCard();
+				}
+
+			}
+
 		}
 
-		return this.isPlaceMazeCard;
+		return result;
 	}
 
 	/**
@@ -185,8 +202,10 @@ public class Manager implements Communication {
 	@Override
 	public String hasWon() {
 		String result = "notWon";
-		if (players.getActivePlayer().isAllFound() == true) {
-			result = players.getActivePlayer().toString();
+		if (players.getActivePlayer().isAllFound()
+				&& gameboard.getMapCard(players.getActivePlayer().getPos()[0], players.getActivePlayer().getPos()[1])
+						.isStartFromFigure()) {
+			result = players.getActivePlayer().getName();
 		}
 		return result;
 	}
@@ -246,7 +265,6 @@ public class Manager implements Communication {
 	@Override
 	public String rotateGear(String direction) {
 		String rotateGear = null;
-		// Exception schreiben falls Direction nicht left oder right.
 		if (direction.toLowerCase().equals("left")) {
 			gameboard.getFreeCard().rotateLeft();
 			rotateGear = gameboard.getFreeCard().toString();

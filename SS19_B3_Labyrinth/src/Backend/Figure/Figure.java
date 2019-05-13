@@ -131,8 +131,14 @@ public class Figure {
 	 */
 
 	public boolean isFound(ObjectCard card) {
-
-		return this.cardstack.cardFound(card);
+		boolean result = false;
+		if (this.treasureCard.equals(card)) {
+			if (this.cardstack.cardFound(card)) {
+				this.treasureCard = null;
+				result = true;
+			}
+		}
+		return result;
 
 	}
 
@@ -143,8 +149,12 @@ public class Figure {
 	 */
 
 	public boolean isAllFound() {
+		boolean result = false;
+		if(cardstack.isAllFound() && this.treasureCard == null) {
+			result = true;
+		}
 
-		return cardstack.isAllFound();
+		return result;
 
 	}
 
@@ -155,8 +165,8 @@ public class Figure {
 
 	@Override
 	public String toString() {
-		return "" + this.name + ";" + "" + this.color + ";" + "" + this.treasureCard + ";" + "" + this.cardstack + ";"
-				+ "" + Arrays.toString(this.pos);
+		return this.name + ";" + "" + this.color + ";" + "" + this.treasureCard + ";" + "" + this.cardstack + ";" + ""
+				+ Arrays.toString(this.pos);
 	}
 
 	/**
@@ -214,17 +224,9 @@ public class Figure {
 
 		private boolean cardFound(ObjectCard card) {
 			boolean result = false;
-			ObjectCard found = null;
-			for (ObjectCard i : objectsCards) {
-				if (result == false) {
-					if (i.equals(card)) {
-						found = i;
-						result = true;
-					}
-				}
+			if (foundCards.add(card)) {
+				result = true;
 			}
-			foundCards.add(found);
-			objectsCards.remove(found);
 			return result;
 		}
 

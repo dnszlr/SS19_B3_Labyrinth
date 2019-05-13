@@ -16,13 +16,12 @@ public class Gameboard {
 	 */
 	private MazeCard freeCard;
 	private MazeCard[][] map;
-	private int[][] visited;
 
 	/**
 	 * Konstruktor der Klasse Gameboard.
 	 */
 	public Gameboard() {
-		visited = new int[7][7];
+
 		this.map = new MazeCard[7][7];
 		this.map[Color.RED.getPos()[0]][Color.RED.getPos()[1]] = new CurveCard(Color.RED, null);
 		this.map[Color.YELLOW.getPos()[0]][Color.YELLOW.getPos()[1]] = new CurveCard(Color.YELLOW, null);
@@ -397,69 +396,63 @@ public class Gameboard {
 	 */
 
 	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) {
-		boolean found = false;
-		boolean notFound = false;
-		MazeCard current = getMapCard(currentPos[0], currentPos[1]);
-		MazeCard old = getMapCard(oldPos[0], oldPos[1]);
 
-		if (this.visited[oldPos[0]][oldPos[1]] != 1) {
-			this.visited[oldPos[0]][oldPos[1]] = 1;
+		boolean result = false;
+		int[][] visited = new int[7][7];
+		if (moveFigureWithArray(currentPos, oldPos, visited, figure)) {
+			result = true;
 		}
-		if (old.equals(current)) {
-			found = true;
-		} else {
 
-			while (!old.equals(current) && found == false && notFound == false) {
-
-				if (old.getNeighboring(Direction.north) != null && old.getWall()[0] == 0
-						&& old.getNeighboring(Direction.north).getWall()[2] == 0) {
-					if (this.visited[oldPos[0]][oldPos[1] - 1] != 1) {
-						int[] older = new int[] { oldPos[0], oldPos[1] - 1 };
-						found = moveFigure(currentPos, older, figure);
-
-					} else {
-						notFound = true;
-					}
-
-				} else if (old.getNeighboring(Direction.east) != null && old.getWall()[1] == 0
-						&& old.getNeighboring(Direction.east).getWall()[3] == 0) {
-					if (this.visited[oldPos[0] + 1][oldPos[1]] != 1) {
-						int[] older = new int[] { oldPos[0] + 1, oldPos[1] };
-						found = moveFigure(currentPos, older, figure);
-
-					} else {
-						notFound = true;
-					}
-
-				} else if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0
-						&& old.getNeighboring(Direction.south).getWall()[0] == 0) {
-					if (this.visited[oldPos[0]][oldPos[1] + 1] != 1) {
-						int[] older = new int[] { oldPos[0], oldPos[1] + 1 };
-						found = moveFigure(currentPos, older, figure);
-					} else {
-						notFound = true;
-					}
-
-				} else if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0
-						&& old.getNeighboring(Direction.east).getWall()[1] == 0) {
-					if (this.visited[oldPos[0] - 1][oldPos[1]] != 1) {
-						int[] older = new int[] { oldPos[0] - 1, oldPos[1] };
-						found = moveFigure(currentPos, older, figure);
-					} else {
-						notFound = true;
-					}
-
-				} else {
-					notFound = true;
-				}
-
-			}
-		}
-		
-		return found;
+		return result;
 
 	}
-	
 
+	private boolean moveFigureWithArray(int[] currentPos, int[] oldPos, int[][] visited, Figure figure) {
+
+		if (oldPos[0] == currentPos[0] && oldPos[1] == currentPos[1]) {
+			visited = new int[7][7];
+			return true;
+		}
+		if (visited[oldPos[0]][oldPos[1]] == 1) {
+			return false;
+		}
+
+		visited[oldPos[0]][oldPos[1]] = 1;
+		MazeCard old = getMapCard(oldPos[0], oldPos[1]);
+
+		if (old.getNeighboring(Direction.north) != null && old.getWall()[0] == 0
+				&& old.getNeighboring(Direction.north).getWall()[2] == 0) {
+			if (moveFigureWithArray(currentPos, new int[] { oldPos[0], oldPos[1] - 1 }, visited, figure)) {
+				return true;
+
+			}
+
+		} 
+		if (old.getNeighboring(Direction.east) != null && old.getWall()[1] == 0
+				&& old.getNeighboring(Direction.east).getWall()[3] == 0) {
+			if (moveFigureWithArray(currentPos, new int[] { oldPos[0] + 1, oldPos[1] }, visited, figure)) {
+				return true;
+
+			}
+
+		} 
+		if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0
+				&& old.getNeighboring(Direction.south).getWall()[0] == 0) {
+			if (moveFigureWithArray(currentPos, new int[] { oldPos[0], oldPos[1] + 1 }, visited, figure)) {
+				return true;
+
+			}
+		} 
+		if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0
+				&& old.getNeighboring(Direction.west).getWall()[1] == 0) {
+			if (moveFigureWithArray(currentPos, new int[] { oldPos[0] - 1, oldPos[1] }, visited, figure)) {
+				return true;
+
+			}
+
+		}
+
+		return false;
+	}
 
 }
