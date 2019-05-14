@@ -1,14 +1,16 @@
 package Backend.Cards;
 
+import java.io.Serializable;
+
 import Backend.Treasure;
 
-public class ObjectCard {
+public class ObjectCard implements Serializable {
 
-	
+
 	/**
 	 * 
 	 */
-	
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Attribute der Klasse ObjectCard
 	 */

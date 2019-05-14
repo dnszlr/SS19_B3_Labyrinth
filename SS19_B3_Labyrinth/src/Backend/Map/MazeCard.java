@@ -1,5 +1,6 @@
 package Backend.Map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -8,12 +9,16 @@ import Backend.Direction;
 import Backend.Treasure;
 import Backend.Figure.Figure;
 
-public abstract class MazeCard {
+public abstract class MazeCard implements Serializable {
 
 	/**
 	 * 
 	 */
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Attribute der Klasse MazeCard
 	 */

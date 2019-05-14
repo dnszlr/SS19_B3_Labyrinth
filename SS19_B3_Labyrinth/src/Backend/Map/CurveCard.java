@@ -11,6 +11,11 @@ import Backend.Treasure;
 public class CurveCard extends MazeCard {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Konstruktor der Klasse CurveCard
 	 */
 	public CurveCard(Color color, Treasure treasure) {

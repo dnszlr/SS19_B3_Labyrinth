@@ -1,5 +1,6 @@
 package Backend.Map;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,8 +11,12 @@ import Backend.PositionsCard;
 import Backend.Treasure;
 import Backend.Figure.Figure;
 
-public class Gameboard{
+public class Gameboard implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Attribute der Klasse Gameboard.
 	 */

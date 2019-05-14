@@ -1,13 +1,18 @@
 package Backend.Figure;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import Backend.Color;
 import Backend.Cards.ObjectCard;
 
-public class Figure {
+public class Figure implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Attribute der Klasse Figure
 	 */
@@ -173,8 +178,12 @@ public class Figure {
 	/**
 	 * Innere Klasse CardsStack
 	 */
-	private class CardsStack {
+	private class CardsStack implements Serializable{
 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		/**
 		 * Attribute der Klasse CardsStack
 		 */

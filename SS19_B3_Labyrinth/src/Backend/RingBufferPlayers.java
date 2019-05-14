@@ -1,11 +1,16 @@
 package Backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import Backend.Figure.Figure;
 
-public class RingBufferPlayers  {
+public class RingBufferPlayers  implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Attribute der Klasse RingBufferPlayers.
 	 */

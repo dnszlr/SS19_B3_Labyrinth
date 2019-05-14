@@ -12,12 +12,13 @@ public class Manager_Test {
 	Manager manager;
 
 	@Before
-	public void initialize() {
+	public void initialize() throws IOException {
 		manager = new Manager();
 		manager.addPlayer("Player1", "RED");
 		manager.addPlayer("Player2", "BLUE");
 		manager.addPlayer("Player3", "GREEN");
 		manager.startGame();
+		manager.saveGame("test.ser", "Serialization");
 
 	}
 
@@ -54,7 +55,8 @@ public class Manager_Test {
 	public void testGetActivePlayerTreasureCard() {
 
 		String activePlayerTreasureCard = manager.getActivePlayerTreasureCard();
-		System.out.println(activePlayerTreasureCard);
+		assertTrue(activePlayerTreasureCard != null);
+//		System.out.println(activePlayerTreasureCard);
 	}
 
 	@Test
@@ -69,7 +71,7 @@ public class Manager_Test {
 		String player4 = manager.addPlayer("Player4", "YELLOW");
 		String check = manager.getPlayers()[3];
 		assertEquals(player4, check);
-		System.out.println(manager.addPlayer("Player3", "GREEN"));
+//		System.out.println(manager.addPlayer("Player3", "GREEN"));
 
 	}
 
@@ -101,12 +103,12 @@ public class Manager_Test {
 
 		String player = manager.getPlayers()[1];
 		String nextPlayer = manager.endRound();
-		System.out.println(nextPlayer);
-		System.out.println(player);
+//		System.out.println(nextPlayer);
+//		System.out.println(player);
 		assertNotEquals(nextPlayer, player);
 		manager.moveGears("A2");
 		String nextPlayerMoved = manager.endRound();
-		System.out.println(nextPlayerMoved);
+//		System.out.println(nextPlayerMoved);
 		assertEquals(nextPlayerMoved, player);
 	}
 
@@ -141,7 +143,8 @@ public class Manager_Test {
 		
 		Manager m = new Manager();
 		m.loadGame("test.ser", "Serialization");
-		System.out.println(m.getFreeMazeCard());
+		System.out.println(m.getActivePlayer());
+		
 	}
 
 	@Test

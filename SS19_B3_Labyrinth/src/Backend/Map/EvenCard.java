@@ -5,6 +5,11 @@ package Backend.Map;
  */
 public class EvenCard extends MazeCard {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Konstruktor der Klasse EvenCard
 	 * 
 	 * @param color

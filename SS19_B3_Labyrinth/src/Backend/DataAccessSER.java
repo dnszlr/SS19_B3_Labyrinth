@@ -8,18 +8,20 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class DataAccessSER implements DataAccess {
+public class DataAccessSER implements DataAccess, Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
-	public void writeToFile(String path, String type) throws IOException {
+	public void writeToFile(Object ser, String path, String type) throws IOException {
 		switch (type) {
 		case "Serialization":
 			ObjectOutputStream oos = null;
 			try {
-				Manager manager = new Manager();
+
 				oos = new ObjectOutputStream(new FileOutputStream(path));
-				oos.writeObject(manager);
-				System.out.println(manager);
+				oos.writeObject(ser);
+				System.out.println(ser);
 			} catch (FileNotFoundException e) {
 				System.err.println(path + " could not be created");
 			} catch (IOException e) {
@@ -44,15 +46,15 @@ public class DataAccessSER implements DataAccess {
 	}
 
 	@Override
-	public void readFile(String path, String type) throws IOException, ClassNotFoundException {
-
+	public Object readFile(String path, String type) throws IOException, ClassNotFoundException {
+		Manager deSer = new Manager();
 		switch (type) {
 		case "Serialization":
 			ObjectInputStream ois = null;
 			try {
 				ois = new ObjectInputStream(new FileInputStream(path));
-				Manager m = (Manager) ois.readObject();
-				System.out.println(m);
+				deSer = (Manager) ois.readObject();
+				System.out.println(deSer);
 			} catch (IOException e) {
 				System.err.println("errors in the output");
 			} catch (ClassNotFoundException e) {
@@ -65,7 +67,7 @@ public class DataAccessSER implements DataAccess {
 			System.err.println("Wrong type, Serialization works");
 			break;
 		}
+		return deSer;
 
 	}
-
 }

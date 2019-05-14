@@ -8,6 +8,11 @@ import Backend.Treasure;
 public class CrotchCard extends MazeCard {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Konstuktor für die Klasse CrotchCard
 	 * 
 	 * @param treasure

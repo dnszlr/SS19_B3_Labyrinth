@@ -4,8 +4,10 @@ import java.io.IOException;
 
 public interface DataAccess {
 
-	public void writeToFile(String path, String type) throws IOException;
+	public void writeToFile(Object ser, String path, String type) throws IOException;
 
-	public void readFile(String path, String type) throws IOException, ClassNotFoundException;
+	public Object readFile(String path, String type) throws IOException, ClassNotFoundException;
+
+	
 
 }

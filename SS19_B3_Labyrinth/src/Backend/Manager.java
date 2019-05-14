@@ -34,7 +34,7 @@ public class Manager implements Communication, Serializable {
 	 */
 
 	public Manager() {
-		
+
 		players = new RingBufferPlayers();
 
 	}
@@ -246,44 +246,47 @@ public class Manager implements Communication, Serializable {
 	 * 
 	 * @throws IOException
 	 */
-	// SPEICHERN UND LADEN FOLIEN s269
 	@Override
 	public String saveGame(String path, String type) throws IOException {
 		String saver;
+
 		DataAccessSER save = new DataAccessSER();
 		try {
-			save.writeToFile(path, type);
+			save.writeToFile(Manager.this, path, type);
 			saver = "Game saved successfully!";
-		}catch(IOException e) {
+		} catch (IOException e) {
 			saver = "Game couldn't load!";
 			System.err.println(saver);
 		}
-		
 
 		return saver;
 	}
 
 	/**
 	 * Methode um ein gespeichertes Spiel zu laden.
-	 * @throws IOException 
-	 * @throws ClassNotFoundException 
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	@Override
 	public String loadGame(String path, String type) throws ClassNotFoundException, IOException {
-		String saver;
+		String saver = "The game couldn't load";
 		DataAccessSER save = new DataAccessSER();
+
 		try {
+			
 			save.readFile(path, type);
 			saver = "Game successfully saved!";
-		}catch (ClassNotFoundException e){
-			saver = "Game couldn't save, because class was not found";
+
+		} catch (ClassNotFoundException e) {
+			saver = "Game couldn't load, because class was not found";
 			System.err.println(saver);
-		}catch(IOException e) {
-			saver = "Game could't save";
+		} catch (IOException e) {
+			saver = "Game could't load";
 			System.err.println(saver);
-			
+
 		}
-		
+
 		return saver;
 	}
 
