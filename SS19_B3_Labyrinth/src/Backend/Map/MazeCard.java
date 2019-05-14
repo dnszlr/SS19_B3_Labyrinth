@@ -11,6 +11,10 @@ import Backend.Figure.Figure;
 public abstract class MazeCard {
 
 	/**
+	 * 
+	 */
+	
+	/**
 	 * Attribute der Klasse MazeCard
 	 */
 	protected int[] wall;
@@ -18,6 +22,7 @@ public abstract class MazeCard {
 	private Treasure treasure;
 	private Color color;
 	private ArrayList<Figure> figures;
+	
 
 	/**
 	 * Konstruktor der Klasse MazeCard
@@ -33,6 +38,7 @@ public abstract class MazeCard {
 		this.treasure = treasure;
 		this.neighboring = new MazeCard[4];
 		this.figures = new ArrayList<Figure>();
+		
 	}
 
 	/**

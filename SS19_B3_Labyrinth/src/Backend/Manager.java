@@ -1,6 +1,5 @@
 package Backend;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -24,7 +23,7 @@ public class Manager implements Communication, Serializable {
 	private Color color;
 	private Treasure treasure;
 	private Gameboard gameboard;
-	private RingBufferPlayers players = new RingBufferPlayers();
+	private RingBufferPlayers players;
 	private ArrayList<ObjectCard> objectCards;
 	private boolean isMoveFigur = false;
 	private boolean isPlaceMazeCard;
@@ -35,6 +34,8 @@ public class Manager implements Communication, Serializable {
 	 */
 
 	public Manager() {
+		
+		players = new RingBufferPlayers();
 
 	}
 

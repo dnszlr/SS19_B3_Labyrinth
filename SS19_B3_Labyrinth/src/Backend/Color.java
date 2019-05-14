@@ -1,6 +1,8 @@
 package Backend;
 
-public enum Color {
+
+
+public enum Color{
 	
 	/**
 	 *Die Attribute des Enums Color mit einer (x,y) Position

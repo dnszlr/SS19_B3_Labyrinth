@@ -10,13 +10,13 @@ import Backend.PositionsCard;
 import Backend.Treasure;
 import Backend.Figure.Figure;
 
-public class Gameboard  {
+public class Gameboard{
+
 	/**
 	 * Attribute der Klasse Gameboard.
 	 */
 	private MazeCard freeCard;
 	private MazeCard[][] map;
-
 	/**
 	 * Konstruktor der Klasse Gameboard.
 	 */
@@ -426,7 +426,7 @@ public class Gameboard  {
 
 			}
 
-		} 
+		}
 		if (old.getNeighboring(Direction.east) != null && old.getWall()[1] == 0
 				&& old.getNeighboring(Direction.east).getWall()[3] == 0) {
 			if (moveFigureWithArray(currentPos, new int[] { oldPos[0] + 1, oldPos[1] }, visited, figure)) {
@@ -434,14 +434,14 @@ public class Gameboard  {
 
 			}
 
-		} 
+		}
 		if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0
 				&& old.getNeighboring(Direction.south).getWall()[0] == 0) {
 			if (moveFigureWithArray(currentPos, new int[] { oldPos[0], oldPos[1] + 1 }, visited, figure)) {
 				return true;
 
 			}
-		} 
+		}
 		if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0
 				&& old.getNeighboring(Direction.west).getWall()[1] == 0) {
 			if (moveFigureWithArray(currentPos, new int[] { oldPos[0] - 1, oldPos[1] }, visited, figure)) {

@@ -4,12 +4,18 @@ import Backend.Treasure;
 
 public class ObjectCard {
 
+	
+	/**
+	 * 
+	 */
+	
 	/**
 	 * Attribute der Klasse ObjectCard
 	 */
 
 	private boolean found;
 	private Treasure treasure;
+	
 
 	/**
 	 * Konstruktor der Klasse Object Card

@@ -5,12 +5,14 @@ import java.util.Collections;
 import Backend.Figure.Figure;
 
 public class RingBufferPlayers  {
+
 	/**
 	 * Attribute der Klasse RingBufferPlayers.
 	 */
 	private int readPointer;
 	private ArrayList<Figure> figures;
 	private Figure activePlayer;
+	
 
 	/**
 	 * Konstuktor der Klasse RingBufferPlayers.

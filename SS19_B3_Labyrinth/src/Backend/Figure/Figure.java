@@ -7,7 +7,7 @@ import Backend.Color;
 import Backend.Cards.ObjectCard;
 
 public class Figure {
-
+	
 	/**
 	 * Attribute der Klasse Figure
 	 */
@@ -16,6 +16,7 @@ public class Figure {
 	private Color color;
 	private ObjectCard treasureCard;
 	private CardsStack cardstack;
+	
 
 	/**
 	 * Konstruktor der Klasse Figure.

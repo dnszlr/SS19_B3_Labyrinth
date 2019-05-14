@@ -2,6 +2,8 @@ package Backend;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -129,13 +131,17 @@ public class Manager_Test {
 	}
 
 	@Test
-	public void testSaveGame() {
-		fail("Not yet implemented");
+	public void testSaveGame() throws IOException {
+		System.out.println(manager.saveGame("test.ser", "Serialization"));
+		assertEquals(manager.saveGame("test.ser", "Serialization"), "Game saved successfully!");
 	}
 
 	@Test
-	public void testLoadGame() {
-		fail("Not yet implemented");
+	public void testLoadGame() throws ClassNotFoundException, IOException {
+		
+		Manager m = new Manager();
+		m.loadGame("test.ser", "Serialization");
+		System.out.println(m.getFreeMazeCard());
 	}
 
 	@Test

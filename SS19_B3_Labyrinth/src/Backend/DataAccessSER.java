@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 public class DataAccessSER implements DataAccess {
 
@@ -15,14 +16,16 @@ public class DataAccessSER implements DataAccess {
 		case "Serialization":
 			ObjectOutputStream oos = null;
 			try {
-				Manager m = new Manager();
+				Manager manager = new Manager();
 				oos = new ObjectOutputStream(new FileOutputStream(path));
-				oos.writeObject(m);
-				System.out.println(m);
+				oos.writeObject(manager);
+				System.out.println(manager);
 			} catch (FileNotFoundException e) {
 				System.err.println(path + " could not be created");
 			} catch (IOException e) {
 				System.err.println("errors in the input");
+				System.out.println(e.getClass());
+				System.out.println(e.getMessage());
 			} finally {
 				try {
 					oos.close();
