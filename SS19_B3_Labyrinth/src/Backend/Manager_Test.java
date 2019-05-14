@@ -15,12 +15,13 @@ public class Manager_Test {
 		manager.addPlayer("Player1", "RED");
 		manager.addPlayer("Player2", "BLUE");
 		manager.addPlayer("Player3", "GREEN");
+		manager.startGame();
 
 	}
 
 	@Test
 	public void testGetMap() {
-		manager.startGame();
+
 		String[][] map = manager.getMap();
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 7; j++) {
@@ -49,14 +50,14 @@ public class Manager_Test {
 
 	@Test
 	public void testGetActivePlayerTreasureCard() {
-		manager.startGame();
+
 		String activePlayerTreasureCard = manager.getActivePlayerTreasureCard();
 		System.out.println(activePlayerTreasureCard);
 	}
 
 	@Test
 	public void testGetFoundTreasures() {
-		manager.startGame();
+
 		String found = manager.getFoundTreasures("GREEN");
 		assertTrue(found.equals("[]"));
 	}
@@ -66,6 +67,8 @@ public class Manager_Test {
 		String player4 = manager.addPlayer("Player4", "YELLOW");
 		String check = manager.getPlayers()[3];
 		assertEquals(player4, check);
+		System.out.println(manager.addPlayer("Player3", "GREEN"));
+
 	}
 
 	@Test
@@ -75,7 +78,7 @@ public class Manager_Test {
 
 	@Test
 	public void testMoveGears() {
-		manager.startGame();
+
 		String[][] map = manager.getMap();
 		manager.moveGears("A2");
 		String[][] map2 = manager.getMap();
@@ -86,23 +89,28 @@ public class Manager_Test {
 
 	@Test
 	public void testHasWon() {
-		manager.startGame();
+
 		assertTrue(manager.hasWon().equals("notWon"));
 
 	}
 
 	@Test
 	public void testEndRound() {
-		manager.startGame();
+
 		String player = manager.getPlayers()[1];
 		String nextPlayer = manager.endRound();
 		System.out.println(nextPlayer);
-		assertEquals(nextPlayer, player);
+		System.out.println(player);
+		assertNotEquals(nextPlayer, player);
+		manager.moveGears("A2");
+		String nextPlayerMoved = manager.endRound();
+		System.out.println(nextPlayerMoved);
+		assertEquals(nextPlayerMoved, player);
 	}
 
 	@Test
 	public void testGetFreeMazeCard() {
-		manager.startGame();
+
 		String[][] map = manager.getMap();
 		manager.moveGears("A6");
 		assertEquals(manager.getFreeMazeCard(), map[5][6]);
@@ -110,15 +118,14 @@ public class Manager_Test {
 
 	@Test
 	public void testRotateGears() {
-		manager.startGame();
+
 		String freeCard = manager.getFreeMazeCard();
 		String rotateRight = manager.rotateGear("right");
 		assertNotEquals(freeCard, rotateRight);
 		String rotateLeft = manager.rotateGear("left");
 		assertEquals(freeCard, rotateLeft);
 		String rotateWrong = manager.rotateGear("lft");
-		System.out.println(rotateWrong);
-		assertTrue(rotateWrong.equals("Wrong direction use left or right"));
+		assertTrue(rotateWrong.equals("Wrong direction use 'left' or 'right'"));
 	}
 
 	@Test
@@ -133,7 +140,9 @@ public class Manager_Test {
 
 	@Test
 	public void testMoveFigure() {
-		fail("Not yet implemented");
-	}
 
+		int[] position = { 1, 0 };
+		manager.moveFigure(position);
+
+	}
 }

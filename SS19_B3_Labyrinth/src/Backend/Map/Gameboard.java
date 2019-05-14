@@ -410,7 +410,6 @@ public class Gameboard {
 	private boolean moveFigureWithArray(int[] currentPos, int[] oldPos, int[][] visited, Figure figure) {
 
 		if (oldPos[0] == currentPos[0] && oldPos[1] == currentPos[1]) {
-			visited = new int[7][7];
 			return true;
 		}
 		if (visited[oldPos[0]][oldPos[1]] == 1) {

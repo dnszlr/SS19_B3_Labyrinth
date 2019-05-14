@@ -67,9 +67,9 @@ public class Figure_Test {
 		figure.isFound(card3);
 		figure.drawCard();
 		figure.isFound(card4);
-		boolean result = figure.isAllFound();
 		
-		assertTrue(result);
+		
+		assertTrue(figure.isAllFound());
 		
 	}
 	

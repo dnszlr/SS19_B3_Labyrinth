@@ -26,7 +26,7 @@ public class Manager implements Communication, Serializable {
 	private Gameboard gameboard;
 	private RingBufferPlayers players = new RingBufferPlayers();;
 	private ArrayList<ObjectCard> objectCards;
-	private boolean isMoveFigure;
+	private boolean isMoveFigur = false;
 	private boolean isPlaceMazeCard;
 	private static final long serialVersionUID = 1L;
 
@@ -110,15 +110,17 @@ public class Manager implements Communication, Serializable {
 	@Override
 	public String addPlayer(String name, String color) {
 
-		String addPlayer = "Wrong color or name";
-		if (!name.equals(null) && (color.toLowerCase().equals("red") || color.toLowerCase().equals("blue")
+		String addPlayer = "Name can't be null or color name must be red, yellow, green or blue";
+		if (name != null && (color.toLowerCase().equals("red") || color.toLowerCase().equals("blue")
 				|| color.toLowerCase().equals("yellow") || color.toLowerCase().equals("green"))) {
 			Color playerColor = Color.valueOf(color);
 			Figure newPlayer = new Figure(name, playerColor);
-			this.players.addFigure(newPlayer);
-			addPlayer = newPlayer.toString();
+			if (this.players.addFigure(newPlayer)) {
+				addPlayer = newPlayer.toString();
+			} else {
+				addPlayer = "No duplicated colors allowed!";
+			}
 		}
-
 		return addPlayer;
 	}
 
@@ -164,6 +166,7 @@ public class Manager implements Communication, Serializable {
 	public String moveGears(String position) {
 
 		gameboard.moveGears(PositionsCard.valueOf(position), gameboard.getFreeCard());
+		this.isMoveFigur = true;
 		return gameboard.getFreeCard().toString();
 	}
 
@@ -173,24 +176,17 @@ public class Manager implements Communication, Serializable {
 	@Override
 	public boolean moveFigure(int[] position) {
 		boolean result = false;
-		if (gameboard.moveFigure(position, players.getActivePlayer().getPos(), players.getActivePlayer())) {
-			gameboard.getMapCard(players.getActivePlayer().getPos()[0], players.getActivePlayer().getPos()[1])
-					.removeFigure(players.getActivePlayer());
-			gameboard.getMapCard(position[0], position[1]).addFigure(players.getActivePlayer());
-			players.getActivePlayer().setPos(position);
-			players.getActivePlayer().getTreasureCard()
-					.found(gameboard.getMapCard(position[0], position[1]).getTreasure());
-			if (players.getActivePlayer().getTreasureCard().isFound()) {
-				players.getActivePlayer().isFound(players.getActivePlayer().getTreasureCard());
-				if (hasWon().equals(players.getActivePlayer().getName())) {
-					players = new RingBufferPlayers();
-					startGame();
-				} else {
-					players.getActivePlayer().drawCard();
-				}
+		if (position[0] <= 6 && position[0] >= 0 && position[1] <= 6 && position[1] >= 0) {
+			if (gameboard.moveFigure(position, players.getActivePlayer().getPos(), players.getActivePlayer())) {
+				gameboard.getMapCard(players.getActivePlayer().getPos()[0], players.getActivePlayer().getPos()[1])
+						.removeFigure(players.getActivePlayer());
+				gameboard.getMapCard(position[0], position[1]).addFigure(players.getActivePlayer());
+				players.getActivePlayer().setPos(position);
+				players.getActivePlayer().getTreasureCard()
+						.found(gameboard.getMapCard(position[0], position[1]).getTreasure());
+				result = true;
 
 			}
-
 		}
 
 		return result;
@@ -212,12 +208,28 @@ public class Manager implements Communication, Serializable {
 
 	/**
 	 * Methode um eine Runde zu beenden.
+	 * 
+	 * @return String - tells if round could be ended or not.
 	 */
 	@Override
 	public String endRound() {
+		String result = "You have to move the gears once per round!";
+		if (this.isMoveFigur == true) {
+			if (players.getActivePlayer().getTreasureCard().isFound()) {
+				players.getActivePlayer().isFound(players.getActivePlayer().getTreasureCard());
+				if (hasWon().equals(players.getActivePlayer().getName())) {
+					return "GameOver: " + players.getActivePlayer().getName() + " won the game!";
+				} else {
+					players.getActivePlayer().drawCard();
+				}
 
-		players.nextPlayer();
-		return players.getActivePlayer().toString();
+			}
+			players.nextPlayer();
+			result = players.getActivePlayer().toString();
+			this.isMoveFigur = false;
+		}
+
+		return result;
 	}
 
 	/**
@@ -264,17 +276,16 @@ public class Manager implements Communication, Serializable {
 	 */
 	@Override
 	public String rotateGear(String direction) {
-		String rotateGear = null;
-		if (direction.toLowerCase().equals("left")) {
-			gameboard.getFreeCard().rotateLeft();
-			rotateGear = gameboard.getFreeCard().toString();
-		} else if (direction.toLowerCase().equals("right")) {
-			gameboard.getFreeCard().rotateRight();
-			rotateGear = gameboard.getFreeCard().toString();
-		} else {
-			rotateGear = "Wrong direction use left or right";
+		String rotateGear = "Wrong direction use 'left' or 'right'";
+		if (direction != null) {
+			if (direction.toLowerCase().equals("left")) {
+				gameboard.getFreeCard().rotateLeft();
+				rotateGear = gameboard.getFreeCard().toString();
+			} else if (direction.toLowerCase().equals("right")) {
+				gameboard.getFreeCard().rotateRight();
+				rotateGear = gameboard.getFreeCard().toString();
+			}
 		}
-
 		return rotateGear;
 	}
 

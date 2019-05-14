@@ -22,7 +22,7 @@ public abstract class MazeCard {
 	/**
 	 * Konstruktor der Klasse MazeCard
 	 * 
-	 * @param          int
+	 * @param int
 	 * @param Color
 	 * @param MazeCard
 	 */
@@ -164,16 +164,12 @@ public abstract class MazeCard {
 	 */
 	public boolean removeFigure(Figure figure) {
 		boolean result = false;
-		
-		for (Figure i : figures) {
-			if (result == false) {
-				if (i.equals(figure)) {
-					figures.remove(figure);
-					result = true;
-				}
-			}
+
+		if (figures.contains(figure)) {
+			figures.remove(figure);
+			result = true;
 		}
-		
+
 		return result;
 	}
 
@@ -224,10 +220,9 @@ public abstract class MazeCard {
 	 */
 	@Override
 	public String toString() {
-		
-		String MazeCard = getClass().getSimpleName() + ";" + Arrays.toString(getWall()) + ";"
-				+ this.figures.toString() + ";" + "" + getColor() + ";" + "" + getFigures() + ";" + ""
-				+ getTreasure();
+
+		String MazeCard = getClass().getSimpleName() + ";" + Arrays.toString(getWall()) + ";" + this.figures.toString()
+				+ ";" + "" + getColor() + ";" + "" + getFigures() + ";" + "" + getTreasure();
 		return MazeCard;
 
 	}
