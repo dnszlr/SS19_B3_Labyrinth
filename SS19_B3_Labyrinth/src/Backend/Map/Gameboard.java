@@ -10,7 +10,7 @@ import Backend.PositionsCard;
 import Backend.Treasure;
 import Backend.Figure.Figure;
 
-public class Gameboard {
+public class Gameboard  {
 	/**
 	 * Attribute der Klasse Gameboard.
 	 */

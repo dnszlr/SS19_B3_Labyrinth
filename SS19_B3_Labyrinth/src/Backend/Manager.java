@@ -24,11 +24,19 @@ public class Manager implements Communication, Serializable {
 	private Color color;
 	private Treasure treasure;
 	private Gameboard gameboard;
-	private RingBufferPlayers players = new RingBufferPlayers();;
+	private RingBufferPlayers players = new RingBufferPlayers();
 	private ArrayList<ObjectCard> objectCards;
 	private boolean isMoveFigur = false;
 	private boolean isPlaceMazeCard;
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Konstruktor der Klasse Manager
+	 */
+
+	public Manager() {
+
+	}
 
 	/**
 	 * Getter der Map des Gameboards.
@@ -240,25 +248,42 @@ public class Manager implements Communication, Serializable {
 	// SPEICHERN UND LADEN FOLIEN s269
 	@Override
 	public String saveGame(String path, String type) throws IOException {
-		PrintWriter pw = null;
+		String saver;
+		DataAccessSER save = new DataAccessSER();
 		try {
-			DataAccessSER dataAccessSer = new DataAccessSER();
-			dataAccessSer.writeToStream(new PrintWriter(type));
-			pw = new PrintWriter(new FileWriter(path));
-			dataAccessSer.writeToStream(pw);
-		} finally {
-			if (pw != null)
-				pw.close();
+			save.writeToFile(path, type);
+			saver = "Game saved successfully!";
+		}catch(IOException e) {
+			saver = "Game couldn't load!";
+			System.err.println(saver);
 		}
-		return null;
+		
+
+		return saver;
 	}
 
 	/**
 	 * Methode um ein gespeichertes Spiel zu laden.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
 	@Override
-	public String loadGame(String path, String type) {
-		return null;
+	public String loadGame(String path, String type) throws ClassNotFoundException, IOException {
+		String saver;
+		DataAccessSER save = new DataAccessSER();
+		try {
+			save.readFile(path, type);
+			saver = "Game successfully saved!";
+		}catch (ClassNotFoundException e){
+			saver = "Game couldn't save, because class was not found";
+			System.err.println(saver);
+		}catch(IOException e) {
+			saver = "Game could't save";
+			System.err.println(saver);
+			
+		}
+		
+		return saver;
 	}
 
 	/**

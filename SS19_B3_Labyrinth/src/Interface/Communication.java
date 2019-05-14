@@ -32,7 +32,7 @@ public interface Communication {
 
 	public String saveGame(String path, String type) throws IOException;
 
-	public String loadGame(String path, String type);
+	public String loadGame(String path, String type) throws ClassNotFoundException, IOException;
 	
 	public String getFreeMazeCard();
 	

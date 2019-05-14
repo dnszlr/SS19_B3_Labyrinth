@@ -1,9 +1,11 @@
 package Backend;
 
+import java.io.IOException;
+
 public interface DataAccess {
 	
-	public String saveGame(String path, String type);
+	public void writeToFile(String path, String type) throws IOException;
 	
-	public String loadGame(String path, String type);
+	public void readFile(String path, String type) throws IOException, ClassNotFoundException;
 
 }

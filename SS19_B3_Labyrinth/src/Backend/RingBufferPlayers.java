@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import Backend.Figure.Figure;
 
-public class RingBufferPlayers {
+public class RingBufferPlayers  {
 	/**
 	 * Attribute der Klasse RingBufferPlayers.
 	 */
