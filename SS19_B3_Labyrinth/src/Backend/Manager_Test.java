@@ -12,7 +12,7 @@ public class Manager_Test {
 	Manager manager;
 
 	@Before
-	public void initialize() throws IOException {
+	public void initialize() throws Exception {
 		manager = new Manager();
 		manager.addPlayer("Player1", "RED");
 		manager.addPlayer("Player2", "BLUE");
@@ -60,7 +60,7 @@ public class Manager_Test {
 	}
 
 	@Test
-	public void testGetFoundTreasures() {
+	public void testGetFoundTreasures() throws Exception {
 
 		String found = manager.getFoundTreasures("GREEN");
 		assertTrue(found.equals("[]"));
@@ -76,31 +76,54 @@ public class Manager_Test {
 	}
 
 	@Test
-	public void testStartGame() {
+	public void testStartGame() throws Exception {
 		manager.startGame(); // wie testen?
 	}
 
 	@Test
-	public void testMoveGears() {
+	public void testMoveGears() throws Exception {
 
 		String[][] map = manager.getMap();
 		manager.moveGears("A2");
-		assertTrue(manager.moveGears("G2").equals("Couldn't move, try again with other position"));
 		String[][] map2 = manager.getMap();
 		assertEquals(manager.getFreeMazeCard(), map[1][6]);
 		assertEquals(map[1][5], map2[1][6]);
-
+		assertTrue(manager.moveGears("G2").equals("Couldn't move, try again with other position"));
+		manager.moveGears("A4");
+		assertTrue(manager.moveGears("G4").equals("Couldn't move, try again with other position"));
+		manager.moveGears("A6");
+		assertTrue(manager.moveGears("G6").equals("Couldn't move, try again with other position"));
+		manager.moveGears("G2");
+		assertTrue(manager.moveGears("A2").equals("Couldn't move, try again with other position"));
+		manager.moveGears("G4");
+		assertTrue(manager.moveGears("A4").equals("Couldn't move, try again with other position"));
+		manager.moveGears("G6");
+		assertTrue(manager.moveGears("A6").equals("Couldn't move, try again with other position"));
+		manager.moveGears("B1");
+		assertTrue(manager.moveGears("B7").equals("Couldn't move, try again with other position"));
+		manager.moveGears("D1");
+		assertTrue(manager.moveGears("D7").equals("Couldn't move, try again with other position"));
+		manager.moveGears("F1");
+		assertTrue(manager.moveGears("F7").equals("Couldn't move, try again with other position"));
+		manager.moveGears("B7");
+		assertTrue(manager.moveGears("B1").equals("Couldn't move, try again with other position"));
+		manager.moveGears("D7");
+		assertTrue(manager.moveGears("D1").equals("Couldn't move, try again with other position"));
+		map = manager.getMap();
+		manager.moveGears("F7");
+		assertTrue(manager.moveGears("F1").equals("Couldn't move, try again with other position"));
+		assertEquals(manager.getFreeMazeCard(), map[0][5]);
 	}
 
 	@Test
-	public void testHasWon() {
+	public void testHasWon() throws Exception {
 
 		assertTrue(manager.hasWon().equals("notWon"));
 
 	}
 
 	@Test
-	public void testEndRound() {
+	public void testEndRound() throws Exception {
 
 		String player = manager.getPlayers()[1];
 		String nextPlayer = manager.endRound();
@@ -114,7 +137,7 @@ public class Manager_Test {
 	}
 
 	@Test
-	public void testGetFreeMazeCard() {
+	public void testGetFreeMazeCard() throws Exception {
 
 		String[][] map = manager.getMap();
 		manager.moveGears("A6");
@@ -141,12 +164,11 @@ public class Manager_Test {
 
 	@Test
 	public void testLoadGame() throws ClassNotFoundException, IOException {
-		manager.addPlayer("Player3", "YELLOW");
-		
+
 		manager.loadGame("test.ser", "Serialization");
-		System.out.println(manager.getActivePlayer());
+
 		assertEquals(manager.getActivePlayer(), this.manager.getActivePlayer());
-		
+
 	}
 
 	@Test

@@ -16,13 +16,13 @@ public interface Communication {
 
 	public String getActivePlayerTreasureCard();
 
-	public String getFoundTreasures(String color);
+	public String getFoundTreasures(String color) throws Exception;
 
 	public String addPlayer(String name, String color);
 
-	public String startGame();
+	public String startGame() throws Exception;
 
-	public String moveGears(String position);
+	public String moveGears(String position) throws Exception;
 
 	public boolean moveFigure(int[] position);
 

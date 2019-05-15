@@ -13,7 +13,7 @@ public class DataAccessSER_Test {
 	DataAccessSER DAS;
 	
 	@Before
-	public void initialize() {
+	public void initialize() throws Exception {
 		manager = new Manager();
 		DAS = new DataAccessSER();
 		manager.addPlayer("Hans", "GREEN");

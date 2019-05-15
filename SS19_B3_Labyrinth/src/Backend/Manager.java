@@ -108,15 +108,20 @@ public class Manager implements Communication, Serializable {
 	 * @return String
 	 */
 	@Override
-	public String getFoundTreasures(String color) {
-		Figure safer = this.players.getActivePlayer();
-		Color playerColor = Color.valueOf(color);
-		while (!this.players.getActivePlayer().getColor().equals(playerColor)) {
-			this.players.nextPlayer();
-		}
-		String foundCards = this.players.getActivePlayer().getFoundCards();
-		while (!this.players.getActivePlayer().equals(safer)) {
-			this.players.nextPlayer();
+	public String getFoundTreasures(String color) throws Exception {
+		String foundCards = null;
+		try {
+			Figure safer = this.players.getActivePlayer();
+			Color playerColor = Color.valueOf(color);
+			while (!this.players.getActivePlayer().getColor().equals(playerColor)) {
+				this.players.nextPlayer();
+			}
+			foundCards = this.players.getActivePlayer().getFoundCards();
+			while (!this.players.getActivePlayer().equals(safer)) {
+				this.players.nextPlayer();
+			}
+		} catch (Exception e) {
+			foundCards = "Couldn't find the cards of " + color;
 		}
 
 		return foundCards;
@@ -151,33 +156,39 @@ public class Manager implements Communication, Serializable {
 	 * @return String
 	 */
 	@Override
-	public String startGame() throws Exception{
-		String startGame = "Please add Players befor you start the game";
-		if (this.players.getActivePlayer() != null) {
-			for (Treasure i : Treasure.values()) {
-				this.objectCards.add(new ObjectCard(i));
-			}
-			Collections.shuffle(this.objectCards);
-			Figure[] participants = new Figure[getPlayers().length];
-			for (int i = 0; i < participants.length; i++) {
-				participants[i] = this.players.nextPlayer();
-			}
-			while (this.objectCards.size() > 0) {
+	public String startGame() throws Exception {
+		String startGame = null;
+		try {
 
-				this.players.getActivePlayer().addCard(this.objectCards.get(0));
-				this.objectCards.remove(0);
-				if (this.players.getActivePlayer().getTreasureCard() == null) {
-					this.players.getActivePlayer().drawCard();
+			if (this.players.getActivePlayer() != null) {
+				for (Treasure i : Treasure.values()) {
+					this.objectCards.add(new ObjectCard(i));
+				}
+				Collections.shuffle(this.objectCards);
+				Figure[] participants = new Figure[getPlayers().length];
+				for (int i = 0; i < participants.length; i++) {
+					participants[i] = this.players.nextPlayer();
+				}
+				while (this.objectCards.size() > 0) {
+
+					this.players.getActivePlayer().addCard(this.objectCards.get(0));
+					this.objectCards.remove(0);
+					if (this.players.getActivePlayer().getTreasureCard() == null) {
+						this.players.getActivePlayer().drawCard();
+
+					}
+
+					this.players.nextPlayer();
 
 				}
 
-				this.players.nextPlayer();
+				gameboard.placeFigures(participants);
 
+				startGame = getMap() + ";" + objectCards.toString();
 			}
 
-			gameboard.placeFigures(participants);
-
-			startGame = getMap() + ";" + objectCards.toString();
+		} catch (Exception e) {
+			startGame = "Please add Players befor you start the game";
 		}
 
 		return startGame;
@@ -189,16 +200,23 @@ public class Manager implements Communication, Serializable {
 	 * @return String
 	 */
 	@Override
-	public String moveGears(String position) {
-		String moveResult = "Couldn't move, try again with other position";
-		PositionsCard positionCard = PositionsCard.valueOf(position);
+	public String moveGears(String position) throws Exception {
+		String moveResult = null;
+		try {
+			PositionsCard positionCard = PositionsCard.valueOf(position.toUpperCase());
 		if (checkMoveGears(positionCard)) {
 			this.checkPosition = positionCard;
 			this.gameboard.moveGears(positionCard, this.gameboard.getFreeCard());
 			this.isMoveFigur = true;
 			this.checkPosition = positionCard;
 			moveResult = gameboard.getFreeCard().toString();
+		}else {
+			moveResult = "Couldn't move, try again with other position";
 		}
+		}catch(Exception e) {
+			moveResult = "Wrong position name";
+		}
+		
 
 		return moveResult;
 	}

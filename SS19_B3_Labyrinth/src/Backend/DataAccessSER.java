@@ -21,7 +21,6 @@ public class DataAccessSER implements DataAccess, Serializable {
 
 				oos = new ObjectOutputStream(new FileOutputStream(path));
 				oos.writeObject(ser);
-				System.out.println(ser);
 			} catch (FileNotFoundException e) {
 				System.err.println(path + " could not be created");
 			} catch (IOException e) {
@@ -54,7 +53,6 @@ public class DataAccessSER implements DataAccess, Serializable {
 			try {
 				ois = new ObjectInputStream(new FileInputStream(path));
 				deSer = ois.readObject();
-				System.out.println(deSer);
 			} catch (IOException e) {
 				System.err.println("errors in the output");
 			} catch (ClassNotFoundException e) {
