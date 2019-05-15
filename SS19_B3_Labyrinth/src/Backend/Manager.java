@@ -24,7 +24,7 @@ public class Manager implements Communication, Serializable {
 	private Gameboard gameboard;
 	private RingBufferPlayers players;
 	private ArrayList<ObjectCard> objectCards;
-	private boolean isMoveFigur = false;
+	private boolean isMoveFigur;
 	private boolean isPlaceMazeCard;
 	private PositionsCard checkPosition;
 	private static final long serialVersionUID = 1L;
@@ -38,6 +38,8 @@ public class Manager implements Communication, Serializable {
 		this.players = new RingBufferPlayers();
 		this.objectCards = new ArrayList<ObjectCard>();
 		this.gameboard = new Gameboard();
+		this.isMoveFigur = false;
+		
 
 	}
 
@@ -414,7 +416,7 @@ public class Manager implements Communication, Serializable {
 	 */
 	@Override
 	public String loadGame(String path, String type) throws ClassNotFoundException, IOException {
-		String loader = "The game couldn't load";
+		String loader = null;
 		DataAccessSER load = new DataAccessSER();
 		Manager deSer = new Manager();
 
