@@ -1,7 +1,6 @@
 package Backend;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +26,7 @@ public class Manager implements Communication, Serializable {
 	private ArrayList<ObjectCard> objectCards;
 	private boolean isMoveFigur = false;
 	private boolean isPlaceMazeCard;
+	private PositionsCard checkPosition;
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -35,12 +35,16 @@ public class Manager implements Communication, Serializable {
 
 	public Manager() {
 
-		players = new RingBufferPlayers();
+		this.players = new RingBufferPlayers();
+		this.objectCards = new ArrayList<ObjectCard>();
+		this.gameboard = new Gameboard();
 
 	}
 
 	/**
 	 * Getter der Map des Gameboards.
+	 * 
+	 * @return String[][]
 	 */
 	@Override
 	public String[][] getMap() {
@@ -49,7 +53,7 @@ public class Manager implements Communication, Serializable {
 		for (int i = 0; i < map.length; i++) {
 			for (int j = 0; j < map[i].length; j++) {
 
-				String card = gameboard.getMapCard(i, j).toString();
+				String card = this.gameboard.getMapCard(i, j).toString();
 				map[i][j] = card;
 			}
 		}
@@ -59,16 +63,18 @@ public class Manager implements Communication, Serializable {
 
 	/**
 	 * Getter für die Spieler die am Spiel teilnehmen.
+	 * 
+	 * @return String[]
 	 */
 	@Override
 	public String[] getPlayers() {
 		List<String> getPlayers = new ArrayList<String>();
-		Figure safer = players.getActivePlayer();
+		Figure safer = this.players.getActivePlayer();
 
 		do {
-			getPlayers.add(players.getActivePlayer().toString());
-			players.nextPlayer();
-		} while (!players.getActivePlayer().equals(safer));
+			getPlayers.add(this.players.getActivePlayer().toString());
+			this.players.nextPlayer();
+		} while (!this.players.getActivePlayer().equals(safer));
 
 		String[] players = getPlayers.toArray(new String[0]);
 		return players;
@@ -77,11 +83,13 @@ public class Manager implements Communication, Serializable {
 
 	/**
 	 * Getter für den Spieler der gerade am Zug ist.
+	 * 
+	 * @return String
 	 */
 	@Override
 	public String getActivePlayer() {
 
-		String activePlayer = players.getActivePlayer().toString();
+		String activePlayer = this.players.getActivePlayer().toString();
 		return activePlayer;
 	}
 
@@ -90,23 +98,25 @@ public class Manager implements Communication, Serializable {
 	 */
 	@Override
 	public String getActivePlayerTreasureCard() {
-		String activePlayerTreasureCard = players.getActivePlayer().getTreasureCard().toString();
+		String activePlayerTreasureCard = this.players.getActivePlayer().getTreasureCard().toString();
 		return activePlayerTreasureCard;
 	}
 
 	/**
 	 * Getter für die bereits gefunden Treasures.
+	 * 
+	 * @return String
 	 */
 	@Override
 	public String getFoundTreasures(String color) {
-		Figure safer = players.getActivePlayer();
+		Figure safer = this.players.getActivePlayer();
 		Color playerColor = Color.valueOf(color);
-		while (!players.getActivePlayer().getColor().equals(playerColor)) {
-			players.nextPlayer();
+		while (!this.players.getActivePlayer().getColor().equals(playerColor)) {
+			this.players.nextPlayer();
 		}
-		String foundCards = players.getActivePlayer().getFoundCards();
-		while (!players.getActivePlayer().equals(safer)) {
-			players.nextPlayer();
+		String foundCards = this.players.getActivePlayer().getFoundCards();
+		while (!this.players.getActivePlayer().equals(safer)) {
+			this.players.nextPlayer();
 		}
 
 		return foundCards;
@@ -115,6 +125,8 @@ public class Manager implements Communication, Serializable {
 
 	/**
 	 * Methode um Spieler dem Spiel hinzuzufügen.
+	 * 
+	 * @return String
 	 */
 	@Override
 	public String addPlayer(String name, String color) {
@@ -135,64 +147,174 @@ public class Manager implements Communication, Serializable {
 
 	/**
 	 * Methode um das Spiel zu starten.
+	 * 
+	 * @return String
 	 */
 	@Override
-	public String startGame() {
+	public String startGame() throws Exception{
+		String startGame = "Please add Players befor you start the game";
+		if (this.players.getActivePlayer() != null) {
+			for (Treasure i : Treasure.values()) {
+				this.objectCards.add(new ObjectCard(i));
+			}
+			Collections.shuffle(this.objectCards);
+			Figure[] participants = new Figure[getPlayers().length];
+			for (int i = 0; i < participants.length; i++) {
+				participants[i] = this.players.nextPlayer();
+			}
+			while (this.objectCards.size() > 0) {
 
-		this.objectCards = new ArrayList<ObjectCard>();
-		this.gameboard = new Gameboard();
-		for (Treasure i : Treasure.values()) {
-			objectCards.add(new ObjectCard(i));
-		}
-		Collections.shuffle(objectCards);
-		Figure[] participants = new Figure[getPlayers().length];
-		for (int i = 0; i < participants.length; i++) {
-			participants[i] = players.nextPlayer();
-		}
-		while (objectCards.size() > 0) {
+				this.players.getActivePlayer().addCard(this.objectCards.get(0));
+				this.objectCards.remove(0);
+				if (this.players.getActivePlayer().getTreasureCard() == null) {
+					this.players.getActivePlayer().drawCard();
 
-			players.getActivePlayer().addCard(objectCards.get(0));
-			objectCards.remove(0);
-			if (players.getActivePlayer().getTreasureCard() == null) {
-				players.getActivePlayer().drawCard();
+				}
+
+				this.players.nextPlayer();
 
 			}
 
-			players.nextPlayer();
+			gameboard.placeFigures(participants);
 
+			startGame = getMap() + ";" + objectCards.toString();
 		}
 
-		gameboard.placeFigures(participants);
-
-		String startGame = getMap() + ";" + objectCards.toString();
 		return startGame;
 	}
 
 	/**
 	 * Methode um die Wegkarten zu bewegen.
+	 * 
+	 * @return String
 	 */
 	@Override
 	public String moveGears(String position) {
+		String moveResult = "Couldn't move, try again with other position";
+		PositionsCard positionCard = PositionsCard.valueOf(position);
+		if (checkMoveGears(positionCard)) {
+			this.checkPosition = positionCard;
+			this.gameboard.moveGears(positionCard, this.gameboard.getFreeCard());
+			this.isMoveFigur = true;
+			this.checkPosition = positionCard;
+			moveResult = gameboard.getFreeCard().toString();
+		}
 
-		gameboard.moveGears(PositionsCard.valueOf(position), gameboard.getFreeCard());
-		this.isMoveFigur = true;
-		return gameboard.getFreeCard().toString();
+		return moveResult;
+	}
+
+	/**
+	 * Methode um herauszufinden ob moveGears zulässig ist.
+	 * 
+	 * @param positionCard
+	 * @return boolean
+	 */
+
+	private boolean checkMoveGears(PositionsCard positionCard) {
+		boolean result = false;
+		if (this.checkPosition == null) {
+			result = true;
+		} else {
+			switch (positionCard) {
+			case A2:
+				if (!this.checkPosition.equals(PositionsCard.G2)) {
+					result = true;
+				}
+				break;
+
+			case A4:
+				if (!this.checkPosition.equals(PositionsCard.G4)) {
+					result = true;
+				}
+				break;
+
+			case A6:
+				if (!this.checkPosition.equals(PositionsCard.G6)) {
+					result = true;
+				}
+				break;
+			case G2:
+				if (!this.checkPosition.equals(PositionsCard.A2)) {
+					result = true;
+				}
+				break;
+
+			case G4:
+				if (!this.checkPosition.equals(PositionsCard.A4)) {
+					result = true;
+				}
+				break;
+
+			case G6:
+				if (!this.checkPosition.equals(PositionsCard.A6)) {
+					result = true;
+				}
+				break;
+
+			case B1:
+				if (!this.checkPosition.equals(PositionsCard.B7)) {
+					result = true;
+				}
+				break;
+
+			case D1:
+				if (!this.checkPosition.equals(PositionsCard.D7)) {
+					result = true;
+				}
+				break;
+
+			case F1:
+				if (!this.checkPosition.equals(PositionsCard.F7)) {
+					result = true;
+				}
+				break;
+
+			case B7:
+				if (!this.checkPosition.equals(PositionsCard.B1)) {
+					result = true;
+				}
+				break;
+
+			case D7:
+				if (!this.checkPosition.equals(PositionsCard.D1)) {
+					result = true;
+				}
+				break;
+
+			case F7:
+				if (!this.checkPosition.equals(PositionsCard.F1)) {
+					result = true;
+				}
+				break;
+
+			default:
+				break;
+			}
+
+		}
+
+		return result;
 	}
 
 	/**
 	 * Methode um die Spielfiguren zu bewegen.
+	 * 
+	 * @return boolean
 	 */
 	@Override
 	public boolean moveFigure(int[] position) {
 		boolean result = false;
 		if (position[0] <= 6 && position[0] >= 0 && position[1] <= 6 && position[1] >= 0) {
-			if (gameboard.moveFigure(position, players.getActivePlayer().getPos(), players.getActivePlayer())) {
-				gameboard.getMapCard(players.getActivePlayer().getPos()[0], players.getActivePlayer().getPos()[1])
-						.removeFigure(players.getActivePlayer());
-				gameboard.getMapCard(position[0], position[1]).addFigure(players.getActivePlayer());
-				players.getActivePlayer().setPos(position);
-				players.getActivePlayer().getTreasureCard()
-						.found(gameboard.getMapCard(position[0], position[1]).getTreasure());
+			if (this.gameboard.moveFigure(position, this.players.getActivePlayer().getPos(),
+					this.players.getActivePlayer())) {
+				this.gameboard
+						.getMapCard(this.players.getActivePlayer().getPos()[0],
+								this.players.getActivePlayer().getPos()[1])
+						.removeFigure(this.players.getActivePlayer());
+				this.gameboard.getMapCard(position[0], position[1]).addFigure(this.players.getActivePlayer());
+				this.players.getActivePlayer().setPos(position);
+				this.players.getActivePlayer().getTreasureCard()
+						.found(this.gameboard.getMapCard(position[0], position[1]).getTreasure());
 				result = true;
 
 			}
@@ -203,14 +325,16 @@ public class Manager implements Communication, Serializable {
 
 	/**
 	 * Methode um den Sieger zu ermitteln.
+	 * 
+	 * @return String
 	 */
 	@Override
 	public String hasWon() {
 		String result = "notWon";
-		if (players.getActivePlayer().isAllFound()
-				&& gameboard.getMapCard(players.getActivePlayer().getPos()[0], players.getActivePlayer().getPos()[1])
-						.isStartFromFigure()) {
-			result = players.getActivePlayer().getName();
+		if (this.players.getActivePlayer().isAllFound() && this.gameboard
+				.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1])
+				.isStartFromFigure()) {
+			result = this.players.getActivePlayer().getName();
 		}
 		return result;
 	}
@@ -224,16 +348,16 @@ public class Manager implements Communication, Serializable {
 	public String endRound() {
 		String result = "You have to move the gears once per round!";
 		if (this.isMoveFigur == true) {
-			if (players.getActivePlayer().getTreasureCard().isFound()) {
-				players.getActivePlayer().isFound(players.getActivePlayer().getTreasureCard());
-				if (hasWon().equals(players.getActivePlayer().getName())) {
-					return "GameOver: " + players.getActivePlayer().getName() + " won the game!";
+			if (this.players.getActivePlayer().getTreasureCard().isFound()) {
+				this.players.getActivePlayer().isFound(players.getActivePlayer().getTreasureCard());
+				if (hasWon().equals(this.players.getActivePlayer().getName())) {
+					return "GameOver: " + this.players.getActivePlayer().getName() + " won the game!";
 				} else {
 					players.getActivePlayer().drawCard();
 				}
 
 			}
-			players.nextPlayer();
+			this.players.nextPlayer();
 			result = players.getActivePlayer().toString();
 			this.isMoveFigur = false;
 		}
@@ -245,6 +369,7 @@ public class Manager implements Communication, Serializable {
 	 * Methode um das Spiel zu speichern.
 	 * 
 	 * @throws IOException
+	 * @return String
 	 */
 	@Override
 	public String saveGame(String path, String type) throws IOException {
@@ -255,7 +380,7 @@ public class Manager implements Communication, Serializable {
 			save.writeToFile(Manager.this, path, type);
 			saver = "Game saved successfully!";
 		} catch (IOException e) {
-			saver = "Game couldn't load!";
+			saver = "Game couldn't save!";
 			System.err.println(saver);
 		}
 
@@ -267,52 +392,56 @@ public class Manager implements Communication, Serializable {
 	 * 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * @return String
 	 */
 	@Override
 	public String loadGame(String path, String type) throws ClassNotFoundException, IOException {
-		String saver = "The game couldn't load";
-		DataAccessSER save = new DataAccessSER();
+		String loader = "The game couldn't load";
+		DataAccessSER load = new DataAccessSER();
+		Manager deSer = new Manager();
 
 		try {
-			
-			save.readFile(path, type);
-			saver = "Game successfully saved!";
+
+			deSer = (Manager) load.readFile(path, type);
+			loader = "Game successfully loaded!";
 
 		} catch (ClassNotFoundException e) {
-			saver = "Game couldn't load, because class was not found";
-			System.err.println(saver);
+			loader = "Game couldn't load, because class was not found";
+			System.err.println(loader);
 		} catch (IOException e) {
-			saver = "Game could't load";
-			System.err.println(saver);
+			loader = "Game could't load";
+			System.err.println(loader);
 
 		}
 
-		return saver;
+		return loader;
 	}
 
 	/**
-	 * Methode um eine freie Labyrintkarte zu erfragen.
+	 * Methode um die freie Labyrintkarte zu erfragen.
 	 */
 	@Override
 	public String getFreeMazeCard() {
 
-		String freeCard = gameboard.getFreeCard().toString();
+		String freeCard = this.gameboard.getFreeCard().toString();
 		return freeCard;
 	}
 
 	/**
-	 * Methode um ein Feld zu drehen.
+	 * Methode um eine Karte zu drehen.
+	 * 
+	 * @return String
 	 */
 	@Override
 	public String rotateGear(String direction) {
 		String rotateGear = "Wrong direction use 'left' or 'right'";
 		if (direction != null) {
 			if (direction.toLowerCase().equals("left")) {
-				gameboard.getFreeCard().rotateLeft();
-				rotateGear = gameboard.getFreeCard().toString();
+				this.gameboard.getFreeCard().rotateLeft();
+				rotateGear = this.gameboard.getFreeCard().toString();
 			} else if (direction.toLowerCase().equals("right")) {
-				gameboard.getFreeCard().rotateRight();
-				rotateGear = gameboard.getFreeCard().toString();
+				this.gameboard.getFreeCard().rotateRight();
+				rotateGear = this.gameboard.getFreeCard().toString();
 			}
 		}
 		return rotateGear;

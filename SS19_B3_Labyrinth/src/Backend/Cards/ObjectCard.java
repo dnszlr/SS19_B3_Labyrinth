@@ -22,7 +22,8 @@ public class ObjectCard implements Serializable {
 	/**
 	 * Konstruktor der Klasse Object Card
 	 * 
-	 * @param treasure
+	 * @param Treasure treasure
+	 * @return ObjectCard
 	 */
 
 	public ObjectCard(Treasure treasure) {
@@ -34,7 +35,7 @@ public class ObjectCard implements Serializable {
 	/**
 	 * Methode um zu überprüfen ob der Spieler etwas gefunden hat
 	 * 
-	 * @return found
+	 * @return boolean found
 	 */
 	public boolean isFound() {
 
@@ -43,6 +44,7 @@ public class ObjectCard implements Serializable {
 
 	/**
 	 * Methode um eine Karte als gefunden zu markieren.
+	 * @param Treasure treasure
 	 */
 	public void found(Treasure treasure) {
 
@@ -57,6 +59,8 @@ public class ObjectCard implements Serializable {
 	/**
 	 * Überschreiben der Object Methode "equals" vergleicht zwei Objekte auf
 	 * Inhaltsgleichheit.
+	 * @param Object o
+	 * @return boolean result
 	 */
 
 	@Override
@@ -78,6 +82,7 @@ public class ObjectCard implements Serializable {
 	/**
 	 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen
 	 * String.
+	 * @return String
 	 */
 
 	@Override

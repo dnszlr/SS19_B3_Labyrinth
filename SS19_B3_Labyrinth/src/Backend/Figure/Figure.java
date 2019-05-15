@@ -26,8 +26,8 @@ public class Figure implements Serializable {
 	/**
 	 * Konstruktor der Klasse Figure.
 	 * 
-	 * @param String
-	 * @param Color
+	 * @param String name
+	 * @param Color color
 	 */
 
 	public Figure(String name, Color color) {
@@ -74,7 +74,7 @@ public class Figure implements Serializable {
 	/**
 	 * Getter für das Attribut pos.
 	 * 
-	 * @return int
+	 * @return int[]
 	 */
 
 	public int[] getPos() {
@@ -96,7 +96,7 @@ public class Figure implements Serializable {
 	/**
 	 * Setter für das Attribut pos.
 	 * 
-	 * @param int
+	 * @param int[] pos
 	 */
 
 	public void setPos(int[] pos) {
@@ -108,7 +108,7 @@ public class Figure implements Serializable {
 	/**
 	 * Methode um eine Karte hinzuzufügen.
 	 * 
-	 * @param ObjectCard
+	 * @param ObjectCard card
 	 */
 	public void addCard(ObjectCard card) {
 
@@ -132,8 +132,8 @@ public class Figure implements Serializable {
 	/**
 	 * Methode um abzufragen ob eine Karte gefunden wurde.
 	 * 
-	 * @param ObjectCard
-	 * @return boolean
+	 * @param ObjectCard card
+	 * @return boolean result
 	 */
 
 	public boolean isFound(ObjectCard card) {
@@ -151,7 +151,7 @@ public class Figure implements Serializable {
 	/**
 	 * Methode um herauszufinden ob alle Karten gefunden wurden
 	 * 
-	 * @return boolean
+	 * @return boolean result
 	 */
 
 	public boolean isAllFound() {
@@ -167,6 +167,7 @@ public class Figure implements Serializable {
 	/**
 	 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen
 	 * String.
+	 * @return Strinng
 	 */
 
 	@Override
@@ -204,7 +205,7 @@ public class Figure implements Serializable {
 		/**
 		 * Methode um eine Karte dem CardStack hinzuzufügen
 		 * 
-		 * @param ObjectCard
+		 * @param ObjectCard card
 		 */
 
 		private void addCard(ObjectCard card) {
@@ -228,8 +229,8 @@ public class Figure implements Serializable {
 		/**
 		 * Methode um zu Überprüfen ob eine Karte gefunden wurde.
 		 * 
-		 * @param ObjectCard
-		 * @return boolean
+		 * @param ObjectCard card
+		 * @return boolean result
 		 */
 
 		private boolean cardFound(ObjectCard card) {
@@ -243,7 +244,7 @@ public class Figure implements Serializable {
 		/**
 		 * Methode um zu Überprüfen ob alle Karten gefunden wurde
 		 * 
-		 * @return boolean
+		 * @return boolean result
 		 */
 
 		private boolean isAllFound() {
@@ -257,6 +258,7 @@ public class Figure implements Serializable {
 		/**
 		 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen
 		 * String.
+		 * @return String
 		 */
 
 		@Override

@@ -14,10 +14,6 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * 
 	 */
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Attribute der Klasse MazeCard
@@ -27,13 +23,13 @@ public abstract class MazeCard implements Serializable {
 	private Treasure treasure;
 	private Color color;
 	private ArrayList<Figure> figures;
-	
 
 	/**
 	 * Konstruktor der Klasse MazeCard
 	 * 
-	 * @param int
-	 * @param Color
+	 * @param int[] wall
+	 * @param Color color
+	 * @param Treasure treasure
 	 * @param MazeCard
 	 */
 	public MazeCard(int[] wall, Color color, Treasure treasure) {
@@ -43,7 +39,7 @@ public abstract class MazeCard implements Serializable {
 		this.treasure = treasure;
 		this.neighboring = new MazeCard[4];
 		this.figures = new ArrayList<Figure>();
-		
+
 	}
 
 	/**
@@ -59,7 +55,7 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Methode um die Position der Wand zu erfragen
 	 * 
-	 * @return int
+	 * @return int[]
 	 */
 	public int[] getWall() {
 		return this.wall;
@@ -78,7 +74,7 @@ public abstract class MazeCard implements Serializable {
 	 * Getter um die Nachbarn der aktuellen Posititon in eine bestimme Richtung zu
 	 * erhalten.
 	 * 
-	 * @param Direction
+	 * @param Direction direction
 	 * @return MazeCard
 	 */
 	public MazeCard getNeighboring(Direction direction) {
@@ -104,7 +100,7 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Getter um die Farbe zu erfragen.
 	 * 
-	 * @return color
+	 * @return Color color
 	 */
 	public Color getColor() {
 		return this.color;
@@ -113,7 +109,7 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Getter um die Figuren zu erfragen.
 	 * 
-	 * @return figures
+	 * @return ArrayList<Figure> figure
 	 */
 	public ArrayList<Figure> getFigures() {
 		return this.figures;
@@ -122,8 +118,8 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Setter um die Nachbarkarten zu setzen. Karte und Richtung bestimmbar.
 	 * 
-	 * @param card
-	 * @param direction
+	 * @param MazeCard card
+	 * @param Direction direction
 	 */
 	public void setNeighboring(MazeCard card, Direction direction) {
 
@@ -148,7 +144,7 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Methode um eine Figure einer Karte hinzuzufï¿½gen.
 	 * 
-	 * @param figure
+	 * @param Figure figure
 	 */
 	public void addFigure(Figure figure) {
 
@@ -159,7 +155,7 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Methode um alle Figuren von figures einer Karte hinzuzufï¿½gen.
 	 * 
-	 * @param figures
+	 * @param ArrayList<Figure> figures
 	 */
 	public void addFigures(ArrayList<Figure> figures) {
 
@@ -170,8 +166,8 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Methode um eine Figure von einer Karte zu entfernen.
 	 * 
-	 * @param figure
-	 * @return result
+	 * @param Figure figure
+	 * @return boolean result
 	 */
 	public boolean removeFigure(Figure figure) {
 		boolean result = false;
@@ -196,7 +192,7 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Methode um zu fragen ob die Karte eine Startpunkt ist.
 	 * 
-	 * @return result
+	 * @return boolean result
 	 */
 	public boolean isStart() {
 		boolean result = false;
@@ -212,7 +208,7 @@ public abstract class MazeCard implements Serializable {
 	 * Methode um zu fragen ob die Karte ein Startpunkt einer spezifischen Figur
 	 * ist.
 	 * 
-	 * @return result
+	 * @return boolean result
 	 */
 	public boolean isStartFromFigure() {
 		boolean result = false;
@@ -228,6 +224,7 @@ public abstract class MazeCard implements Serializable {
 
 	/**
 	 * Überschreiben der Methode "toString" von Object.
+	 * @return String
 	 */
 	@Override
 	public String toString() {

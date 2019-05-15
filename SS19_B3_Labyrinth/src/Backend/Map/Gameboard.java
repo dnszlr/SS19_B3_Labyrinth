@@ -13,15 +13,13 @@ import Backend.Figure.Figure;
 
 public class Gameboard implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Attribute der Klasse Gameboard.
 	 */
 	private MazeCard freeCard;
 	private MazeCard[][] map;
+
 	/**
 	 * Konstruktor der Klasse Gameboard.
 	 */
@@ -65,7 +63,7 @@ public class Gameboard implements Serializable {
 	/**
 	 * Methode um ein neue Labyrinthkarte zu generieren.
 	 * 
-	 * @param Treasure
+	 * @param List<Treasure> treasures
 	 * @return MazeCard
 	 */
 	private MazeCard generateNewMaze(List<Treasure> treasures) {
@@ -91,7 +89,7 @@ public class Gameboard implements Serializable {
 	/**
 	 * Erstellt eine Liste mit Karten die frei auf dem Feld verteilbar sind.
 	 * 
-	 * @return MazeCard
+	 * @return List<MazeCard>
 	 */
 
 	private List<MazeCard> generateFreeCards() {
@@ -163,7 +161,7 @@ public class Gameboard implements Serializable {
 	/**
 	 * Methode um die Figuren auf dem Spielfeld zu platzieren.
 	 * 
-	 * @param Figure
+	 * @param Figure[] figures
 	 */
 	public void placeFigures(Figure[] figures) {
 
@@ -186,8 +184,8 @@ public class Gameboard implements Serializable {
 	 * Methode um die Labyrinthkarten zu verschieben. gibt neue freecard nach jedem
 	 * schieben bekommt jeder neue nachbarn
 	 * 
-	 * @param PositionCard
-	 * @param MazeCard
+	 * @param PositionCard move
+	 * @param MazeCard     card
 	 * @return MazeCard
 	 */
 	public MazeCard moveGears(PositionsCard move, MazeCard card) {
@@ -380,8 +378,8 @@ public class Gameboard implements Serializable {
 	/**
 	 * Getter um eine bestimmte Koordinate auf dem Spielfeld zu erfragen.
 	 * 
-	 * @param x
-	 * @param y
+	 * @param int x
+	 * @param int y
 	 * @return MazeCard
 	 */
 	public MazeCard getMapCard(int x, int y) {
@@ -394,10 +392,10 @@ public class Gameboard implements Serializable {
 	/**
 	 * Methode um zu erfragen ob ein Zug möglich wäre.
 	 * 
-	 * @param currentPos
-	 * @param oldPos
-	 * @param figure
-	 * @return boolean
+	 * @param int[] currentPos
+	 * @param int[] oldPos
+	 * @param Figure figure
+	 * @return boolean result
 	 */
 
 	public boolean moveFigure(int[] currentPos, int[] oldPos, Figure figure) {
@@ -411,7 +409,14 @@ public class Gameboard implements Serializable {
 		return result;
 
 	}
-
+	/**
+	 * Hilfsmethode für moveFigure.
+	 * @param int[] currentPos
+	 * @param int[] oldPos
+	 * @param int[][] visited
+	 * @param Figure figure
+	 * @return boolean
+	 */
 	private boolean moveFigureWithArray(int[] currentPos, int[] oldPos, int[][] visited, Figure figure) {
 
 		if (oldPos[0] == currentPos[0] && oldPos[1] == currentPos[1]) {

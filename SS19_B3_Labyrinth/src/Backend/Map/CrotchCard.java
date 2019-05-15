@@ -15,7 +15,7 @@ public class CrotchCard extends MazeCard {
 	/**
 	 * Konstuktor für die Klasse CrotchCard
 	 * 
-	 * @param treasure
+	 * @param Treasure treasure
 	 */
 	public CrotchCard(Treasure treasure) {
 

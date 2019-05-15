@@ -17,6 +17,8 @@ public class CurveCard extends MazeCard {
 
 	/**
 	 * Konstruktor der Klasse CurveCard
+	 * @param Color color
+	 * @param Treasure treasure
 	 */
 	public CurveCard(Color color, Treasure treasure) {
 

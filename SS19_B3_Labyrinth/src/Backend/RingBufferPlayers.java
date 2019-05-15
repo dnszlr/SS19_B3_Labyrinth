@@ -33,8 +33,8 @@ public class RingBufferPlayers  implements Serializable {
 	 * Methode um einen Spieler dem Spiel hinzuzufügen gibt zurück ob die Figur
 	 * erfolgreich hinzugefügt worden ist.
 	 * 
-	 * @param Figure
-	 * @return boolean
+	 * @param Figure figure
+	 * @return boolean result
 	 */
 
 	public boolean addFigure(Figure figure) {

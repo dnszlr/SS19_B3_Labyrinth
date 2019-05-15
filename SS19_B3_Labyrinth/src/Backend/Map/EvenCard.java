@@ -12,8 +12,8 @@ public class EvenCard extends MazeCard {
 	/**
 	 * Konstruktor der Klasse EvenCard
 	 * 
-	 * @param color
-	 * @param treasure
+	 * @param Color color
+	 * @param Treasure treasure
 	 */
 	public EvenCard() {
 		super(new int[4], null, null);

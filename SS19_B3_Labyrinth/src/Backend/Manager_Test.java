@@ -85,6 +85,7 @@ public class Manager_Test {
 
 		String[][] map = manager.getMap();
 		manager.moveGears("A2");
+		assertTrue(manager.moveGears("G2").equals("Couldn't move, try again with other position"));
 		String[][] map2 = manager.getMap();
 		assertEquals(manager.getFreeMazeCard(), map[1][6]);
 		assertEquals(map[1][5], map2[1][6]);
@@ -134,16 +135,17 @@ public class Manager_Test {
 
 	@Test
 	public void testSaveGame() throws IOException {
-		System.out.println(manager.saveGame("test.ser", "Serialization"));
-		assertEquals(manager.saveGame("test.ser", "Serialization"), "Game saved successfully!");
+		this.manager.saveGame("test.ser", "Serialization");
+		assertEquals(this.manager.saveGame("test.ser", "Serialization"), "Game saved successfully!");
 	}
 
 	@Test
 	public void testLoadGame() throws ClassNotFoundException, IOException {
+		manager.addPlayer("Player3", "YELLOW");
 		
-		Manager m = new Manager();
-		m.loadGame("test.ser", "Serialization");
-		System.out.println(m.getActivePlayer());
+		manager.loadGame("test.ser", "Serialization");
+		System.out.println(manager.getActivePlayer());
+		assertEquals(manager.getActivePlayer(), this.manager.getActivePlayer());
 		
 	}
 
@@ -151,7 +153,7 @@ public class Manager_Test {
 	public void testMoveFigure() {
 
 		int[] position = { 1, 0 };
-		manager.moveFigure(position);
+		this.manager.moveFigure(position);
 
 	}
 }

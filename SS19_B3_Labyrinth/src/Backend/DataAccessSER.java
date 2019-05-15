@@ -47,13 +47,13 @@ public class DataAccessSER implements DataAccess, Serializable {
 
 	@Override
 	public Object readFile(String path, String type) throws IOException, ClassNotFoundException {
-		Manager deSer = new Manager();
+		Object deSer = new Object();
 		switch (type) {
 		case "Serialization":
 			ObjectInputStream ois = null;
 			try {
 				ois = new ObjectInputStream(new FileInputStream(path));
-				deSer = (Manager) ois.readObject();
+				deSer = ois.readObject();
 				System.out.println(deSer);
 			} catch (IOException e) {
 				System.err.println("errors in the output");
@@ -67,7 +67,7 @@ public class DataAccessSER implements DataAccess, Serializable {
 			System.err.println("Wrong type, Serialization works");
 			break;
 		}
+		
 		return deSer;
-
 	}
 }
