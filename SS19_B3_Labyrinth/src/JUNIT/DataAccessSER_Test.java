@@ -1,4 +1,4 @@
-package Backend;
+package JUNIT;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,9 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Backend.DataAccessSER;
+import Backend.Manager;
 
 public class DataAccessSER_Test {
 	
@@ -27,14 +30,14 @@ public class DataAccessSER_Test {
 	@Test
 	public void testWriteToFile() throws IOException {
 		
-		DAS.writeToFile(manager, "unitSaveTest.ser", "Serialization");
+		DAS.writeToFile(manager, "unitSaveTest.ser");
 		
 	}
 	
 	@Test
 	public void testReadFromFile() throws ClassNotFoundException, IOException {
-		DAS.writeToFile(manager, "unitLoadTest.ser", "Serialization");
-		Manager a = (Manager) DAS.readFile("unitLoadTest.ser", "Serialization");
+		DAS.writeToFile(manager, "unitLoadTest.ser");
+		Manager a = (Manager) DAS.readFile("unitLoadTest.ser");
 		assertEquals(a.getFreeMazeCard(), manager.getFreeMazeCard());
 		
 		

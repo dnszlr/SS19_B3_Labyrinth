@@ -1,4 +1,4 @@
-package Backend;
+package JUNIT;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Backend.Manager;
 
 public class Manager_Test {
 
@@ -18,7 +20,6 @@ public class Manager_Test {
 		manager.addPlayer("Player2", "BLUE");
 		manager.addPlayer("Player3", "GREEN");
 		manager.startGame();
-		manager.saveGame("test.ser", "Serialization");
 
 	}
 
@@ -77,7 +78,7 @@ public class Manager_Test {
 
 	@Test
 	public void testStartGame() throws Exception {
-		manager.startGame(); // wie testen?
+		manager.startGame();
 	}
 
 	@Test
@@ -158,8 +159,9 @@ public class Manager_Test {
 
 	@Test
 	public void testSaveGame() throws IOException {
-		this.manager.saveGame("test.ser", "Serialization");
-		assertEquals(this.manager.saveGame("test.ser", "Serialization"), "Game saved successfully!");
+		this.manager.saveGame("test.ser", "serialization");
+		assertTrue(this.manager.saveGame("test.ser", "serialization").equals("Game saved successfully!"));
+		this.manager.saveGame("testCSV", "csv");
 	}
 
 	@Test

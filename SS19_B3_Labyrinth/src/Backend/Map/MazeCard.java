@@ -2,8 +2,6 @@ package Backend.Map;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import Backend.Color;
 import Backend.Direction;
 import Backend.Treasure;
@@ -27,8 +25,8 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Konstruktor der Klasse MazeCard
 	 * 
-	 * @param int[] wall
-	 * @param Color color
+	 * @param          int[] wall
+	 * @param Color    color
 	 * @param Treasure treasure
 	 * @param MazeCard
 	 */
@@ -58,6 +56,7 @@ public abstract class MazeCard implements Serializable {
 	 * @return int[]
 	 */
 	public int[] getWall() {
+
 		return this.wall;
 	}
 
@@ -118,7 +117,7 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Setter um die Nachbarkarten zu setzen. Karte und Richtung bestimmbar.
 	 * 
-	 * @param MazeCard card
+	 * @param MazeCard  card
 	 * @param Direction direction
 	 */
 	public void setNeighboring(MazeCard card, Direction direction) {
@@ -224,13 +223,15 @@ public abstract class MazeCard implements Serializable {
 
 	/**
 	 * Überschreiben der Methode "toString" von Object.
+	 * 
 	 * @return String
 	 */
 	@Override
 	public String toString() {
+		
 
-		String MazeCard = getClass().getSimpleName() + ";" + Arrays.toString(getWall()) + ";" + this.figures.toString()
-				+ ";" + "" + getColor() + ";" + "" + getFigures() + ";" + "" + getTreasure();
+		String MazeCard = getClass().getSimpleName() + ";" + getWall()[0] + ";" + getWall()[1] + ";" + getWall()[2]
+				+ ";" + getWall()[3] + ";" + "" + getColor() + ";" + "" + getTreasure() + ";";
 		return MazeCard;
 
 	}

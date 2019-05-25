@@ -1,4 +1,4 @@
-package Backend.Map;
+package JUNIT;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import Backend.Map.EvenCard;
 
 public class EvenCard_Test {
 
@@ -30,12 +32,12 @@ public class EvenCard_Test {
 		System.out.println(Arrays.toString(tester.getWall()));
 		if (Arrays.equals(tester.getWall(), a)) {
 			tester.rotateLeft();
-			for (int i = 0; i < tester.wall.length; i++) {
+			for (int i = 0; i < tester.getWall().length; i++) {
 				assertTrue(b[i] == tester.getWall()[i]);
 			}
 		} else {
 			tester.rotateLeft();
-			for (int i = 0; i < tester.wall.length; i++) {
+			for (int i = 0; i < tester.getWall().length; i++) {
 				assertTrue(a[i] == tester.getWall()[i]);
 			}
 		}
@@ -53,12 +55,12 @@ public class EvenCard_Test {
 		System.out.println(Arrays.toString(tester.getWall()));
 		if (Arrays.equals(tester.getWall(), a)) {
 			tester.rotateRight();
-			for (int i = 0; i < tester.wall.length; i++) {
+			for (int i = 0; i < tester.getWall().length; i++) {
 				assertTrue(b[i] == tester.getWall()[i]);
 			}
 		} else {
 			tester.rotateRight();
-			for (int i = 0; i < tester.wall.length; i++) {
+			for (int i = 0; i < tester.getWall().length; i++) {
 				assertTrue(a[i] == tester.getWall()[i]);
 			}
 		}

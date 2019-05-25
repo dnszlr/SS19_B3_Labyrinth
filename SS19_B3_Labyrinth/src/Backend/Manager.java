@@ -1,13 +1,19 @@
 package Backend;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import Backend.Cards.ObjectCard;
 import Backend.Figure.Figure;
+import Backend.Map.CrotchCard;
+import Backend.Map.CurveCard;
+import Backend.Map.EvenCard;
 import Backend.Map.Gameboard;
+import Backend.Map.MazeCard;
 import Interface.Communication;
 
 public class Manager implements Communication, Serializable {
@@ -39,7 +45,111 @@ public class Manager implements Communication, Serializable {
 		this.objectCards = new ArrayList<ObjectCard>();
 		this.gameboard = new Gameboard();
 		this.isMoveFigur = false;
+
+	}
+
+	public Manager(BufferedReader reader) throws IOException { // Position von den neuen Figuren am Ende auf die
+																// jeweilige Karte setzen im Labyrinth
+
+		String line = reader.readLine();
+		String[] fields;
+		while (!line.equals("LP")) {
+			fields = line.split(";");
+			String name = fields[0];
+			Color color = Color.valueOf(fields[1]);
+			int[] pos = new int[] { Integer.parseInt(fields[2]), Integer.parseInt(fields[3]) };
+			Figure atm = new Figure(name, color, pos);
+			ArrayList<ObjectCard> safer = new ArrayList<ObjectCard>();
+			for (int i = 4; i < fields.length - 2; i = i + 2) {
+				ObjectCard card = new ObjectCard(Treasure.valueOf(fields[i]));
+				if (fields[i + 1].equals("true")) {
+					card.found(Treasure.valueOf(fields[i]));
+					safer.add(card);
+				} else {
+					safer.add(card);
+				}
+
+			}
+			for (ObjectCard o : safer) {
+				if (o.isFound() == false) {
+					atm.addCard(o);
+				} else {
+					atm.isFound(o);
+				}
+			}
+			atm.drawCard();
+			this.players = new RingBufferPlayers();
+			this.players.addFigure(atm);
+			line = reader.readLine();
+		}
+		line = reader.readLine();
+		this.isMoveFigur = Boolean.parseBoolean(line);
+		line = reader.readLine();
+		if (line.equals("null")) {
+			this.checkPosition = null;
+		} else {
+			this.checkPosition = PositionsCard.valueOf(line);
+		}
+		line = reader.readLine();
+		if (line.equals("null")) {
+			this.objectCards = new ArrayList<ObjectCard>();
+		} else {
+			fields = line.split(";");
+			this.objectCards = new ArrayList<ObjectCard>();
+			for (int i = 0; i < fields.length; i = i + 2) {
+				this.objectCards.add(new ObjectCard(Treasure.valueOf(fields[i])));
+			}
+		}
+		line = reader.readLine();
+		ArrayList<MazeCard> maze = new ArrayList<MazeCard>();
+		while (!line.equals("csvEnd")) {
+			fields = line.split(";");
+			if (fields[0].equals("EvenCard")) {
+				EvenCard mazeCard = new EvenCard(new int[] { Integer.parseInt(fields[1]), Integer.parseInt(fields[2]),
+						Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) });
+				maze.add(mazeCard);
+
+			} else if (fields[0].equals("CurveCard")) {
+				if (fields[5].equals("null") && fields[6].equals("null")) {
+					CurveCard mazeCard = new CurveCard(new int[] { Integer.parseInt(fields[1]),
+							Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) },
+							null, null);
+					maze.add(mazeCard);
+				} else if (fields[6].equals("null")) {
+					CurveCard mazeCard = new CurveCard(
+							new int[] { Integer.parseInt(fields[1]), Integer.parseInt(fields[2]),
+									Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) },
+							Color.valueOf(fields[5]), null);
+					maze.add(mazeCard);
+
+				} else if (fields[5].equals("null")) {
+					CurveCard mazeCard = new CurveCard(
+							new int[] { Integer.parseInt(fields[1]), Integer.parseInt(fields[2]),
+									Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) },
+							null, Treasure.valueOf(fields[6]));
+					maze.add(mazeCard);
+				}
+
+			} else if (fields[0].equals("CrotchCard")) {
+				CrotchCard mazeCard = new CrotchCard(
+						new int[] { Integer.parseInt(fields[1]), Integer.parseInt(fields[2]),
+								Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) },
+						Treasure.valueOf(fields[6]));
+				maze.add(mazeCard);
+
+			}
+			line = reader.readLine();
+		}
+		this.gameboard = new Gameboard(maze);
 		
+		Figure safer = this.players.getActivePlayer();
+		do {
+			this.gameboard
+					.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1])
+					.addFigure(this.players.getActivePlayer());
+			
+			this.players.nextPlayer();
+		} while (!this.players.getActivePlayer().equals(safer));
 
 	}
 
@@ -110,7 +220,7 @@ public class Manager implements Communication, Serializable {
 	 * @return String
 	 */
 	@Override
-	public String getFoundTreasures(String color) throws Exception {
+	public String getFoundTreasures(String color) {
 		String foundCards = null;
 		try {
 			Figure safer = this.players.getActivePlayer();
@@ -158,7 +268,7 @@ public class Manager implements Communication, Serializable {
 	 * @return String
 	 */
 	@Override
-	public String startGame() throws Exception {
+	public String startGame() {
 		String startGame = null;
 		try {
 
@@ -206,19 +316,18 @@ public class Manager implements Communication, Serializable {
 		String moveResult = null;
 		try {
 			PositionsCard positionCard = PositionsCard.valueOf(position.toUpperCase());
-		if (checkMoveGears(positionCard)) {
-			this.checkPosition = positionCard;
-			this.gameboard.moveGears(positionCard, this.gameboard.getFreeCard());
-			this.isMoveFigur = true;
-			this.checkPosition = positionCard;
-			moveResult = gameboard.getFreeCard().toString();
-		}else {
-			moveResult = "Couldn't move, try again with other position";
-		}
-		}catch(Exception e) {
+			if (checkMoveGears(positionCard)) {
+				this.checkPosition = positionCard;
+				this.gameboard.moveGears(positionCard, this.gameboard.getFreeCard());
+				this.isMoveFigur = true;
+				this.checkPosition = positionCard;
+				moveResult = gameboard.getFreeCard().toString();
+			} else {
+				moveResult = "Couldn't move, try again with other position";
+			}
+		} catch (Exception e) {
 			moveResult = "Wrong position name";
 		}
-		
 
 		return moveResult;
 	}
@@ -388,20 +497,35 @@ public class Manager implements Communication, Serializable {
 	/**
 	 * Methode um das Spiel zu speichern.
 	 * 
-	 * @throws IOException
 	 * @return String
 	 */
 	@Override
-	public String saveGame(String path, String type) throws IOException {
-		String saver;
+	public String saveGame(String path, String type) {
+		String saver = null;
 
-		DataAccessSER save = new DataAccessSER();
-		try {
-			save.writeToFile(Manager.this, path, type);
-			saver = "Game saved successfully!";
-		} catch (IOException e) {
-			saver = "Game couldn't save!";
-			System.err.println(saver);
+		switch (type) {
+		case "serialization":
+			DataAccessSER saveSER = new DataAccessSER();
+			try {
+				saveSER.writeToFile(Manager.this, path);
+				saver = "Game saved successfully!";
+			} catch (IOException e) {
+				saver = "Game couldn't save!";
+				System.err.println(saver);
+			}
+			break;
+
+		case "csv":
+			DataAccessCSV saveCSV = new DataAccessCSV();
+			try {
+				saveCSV.writeToFile(Manager.this, path);
+				saver = "Game saved successfully!";
+			} catch (IOException e) {
+				saver = "Game couldn't save!";
+				System.err.println(saver);
+			}
+
+			break;
 		}
 
 		return saver;
@@ -409,28 +533,46 @@ public class Manager implements Communication, Serializable {
 
 	/**
 	 * Methode um ein gespeichertes Spiel zu laden.
-	 * 
+	 *
+	 * @return String
 	 * @throws IOException
 	 * @throws ClassNotFoundException
-	 * @return String
 	 */
 	@Override
 	public String loadGame(String path, String type) throws ClassNotFoundException, IOException {
 		String loader = null;
-		DataAccessSER load = new DataAccessSER();
-		Manager deSer = new Manager();
 
-		try {
+		switch (type) {
+		case "serialization":
+			try {
+				Manager deSer = new Manager();
+				DataAccessSER load = new DataAccessSER();
+				deSer = (Manager) load.readFile(path);
+				this.gameboard = deSer.gameboard;
+				this.players = deSer.players;
+				this.objectCards = deSer.objectCards;
+				this.isMoveFigur = deSer.isMoveFigur;
+				this.checkPosition = deSer.checkPosition;
+				loader = "Game successfully loaded!";
 
-			deSer = (Manager) load.readFile(path, type);
-			loader = "Game successfully loaded!";
+			} catch (ClassNotFoundException e) {
+				loader = "Game couldn't load, because class was not found";
+				System.err.println(loader);
+			} catch (IOException e) {
+				loader = "Game could't load";
+				System.err.println(loader);
 
-		} catch (ClassNotFoundException e) {
-			loader = "Game couldn't load, because class was not found";
-			System.err.println(loader);
-		} catch (IOException e) {
-			loader = "Game could't load";
-			System.err.println(loader);
+			}
+			break;
+
+		case "csv":
+			DataAccessCSV load = new DataAccessCSV();
+			Manager deCSV = (Manager) load.readFile(path);
+			this.gameboard = deCSV.gameboard;
+			this.players = deCSV.players;
+			this.objectCards = deCSV.objectCards;
+			this.isMoveFigur = deCSV.isMoveFigur;
+			this.checkPosition = deCSV.checkPosition;
 
 		}
 
@@ -465,6 +607,34 @@ public class Manager implements Communication, Serializable {
 			}
 		}
 		return rotateGear;
+	}
+
+	public void writeToStream(PrintWriter pw) {
+
+		for (int i = 0; i < this.getPlayers().length; i++) {
+			pw.println(this.getPlayers()[i] + ".");
+
+		}
+		pw.println("LP");
+
+		pw.println(this.isMoveFigur);
+		pw.println(this.checkPosition);
+		if (this.objectCards.size() == 0) {
+			pw.println("null");
+		} else {
+			pw.println(this.objectCards);
+		}
+		pw.println(this.getFreeMazeCard() + ".");
+		for (int i = 0; i < this.getMap().length; i++) {
+			for (int j = 0; j < this.getMap()[i].length; j++) {
+				pw.println(this.getMap()[i][j] + ".");
+
+			}
+		}
+		pw.println("csvEnd");
+
+		pw.flush();
+
 	}
 
 }

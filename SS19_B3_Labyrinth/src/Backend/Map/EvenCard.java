@@ -1,5 +1,8 @@
 package Backend.Map;
 
+import Backend.Color;
+import Backend.Treasure;
+
 /**
  * Klasse EvenCard erbt von Klasse @MazeCard
  */
@@ -12,7 +15,7 @@ public class EvenCard extends MazeCard {
 	/**
 	 * Konstruktor der Klasse EvenCard
 	 * 
-	 * @param Color color
+	 * @param Color    color
 	 * @param Treasure treasure
 	 */
 	public EvenCard() {
@@ -23,6 +26,12 @@ public class EvenCard extends MazeCard {
 		} else {
 			this.wall = new int[] { 0, 1, 0, 1 };
 		}
+	}
+
+	public EvenCard(int[] wall) {
+
+		super(wall, null, null);
+
 	}
 
 	/**

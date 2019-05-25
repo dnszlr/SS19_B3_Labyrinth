@@ -8,64 +8,51 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import Interface.DataAccess;
+
 public class DataAccessSER implements DataAccess, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public void writeToFile(Object ser, String path, String type) throws IOException {
-		switch (type) {
-		case "Serialization":
-			ObjectOutputStream oos = null;
+	public void writeToFile(Object ser, String path) throws IOException {
+
+		ObjectOutputStream oos = null;
+		try {
+
+			oos = new ObjectOutputStream(new FileOutputStream(path));
+			oos.writeObject(ser);
+		} catch (FileNotFoundException e) {
+			System.err.println(path + " could not be created");
+		} catch (IOException e) {
+			System.err.println("errors in the input");
+			System.out.println(e.getClass());
+			System.out.println(e.getMessage());
+		} finally {
 			try {
-
-				oos = new ObjectOutputStream(new FileOutputStream(path));
-				oos.writeObject(ser);
-			} catch (FileNotFoundException e) {
-				System.err.println(path + " could not be created");
-			} catch (IOException e) {
-				System.err.println("errors in the input");
-				System.out.println(e.getClass());
-				System.out.println(e.getMessage());
-			} finally {
-				try {
-					oos.close();
-				} catch (Exception e) {
-					System.err.println("Error closing a file");
-				}
-
+				oos.close();
+			} catch (Exception e) {
+				System.err.println("Error closing a file");
 			}
-			break;
 
-		default:
-			System.err.println("Wrong type, Serialization works");
-			break;
 		}
 
 	}
 
 	@Override
-	public Object readFile(String path, String type) throws IOException, ClassNotFoundException {
+	public Object readFile(String path) throws IOException, ClassNotFoundException {
 		Object deSer = new Object();
-		switch (type) {
-		case "Serialization":
-			ObjectInputStream ois = null;
-			try {
-				ois = new ObjectInputStream(new FileInputStream(path));
-				deSer = ois.readObject();
-			} catch (IOException e) {
-				System.err.println("errors in the output");
-			} catch (ClassNotFoundException e) {
-				System.err.println("Class could not be found");
-			}
 
-			break;
-
-		default:
-			System.err.println("Wrong type, Serialization works");
-			break;
+		ObjectInputStream ois = null;
+		try {
+			ois = new ObjectInputStream(new FileInputStream(path));
+			deSer = ois.readObject();
+		} catch (IOException e) {
+			System.err.println("errors in the output");
+		} catch (ClassNotFoundException e) {
+			System.err.println("Class could not be found");
 		}
-		
+
 		return deSer;
 	}
 }

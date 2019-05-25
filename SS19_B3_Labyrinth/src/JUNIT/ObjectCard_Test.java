@@ -1,10 +1,11 @@
-package Backend.Cards;
+package JUNIT;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
 import Backend.Treasure;
+import Backend.Cards.ObjectCard;
 
 public class ObjectCard_Test {
 	

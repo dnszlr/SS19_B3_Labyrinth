@@ -2,13 +2,11 @@ package Backend.Figure;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import Backend.Color;
 import Backend.Cards.ObjectCard;
 
 public class Figure implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -21,13 +19,12 @@ public class Figure implements Serializable {
 	private Color color;
 	private ObjectCard treasureCard;
 	private CardsStack cardstack;
-	
 
 	/**
 	 * Konstruktor der Klasse Figure.
 	 * 
 	 * @param String name
-	 * @param Color color
+	 * @param Color  color
 	 */
 
 	public Figure(String name, Color color) {
@@ -36,6 +33,15 @@ public class Figure implements Serializable {
 		this.name = name;
 		this.color = color;
 		this.pos = color.getPos();
+	}
+
+	public Figure(String name, Color color, int[] pos) {
+
+		this.cardstack = new CardsStack();
+		this.name = name;
+		this.color = color;
+		this.pos = pos;
+
 	}
 
 	/**
@@ -101,7 +107,7 @@ public class Figure implements Serializable {
 
 	public void setPos(int[] pos) {
 
-		this.pos = pos; //
+		this.pos = pos;
 
 	}
 
@@ -138,12 +144,12 @@ public class Figure implements Serializable {
 
 	public boolean isFound(ObjectCard card) {
 		boolean result = false;
-		if (this.treasureCard.equals(card)) {
-			if (this.cardstack.cardFound(card)) {
-				this.treasureCard = null;
-				result = true;
-			}
+
+		if (this.cardstack.cardFound(card)) {
+			this.treasureCard = null;
+			result = true;
 		}
+
 		return result;
 
 	}
@@ -156,7 +162,7 @@ public class Figure implements Serializable {
 
 	public boolean isAllFound() {
 		boolean result = false;
-		if(cardstack.isAllFound() && this.treasureCard == null) {
+		if (cardstack.isAllFound() && this.treasureCard == null) {
 			result = true;
 		}
 
@@ -167,19 +173,20 @@ public class Figure implements Serializable {
 	/**
 	 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen
 	 * String.
+	 * 
 	 * @return Strinng
 	 */
 
 	@Override
 	public String toString() {
-		return this.name + ";" + "" + this.color + ";" + "" + this.treasureCard + ";" + "" + this.cardstack + ";" + ""
-				+ Arrays.toString(this.pos);
+		return this.name + ";" + "" + this.color + ";" + "" + this.pos[0] + ";" + this.pos[1] + ";" + this.treasureCard
+				+ ";" + "" + this.cardstack;
 	}
 
 	/**
 	 * Innere Klasse CardsStack
 	 */
-	private class CardsStack implements Serializable{
+	private class CardsStack implements Serializable {
 
 		/**
 		 * 
@@ -258,13 +265,23 @@ public class Figure implements Serializable {
 		/**
 		 * Überschreiben der Object Methode "toString". Umwandlung des Objektes in einen
 		 * String.
+		 * 
 		 * @return String
 		 */
 
 		@Override
 		public String toString() {
 
-			return "" + this.objectsCards.toString() + ";" + "" + this.foundCards.toString();
+			String objCards = "";
+			for (ObjectCard i : objectsCards) {
+				objCards = objCards + i.toString() + ";";
+			}
+			String fndCards = "";
+			for (ObjectCard i : foundCards) {
+				fndCards = fndCards + i.toString() + ";";
+			}
+
+			return objCards + fndCards;
 		}
 
 	}

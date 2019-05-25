@@ -1,4 +1,4 @@
-package Backend.Figure;
+package JUNIT;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -7,6 +7,7 @@ import org.junit.Test;
 import Backend.Color;
 import Backend.Treasure;
 import Backend.Cards.ObjectCard;
+import Backend.Figure.Figure;
 
 public class Figure_Test {
 

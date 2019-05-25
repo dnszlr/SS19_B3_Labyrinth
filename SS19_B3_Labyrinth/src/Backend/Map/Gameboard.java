@@ -60,6 +60,22 @@ public class Gameboard implements Serializable {
 		this.freeCard = freeCards.get(0);
 	}
 
+	public Gameboard(ArrayList<MazeCard> csv) {
+		this.map = new MazeCard[7][7];
+		this.freeCard = csv.get(0);
+		csv.remove(0);
+		
+		for(int i = 0; i < map.length; i++) {
+			for(int j = 0; j < map[i].length; j++) {
+				this.map[i][j] = csv.get(0);
+				csv.remove(0);
+			}
+		}
+		
+		
+		
+	}
+
 	/**
 	 * Methode um ein neue Labyrinthkarte zu generieren.
 	 * 
@@ -392,8 +408,8 @@ public class Gameboard implements Serializable {
 	/**
 	 * Methode um zu erfragen ob ein Zug möglich wäre.
 	 * 
-	 * @param int[] currentPos
-	 * @param int[] oldPos
+	 * @param        int[] currentPos
+	 * @param        int[] oldPos
 	 * @param Figure figure
 	 * @return boolean result
 	 */
@@ -409,11 +425,13 @@ public class Gameboard implements Serializable {
 		return result;
 
 	}
+
 	/**
 	 * Hilfsmethode für moveFigure.
-	 * @param int[] currentPos
-	 * @param int[] oldPos
-	 * @param int[][] visited
+	 * 
+	 * @param        int[] currentPos
+	 * @param        int[] oldPos
+	 * @param        int[][] visited
 	 * @param Figure figure
 	 * @return boolean
 	 */

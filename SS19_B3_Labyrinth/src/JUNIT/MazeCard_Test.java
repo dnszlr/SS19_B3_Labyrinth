@@ -1,4 +1,4 @@
-package Backend.Map;
+package JUNIT;
 
 public class MazeCard_Test {
 	

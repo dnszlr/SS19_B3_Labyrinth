@@ -1,4 +1,4 @@
-package Backend.Map;
+package JUNIT;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,7 @@ import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 import Backend.Treasure;
+import Backend.Map.CrotchCard;
 
 public class CrotchCard_Test {
 
@@ -58,12 +59,12 @@ public class CrotchCard_Test {
 		System.out.println(Arrays.toString(tester1.getWall()));
 		tester1.rotateLeft();
 		int[] a = { 0, 0, 0, 1 };
-		for (int i = 0; i < tester1.wall.length; i++) {
+		for (int i = 0; i < tester1.getWall().length; i++) {
 			assertTrue(a[i] == tester1.getWall()[i]);
 		}
 		tester1.rotateLeft();
 		int[] b = { 0, 0, 1, 0 };
-		for (int i = 0; i < tester1.wall.length; i++) {
+		for (int i = 0; i < tester1.getWall().length; i++) {
 			assertTrue(b[i] == tester1.getWall()[i]);
 		}
 
@@ -76,14 +77,14 @@ public class CrotchCard_Test {
 		System.out.println(Arrays.toString(tester3.getWall()));
 		tester3.rotateRight();
 		int[] a = { 1, 0, 0, 0 };
-		for (int i = 0; i < tester3.wall.length; i++) {
+		for (int i = 0; i < tester3.getWall().length; i++) {
 			assertTrue(a[i] == tester3.getWall()[i]);
 		}
 
 		tester3.rotateRight();
 
 		int[] b = { 0, 1, 0, 0 };
-		for (int i = 0; i < tester3.wall.length; i++) {
+		for (int i = 0; i < tester3.getWall().length; i++) {
 			assertTrue(b[i] == tester3.getWall()[i]);
 		}
 

@@ -1,4 +1,4 @@
-package Backend.Map;
+package JUNIT;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +12,7 @@ import Backend.Color;
 import Backend.Direction;
 import Backend.Treasure;
 import Backend.Figure.Figure;
+import Backend.Map.CurveCard;
 
 public class CurveCard_Test {
 

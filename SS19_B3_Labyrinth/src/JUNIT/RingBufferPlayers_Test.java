@@ -1,9 +1,11 @@
-package Backend;
+package JUNIT;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import Backend.Color;
+import Backend.RingBufferPlayers;
 import Backend.Figure.Figure;
 
 public class RingBufferPlayers_Test {

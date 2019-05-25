@@ -1,5 +1,6 @@
 package Backend.Map;
 
+import Backend.Color;
 import Backend.Treasure;
 
 /**
@@ -73,6 +74,12 @@ public class CrotchCard extends MazeCard {
 		}
 	}
 
+	public CrotchCard(int[] wall, Treasure treasure) {
+
+		super(wall, null, treasure);
+
+	}
+
 	/**
 	 * Überschreiben der rotateLeft Methode von MazeCard.
 	 */
@@ -97,7 +104,7 @@ public class CrotchCard extends MazeCard {
 	}
 
 	/**
-	 * Üerschreiben der rotateRight Methode von MazeCard. 
+	 * Üerschreiben der rotateRight Methode von MazeCard.
 	 */
 	@Override
 	public void rotateLeft() {

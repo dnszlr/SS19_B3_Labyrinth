@@ -1,4 +1,4 @@
-package Backend.Map;
+package JUNIT;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -6,6 +6,11 @@ import org.junit.Test;
 import Backend.Color;
 import Backend.PositionsCard;
 import Backend.Figure.Figure;
+import Backend.Map.CrotchCard;
+import Backend.Map.CurveCard;
+import Backend.Map.EvenCard;
+import Backend.Map.Gameboard;
+import Backend.Map.MazeCard;
 
 public class Gameboard_Test {
 

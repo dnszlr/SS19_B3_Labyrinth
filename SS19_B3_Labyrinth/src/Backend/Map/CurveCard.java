@@ -1,7 +1,6 @@
 package Backend.Map;
 
 import java.util.Arrays;
-
 import Backend.Color;
 import Backend.Treasure;
 
@@ -53,6 +52,12 @@ public class CurveCard extends MazeCard {
 			}
 		}
 
+	}
+	
+	public CurveCard(int[] wall, Color color, Treasure treasure) {
+		
+		super(wall, color, treasure);
+		
 	}
 
 	/**
