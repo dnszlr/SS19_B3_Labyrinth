@@ -38,7 +38,7 @@ public class startController implements Initializable{
 	private void handleStartButton(ActionEvent event) throws IOException {
 		
 		Parent registrationPage_Stage = FXMLLoader.load(getClass().getResource("registrationpage.fxml"));
-		Scene registrationPage_Scene = new Scene(registrationPage_Stage, 1600, 1000);
+		Scene registrationPage_Scene = new Scene(registrationPage_Stage, 1400, 800);
 		Stage AtmStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		AtmStage.setScene(registrationPage_Scene);
 		String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();

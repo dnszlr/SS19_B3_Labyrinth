@@ -65,7 +65,7 @@ public class registrationController implements Initializable {
 	private void handleMazeButton(ActionEvent event) throws IOException {
 		
 		Parent gamepage_Stage = FXMLLoader.load(getClass().getResource("gamepage.fxml"));
-		Scene gamepage_Scene = new Scene(gamepage_Stage, 1600, 1000);
+		Scene gamepage_Scene = new Scene(gamepage_Stage, 1400, 800);
 		Stage AtmStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		AtmStage.setScene(gamepage_Scene);
 		String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
@@ -73,7 +73,6 @@ public class registrationController implements Initializable {
 		AtmStage.show();
 		
 	}
-	
 	
 	@FXML
 	private void handleRedButton() {
