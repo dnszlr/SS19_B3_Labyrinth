@@ -47,9 +47,13 @@ public class Manager implements Communication, Serializable {
 		this.isMoveFigur = false;
 
 	}
-
-	public Manager(BufferedReader reader) throws IOException { // Position von den neuen Figuren am Ende auf die
-																// jeweilige Karte setzen im Labyrinth
+	/**
+	 * CSV Laden.
+	 * @param reader
+	 * @throws IOException
+	 */
+	public Manager(BufferedReader reader) throws IOException { 
+																
 
 		String line = reader.readLine();
 		String[] fields;
@@ -495,7 +499,7 @@ public class Manager implements Communication, Serializable {
 	}
 
 	/**
-	 * Methode um das Spiel zu speichern.
+	 * Methode um das Spiel zu speichern über CSV oder Serialisierung.
 	 * 
 	 * @return String
 	 */
@@ -544,10 +548,9 @@ public class Manager implements Communication, Serializable {
 
 		switch (type) {
 		case "serialization":
-			try {
-				Manager deSer = new Manager();
-				DataAccessSER load = new DataAccessSER();
-				deSer = (Manager) load.readFile(path);
+			
+				DataAccessSER loadSER = new DataAccessSER();
+				Manager deSer = (Manager) loadSER.readFile(path);
 				this.gameboard = deSer.gameboard;
 				this.players = deSer.players;
 				this.objectCards = deSer.objectCards;
@@ -555,19 +558,14 @@ public class Manager implements Communication, Serializable {
 				this.checkPosition = deSer.checkPosition;
 				loader = "Game successfully loaded!";
 
-			} catch (ClassNotFoundException e) {
-				loader = "Game couldn't load, because class was not found";
-				System.err.println(loader);
-			} catch (IOException e) {
-				loader = "Game could't load";
-				System.err.println(loader);
-
-			}
+			
 			break;
 
 		case "csv":
-			DataAccessCSV load = new DataAccessCSV();
-			Manager deCSV = (Manager) load.readFile(path);
+			
+			
+			DataAccessCSV loadCSV = new DataAccessCSV();
+			Manager deCSV = (Manager) loadCSV.readFile(path);
 			this.gameboard = deCSV.gameboard;
 			this.players = deCSV.players;
 			this.objectCards = deCSV.objectCards;
@@ -608,7 +606,10 @@ public class Manager implements Communication, Serializable {
 		}
 		return rotateGear;
 	}
-
+	/**
+	 * writeToStream Methode
+	 * @param pw
+	 */
 	public void writeToStream(PrintWriter pw) {
 
 		for (int i = 0; i < this.getPlayers().length; i++) {

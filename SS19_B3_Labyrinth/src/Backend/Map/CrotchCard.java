@@ -73,7 +73,11 @@ public class CrotchCard extends MazeCard {
 
 		}
 	}
-
+	/**
+	 * Konstruktor CrotchCard
+	 * @param wall
+	 * @param treasure
+	 */
 	public CrotchCard(int[] wall, Treasure treasure) {
 
 		super(wall, null, treasure);

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Box?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.image.Image?>
+
+
+
+<BorderPane styleClass="gameBackground" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.gameController" xmlns="http://javafx.com/javafx/3.5">
+	<top>
+		<HBox prefHeight="150.0" alignment="CENTER" spacing="10.0">
+			<Label text="Player1" styleClass="Header"/>
+			<Label text="Score" styleClass="Header"/>
+			<Label text="Player2" styleClass="Header"/>
+			<Label text="Score" styleClass="Header"/>
+			<Label text="Player3" styleClass="Header"/>
+			<Label text="Score" styleClass="Header"/>
+			<Label text="Player4" styleClass="Header"/>
+			<Label text="Score" styleClass="Header"/>
+		</HBox>
+	</top>
+	<left>
+		<VBox prefWidth="400.0" alignment="CENTER" spacing="10.0">
+			<Label text="ActivePlayer" styleClass="Header"/>
+			<Label fx:id="playerCard" styleClass="cardBack" prefHeight="250.0" prefWidth="280.0"/>
+			<Button fx:id="hideShow" styleClass="FrontButton" text="hide/show" prefHeight="50.0" prefWidth="125.0"/>
+		</VBox>
+	</left>
+	<right>
+		<VBox prefWidth="400.0" alignment="CENTER" spacing="10.0" >
+			<Button text="EndRound" styleClass="FrontButton" prefHeight="50.0" prefWidth="175.0"/>
+			<Label styleClass="book" prefHeight="150.0" prefWidth="150.0"/>
+			<Button text="RotateCardLeft" styleClass="FrontButton" prefHeight="50.0" prefWidth="175.0"/>
+			<Button text="RotateCardRight" styleClass="FrontButton" prefHeight="50.0" prefWidth="175.0"/>
+		</VBox>
+	</right>
+	<bottom>
+		<HBox prefHeight="150.0" alignment="CENTER" spacing="10.0">
+			<Button text="SaveGame" styleClass="FrontButton"/> <!-- FileChooser einbauen -->
+			<Button text="LoadGame" styleClass="FrontButton"/> <!-- FileChooser einbauen -->
+			<Button text="CloseGame" styleClass="FrontButton" onAction="#handleCloseButton"/>
+		</HBox>
+	</bottom>
+	<center>
+		<GridPane alignment="CENTER" prefHeight="600.0" prefWidth="600.0">
+			<Button text="A2" GridPane.columnIndex="2" GridPane.rowIndex="0" prefWidth="80.0" styleClass="FrontButton"/>
+			<Button text="A4" GridPane.columnIndex="4" GridPane.rowIndex="0" prefWidth="80.0" styleClass="FrontButton"/>
+			<Button text="A6" GridPane.columnIndex="6" GridPane.rowIndex="0" prefWidth="80.0" styleClass="FrontButton"/>
+			<Button text="G2" GridPane.columnIndex="2" GridPane.rowIndex="8" prefWidth="80.0" styleClass="FrontButton"/>
+			<Button text="G4" GridPane.columnIndex="4" GridPane.rowIndex="8" prefWidth="80.0" styleClass="FrontButton"/>
+			<Button text="G6" GridPane.columnIndex="6" GridPane.rowIndex="8" prefWidth="80.0" styleClass="FrontButton"/>
+			<Button styleClass="redStart" GridPane.columnIndex="1" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="A2" GridPane.columnIndex="2" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="book" GridPane.columnIndex="3" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="A4" GridPane.columnIndex="4" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="moneybag" GridPane.columnIndex="5" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="A6" GridPane.columnIndex="6" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="yellowStart" GridPane.columnIndex="7" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="B1" GridPane.columnIndex="1" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="B2" GridPane.columnIndex="2" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="B3" GridPane.columnIndex="3" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="B4" GridPane.columnIndex="4" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="B5" GridPane.columnIndex="5" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="B6" GridPane.columnIndex="6" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="B7" GridPane.columnIndex="7" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="map" GridPane.columnIndex="1" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="C2" GridPane.columnIndex="2" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="crown" GridPane.columnIndex="3" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="C4" GridPane.columnIndex="4" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="key" GridPane.columnIndex="5" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="C6" GridPane.columnIndex="6" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="skull" GridPane.columnIndex="7" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="D1" GridPane.columnIndex="1" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="D2" GridPane.columnIndex="2" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="D3" GridPane.columnIndex="3" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="D4" GridPane.columnIndex="4" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="D5" GridPane.columnIndex="5" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="D6" GridPane.columnIndex="6" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="D7" GridPane.columnIndex="7" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="ring" GridPane.columnIndex="1" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="E2" GridPane.columnIndex="2" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="chest" GridPane.columnIndex="3" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="E4" GridPane.columnIndex="4" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="emerald" GridPane.columnIndex="5" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="E6" GridPane.columnIndex="6" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="sword" GridPane.columnIndex="7" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="F1" GridPane.columnIndex="1" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="F2" GridPane.columnIndex="2" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="F3" GridPane.columnIndex="3" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="F4" GridPane.columnIndex="4" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="F5" GridPane.columnIndex="5" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="F6" GridPane.columnIndex="6" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="F7" GridPane.columnIndex="7" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="greenStart" GridPane.columnIndex="1" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="G2" GridPane.columnIndex="2" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="menorah" GridPane.columnIndex="3" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="G4" GridPane.columnIndex="4" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="helmet" GridPane.columnIndex="5" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="G6" GridPane.columnIndex="6" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
+			<Button styleClass="blueStart" GridPane.columnIndex="7" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
+			<Button text="B1" GridPane.columnIndex="0" GridPane.rowIndex="2" prefHeight="80.0" styleClass="FrontButton"/>
+			<Button text="D1" GridPane.columnIndex="0" GridPane.rowIndex="4" prefHeight="80.0" styleClass="FrontButton"/>
+			<Button text="F1" GridPane.columnIndex="0" GridPane.rowIndex="6" prefHeight="80.0" styleClass="FrontButton"/>
+			<Button text="B7" GridPane.columnIndex="8" GridPane.rowIndex="2" prefHeight="80.0" styleClass="FrontButton"/>
+			<Button text="D7" GridPane.columnIndex="8" GridPane.rowIndex="4" prefHeight="80.0" styleClass="FrontButton"/>
+			<Button text="F7" GridPane.columnIndex="8" GridPane.rowIndex="6" prefHeight="80.0" styleClass="FrontButton"/>
+		</GridPane>
+	</center>
+</BorderPane>
+

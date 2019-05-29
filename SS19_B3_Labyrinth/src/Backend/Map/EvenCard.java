@@ -27,7 +27,9 @@ public class EvenCard extends MazeCard {
 			this.wall = new int[] { 0, 1, 0, 1 };
 		}
 	}
-
+	/**
+	 * Konstruktor EvenCard
+	 */
 	public EvenCard(int[] wall) {
 
 		super(wall, null, null);

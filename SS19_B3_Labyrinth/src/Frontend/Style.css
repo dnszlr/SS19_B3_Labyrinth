@@ -1,0 +1,253 @@
+.startPage {
+	-fx-background-image: url("maze_background.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+}
+
+.FrontButton {
+	-fx-background-color: #090a0c, linear-gradient(PaleGoldenRod, DarkGreen),
+		linear-gradient(PaleGoldenRod 10.0%, DarkGreen 90.0%),
+		radial-gradient(center 60.0% 0.0%, radius 100.0%, PaleGoldenRod, DarkGreen);
+	-fx-background-radius: 5.0, 4.0, 3.0, 5.0;
+	-fx-background-insets: 0.0, 1.0, 2.0, 0.0;
+	-fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 1.0), 5.0, 0.0, 0.0, 1.0);
+	-fx-font-family: "Courier New";
+	-fx-text-fill: Black;
+	-fx-font-size: 15.0px;
+	-fx-font-weight: bold;
+	-fx-scale-y: 0.9;
+	-fx-scale-x: 0.9;
+}
+
+.FrontButton:hover {
+	-fx-background-color: #090a0c, linear-gradient(DarkGreen, PaleGoldenRod),
+		linear-gradient(PaleGoldenRod 90.0%, DarkGreen 10.0%),
+		radial-gradient(center 50.0% 0.0%, radius 100.0%, DarkGreen, PaleGoldenRod);
+	-fx-scale-y: 1.1;
+}
+
+.FrontButton:pressed {
+	-fx-scale-y: 0.9;
+	-fx-scale-x: 0.9;
+}
+
+.Header {
+	-fx-font-family: "Courier New";
+	-fx-text-fill: linear-gradient(PaleGoldenRod, LimeGreen);
+	-fx-font-size: 30.0px;
+	-fx-font-weight: bold;
+	-fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 1.0), 5.0, 0.0, 0.0, 1.0);
+}
+
+.RedPlayer {
+	-fx-background-radius: 50px;
+	-fx-background-color: rgb(233, 78, 78);
+	-fx-border-radius: 50.0px;
+	-fx-border-width: 3.0;
+	-fx-border-color: Black;
+}
+
+.RedPlayer:hover{
+	-fx-background-color: Red;
+}
+
+.RedPlayer:pressed{
+	-fx-scale-y: 0.95;
+	-fx-scale-x: 0.95;
+}
+
+.YellowPlayer {
+	-fx-background-radius: 50px;
+	-fx-background-color: rgb(230.0, 227.0, 120.0);
+	-fx-border-radius: 50.0px;
+	-fx-border-width: 3.0;
+	-fx-border-color: Black;
+}
+
+.YellowPlayer:hover{
+	-fx-background-color: Yellow;
+}
+
+.YellowPlayer:pressed{
+	-fx-scale-y: 0.95;
+	-fx-scale-x: 0.95;
+}
+
+.GreenPlayer {
+	-fx-background-radius: 50px;
+	-fx-background-color: rgb(130.0, 212.0, 138.0);
+	-fx-border-radius: 50.0px;
+	-fx-border-width: 3.0;
+	-fx-border-color: Black;
+}
+
+.GreenPlayer:hover{
+	-fx-background-color: Green;
+}
+
+.GreenPlayer:pressed{
+	-fx-scale-y: 0.95;
+	-fx-scale-x: 0.95;
+}
+
+.BluePlayer {
+	-fx-background-radius: 50px;
+	-fx-background-color: rgb(109, 78, 233);
+	-fx-border-radius: 50.0px;
+	-fx-border-width: 3.0;
+	-fx-border-color: Black;
+}
+
+.BluePlayer:hover{
+	-fx-background-color: Blue;
+}
+
+.BluePlayer:pressed{
+	-fx-scale-y: 0.95;
+	-fx-scale-x: 0.95;
+}
+
+.gameBackground{
+	
+	-fx-background-image: url("gamepage_Background.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.cardBack{
+	
+	-fx-background-image: url("CardBack.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+	
+}
+
+.redStart{
+	
+	-fx-background-image: url("CurveCardRED.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover;
+	
+}
+
+.yellowStart{
+	
+	-fx-background-image: url("CurveCardYELLOW.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.greenStart{
+	
+	-fx-background-image: url("CurveCardGREEN.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.blueStart{
+	
+	-fx-background-image: url("CurveCardBLUE.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.book{
+	
+	-fx-background-image: url("CrotchCardBOOK.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.chest{
+	
+	-fx-background-image: url("CrotchCardCHEST.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.crown{
+	
+	-fx-background-image: url("CrotchCardCROWN.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.emerald{
+	
+	-fx-background-image: url("CrotchCardEMERALD.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.helmet{
+	
+	-fx-background-image: url("CrotchCardHELMET.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.key{
+	
+	-fx-background-image: url("CrotchCardKEY.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.map{
+	
+	-fx-background-image: url("CrotchCardMAP.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.menorah{
+	
+	-fx-background-image: url("CrotchCardMENORAH.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.moneybag{
+	
+	-fx-background-image: url("CrotchCardMONEYBAG.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.ring{
+	
+	-fx-background-image: url("CrotchCardRING.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.skull{
+	
+	-fx-background-image: url("CrotchCardSKULL.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}
+
+.sword{
+	
+	-fx-background-image: url("CrotchCardSWORD.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: cover, auto;
+	
+}

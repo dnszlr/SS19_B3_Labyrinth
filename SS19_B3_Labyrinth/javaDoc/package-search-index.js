@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"Backend"},{"l":"Backend.Cards"},{"l":"Backend.Figure"},{"l":"Backend.Map"},{"l":"Interface"}]
+packageSearchIndex = [{"l":"Backend"},{"l":"Backend.Cards"},{"l":"Backend.Figure"},{"l":"Backend.Map"},{"l":"Frontend"},{"l":"Interface"},{"l":"JUNIT"}]

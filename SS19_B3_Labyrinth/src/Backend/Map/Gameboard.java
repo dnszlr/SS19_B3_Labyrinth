@@ -59,7 +59,10 @@ public class Gameboard implements Serializable {
 
 		this.freeCard = freeCards.get(0);
 	}
-
+	/**
+	 * Konstruktor mit ArrayList als Übergabe Parameter für das laden über CSV.
+	 * @param csv
+	 */
 	public Gameboard(ArrayList<MazeCard> csv) {
 		this.map = new MazeCard[7][7];
 		this.freeCard = csv.get(0);
