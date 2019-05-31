@@ -232,6 +232,9 @@ public abstract class MazeCard implements Serializable {
 
 		String MazeCard = getClass().getSimpleName() + ";" + getWall()[0] + ";" + getWall()[1] + ";" + getWall()[2]
 				+ ";" + getWall()[3] + ";" + "" + getColor() + ";" + "" + getTreasure() + ";";
+		for(Figure i : figures) {
+			MazeCard = MazeCard + i.getColor() + ";";
+		}
 		return MazeCard;
 
 	}

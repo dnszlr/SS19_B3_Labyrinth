@@ -77,8 +77,7 @@ public class Figure_Test {
 	@Test
 	public void testToString() {
 		
-		
-		assertEquals("Dennis;RED;bat;false;[book;false, chest;false, crown;false];[];[0, 0]", figure.toString());
+		assertEquals("Dennis;RED;0;0;bat;false;book;false;chest;false;crown;false;", figure.toString());
 		
 		
 	}

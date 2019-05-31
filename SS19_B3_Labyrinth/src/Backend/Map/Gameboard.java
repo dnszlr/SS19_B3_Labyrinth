@@ -1,5 +1,8 @@
 package Backend.Map;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,25 +62,101 @@ public class Gameboard implements Serializable {
 
 		this.freeCard = freeCards.get(0);
 	}
+
 	/**
-	 * Konstruktor mit ArrayList als Übergabe Parameter für das laden über CSV.
+	 * BufferedReader laden des Gameboards
+	 * 
 	 * @param csv
+	 * @throws IOException
 	 */
-	public Gameboard(ArrayList<MazeCard> csv) {
+	public Gameboard(BufferedReader reader) throws IOException {
+		String line = "Start";
+		String[] fields;
+		MazeCard mazeCard = null;
+		ArrayList<MazeCard> cards = new ArrayList<MazeCard>();
 		this.map = new MazeCard[7][7];
-		this.freeCard = csv.get(0);
-		csv.remove(0);
-		
-		for(int i = 0; i < map.length; i++) {
-			for(int j = 0; j < map[i].length; j++) {
-				this.map[i][j] = csv.get(0);
-				csv.remove(0);
+		while (!line.equals("End")) {
+
+			line = reader.readLine();
+			fields = line.split(";");
+
+			if (fields[0].equals("EvenCard")) {
+				mazeCard = new EvenCard();
+				while (!Arrays.equals(mazeCard.getWall(), new int[] { Integer.parseInt(fields[1]),
+						Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) })) {
+					mazeCard.rotateLeft();
+				}
+
+				cards.add(mazeCard);
+
+			} else if (fields[0].equals("CurveCard")) {
+				if (fields[5].equals("null") && fields[6].equals("null")) {
+					mazeCard = new CurveCard(null, null);
+				} else if (fields[6].equals("null")) {
+					mazeCard = new CurveCard(Color.valueOf(fields[5]), null);
+				} else if (fields[5].equals("null")) {
+					mazeCard = new CurveCard(null, Treasure.valueOf(fields[6]));
+				} else {
+					mazeCard = new CurveCard(Color.valueOf(fields[5]), Treasure.valueOf(fields[6]));
+				}
+				while (!Arrays.equals(mazeCard.getWall(), new int[] { Integer.parseInt(fields[1]),
+						Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) })) {
+					mazeCard.rotateLeft();
+				}
+
+				cards.add(mazeCard);
+
+			} else if (fields[0].equals("CrotchCard")) {
+				if (fields[6].equals("null")) {
+					mazeCard = new CrotchCard(null);
+				} else {
+					mazeCard = new CrotchCard(Treasure.valueOf(fields[6]));
+				}
+				while (!Arrays.equals(mazeCard.getWall(), new int[] { Integer.parseInt(fields[1]),
+						Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) })) {
+					mazeCard.rotateLeft();
+				}
+
+				cards.add(mazeCard);
+
+			}
+
+		}
+
+		this.freeCard = cards.get(0);
+		cards.remove(0);
+
+		for (int i = 0; i < this.map.length; i++) {
+			for (int j = 0; j < this.map.length; j++) {
+				this.map[i][j] = cards.get(0);
+				cards.remove(0);
 			}
 		}
 		
-		
-		
+		setAllNeighbours();
 	}
+	
+	/**
+	 * writeToStream Methode für CSV
+	 * 
+	 * @param pw
+	 */
+	public void writeToStream(PrintWriter pw) {
+		
+		pw.println(this.freeCard.toString());
+		for (int i = 0; i < this.map.length; i++) {
+			for (int j = 0; j < this.map[i].length; j++) {
+				pw.println(this.map[i][j].toString());
+
+			}
+		}
+
+		pw.println("End");
+		pw.flush();
+
+	}
+
+
 
 	/**
 	 * Methode um ein neue Labyrinthkarte zu generieren.
@@ -411,8 +490,8 @@ public class Gameboard implements Serializable {
 	/**
 	 * Methode um zu erfragen ob ein Zug möglich wäre.
 	 * 
-	 * @param        int[] currentPos
-	 * @param        int[] oldPos
+	 * @param int[]  currentPos
+	 * @param int[]  oldPos
 	 * @param Figure figure
 	 * @return boolean result
 	 */
@@ -432,10 +511,10 @@ public class Gameboard implements Serializable {
 	/**
 	 * Hilfsmethode für moveFigure.
 	 * 
-	 * @param        int[] currentPos
-	 * @param        int[] oldPos
-	 * @param        int[][] visited
-	 * @param Figure figure
+	 * @param int[]   currentPos
+	 * @param int[]   oldPos
+	 * @param int[][] visited
+	 * @param Figure  figure
 	 * @return boolean
 	 */
 	private boolean moveFigureWithArray(int[] currentPos, int[] oldPos, int[][] visited, Figure figure) {

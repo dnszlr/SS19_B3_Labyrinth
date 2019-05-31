@@ -17,27 +17,34 @@
 <BorderPane styleClass="gameBackground" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.gameController" xmlns="http://javafx.com/javafx/3.5">
 	<top>
 		<HBox prefHeight="150.0" alignment="CENTER" spacing="10.0">
-			<Label text="Player1" styleClass="Header"/>
-			<Label text="Score" styleClass="Header"/>
-			<Label text="Player2" styleClass="Header"/>
-			<Label text="Score" styleClass="Header"/>
-			<Label text="Player3" styleClass="Header"/>
-			<Label text="Score" styleClass="Header"/>
-			<Label text="Player4" styleClass="Header"/>
-			<Label text="Score" styleClass="Header"/>
+			<Label text="Player1:" styleClass="Header"/>
+			<Label text="0" styleClass="Header"/>
+			<Label text="Player2:" styleClass="Header"/>
+			<Label text="0" styleClass="Header"/>
+			<Label text="Player3:" styleClass="Header"/>
+			<Label text="0" styleClass="Header"/>
+			<Label text="Player4:" styleClass="Header"/>
+			<Label text="0" styleClass="Header"/>
 		</HBox>
 	</top>
 	<left>
 		<VBox prefWidth="400.0" alignment="CENTER" spacing="10.0">
 			<Label text="ActivePlayer" styleClass="Header"/>
-			<Label fx:id="playerCard" styleClass="cardBack" prefHeight="250.0" prefWidth="280.0"/>
+			<StackPane>
+				<ImageView fitHeight="250.0" fitWidth="200.0"><image><Image url="Frontend/Images/clear.png" ></Image></image></ImageView>
+				<ImageView fitHeight="250.0" fitWidth="200.0"><image><Image url="Frontend/Images/CardBack.jpg" ></Image></image></ImageView>
+			</StackPane>
 			<Button fx:id="hideShow" styleClass="FrontButton" text="hide/show" prefHeight="50.0" prefWidth="125.0"/>
 		</VBox>
 	</left>
 	<right>
 		<VBox prefWidth="400.0" alignment="CENTER" spacing="10.0" >
 			<Button text="EndRound" styleClass="FrontButton" prefHeight="50.0" prefWidth="175.0"/>
-			<Label styleClass="book" prefHeight="150.0" prefWidth="150.0"/>
+			<StackPane>
+				<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/clear.png" ></Image></image></ImageView>
+				<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/clear.png"></Image></image></ImageView>
+				<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+			</StackPane >
 			<Button text="RotateCardLeft" styleClass="FrontButton" prefHeight="50.0" prefWidth="175.0"/>
 			<Button text="RotateCardRight" styleClass="FrontButton" prefHeight="50.0" prefWidth="175.0"/>
 		</VBox>
@@ -50,68 +57,266 @@
 		</HBox>
 	</bottom>
 	<center>
-		<GridPane alignment="CENTER" prefHeight="600.0" prefWidth="600.0">
-			<Button text="A2" GridPane.columnIndex="2" GridPane.rowIndex="0" prefWidth="80.0" styleClass="FrontButton"/>
-			<Button text="A4" GridPane.columnIndex="4" GridPane.rowIndex="0" prefWidth="80.0" styleClass="FrontButton"/>
-			<Button text="A6" GridPane.columnIndex="6" GridPane.rowIndex="0" prefWidth="80.0" styleClass="FrontButton"/>
-			<Button text="G2" GridPane.columnIndex="2" GridPane.rowIndex="8" prefWidth="80.0" styleClass="FrontButton"/>
-			<Button text="G4" GridPane.columnIndex="4" GridPane.rowIndex="8" prefWidth="80.0" styleClass="FrontButton"/>
-			<Button text="G6" GridPane.columnIndex="6" GridPane.rowIndex="8" prefWidth="80.0" styleClass="FrontButton"/>
-			<Button styleClass="redStart" GridPane.columnIndex="1" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="A2" GridPane.columnIndex="2" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="book" GridPane.columnIndex="3" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="A4" GridPane.columnIndex="4" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="moneybag" GridPane.columnIndex="5" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="A6" GridPane.columnIndex="6" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="yellowStart" GridPane.columnIndex="7" GridPane.rowIndex="1" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="B1" GridPane.columnIndex="1" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="B2" GridPane.columnIndex="2" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="B3" GridPane.columnIndex="3" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="B4" GridPane.columnIndex="4" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="B5" GridPane.columnIndex="5" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="B6" GridPane.columnIndex="6" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="B7" GridPane.columnIndex="7" GridPane.rowIndex="2" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="map" GridPane.columnIndex="1" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="C2" GridPane.columnIndex="2" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="crown" GridPane.columnIndex="3" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="C4" GridPane.columnIndex="4" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="key" GridPane.columnIndex="5" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="C6" GridPane.columnIndex="6" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="skull" GridPane.columnIndex="7" GridPane.rowIndex="3" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="D1" GridPane.columnIndex="1" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="D2" GridPane.columnIndex="2" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="D3" GridPane.columnIndex="3" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="D4" GridPane.columnIndex="4" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="D5" GridPane.columnIndex="5" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="D6" GridPane.columnIndex="6" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="D7" GridPane.columnIndex="7" GridPane.rowIndex="4" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="ring" GridPane.columnIndex="1" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="E2" GridPane.columnIndex="2" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="chest" GridPane.columnIndex="3" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="E4" GridPane.columnIndex="4" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="emerald" GridPane.columnIndex="5" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="E6" GridPane.columnIndex="6" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="sword" GridPane.columnIndex="7" GridPane.rowIndex="5" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="F1" GridPane.columnIndex="1" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="F2" GridPane.columnIndex="2" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="F3" GridPane.columnIndex="3" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="F4" GridPane.columnIndex="4" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="F5" GridPane.columnIndex="5" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="F6" GridPane.columnIndex="6" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="F7" GridPane.columnIndex="7" GridPane.rowIndex="6" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="greenStart" GridPane.columnIndex="1" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="G2" GridPane.columnIndex="2" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="menorah" GridPane.columnIndex="3" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="G4" GridPane.columnIndex="4" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="helmet" GridPane.columnIndex="5" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="G6" GridPane.columnIndex="6" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
-			<Button styleClass="blueStart" GridPane.columnIndex="7" GridPane.rowIndex="7" prefHeight="80.0" prefWidth="80.0"/>
-			<Button text="B1" GridPane.columnIndex="0" GridPane.rowIndex="2" prefHeight="80.0" styleClass="FrontButton"/>
-			<Button text="D1" GridPane.columnIndex="0" GridPane.rowIndex="4" prefHeight="80.0" styleClass="FrontButton"/>
-			<Button text="F1" GridPane.columnIndex="0" GridPane.rowIndex="6" prefHeight="80.0" styleClass="FrontButton"/>
-			<Button text="B7" GridPane.columnIndex="8" GridPane.rowIndex="2" prefHeight="80.0" styleClass="FrontButton"/>
-			<Button text="D7" GridPane.columnIndex="8" GridPane.rowIndex="4" prefHeight="80.0" styleClass="FrontButton"/>
-			<Button text="F7" GridPane.columnIndex="8" GridPane.rowIndex="6" prefHeight="80.0" styleClass="FrontButton"/>
+		<GridPane alignment="CENTER">
+			<children>
+				<Button text="A2" GridPane.columnIndex="2" GridPane.rowIndex="0" prefWidth="100.0" styleClass="FrontButton"/>
+				<Button text="A4" GridPane.columnIndex="4" GridPane.rowIndex="0" prefWidth="100.0" styleClass="FrontButton"/>
+				<Button text="A6" GridPane.columnIndex="6" GridPane.rowIndex="0" prefWidth="100.0" styleClass="FrontButton"/>
+				<Button text="G2" GridPane.columnIndex="2" GridPane.rowIndex="8" prefWidth="100.0" styleClass="FrontButton"/>
+				<Button text="G4" GridPane.columnIndex="4" GridPane.rowIndex="8" prefWidth="100.0" styleClass="FrontButton"/>
+				<Button text="G6" GridPane.columnIndex="6" GridPane.rowIndex="8" prefWidth="100.0" styleClass="FrontButton"/>
+				<StackPane fx:id="A1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane >
+				<StackPane fx:id="A2" GridPane.columnIndex="2" GridPane.rowIndex="1">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="A3" GridPane.columnIndex="3" GridPane.rowIndex="1">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="A4" GridPane.columnIndex="4" GridPane.rowIndex="1">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="A5" GridPane.columnIndex="5" GridPane.rowIndex="1">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="A6" GridPane.columnIndex="6" GridPane.rowIndex="1">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="A7" GridPane.columnIndex="7" GridPane.rowIndex="1">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="B1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="B2" GridPane.columnIndex="2" GridPane.rowIndex="2">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="B3" GridPane.columnIndex="3" GridPane.rowIndex="2">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="B4" GridPane.columnIndex="4" GridPane.rowIndex="2">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="B5" GridPane.columnIndex="5" GridPane.rowIndex="2">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="B6" GridPane.columnIndex="6" GridPane.rowIndex="2">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="B7" GridPane.columnIndex="7" GridPane.rowIndex="2">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="C1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="C2" GridPane.columnIndex="2" GridPane.rowIndex="3">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="C3" GridPane.columnIndex="3" GridPane.rowIndex="3">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="C4" GridPane.columnIndex="4" GridPane.rowIndex="3" >
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="C5" GridPane.columnIndex="5" GridPane.rowIndex="3">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="C6" GridPane.columnIndex="6" GridPane.rowIndex="3">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="C7" GridPane.columnIndex="7" GridPane.rowIndex="3">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="D1" GridPane.columnIndex="1" GridPane.rowIndex="4">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="D2" GridPane.columnIndex="2" GridPane.rowIndex="4">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="D3" GridPane.columnIndex="3" GridPane.rowIndex="4">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="D4" GridPane.columnIndex="4" GridPane.rowIndex="4">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="D5" GridPane.columnIndex="5" GridPane.rowIndex="4">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="D6" GridPane.columnIndex="6" GridPane.rowIndex="4">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="D7" GridPane.columnIndex="7" GridPane.rowIndex="4">
+					<children>
+					<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="E1" GridPane.columnIndex="1" GridPane.rowIndex="5">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="E2" GridPane.columnIndex="2" GridPane.rowIndex="5">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="E3" GridPane.columnIndex="3" GridPane.rowIndex="5">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="E4" GridPane.columnIndex="4" GridPane.rowIndex="5">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="E5" GridPane.columnIndex="5" GridPane.rowIndex="5">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="E6" GridPane.columnIndex="6" GridPane.rowIndex="5">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="E7" GridPane.columnIndex="7" GridPane.rowIndex="5">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="F1" GridPane.columnIndex="1" GridPane.rowIndex="6">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="F2" GridPane.columnIndex="2" GridPane.rowIndex="6">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="F3" GridPane.columnIndex="3" GridPane.rowIndex="6">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="F4" GridPane.columnIndex="4" GridPane.rowIndex="6">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="F5" GridPane.columnIndex="5" GridPane.rowIndex="6">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="F6" GridPane.columnIndex="6" GridPane.rowIndex="6">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="F7" GridPane.columnIndex="7" GridPane.rowIndex="6">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="G1" GridPane.columnIndex="1" GridPane.rowIndex="7">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="G2" GridPane.columnIndex="2" GridPane.rowIndex="7">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="G3" GridPane.columnIndex="3" GridPane.rowIndex="7">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="G4" GridPane.columnIndex="4" GridPane.rowIndex="7">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="G5" GridPane.columnIndex="5" GridPane.rowIndex="7">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="G6" GridPane.columnIndex="6" GridPane.rowIndex="7">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<StackPane fx:id="G7" GridPane.columnIndex="7" GridPane.rowIndex="7">
+					<children>
+						<ImageView fitHeight="100.0" fitWidth="100.0"><image><Image url="Frontend/Images/groundCard.jpg"></Image></image></ImageView>
+					</children>
+				</StackPane>
+				<Button text="B1" GridPane.columnIndex="0" GridPane.rowIndex="2" prefHeight="100.0" styleClass="FrontButton"/>
+				<Button text="D1" GridPane.columnIndex="0" GridPane.rowIndex="4" prefHeight="100.0" styleClass="FrontButton"/>
+				<Button text="F1" GridPane.columnIndex="0" GridPane.rowIndex="6" prefHeight="100.0" styleClass="FrontButton"/>
+				<Button text="B7" GridPane.columnIndex="8" GridPane.rowIndex="2" prefHeight="100.0" styleClass="FrontButton"/>
+				<Button text="D7" GridPane.columnIndex="8" GridPane.rowIndex="4" prefHeight="100.0" styleClass="FrontButton"/>
+				<Button text="F7" GridPane.columnIndex="8" GridPane.rowIndex="6" prefHeight="100.0" styleClass="FrontButton"/>
+			</children>
 		</GridPane>
 	</center>
 </BorderPane>

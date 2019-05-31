@@ -1,6 +1,5 @@
 package Backend;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -9,12 +8,9 @@ import java.util.Collections;
 import java.util.List;
 import Backend.Cards.ObjectCard;
 import Backend.Figure.Figure;
-import Backend.Map.CrotchCard;
-import Backend.Map.CurveCard;
-import Backend.Map.EvenCard;
 import Backend.Map.Gameboard;
-import Backend.Map.MazeCard;
 import Interface.Communication;
+import Interface.DataAccess;
 
 public class Manager implements Communication, Serializable {
 
@@ -45,115 +41,6 @@ public class Manager implements Communication, Serializable {
 		this.objectCards = new ArrayList<ObjectCard>();
 		this.gameboard = new Gameboard();
 		this.isMoveFigur = false;
-
-	}
-	/**
-	 * CSV Laden.
-	 * @param reader
-	 * @throws IOException
-	 */
-	public Manager(BufferedReader reader) throws IOException { 
-																
-
-		String line = reader.readLine();
-		String[] fields;
-		while (!line.equals("LP")) {
-			fields = line.split(";");
-			String name = fields[0];
-			Color color = Color.valueOf(fields[1]);
-			int[] pos = new int[] { Integer.parseInt(fields[2]), Integer.parseInt(fields[3]) };
-			Figure atm = new Figure(name, color, pos);
-			ArrayList<ObjectCard> safer = new ArrayList<ObjectCard>();
-			for (int i = 4; i < fields.length - 2; i = i + 2) {
-				ObjectCard card = new ObjectCard(Treasure.valueOf(fields[i]));
-				if (fields[i + 1].equals("true")) {
-					card.found(Treasure.valueOf(fields[i]));
-					safer.add(card);
-				} else {
-					safer.add(card);
-				}
-
-			}
-			for (ObjectCard o : safer) {
-				if (o.isFound() == false) {
-					atm.addCard(o);
-				} else {
-					atm.isFound(o);
-				}
-			}
-			atm.drawCard();
-			this.players = new RingBufferPlayers();
-			this.players.addFigure(atm);
-			line = reader.readLine();
-		}
-		line = reader.readLine();
-		this.isMoveFigur = Boolean.parseBoolean(line);
-		line = reader.readLine();
-		if (line.equals("null")) {
-			this.checkPosition = null;
-		} else {
-			this.checkPosition = PositionsCard.valueOf(line);
-		}
-		line = reader.readLine();
-		if (line.equals("null")) {
-			this.objectCards = new ArrayList<ObjectCard>();
-		} else {
-			fields = line.split(";");
-			this.objectCards = new ArrayList<ObjectCard>();
-			for (int i = 0; i < fields.length; i = i + 2) {
-				this.objectCards.add(new ObjectCard(Treasure.valueOf(fields[i])));
-			}
-		}
-		line = reader.readLine();
-		ArrayList<MazeCard> maze = new ArrayList<MazeCard>();
-		while (!line.equals("csvEnd")) {
-			fields = line.split(";");
-			if (fields[0].equals("EvenCard")) {
-				EvenCard mazeCard = new EvenCard(new int[] { Integer.parseInt(fields[1]), Integer.parseInt(fields[2]),
-						Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) });
-				maze.add(mazeCard);
-
-			} else if (fields[0].equals("CurveCard")) {
-				if (fields[5].equals("null") && fields[6].equals("null")) {
-					CurveCard mazeCard = new CurveCard(new int[] { Integer.parseInt(fields[1]),
-							Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) },
-							null, null);
-					maze.add(mazeCard);
-				} else if (fields[6].equals("null")) {
-					CurveCard mazeCard = new CurveCard(
-							new int[] { Integer.parseInt(fields[1]), Integer.parseInt(fields[2]),
-									Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) },
-							Color.valueOf(fields[5]), null);
-					maze.add(mazeCard);
-
-				} else if (fields[5].equals("null")) {
-					CurveCard mazeCard = new CurveCard(
-							new int[] { Integer.parseInt(fields[1]), Integer.parseInt(fields[2]),
-									Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) },
-							null, Treasure.valueOf(fields[6]));
-					maze.add(mazeCard);
-				}
-
-			} else if (fields[0].equals("CrotchCard")) {
-				CrotchCard mazeCard = new CrotchCard(
-						new int[] { Integer.parseInt(fields[1]), Integer.parseInt(fields[2]),
-								Integer.parseInt(fields[3]), Integer.parseInt(fields[4]) },
-						Treasure.valueOf(fields[6]));
-				maze.add(mazeCard);
-
-			}
-			line = reader.readLine();
-		}
-		this.gameboard = new Gameboard(maze);
-		
-		Figure safer = this.players.getActivePlayer();
-		do {
-			this.gameboard
-					.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1])
-					.addFigure(this.players.getActivePlayer());
-			
-			this.players.nextPlayer();
-		} while (!this.players.getActivePlayer().equals(safer));
 
 	}
 
@@ -502,32 +389,26 @@ public class Manager implements Communication, Serializable {
 	 * Methode um das Spiel zu speichern über CSV oder Serialisierung.
 	 * 
 	 * @return String
+	 * @throws IOException
 	 */
 	@Override
-	public String saveGame(String path, String type) {
+	public String saveGame(String path, String type) throws IOException {
 		String saver = null;
 
 		switch (type) {
 		case "serialization":
 			DataAccessSER saveSER = new DataAccessSER();
-			try {
-				saveSER.writeToFile(Manager.this, path);
-				saver = "Game saved successfully!";
-			} catch (IOException e) {
-				saver = "Game couldn't save!";
-				System.err.println(saver);
-			}
+
+			saveSER.writeToFile(Manager.this, path);
+			saver = "Game saved successfully!";
+
 			break;
 
 		case "csv":
 			DataAccessCSV saveCSV = new DataAccessCSV();
-			try {
-				saveCSV.writeToFile(Manager.this, path);
-				saver = "Game saved successfully!";
-			} catch (IOException e) {
-				saver = "Game couldn't save!";
-				System.err.println(saver);
-			}
+
+			saveCSV.writeToFile(this.gameboard, path);
+			saver = "Game saved successfully!";
 
 			break;
 		}
@@ -545,32 +426,23 @@ public class Manager implements Communication, Serializable {
 	@Override
 	public String loadGame(String path, String type) throws ClassNotFoundException, IOException {
 		String loader = null;
-
+		DataAccess load;
 		switch (type) {
 		case "serialization":
-			
-				DataAccessSER loadSER = new DataAccessSER();
-				Manager deSer = (Manager) loadSER.readFile(path);
-				this.gameboard = deSer.gameboard;
-				this.players = deSer.players;
-				this.objectCards = deSer.objectCards;
-				this.isMoveFigur = deSer.isMoveFigur;
-				this.checkPosition = deSer.checkPosition;
-				loader = "Game successfully loaded!";
 
-			
+			load = new DataAccessSER();
+			Manager deSer = (Manager) load.readFile(path);
+			loader = "Game successfully loaded!";
+
 			break;
 
 		case "csv":
-			
-			
-			DataAccessCSV loadCSV = new DataAccessCSV();
-			Manager deCSV = (Manager) loadCSV.readFile(path);
-			this.gameboard = deCSV.gameboard;
-			this.players = deCSV.players;
-			this.objectCards = deCSV.objectCards;
-			this.isMoveFigur = deCSV.isMoveFigur;
-			this.checkPosition = deCSV.checkPosition;
+
+			load = new DataAccessCSV();
+			this.gameboard = (Gameboard) load.readFile(path);
+			loader = "Game successfully loaded!";
+
+			break;
 
 		}
 
@@ -605,37 +477,6 @@ public class Manager implements Communication, Serializable {
 			}
 		}
 		return rotateGear;
-	}
-	/**
-	 * writeToStream Methode
-	 * @param pw
-	 */
-	public void writeToStream(PrintWriter pw) {
-
-		for (int i = 0; i < this.getPlayers().length; i++) {
-			pw.println(this.getPlayers()[i] + ".");
-
-		}
-		pw.println("LP");
-
-		pw.println(this.isMoveFigur);
-		pw.println(this.checkPosition);
-		if (this.objectCards.size() == 0) {
-			pw.println("null");
-		} else {
-			pw.println(this.objectCards);
-		}
-		pw.println(this.getFreeMazeCard() + ".");
-		for (int i = 0; i < this.getMap().length; i++) {
-			for (int j = 0; j < this.getMap()[i].length; j++) {
-				pw.println(this.getMap()[i][j] + ".");
-
-			}
-		}
-		pw.println("csvEnd");
-
-		pw.flush();
-
 	}
 
 }

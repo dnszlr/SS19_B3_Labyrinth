@@ -1,5 +1,5 @@
 .startPage {
-	-fx-background-image: url("maze_background.jpg");
+	-fx-background-image: url("Images/maze_background.jpg");
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: cover, auto;
 }
@@ -45,6 +45,7 @@
 	-fx-border-radius: 50.0px;
 	-fx-border-width: 3.0;
 	-fx-border-color: Black;
+	-fx-padding: 0.0;
 }
 
 .RedPlayer:hover{
@@ -62,6 +63,7 @@
 	-fx-border-radius: 50.0px;
 	-fx-border-width: 3.0;
 	-fx-border-color: Black;
+	-fx-padding: 0.0;
 }
 
 .YellowPlayer:hover{
@@ -79,6 +81,7 @@
 	-fx-border-radius: 50.0px;
 	-fx-border-width: 3.0;
 	-fx-border-color: Black;
+	-fx-padding: 0;
 }
 
 .GreenPlayer:hover{
@@ -96,6 +99,7 @@
 	-fx-border-radius: 50.0px;
 	-fx-border-width: 3.0;
 	-fx-border-color: Black;
+	-fx-padding: 0;
 }
 
 .BluePlayer:hover{
@@ -109,144 +113,7 @@
 
 .gameBackground{
 	
-	-fx-background-image: url("gamepage_Background.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.cardBack{
-	
-	-fx-background-image: url("CardBack.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-	
-}
-
-.redStart{
-	
-	-fx-background-image: url("CurveCardRED.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover;
-	
-}
-
-.yellowStart{
-	
-	-fx-background-image: url("CurveCardYELLOW.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.greenStart{
-	
-	-fx-background-image: url("CurveCardGREEN.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.blueStart{
-	
-	-fx-background-image: url("CurveCardBLUE.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.book{
-	
-	-fx-background-image: url("CrotchCardBOOK.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.chest{
-	
-	-fx-background-image: url("CrotchCardCHEST.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.crown{
-	
-	-fx-background-image: url("CrotchCardCROWN.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.emerald{
-	
-	-fx-background-image: url("CrotchCardEMERALD.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.helmet{
-	
-	-fx-background-image: url("CrotchCardHELMET.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.key{
-	
-	-fx-background-image: url("CrotchCardKEY.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.map{
-	
-	-fx-background-image: url("CrotchCardMAP.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.menorah{
-	
-	-fx-background-image: url("CrotchCardMENORAH.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.moneybag{
-	
-	-fx-background-image: url("CrotchCardMONEYBAG.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.ring{
-	
-	-fx-background-image: url("CrotchCardRING.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.skull{
-	
-	-fx-background-image: url("CrotchCardSKULL.jpg");
-	-fx-background-repeat: no-repeat;
-	-fx-background-size: cover, auto;
-	
-}
-
-.sword{
-	
-	-fx-background-image: url("CrotchCardSWORD.jpg");
+	-fx-background-image: url("Images/gamepage_Background.jpg");
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: cover, auto;
 	

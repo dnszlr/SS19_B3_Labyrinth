@@ -280,6 +280,7 @@ public class Figure implements Serializable {
 			for (ObjectCard i : foundCards) {
 				fndCards = fndCards + i.toString() + ";";
 			}
+			
 
 			return objCards + fndCards;
 		}

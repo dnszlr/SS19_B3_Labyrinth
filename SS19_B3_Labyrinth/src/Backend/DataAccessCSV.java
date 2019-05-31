@@ -1,10 +1,12 @@
 package Backend;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import Backend.Map.Gameboard;
 import Interface.DataAccess;
 
 public class DataAccessCSV implements DataAccess {
@@ -14,10 +16,9 @@ public class DataAccessCSV implements DataAccess {
 		PrintWriter pw = null;
 
 		try {
-			Manager csvLoad = (Manager) csv;
-			csvLoad.writeToStream(new PrintWriter(System.out));
+			Gameboard csvWrite = (Gameboard) csv;
 			pw = new PrintWriter(new FileWriter(path));
-			csvLoad.writeToStream(pw);
+			csvWrite.writeToStream(pw);
 
 		} finally {
 			if (pw != null) {
@@ -29,18 +30,17 @@ public class DataAccessCSV implements DataAccess {
 	}
 
 	@Override
-	public Object readFile(String path) throws IOException, ClassNotFoundException {
+	public Object readFile(String path) throws IOException, FileNotFoundException {
 		BufferedReader reader = null;
-		Manager csvWrite;
+		Object csvLoad;
 		try {
 			reader = new BufferedReader(new FileReader(path));
-			csvWrite = new Manager(reader);
-			System.out.println(csvWrite);
+			csvLoad = new Gameboard(reader);
 		} finally {
 			reader.close();
 
 		}
-		return csvWrite;
+		return csvLoad;
 	}
 
 }

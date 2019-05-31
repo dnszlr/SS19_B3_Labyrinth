@@ -53,17 +53,6 @@ public class CurveCard extends MazeCard {
 		}
 
 	}
-	/**
-	 * Konstruktor CurveCard
-	 * @param wall
-	 * @param color
-	 * @param treasure
-	 */
-	public CurveCard(int[] wall, Color color, Treasure treasure) {
-		
-		super(wall, color, treasure);
-		
-	}
 
 	/**
 	 * Überschreiben der Methode rotateLeft von MazeCard.

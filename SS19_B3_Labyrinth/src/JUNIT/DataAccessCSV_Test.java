@@ -5,37 +5,35 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import Backend.DataAccessCSV;
-import Backend.Manager;
+import Backend.Map.Gameboard;
 
 public class DataAccessCSV_Test {
 
-	Manager manager;
+	Gameboard csvBoard;
 	DataAccessCSV CSV;
 
 	@Before
 	public void initialize() throws Exception {
-		manager = new Manager();
+		csvBoard = new Gameboard();
 		CSV = new DataAccessCSV();
-		manager.addPlayer("Hans", "GREEN");
-		manager.addPlayer("Han", "YELLOW");
-		manager.addPlayer("Ha", "RED");
-		manager.addPlayer("H", "BLUE");
-		manager.startGame();
+		CSV.writeToFile(csvBoard, "unitCSVTest.txt");
 
 	}
 
 	@Test
 	public void testWriteToFile() throws IOException {
 
-		CSV.writeToFile(manager, "unitCSVTest.txt");
+		CSV.writeToFile(csvBoard, "unitCSVTest.txt");
 
 	}
 
 	@Test
 	public void testReadFromFile() throws ClassNotFoundException, IOException {
-		CSV.writeToFile(manager, "unitCSVTest.txt");
-		Manager a = (Manager) CSV.readFile("unitCSVTest.txt");
-		assertEquals(a.getFreeMazeCard(), manager.getFreeMazeCard());
+		
+		Gameboard load =  (Gameboard) CSV.readFile("unitCSVTest.txt");
+		System.out.println(csvBoard.getFreeCard());
+		System.out.println(load.getFreeCard());
+		assertEquals(load.getMapCard(5, 4).toString(), csvBoard.getMapCard(5, 4).toString());
 
 	}
 }

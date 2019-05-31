@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Backend.Manager;
+import Interface.Communication;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.Node;
@@ -123,6 +125,7 @@ public class registrationController implements Initializable {
 		this.BluePlayer.setOnMouseClicked(event -> this.handleBlueField());
 		
 	}
+
 	
 	
 
