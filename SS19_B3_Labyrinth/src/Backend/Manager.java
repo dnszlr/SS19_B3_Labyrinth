@@ -211,6 +211,7 @@ public class Manager implements Communication, Serializable {
 				this.checkPosition = positionCard;
 				this.gameboard.moveGears(positionCard, this.gameboard.getFreeCard());
 				this.isMoveFigur = true;
+				this.isPlaceMazeCard = true;
 				moveResult = gameboard.getFreeCard().toString();
 
 			}
@@ -372,6 +373,7 @@ public class Manager implements Communication, Serializable {
 			this.players.nextPlayer();
 			result = players.getActivePlayer().toString();
 			this.isMoveFigur = false;
+			this.isPlaceMazeCard = false;
 		}
 
 		return result;
