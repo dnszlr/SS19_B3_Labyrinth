@@ -1,0 +1,649 @@
+package Frontend;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import Backend.Manager;
+import Interface.Communication;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class FXMLController implements Initializable {
+
+	// startController
+
+	@FXML
+	private Label Header;
+	@FXML
+	private Button StartButton;
+	@FXML
+	private Button LoadButton;
+	@FXML
+	private Button CloseButton;
+
+	// registrationController
+
+	@FXML
+	private Button MazeButton;
+	@FXML
+	private Button RedPlayer;
+	@FXML
+	private TextField RedField;
+	@FXML
+	private Button YellowPlayer;
+	@FXML
+	private TextField YellowField;
+	@FXML
+	private Button GreenPlayer;
+	@FXML
+	private TextField GreenField;
+	@FXML
+	private Button BluePlayer;
+	@FXML
+	private TextField BlueField;
+
+	// gameController
+	@FXML
+	private GridPane gamePane;
+	@FXML
+	private StackPane A1;
+	@FXML
+	private StackPane A2;
+	@FXML
+	private StackPane A3;
+	@FXML
+	private StackPane A4;
+	@FXML
+	private StackPane A5;
+	@FXML
+	private StackPane A6;
+	@FXML
+	private StackPane A7;
+	@FXML
+	private StackPane B1;
+	@FXML
+	private StackPane B2;
+	@FXML
+	private StackPane B3;
+	@FXML
+	private StackPane B4;
+	@FXML
+	private StackPane B5;
+	@FXML
+	private StackPane B6;
+	@FXML
+	private StackPane B7;
+	@FXML
+	private StackPane C1;
+	@FXML
+	private StackPane C2;
+	@FXML
+	private StackPane C3;
+	@FXML
+	private StackPane C4;
+	@FXML
+	private StackPane C5;
+	@FXML
+	private StackPane C6;
+	@FXML
+	private StackPane C7;
+	@FXML
+	private StackPane D1;
+	@FXML
+	private StackPane D2;
+	@FXML
+	private StackPane D3;
+	@FXML
+	private StackPane D4;
+	@FXML
+	private StackPane D5;
+	@FXML
+	private StackPane D6;
+	@FXML
+	private StackPane D7;
+	@FXML
+	private StackPane E1;
+	@FXML
+	private StackPane E2;
+	@FXML
+	private StackPane E3;
+	@FXML
+	private StackPane E4;
+	@FXML
+	private StackPane E5;
+	@FXML
+	private StackPane E6;
+	@FXML
+	private StackPane E7;
+	@FXML
+	private StackPane F1;
+	@FXML
+	private StackPane F2;
+	@FXML
+	private StackPane F3;
+	@FXML
+	private StackPane F4;
+	@FXML
+	private StackPane F5;
+	@FXML
+	private StackPane F6;
+	@FXML
+	private StackPane F7;
+	@FXML
+	private StackPane G1;
+	@FXML
+	private StackPane G2;
+	@FXML
+	private StackPane G3;
+	@FXML
+	private StackPane G4;
+	@FXML
+	private StackPane G5;
+	@FXML
+	private StackPane G6;
+	@FXML
+	private StackPane G7;
+	@FXML
+	private Label playerCard;
+	@FXML
+	private Button hideShow;
+	@FXML
+	private Button A2move;
+	@FXML
+	private Button A4move;
+	@FXML
+	private Button A6move;
+	@FXML
+	private Button G2move;
+	@FXML
+	private Button G4move;
+	@FXML
+	private Button G6move;
+	@FXML
+	private Button B1move;
+	@FXML
+	private Button D1move;
+	@FXML
+	private Button F1move;
+	@FXML
+	private Button B7move;
+	@FXML
+	private Button D7move;
+	@FXML
+	private Button F7move;
+	@FXML
+	private StackPane freeMazeCard;
+	@FXML
+	private Button rotateRight;
+	@FXML
+	private Button rotateLeft;
+	@FXML
+	private StackPane activePlayerTreasureCard;
+	@FXML
+	private Button EndRound;
+
+	private Communication manager;
+	private LabyrinthFXML model;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		manager = new Manager();
+		model = new LabyrinthFXML();
+
+	}
+
+	@FXML
+	private void handleStartButton(ActionEvent event) throws IOException {
+
+		Parent pane = FXMLLoader.load(getClass().getResource("registrationpage.fxml"));
+		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		primaryStage.setTitle("Java: 'Adventures in Info2'");
+		String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
+		pane.getStylesheets().add(styleCss);
+		primaryStage.setScene(new Scene(pane, 1600, 1000));
+		primaryStage.show();
+
+	}
+
+	@FXML
+	private void handleMazeButton(ActionEvent event) throws Exception {
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("gamepage.fxml"));
+		loader.setController(this);
+		Parent pane = loader.load();
+		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		primaryStage.setTitle("Java: 'Adventures in Info2'");
+		String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
+		pane.getStylesheets().add(styleCss);
+		primaryStage.setScene(new Scene(pane, 1600, 1000));
+		addPlayers();
+		manager.startGame();
+		getMaze();
+		getFreeCard();
+		handleRotateLeft();
+		handleRotateRight();
+		getActivePlayerTreasureCard();
+		primaryStage.show();
+	}
+
+	private void addPlayers() {
+
+		if (this.RedField.isDisable() == false && !this.RedField.getText().equals("null")
+				&& this.RedField.getText().length() > 0) {
+			manager.addPlayer(RedField.getText(), "RED");
+		}
+		if (this.YellowField.isDisable() == false && !this.YellowField.getText().equals("null")
+				&& this.YellowField.getText().length() > 0) {
+			manager.addPlayer(YellowField.getText(), "YELLOW");
+		}
+		if (this.GreenField.isDisable() == false && !this.GreenField.getText().equals("null")
+				&& this.GreenField.getText().length() > 0) {
+			manager.addPlayer(GreenField.getText(), "GREEN");
+		}
+		if (this.BlueField.isDisable() == false && !this.BlueField.getText().equals("null")
+				&& this.BlueField.getText().length() > 0) {
+			manager.addPlayer(BlueField.getText(), "BLUE");
+		}
+
+	}
+
+	private void getMaze() {
+
+		StackPane[][] mazePanes = new StackPane[][] { { A1, B1, C1, D1, E1, F1, G1 }, { A2, B2, C2, D2, E2, F2, G2 },
+				{ A3, B3, C3, D3, E3, F3, G3 }, { A4, B4, C4, D4, E4, F4, G4 }, { A5, B5, C5, D5, E5, F5, G5 },
+				{ A6, B6, C6, D6, E6, F6, G6 }, { A7, B7, C7, D7, E7, F7, G7 } };
+		String[][] maze = manager.getMap();
+		for (int i = 0; i < maze.length; i++) {
+			for (int j = 0; j < maze.length; j++) {
+				ImageView ground = new ImageView("Frontend/Images/groundCard.jpg");
+				ground.setFitHeight(100.0);
+				ground.setFitWidth(100.0);
+				mazePanes[i][j].getChildren().add(ground);
+				String[] line = maze[i][j].split(";");
+				String walls = line[1] + line[2] + line[3] + line[4];
+				ImageView wall = new ImageView("Frontend/Images/Walls/" + walls + ".png");
+				wall.setFitHeight(100.0);
+				wall.setFitWidth(100.0);
+				mazePanes[i][j].getChildren().add(wall);
+				if (!line[5].equals("null")) {
+					ImageView color = new ImageView("Frontend/Images/Colors/" + line[5].toUpperCase() + ".png");
+					color.setFitHeight(100.0);
+					color.setFitWidth(100.0);
+					mazePanes[i][j].getChildren().add(color);
+				}
+				if (!line[6].equals("null")) {
+					ImageView treasure = new ImageView("Frontend/Images/Treasures/" + line[6].toUpperCase() + ".png");
+					treasure.setFitHeight(100.0);
+					treasure.setFitWidth(100.0);
+					mazePanes[i][j].getChildren().add(treasure);
+				}
+				if (line.length > 7) {
+					for (int y = 7; y < line.length; y++) {
+						ImageView figure = new ImageView(
+								"Frontend/Images/Figures/" + "Figure" + line[y].toUpperCase() + ".png");
+						figure.setFitHeight(100.0);
+						figure.setFitWidth(100.0);
+						mazePanes[i][j].getChildren().add(figure);
+					}
+				}
+
+			}
+		}
+
+	}
+
+	private void getFreeCard() {
+
+		String freeMazeCard = manager.getFreeMazeCard();
+		String[] line = freeMazeCard.split(";");
+		ImageView ground = new ImageView("Frontend/Images/groundCard.jpg");
+		ground.setFitHeight(100.0);
+		ground.setFitWidth(100.0);
+		this.freeMazeCard.getChildren().add(ground);
+		for (int i = 0; i < line.length; i++) {
+			String walls = line[1] + line[2] + line[3] + line[4];
+			ImageView wall = new ImageView("Frontend/Images/Walls/" + walls + ".png");
+			wall.setFitHeight(100.0);
+			wall.setFitWidth(100.0);
+			this.freeMazeCard.getChildren().add(wall);
+			if (!line[5].equals("null")) {
+				ImageView color = new ImageView("Frontend/Images/Colors/" + line[5].toUpperCase() + ".png");
+				color.setFitHeight(100.0);
+				color.setFitWidth(100.0);
+				this.freeMazeCard.getChildren().add(color);
+			}
+			if (!line[6].equals("null")) {
+				ImageView treasure = new ImageView("Frontend/Images/Treasures/" + line[6].toUpperCase() + ".png");
+				treasure.setFitHeight(100.0);
+				treasure.setFitWidth(100.0);
+				this.freeMazeCard.getChildren().add(treasure);
+			}
+		}
+	}
+
+	private void getActivePlayerTreasureCard() {
+
+		String TreasureCard = manager.getActivePlayerTreasureCard();
+		String[] line = TreasureCard.split(";");
+		ImageView cardBack = new ImageView("Frontend/Images/CardBack.jpg");
+		cardBack.setFitHeight(250.0);
+		cardBack.setFitWidth(200.0);
+		this.activePlayerTreasureCard.getChildren().add(cardBack);
+		ImageView treasure = new ImageView("Frontend/Images/Treasures/" + line[0].toUpperCase() + ".png");
+		treasure.setFitHeight(250.0);
+		treasure.setFitWidth(200.0);
+		this.activePlayerTreasureCard.getChildren().add(treasure);
+
+	}
+
+	@FXML
+	private void handlehideShow() {
+
+		this.hideShow.setOnMouseClicked(event -> {
+
+			if (this.activePlayerTreasureCard.getChildren().size() == 1) {
+				getActivePlayerTreasureCard();
+			} else {
+				this.activePlayerTreasureCard.getChildren().remove(1);
+			}
+
+		});
+	}
+
+	@FXML
+	private void handleMoveFigure(MouseEvent event) {
+
+		StackPane maze = (StackPane) event.getSource();
+		int row = GridPane.getRowIndex(maze);
+		int column = GridPane.getColumnIndex(maze);
+
+		int[] position = new int[] { column - 1, row - 1 };
+
+		if (manager.moveFigure(position)) {
+
+			getMaze();
+		}
+
+	}
+
+	@FXML
+	private void handleEndRound() {
+
+		this.EndRound.setOnMouseClicked(event -> {
+			String endRound = manager.endRound();
+			if (!endRound.equals("You have to move the gears once per round!")) {
+
+				getActivePlayerTreasureCard();
+			}
+		});
+
+	}
+
+	@FXML
+	private void moveGears(ActionEvent event) {
+
+		Button button = (Button) event.getSource();
+
+		if (button.equals(this.A2move)) {
+			try {
+				manager.moveGears("A2");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.A2, this.B2, this.C2, this.D2, this.E2, this.F2, this.G2 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.A4move)) {
+			try {
+				manager.moveGears("A4");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.A4, this.B4, this.C4, this.D4, this.E4, this.F4, this.G4 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.A4move)) {
+			try {
+				manager.moveGears("A4");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.A4, this.B4, this.C4, this.D4, this.E4, this.F4, this.G4 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.A6move)) {
+			try {
+				manager.moveGears("A6");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.A6, this.B6, this.C6, this.D6, this.E6, this.F6, this.G6 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.G2move)) {
+			try {
+				manager.moveGears("G2");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.A2, this.B2, this.C2, this.D2, this.E2, this.F2, this.G2 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.G4move)) {
+			try {
+				manager.moveGears("G4");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.A4, this.B4, this.C4, this.D4, this.E4, this.F4, this.G4 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.G6move)) {
+			try {
+				manager.moveGears("G6");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.A6, this.B6, this.C6, this.D6, this.E6, this.F6, this.G6 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.B1move)) {
+			try {
+				manager.moveGears("B1");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.B1, this.B2, this.B3, this.B4, this.B5, this.B6, this.B7 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.D1move)) {
+			try {
+				manager.moveGears("D1");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.D1, this.D2, this.D3, this.D4, this.D5, this.D6, this.D7 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.F1move)) {
+			try {
+				manager.moveGears("F1");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.F1, this.F2, this.F3, this.F4, this.F5, this.F6, this.F7 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.B7move)) {
+			try {
+				manager.moveGears("B7");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.B1, this.B2, this.B3, this.B4, this.B5, this.B6, this.B7 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.D7move)) {
+			try {
+				manager.moveGears("D7");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.D1, this.D2, this.D3, this.D4, this.D5, this.D6, this.D7 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		} else if (button.equals(this.F7move)) {
+			try {
+				manager.moveGears("F7");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			StackPane[] gears = new StackPane[] { this.F1, this.F2, this.F3, this.F4, this.F5, this.F6, this.F7 };
+			for (int i = 0; i < gears.length; i++) {
+				gears[i].getChildren().clear();
+			}
+			getFreeCard();
+			getMaze();
+		}
+
+	}
+
+	@FXML
+	private void handleRotateLeft() {
+
+		this.rotateLeft.setOnMouseClicked(event -> {
+
+			manager.rotateGear("Left");
+			this.freeMazeCard.getChildren().clear();
+			getFreeCard();
+		});
+	}
+
+	@FXML
+	private void handleRotateRight() {
+
+		this.rotateRight.setOnMouseClicked(event -> {
+
+			manager.rotateGear("Right");
+			this.freeMazeCard.getChildren().clear();
+			getFreeCard();
+		});
+	}
+
+	@FXML
+	private void handleRedButton() {
+
+		this.RedPlayer.setOnMouseClicked(event -> {
+
+			if (this.RedField.isDisable() == true) {
+				this.RedField.setDisable(false);
+			} else {
+				this.RedField.setDisable(true);
+			}
+
+		});
+
+	}
+
+	@FXML
+	private void handleYellowButton() {
+
+		this.YellowPlayer.setOnMouseClicked(event -> {
+
+			if (this.YellowField.isDisable() == true) {
+				this.YellowField.setDisable(false);
+			} else {
+				this.YellowField.setDisable(true);
+			}
+
+		});
+
+	}
+
+	@FXML
+	private void handleGreenButton() {
+
+		this.GreenPlayer.setOnMouseClicked(event -> {
+
+			if (this.GreenField.isDisable() == true) {
+				this.GreenField.setDisable(false);
+			} else {
+				this.GreenField.setDisable(true);
+			}
+
+		});
+
+	}
+
+	@FXML
+	private void handleBlueButton() {
+
+		this.BluePlayer.setOnMouseClicked(event -> {
+
+			if (this.BlueField.isDisable() == true) {
+				this.BlueField.setDisable(false);
+			} else {
+				this.BlueField.setDisable(true);
+			}
+
+		});
+
+	}
+
+	@FXML
+	private void handleCloseButton(ActionEvent event) throws IOException {
+		System.exit(0);
+
+	}
+
+}

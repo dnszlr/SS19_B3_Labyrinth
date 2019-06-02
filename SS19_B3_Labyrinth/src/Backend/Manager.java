@@ -203,21 +203,17 @@ public class Manager implements Communication, Serializable {
 	 * @return String
 	 */
 	@Override
-	public String moveGears(String position) throws Exception {
-		String moveResult = null;
-		try {
-			PositionsCard positionCard = PositionsCard.valueOf(position.toUpperCase());
+	public String moveGears(String position) {
+		String moveResult = "Couldn't move, try again with other position";
+		PositionsCard positionCard = PositionsCard.valueOf(position.toUpperCase());
+		if (this.isMoveFigur == false) {
 			if (checkMoveGears(positionCard)) {
 				this.checkPosition = positionCard;
 				this.gameboard.moveGears(positionCard, this.gameboard.getFreeCard());
 				this.isMoveFigur = true;
-				this.checkPosition = positionCard;
 				moveResult = gameboard.getFreeCard().toString();
-			} else {
-				moveResult = "Couldn't move, try again with other position";
+
 			}
-		} catch (Exception e) {
-			moveResult = "Wrong position name";
 		}
 
 		return moveResult;
@@ -324,17 +320,13 @@ public class Manager implements Communication, Serializable {
 	@Override
 	public boolean moveFigure(int[] position) {
 		boolean result = false;
-		if (position[0] <= 6 && position[0] >= 0 && position[1] <= 6 && position[1] >= 0) {
-			if (this.gameboard.moveFigure(position, this.players.getActivePlayer().getPos(),
-					this.players.getActivePlayer())) {
-				this.gameboard
-						.getMapCard(this.players.getActivePlayer().getPos()[0],
-								this.players.getActivePlayer().getPos()[1])
-						.removeFigure(this.players.getActivePlayer());
+		if (position[0] <= 6 && position[0] >= 0 && position[1] <= 6 && position[1] >= 0 && this.isPlaceMazeCard == true) {
+			if (this.gameboard.moveFigure(position, this.players.getActivePlayer().getPos(), this.players.getActivePlayer())) {
+				
+				this.gameboard.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1]).removeFigure(this.players.getActivePlayer());
 				this.gameboard.getMapCard(position[0], position[1]).addFigure(this.players.getActivePlayer());
 				this.players.getActivePlayer().setPos(position);
-				this.players.getActivePlayer().getTreasureCard()
-						.found(this.gameboard.getMapCard(position[0], position[1]).getTreasure());
+				this.players.getActivePlayer().getTreasureCard().found(this.gameboard.getMapCard(position[0], position[1]).getTreasure());
 				result = true;
 
 			}

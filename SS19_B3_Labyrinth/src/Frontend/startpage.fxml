@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.geometry.Insets?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.startController" xmlns="http://javafx.com/javafx/3.5" alignment="TOP_CENTER" styleClass="startPage" spacing="10.0">
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.FXMLController" xmlns="http://javafx.com/javafx/3.5" alignment="TOP_CENTER" styleClass="startPage" spacing="10.0">
 	<children>
 		<Label styleClass="Header" fx:id="Header" text="Java:'Adventures in Info2'" alignment="CENTER" prefHeight="450.0"/>
 		<Button styleClass="FrontButton" fx:id="StartButton" text="Start Game" prefHeight="50.0" prefWidth="125.0" alignment="CENTER"  textAlignment="CENTER" onAction="#handleStartButton"/>
