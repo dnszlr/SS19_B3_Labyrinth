@@ -2,6 +2,7 @@ package Frontend;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import Backend.Manager;
 import Interface.Communication;
@@ -18,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -57,7 +59,7 @@ public class FXMLController implements Initializable {
 
 	// gameController
 	@FXML
-	private GridPane gamePane;
+	private HBox players;
 	@FXML
 	private StackPane A1;
 	@FXML
@@ -237,6 +239,7 @@ public class FXMLController implements Initializable {
 		handleRotateLeft();
 		handleRotateRight();
 		getActivePlayerTreasureCard();
+		getPlayers();
 		primaryStage.show();
 	}
 
@@ -284,8 +287,7 @@ public class FXMLController implements Initializable {
 					color.setFitHeight(100.0);
 					color.setFitWidth(100.0);
 					mazePanes[i][j].getChildren().add(color);
-				}
-				if (!line[6].equals("null")) {
+				} else if (!line[6].equals("null")) {
 					ImageView treasure = new ImageView("Frontend/Images/Treasures/" + line[6].toUpperCase() + ".png");
 					treasure.setFitHeight(100.0);
 					treasure.setFitWidth(100.0);
@@ -302,6 +304,27 @@ public class FXMLController implements Initializable {
 				}
 
 			}
+		}
+
+	}
+
+	@FXML
+	private void getPlayers() {
+		
+		this.players.getChildren().clear();
+		String[] getPlayers = manager.getPlayers();
+		for (int i = 0; i < getPlayers.length; i++) {
+			String[] player = getPlayers[i].split(";");
+			int foundCards = 0;
+			for (int j = 1; j < player.length; j++) {
+				if (player[j].equals("true")) {
+					foundCards++;
+				}
+			}
+			Label label = new Label();
+			label.setText("| " + player[0] + " - " + "CardsFound:" + foundCards + " |");
+			label.getStyleClass().add("Header");
+			this.players.getChildren().add(label);
 		}
 
 	}
@@ -325,8 +348,7 @@ public class FXMLController implements Initializable {
 				color.setFitHeight(100.0);
 				color.setFitWidth(100.0);
 				this.freeMazeCard.getChildren().add(color);
-			}
-			if (!line[6].equals("null")) {
+			} else if (!line[6].equals("null")) {
 				ImageView treasure = new ImageView("Frontend/Images/Treasures/" + line[6].toUpperCase() + ".png");
 				treasure.setFitHeight(100.0);
 				treasure.setFitWidth(100.0);
@@ -372,6 +394,7 @@ public class FXMLController implements Initializable {
 		int column = GridPane.getColumnIndex(maze);
 
 		int[] position = new int[] { column - 1, row - 1 };
+		
 
 		if (manager.moveFigure(position)) {
 
@@ -388,6 +411,7 @@ public class FXMLController implements Initializable {
 			if (!endRound.equals("You have to move the gears once per round!")) {
 
 				getActivePlayerTreasureCard();
+				getPlayers();
 			}
 		});
 

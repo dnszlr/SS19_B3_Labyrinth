@@ -17,16 +17,7 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
 	xmlns="http://javafx.com/javafx/3.5" styleClass="gameBackground">
 	<top>
-		<HBox prefHeight="150.0" alignment="CENTER" spacing="10.0">
-			<Label text="Player1:" styleClass="Header" />
-			<Label text="0" styleClass="Header" />
-			<Label text="Player2:" styleClass="Header" />
-			<Label text="0" styleClass="Header" />
-			<Label text="Player3:" styleClass="Header" />
-			<Label text="0" styleClass="Header" />
-			<Label text="Player4:" styleClass="Header" />
-			<Label text="0" styleClass="Header" />
-		</HBox>
+		<HBox fx:id="players" prefHeight="150.0" alignment="CENTER" spacing="25.0"/>
 	</top>
 	<left>
 		<VBox prefWidth="400.0" alignment="CENTER" spacing="10.0">
