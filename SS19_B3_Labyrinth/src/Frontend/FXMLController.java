@@ -1,5 +1,6 @@
 package Frontend;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -13,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class FXMLController implements Initializable {
@@ -196,6 +200,8 @@ public class FXMLController implements Initializable {
 	private StackPane activePlayerTreasureCard;
 	@FXML
 	private Button EndRound;
+	@FXML
+	private Label activePlayer;
 
 	private Communication manager;
 	private LabyrinthFXML model;
@@ -223,7 +229,43 @@ public class FXMLController implements Initializable {
 
 	@FXML
 	private void handleMazeButton(ActionEvent event) throws Exception {
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("gamepage.fxml"));
+		loader.setController(this);
+		Parent pane = loader.load();
+		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		primaryStage.setTitle("Java: 'Adventures in Info2'");
+		String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
+		pane.getStylesheets().add(styleCss);
+		addPlayers();
+		String startGame = manager.startGame();
+		if (startGame.equals("Please add Players befor you start the game")) {
 
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Error!");
+			alert.setHeaderText("");
+			alert.setContentText(startGame);
+			alert.showAndWait();
+
+		} else {
+
+			primaryStage.setScene(new Scene(pane, 1600, 1000));
+			getMaze();
+			getFreeCard();
+			getActivePlayerTreasureCard();
+			getPlayers();
+			primaryStage.show();
+		}
+
+	}
+
+	@FXML
+	private void handleSERLoadButton(ActionEvent event) throws ClassNotFoundException, IOException {
+
+		FileChooser fileSER = new FileChooser();
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("SER (*.ser)", "*.ser");
+		fileSER.getExtensionFilters().add(extFilter);
+		File file = fileSER.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("gamepage.fxml"));
 		loader.setController(this);
 		Parent pane = loader.load();
@@ -232,15 +274,52 @@ public class FXMLController implements Initializable {
 		String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
 		pane.getStylesheets().add(styleCss);
 		primaryStage.setScene(new Scene(pane, 1600, 1000));
-		addPlayers();
-		manager.startGame();
+		this.manager.loadGame(file.toString(), "serialization");
 		getMaze();
 		getFreeCard();
-		handleRotateLeft();
-		handleRotateRight();
 		getActivePlayerTreasureCard();
 		getPlayers();
 		primaryStage.show();
+	}
+
+	@FXML
+	private void handleCSVLoadButton(ActionEvent event) throws ClassNotFoundException, IOException {
+		String[] safe = manager.getPlayers();
+		FileChooser fileSER = new FileChooser();
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT (*.txt)", "*.txt");
+		fileSER.getExtensionFilters().add(extFilter);
+		File file = fileSER.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
+		this.manager.loadGame(file.toString(), "csv");
+		for (int i = 0; i < safe.length; i++) {
+			if (safe[i].equals("RED") || safe[i].equals("YELLOW") || safe[i].equals("GREEN")
+					|| safe[i].equals("BLUE")) {
+				manager.addPlayer(safe[i - 1], safe[i]);
+			}
+
+		}
+		getMaze();
+		getFreeCard();
+		getActivePlayerTreasureCard();
+		getPlayers();
+
+	}
+
+	@FXML
+	private void handleSaveButton(ActionEvent event) throws IOException {
+
+		FileChooser fileSave = new FileChooser();
+		FileChooser.ExtensionFilter extFilterCSV = new FileChooser.ExtensionFilter("TXT (*.txt)", "*.txt");
+		FileChooser.ExtensionFilter extFilterSER = new FileChooser.ExtensionFilter("SER (*.ser)", "*.ser");
+		fileSave.getExtensionFilters().add(extFilterCSV);
+		fileSave.getExtensionFilters().add(extFilterSER);
+		File file = fileSave.showSaveDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
+		String path = file.getCanonicalPath().toLowerCase();
+		if (file != null && path.endsWith(".txt")) {
+			manager.saveGame(file.toString(), "csv");
+		} else if (file != null && path.endsWith(".ser")) {
+			manager.saveGame(file.toString(), "ser");
+		}
+
 	}
 
 	private void addPlayers() {
@@ -283,20 +362,22 @@ public class FXMLController implements Initializable {
 				wall.setFitWidth(100.0);
 				mazePanes[i][j].getChildren().add(wall);
 				if (!line[5].equals("null")) {
-					ImageView color = new ImageView("Frontend/Images/Colors/" + line[5].toUpperCase() + ".png");
+					String getColor = line[5].toUpperCase();
+					ImageView color = new ImageView("Frontend/Images/Colors/" + getColor + ".png");
 					color.setFitHeight(100.0);
 					color.setFitWidth(100.0);
 					mazePanes[i][j].getChildren().add(color);
 				} else if (!line[6].equals("null")) {
-					ImageView treasure = new ImageView("Frontend/Images/Treasures/" + line[6].toUpperCase() + ".png");
+					String getTreasure = line[6].toUpperCase();
+					ImageView treasure = new ImageView("Frontend/Images/Treasures/" + getTreasure + ".png");
 					treasure.setFitHeight(100.0);
 					treasure.setFitWidth(100.0);
 					mazePanes[i][j].getChildren().add(treasure);
 				}
 				if (line.length > 7) {
 					for (int y = 7; y < line.length; y++) {
-						ImageView figure = new ImageView(
-								"Frontend/Images/Figures/" + "Figure" + line[y].toUpperCase() + ".png");
+						String getFigure = line[y].toUpperCase();
+						ImageView figure = new ImageView("Frontend/Images/Figures/" + "Figure" + getFigure + ".png");
 						figure.setFitHeight(100.0);
 						figure.setFitWidth(100.0);
 						mazePanes[i][j].getChildren().add(figure);
@@ -310,7 +391,7 @@ public class FXMLController implements Initializable {
 
 	@FXML
 	private void getPlayers() {
-		
+
 		this.players.getChildren().clear();
 		String[] getPlayers = manager.getPlayers();
 		for (int i = 0; i < getPlayers.length; i++) {
@@ -344,12 +425,14 @@ public class FXMLController implements Initializable {
 			wall.setFitWidth(100.0);
 			this.freeMazeCard.getChildren().add(wall);
 			if (!line[5].equals("null")) {
-				ImageView color = new ImageView("Frontend/Images/Colors/" + line[5].toUpperCase() + ".png");
+				String getColor = line[5].toUpperCase();
+				ImageView color = new ImageView("Frontend/Images/Colors/" + getColor + ".png");
 				color.setFitHeight(100.0);
 				color.setFitWidth(100.0);
 				this.freeMazeCard.getChildren().add(color);
 			} else if (!line[6].equals("null")) {
-				ImageView treasure = new ImageView("Frontend/Images/Treasures/" + line[6].toUpperCase() + ".png");
+				String getTreasure = line[6].toUpperCase();
+				ImageView treasure = new ImageView("Frontend/Images/Treasures/" + getTreasure + ".png");
 				treasure.setFitHeight(100.0);
 				treasure.setFitWidth(100.0);
 				this.freeMazeCard.getChildren().add(treasure);
@@ -359,13 +442,19 @@ public class FXMLController implements Initializable {
 
 	private void getActivePlayerTreasureCard() {
 
+		String activePlayer = manager.getActivePlayer();
+		String[] player = activePlayer.split(";");
+		this.activePlayer.setText(player[0]);
+		this.activePlayer.setStyle("-fx-text-fill: " + player[1]);
+
 		String TreasureCard = manager.getActivePlayerTreasureCard();
 		String[] line = TreasureCard.split(";");
 		ImageView cardBack = new ImageView("Frontend/Images/CardBack.jpg");
 		cardBack.setFitHeight(250.0);
 		cardBack.setFitWidth(200.0);
 		this.activePlayerTreasureCard.getChildren().add(cardBack);
-		ImageView treasure = new ImageView("Frontend/Images/Treasures/" + line[0].toUpperCase() + ".png");
+		String getTreasure = line[0].toUpperCase();
+		ImageView treasure = new ImageView("Frontend/Images/Treasures/" + getTreasure + ".png");
 		treasure.setFitHeight(250.0);
 		treasure.setFitWidth(200.0);
 		this.activePlayerTreasureCard.getChildren().add(treasure);
@@ -390,218 +479,326 @@ public class FXMLController implements Initializable {
 	private void handleMoveFigure(MouseEvent event) {
 
 		StackPane maze = (StackPane) event.getSource();
+
 		int row = GridPane.getRowIndex(maze);
 		int column = GridPane.getColumnIndex(maze);
 
 		int[] position = new int[] { column - 1, row - 1 };
-		
+		System.out.println(Arrays.toString(position));
 
 		if (manager.moveFigure(position)) {
 
 			getMaze();
+		} else {
+
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Error!");
+			alert.setHeaderText("");
+			alert.setContentText("You have to move gears first!");
+
+			alert.showAndWait();
+
 		}
 
 	}
 
 	@FXML
-	private void handleEndRound() {
+	private void handleEndRound(MouseEvent event) throws IOException {
 
-		this.EndRound.setOnMouseClicked(event -> {
-			String endRound = manager.endRound();
-			if (!endRound.equals("You have to move the gears once per round!")) {
+		String endRound = manager.endRound();
+		String[] activePlayer = this.manager.getActivePlayer().split(";");
 
-				getActivePlayerTreasureCard();
-				getPlayers();
-			}
-		});
+		if (!endRound.equals("You have to move the gears once per round!")) {
+
+			getActivePlayerTreasureCard();
+			getPlayers();
+		} else if (endRound.equals("GameOver: " + activePlayer[0] + " won the game!")) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Congratulation" + activePlayer[0]);
+			alert.setHeaderText(null);
+			alert.setContentText("GameOver: " + activePlayer[0] + " won the game!");
+
+			alert.showAndWait();
+			manager = new Manager();
+			Parent pane = FXMLLoader.load(getClass().getResource("startpage.fxml"));
+			Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			primaryStage.setTitle("Java: 'Adventures in Info2'");
+			String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
+			pane.getStylesheets().add(styleCss);
+			primaryStage.setScene(new Scene(pane, 1600, 1000));
+			primaryStage.show();
+
+		} else {
+
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Error!");
+			alert.setHeaderText("");
+			alert.setContentText("You have to move gears first!");
+			alert.showAndWait();
+		}
 
 	}
 
 	@FXML
 	private void moveGears(ActionEvent event) {
-
+		String move;
 		Button button = (Button) event.getSource();
 
 		if (button.equals(this.A2move)) {
-			try {
-				manager.moveGears("A2");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("A2");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.A2, this.B2, this.C2, this.D2, this.E2, this.F2, this.G2 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.A2, this.B2, this.C2, this.D2, this.E2, this.F2, this.G2 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
+
 		} else if (button.equals(this.A4move)) {
-			try {
-				manager.moveGears("A4");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("A4");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.A4, this.B4, this.C4, this.D4, this.E4, this.F4, this.G4 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.A4, this.B4, this.C4, this.D4, this.E4, this.F4, this.G4 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.A4move)) {
-			try {
-				manager.moveGears("A4");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("A4");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.A4, this.B4, this.C4, this.D4, this.E4, this.F4, this.G4 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.A4, this.B4, this.C4, this.D4, this.E4, this.F4, this.G4 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.A6move)) {
-			try {
-				manager.moveGears("A6");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("A6");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.A6, this.B6, this.C6, this.D6, this.E6, this.F6, this.G6 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.A6, this.B6, this.C6, this.D6, this.E6, this.F6, this.G6 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.G2move)) {
-			try {
-				manager.moveGears("G2");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("G2");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.A2, this.B2, this.C2, this.D2, this.E2, this.F2, this.G2 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.A2, this.B2, this.C2, this.D2, this.E2, this.F2, this.G2 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.G4move)) {
-			try {
-				manager.moveGears("G4");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("G4");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.A4, this.B4, this.C4, this.D4, this.E4, this.F4, this.G4 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.A4, this.B4, this.C4, this.D4, this.E4, this.F4, this.G4 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.G6move)) {
-			try {
-				manager.moveGears("G6");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("G6");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.A6, this.B6, this.C6, this.D6, this.E6, this.F6, this.G6 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.A6, this.B6, this.C6, this.D6, this.E6, this.F6, this.G6 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.B1move)) {
-			try {
-				manager.moveGears("B1");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("B1");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.B1, this.B2, this.B3, this.B4, this.B5, this.B6, this.B7 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.B1, this.B2, this.B3, this.B4, this.B5, this.B6, this.B7 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.D1move)) {
-			try {
-				manager.moveGears("D1");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("D1");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.D1, this.D2, this.D3, this.D4, this.D5, this.D6, this.D7 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.D1, this.D2, this.D3, this.D4, this.D5, this.D6, this.D7 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.F1move)) {
-			try {
-				manager.moveGears("F1");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("F1");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.F1, this.F2, this.F3, this.F4, this.F5, this.F6, this.F7 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.F1, this.F2, this.F3, this.F4, this.F5, this.F6, this.F7 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.B7move)) {
-			try {
-				manager.moveGears("B7");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("B7");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.B1, this.B2, this.B3, this.B4, this.B5, this.B6, this.B7 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.B1, this.B2, this.B3, this.B4, this.B5, this.B6, this.B7 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.D7move)) {
-			try {
-				manager.moveGears("D7");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("D7");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.D1, this.D2, this.D3, this.D4, this.D5, this.D6, this.D7 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.D1, this.D2, this.D3, this.D4, this.D5, this.D6, this.D7 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		} else if (button.equals(this.F7move)) {
-			try {
-				manager.moveGears("F7");
-			} catch (Exception e) {
-				e.printStackTrace();
+
+			move = manager.moveGears("F7");
+			if (move.equals("Couldn't move, try again with other position")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error!");
+				alert.setHeaderText("");
+				alert.setContentText(move);
+
+				alert.showAndWait();
+			} else {
+				StackPane[] gears = new StackPane[] { this.F1, this.F2, this.F3, this.F4, this.F5, this.F6, this.F7 };
+				for (int i = 0; i < gears.length; i++) {
+					gears[i].getChildren().clear();
+				}
+				getFreeCard();
+				getMaze();
 			}
-			StackPane[] gears = new StackPane[] { this.F1, this.F2, this.F3, this.F4, this.F5, this.F6, this.F7 };
-			for (int i = 0; i < gears.length; i++) {
-				gears[i].getChildren().clear();
-			}
-			getFreeCard();
-			getMaze();
 		}
 
 	}
 
 	@FXML
-	private void handleRotateLeft() {
+	private void handleRotateLeft(MouseEvent event) {
 
-		this.rotateLeft.setOnMouseClicked(event -> {
+		manager.rotateGear("Left");
+		this.freeMazeCard.getChildren().clear();
+		getFreeCard();
 
-			manager.rotateGear("Left");
-			this.freeMazeCard.getChildren().clear();
-			getFreeCard();
-		});
 	}
 
 	@FXML
-	private void handleRotateRight() {
+	private void handleRotateRight(MouseEvent event) {
 
-		this.rotateRight.setOnMouseClicked(event -> {
+		manager.rotateGear("Right");
+		this.freeMazeCard.getChildren().clear();
+		getFreeCard();
 
-			manager.rotateGear("Right");
-			this.freeMazeCard.getChildren().clear();
-			getFreeCard();
-		});
 	}
 
 	@FXML

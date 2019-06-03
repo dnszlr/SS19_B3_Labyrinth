@@ -11,7 +11,7 @@
 	<children>
 		<Label styleClass="Header" fx:id="Header" text="Java:'Adventures in Info2'" alignment="CENTER" prefHeight="450.0"/>
 		<Button styleClass="FrontButton" fx:id="StartButton" text="Start Game" prefHeight="50.0" prefWidth="125.0" alignment="CENTER"  textAlignment="CENTER" onAction="#handleStartButton"/>
-		<Button styleClass="FrontButton" fx:id="LoadButton" text="Load Game" prefHeight="50.0" prefWidth="125.0" alignment="CENTER" textAlignment="CENTER"/> <!-- FileChooser einbauen -->
+		<Button styleClass="FrontButton" fx:id="LoadButton" text="Load Game" prefHeight="50.0" prefWidth="125.0" alignment="CENTER" textAlignment="CENTER" onAction="#handleSERLoadButton"/> <!-- FileChooser einbauen -->
 		<Button styleClass="FrontButton" fx:id="CloseButton" text="Close Game" prefHeight="50.0" prefWidth="125.0" alignment="CENTER" textAlignment="CENTER" onAction="#handleCloseButton"/>	
 	</children>
 </VBox>

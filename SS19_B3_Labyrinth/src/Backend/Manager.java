@@ -161,36 +161,33 @@ public class Manager implements Communication, Serializable {
 	@Override
 	public String startGame() {
 		String startGame = null;
-		try {
 
-			if (this.players.getActivePlayer() != null) {
-				for (Treasure i : Treasure.values()) {
-					this.objectCards.add(new ObjectCard(i));
-				}
-				Collections.shuffle(this.objectCards);
-				Figure[] participants = new Figure[getPlayers().length];
-				for (int i = 0; i < participants.length; i++) {
-					participants[i] = this.players.nextPlayer();
-				}
-				while (this.objectCards.size() > 0) {
+		if (this.players.getActivePlayer() != null) {
+			for (Treasure i : Treasure.values()) {
+				this.objectCards.add(new ObjectCard(i));
+			}
+			Collections.shuffle(this.objectCards);
+			Figure[] participants = new Figure[getPlayers().length];
+			for (int i = 0; i < participants.length; i++) {
+				participants[i] = this.players.nextPlayer();
+			}
+			while (this.objectCards.size() > 0) {
 
-					this.players.getActivePlayer().addCard(this.objectCards.get(0));
-					this.objectCards.remove(0);
-					if (this.players.getActivePlayer().getTreasureCard() == null) {
-						this.players.getActivePlayer().drawCard();
-
-					}
-
-					this.players.nextPlayer();
+				this.players.getActivePlayer().addCard(this.objectCards.get(0));
+				this.objectCards.remove(0);
+				if (this.players.getActivePlayer().getTreasureCard() == null) {
+					this.players.getActivePlayer().drawCard();
 
 				}
 
-				gameboard.placeFigures(participants);
+				this.players.nextPlayer();
 
-				startGame = getMap() + ";" + objectCards.toString();
 			}
 
-		} catch (Exception e) {
+			gameboard.placeFigures(participants);
+
+			startGame = getMap() + ";" + objectCards.toString();
+		} else {
 			startGame = "Please add Players befor you start the game";
 		}
 
@@ -321,13 +318,19 @@ public class Manager implements Communication, Serializable {
 	@Override
 	public boolean moveFigure(int[] position) {
 		boolean result = false;
-		if (position[0] <= 6 && position[0] >= 0 && position[1] <= 6 && position[1] >= 0 && this.isPlaceMazeCard == true) {
-			if (this.gameboard.moveFigure(position, this.players.getActivePlayer().getPos(), this.players.getActivePlayer())) {
-				
-				this.gameboard.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1]).removeFigure(this.players.getActivePlayer());
+		if (position[0] <= 6 && position[0] >= 0 && position[1] <= 6 && position[1] >= 0
+				&& this.isPlaceMazeCard == true) {
+			if (this.gameboard.moveFigure(position, this.players.getActivePlayer().getPos(),
+					this.players.getActivePlayer())) {
+
+				this.gameboard
+						.getMapCard(this.players.getActivePlayer().getPos()[0],
+								this.players.getActivePlayer().getPos()[1])
+						.removeFigure(this.players.getActivePlayer());
 				this.gameboard.getMapCard(position[0], position[1]).addFigure(this.players.getActivePlayer());
 				this.players.getActivePlayer().setPos(position);
-				this.players.getActivePlayer().getTreasureCard().found(this.gameboard.getMapCard(position[0], position[1]).getTreasure());
+				this.players.getActivePlayer().getTreasureCard()
+						.found(this.gameboard.getMapCard(position[0], position[1]).getTreasure());
 				result = true;
 
 			}
@@ -419,13 +422,19 @@ public class Manager implements Communication, Serializable {
 	 */
 	@Override
 	public String loadGame(String path, String type) throws ClassNotFoundException, IOException {
-		String loader = null;
+		String loader = "Game could not be loaded";
 		DataAccess load;
 		switch (type) {
 		case "serialization":
 
 			load = new DataAccessSER();
 			Manager deSer = (Manager) load.readFile(path);
+			this.gameboard = deSer.gameboard;
+			this.players = deSer.players;
+			this.objectCards = deSer.objectCards;
+			this.isMoveFigur = deSer.isMoveFigur;
+			this.isPlaceMazeCard = deSer.isPlaceMazeCard;
+			this.checkPosition = deSer.checkPosition;
 			loader = "Game successfully loaded!";
 
 			break;

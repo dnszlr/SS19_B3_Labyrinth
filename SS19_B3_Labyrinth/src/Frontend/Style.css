@@ -40,8 +40,8 @@
 }
 
 .RedPlayer {
-	-fx-background-radius: 50px;
-	-fx-background-color: rgb(233, 78, 78);
+	-fx-background-radius: 50.0px;
+	-fx-background-color: rgb(233.0, 78.0, 78.0);
 	-fx-border-radius: 50.0px;
 	-fx-border-width: 3.0;
 	-fx-border-color: Black;
@@ -58,7 +58,7 @@
 }
 
 .YellowPlayer {
-	-fx-background-radius: 50px;
+	-fx-background-radius: 50.0px;
 	-fx-background-color: rgb(230.0, 227.0, 120.0);
 	-fx-border-radius: 50.0px;
 	-fx-border-width: 3.0;
@@ -76,12 +76,12 @@
 }
 
 .GreenPlayer {
-	-fx-background-radius: 50px;
+	-fx-background-radius: 50.0px;
 	-fx-background-color: rgb(130.0, 212.0, 138.0);
 	-fx-border-radius: 50.0px;
 	-fx-border-width: 3.0;
 	-fx-border-color: Black;
-	-fx-padding: 0;
+	-fx-padding: 0.0;
 }
 
 .GreenPlayer:hover{
@@ -94,12 +94,12 @@
 }
 
 .BluePlayer {
-	-fx-background-radius: 50px;
-	-fx-background-color: rgb(109, 78, 233);
+	-fx-background-radius: 50.0px;
+	-fx-background-color: rgb(109.0, 78.0, 233.0);
 	-fx-border-radius: 50.0px;
 	-fx-border-width: 3.0;
 	-fx-border-color: Black;
-	-fx-padding: 0;
+	-fx-padding: 0.0;
 }
 
 .BluePlayer:hover{
@@ -116,5 +116,19 @@
 	-fx-background-image: url("Images/gamepage_Background.jpg");
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: cover, auto;
+	
+}
+
+.field{
+	
+}
+
+.field:pressed{
+	-fx-border-radius: 25.0px;
+	-fx-border-color: Black;
+	
+	
+	
+	
 	
 }

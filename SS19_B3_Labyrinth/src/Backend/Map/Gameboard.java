@@ -132,17 +132,17 @@ public class Gameboard implements Serializable {
 				cards.remove(0);
 			}
 		}
-		
+
 		setAllNeighbours();
 	}
-	
+
 	/**
 	 * writeToStream Methode für CSV
 	 * 
 	 * @param pw
 	 */
 	public void writeToStream(PrintWriter pw) {
-		
+
 		pw.println(this.freeCard.toString());
 		for (int i = 0; i < this.map.length; i++) {
 			for (int j = 0; j < this.map[i].length; j++) {
@@ -155,8 +155,6 @@ public class Gameboard implements Serializable {
 		pw.flush();
 
 	}
-
-
 
 	/**
 	 * Methode um ein neue Labyrinthkarte zu generieren.
@@ -293,10 +291,17 @@ public class Gameboard implements Serializable {
 		switch (move) {
 		case A2:
 			if (this.map[1][6].getFigures().size() > 0) {
+				for (Figure i : this.map[1][6].getFigures()) {
+					i.setPos(new int[] { 1, 0 });
+				}
 				card.addFigures(this.map[1][6].getFigures());
 			}
+			
 			newFreeCard = getMapCard(1, 6);
 			for (int i = 0; i < this.map[1].length - 1; i++) {
+				for (Figure j : this.map[1][i].getFigures()) {
+					j.setPos(new int[] { 1, i + 1 });
+				}
 				safer[i + 1] = this.map[1][i];
 			}
 			safer[0] = card;
@@ -306,10 +311,17 @@ public class Gameboard implements Serializable {
 
 		case A4:
 			if (this.map[3][6].getFigures().size() > 0) {
+				for (Figure i : this.map[3][6].getFigures()) {
+					i.setPos(new int[] { 3, 0 });
+				}
 				card.addFigures(this.map[3][6].getFigures());
 			}
+			
 			newFreeCard = getMapCard(3, 6);
 			for (int i = 0; i < this.map[3].length - 1; i++) {
+				for (Figure j : this.map[3][i].getFigures()) {
+					j.setPos(new int[] { 3, i + 1 });
+				}
 				safer[i + 1] = this.map[3][i];
 			}
 			safer[0] = card;
@@ -320,10 +332,17 @@ public class Gameboard implements Serializable {
 		case A6:
 
 			if (this.map[5][6].getFigures().size() > 0) {
+				for (Figure i : this.map[5][6].getFigures()) {
+					i.setPos(new int[] { 5, 0 });
+				}
 				card.addFigures(this.map[5][6].getFigures());
 			}
+
 			newFreeCard = getMapCard(5, 6);
 			for (int i = 0; i < this.map[5].length - 1; i++) {
+				for (Figure j : this.map[5][i].getFigures()) {
+					j.setPos(new int[] { 5, i + 1 });
+				}
 				safer[i + 1] = this.map[5][i];
 			}
 			safer[0] = card;
@@ -333,10 +352,17 @@ public class Gameboard implements Serializable {
 
 		case G2:
 			if (this.map[1][0].getFigures().size() > 0) {
+				for (Figure i : this.map[1][0].getFigures()) {
+					i.setPos(new int[] { 1, 6 });
+				}
 				card.addFigures(this.map[1][0].getFigures());
 			}
+
 			newFreeCard = getMapCard(1, 0);
 			for (int i = this.map[1].length - 1; i > 0; i--) {
+				for (Figure j : this.map[1][i].getFigures()) {
+					j.setPos(new int[] { 1, i - 1 });
+				}
 				safer[i - 1] = this.map[1][i];
 			}
 			safer[6] = card;
@@ -345,10 +371,17 @@ public class Gameboard implements Serializable {
 
 		case G4:
 			if (this.map[3][0].getFigures().size() > 0) {
+				for (Figure i : this.map[3][0].getFigures()) {
+					i.setPos(new int[] { 3, 6 });
+				}
 				card.addFigures(this.map[3][0].getFigures());
 			}
+
 			newFreeCard = getMapCard(3, 0);
 			for (int i = this.map[3].length - 1; i > 0; i--) {
+				for (Figure j : this.map[3][i].getFigures()) {
+					j.setPos(new int[] { 3, i - 1 });
+				}
 				safer[i - 1] = this.map[3][i];
 			}
 			safer[6] = card;
@@ -357,10 +390,17 @@ public class Gameboard implements Serializable {
 			break;
 		case G6:
 			if (this.map[5][0].getFigures().size() > 0) {
+				for (Figure i : this.map[5][0].getFigures()) {
+					i.setPos(new int[] { 5, 6 });
+				}
 				card.addFigures(this.map[5][0].getFigures());
 			}
+
 			newFreeCard = getMapCard(5, 0);
 			for (int i = this.map[5].length - 1; i > 0; i--) {
+				for (Figure j : this.map[5][i].getFigures()) {
+					j.setPos(new int[] { 5, i - 1 });
+				}
 				safer[i - 1] = this.map[5][i];
 			}
 			safer[6] = card;
@@ -370,10 +410,16 @@ public class Gameboard implements Serializable {
 
 		case B1:
 			if (this.map[6][1].getFigures().size() > 0) {
+				for (Figure i : this.map[6][1].getFigures()) {
+					i.setPos(new int[] { 0, 1 });
+				}
 				card.addFigures(this.map[6][1].getFigures());
 			}
 			newFreeCard = getMapCard(6, 1);
 			for (int i = 0; i < this.map.length - 1; i++) {
+				for (Figure j : this.map[i][1].getFigures()) {
+					j.setPos(new int[] { i + 1, 1 });
+				}
 				safer[i + 1] = this.map[i][1];
 			}
 			safer[0] = card;
@@ -385,10 +431,16 @@ public class Gameboard implements Serializable {
 
 		case D1:
 			if (this.map[6][3].getFigures().size() > 0) {
+				for (Figure i : this.map[6][3].getFigures()) {
+					i.setPos(new int[] { 0, 3 });
+				}
 				card.addFigures(this.map[6][3].getFigures());
 			}
 			newFreeCard = getMapCard(6, 3);
 			for (int i = 0; i < this.map.length - 1; i++) {
+				for (Figure j : this.map[i][3].getFigures()) {
+					j.setPos(new int[] { i + 1, 3 });
+				}
 				safer[i + 1] = this.map[i][3];
 			}
 			safer[0] = card;
@@ -399,10 +451,16 @@ public class Gameboard implements Serializable {
 			break;
 		case F1:
 			if (this.map[6][5].getFigures().size() > 0) {
+				for (Figure i : this.map[6][5].getFigures()) {
+					i.setPos(new int[] { 0, 5 });
+				}
 				card.addFigures(this.map[6][5].getFigures());
 			}
 			newFreeCard = getMapCard(6, 5);
 			for (int i = 0; i < this.map.length - 1; i++) {
+				for (Figure j : this.map[i][5].getFigures()) {
+					j.setPos(new int[] { i + 1, 5 });
+				}
 				safer[i + 1] = this.map[i][5];
 			}
 			safer[0] = card;
@@ -414,10 +472,16 @@ public class Gameboard implements Serializable {
 
 		case B7:
 			if (this.map[0][1].getFigures().size() > 0) {
+				for (Figure i : this.map[0][1].getFigures()) {
+					i.setPos(new int[] { 6, 1 });
+				}
 				card.addFigures(this.map[0][1].getFigures());
 			}
 			newFreeCard = getMapCard(0, 1);
 			for (int i = this.map.length - 1; i > 0; i--) {
+				for (Figure j : this.map[i][1].getFigures()) {
+					j.setPos(new int[] { i - 1, 1 });
+				}
 				safer[i - 1] = this.map[i][1];
 			}
 			safer[6] = card;
@@ -429,10 +493,16 @@ public class Gameboard implements Serializable {
 
 		case D7:
 			if (this.map[0][3].getFigures().size() > 0) {
+				for (Figure i : this.map[0][3].getFigures()) {
+					i.setPos(new int[] { 6, 3 });
+				}
 				card.addFigures(this.map[0][3].getFigures());
 			}
 			newFreeCard = getMapCard(0, 3);
 			for (int i = this.map.length - 1; i > 0; i--) {
+				for (Figure j : this.map[i][3].getFigures()) {
+					j.setPos(new int[] { i - 1, 3 });
+				}
 				safer[i - 1] = this.map[i][3];
 			}
 			safer[6] = card;
@@ -443,10 +513,16 @@ public class Gameboard implements Serializable {
 			break;
 		case F7:
 			if (this.map[0][5].getFigures().size() > 0) {
+				for (Figure i : this.map[0][5].getFigures()) {
+					i.setPos(new int[] { 6, 5 });
+				}
 				card.addFigures(this.map[0][5].getFigures());
 			}
 			newFreeCard = getMapCard(0, 5);
 			for (int i = this.map.length - 1; i > 0; i--) {
+				for (Figure j : this.map[i][5].getFigures()) {
+					j.setPos(new int[] { i - 1, 5 });
+				}
 				safer[i - 1] = this.map[i][5];
 			}
 			safer[6] = card;

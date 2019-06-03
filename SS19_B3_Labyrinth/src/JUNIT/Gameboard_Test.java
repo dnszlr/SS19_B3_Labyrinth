@@ -82,11 +82,16 @@ public class Gameboard_Test {
 
 	@Test
 	public void checkMoveGears() {
+		figure1.setPos(new int[] { 1, 6 });
+		figure2.setPos(new int[] { 1, 2 });
 		gameboard.getMapCard(1, 6).addFigure(figure1);
+		gameboard.getMapCard(1, 2).addFigure(figure1);
+		System.out.println(figure1.toString());
 		MazeCard A2 = gameboard.getMapCard(1, 3);
 		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
 		assertEquals(A2, gameboard.getMapCard(1, 4));
-		assertTrue(gameboard.getMapCard(1, 0).getFigures().size() == 1);
+
+		System.out.println(figure1.toString());
 		gameboard.getMapCard(1, 0).getFigures().remove(0);
 
 		gameboard.getMapCard(3, 6).addFigure(figure1);
@@ -151,14 +156,14 @@ public class Gameboard_Test {
 		assertEquals(B7, gameboard.getMapCard(2, 1));
 		assertTrue(gameboard.getMapCard(6, 1).getFigures().size() == 1);
 		gameboard.getMapCard(6, 1).getFigures().remove(0);
-		
+
 		gameboard.getMapCard(0, 3).addFigure(figure1);
 		MazeCard D7 = gameboard.getMapCard(3, 3);
 		gameboard.moveGears(PositionsCard.D7, gameboard.getFreeCard());
 		assertEquals(D7, gameboard.getMapCard(2, 3));
 		assertTrue(gameboard.getMapCard(6, 3).getFigures().size() == 1);
 		gameboard.getMapCard(6, 3).getFigures().remove(0);
-		
+
 		gameboard.getMapCard(0, 5).addFigure(figure1);
 		MazeCard F7 = gameboard.getMapCard(3, 5);
 		gameboard.moveGears(PositionsCard.F7, gameboard.getFreeCard());
@@ -170,8 +175,8 @@ public class Gameboard_Test {
 
 	@Test
 	public void checkMoveFigure() {
-		
-		figure1.setPos(new int[] {3,3});
+
+		figure1.setPos(new int[] { 3, 3 });
 
 		int[] west = { 2, 3 };
 

@@ -31,6 +31,7 @@ public class DataAccessCSV_Test {
 	public void testReadFromFile() throws ClassNotFoundException, IOException {
 		
 		Gameboard load =  (Gameboard) CSV.readFile("unitCSVTest.txt");
+		System.out.println(load.toString());
 		assertEquals(load.getMapCard(5, 4).toString(), csvBoard.getMapCard(5, 4).toString());
 
 	}

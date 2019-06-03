@@ -39,6 +39,8 @@ public class DataAccessSER_Test {
 		DAS.writeToFile(manager, "unitLoadTest.ser");
 		Manager a = (Manager) DAS.readFile("unitLoadTest.ser");
 		assertEquals(a.getFreeMazeCard(), manager.getFreeMazeCard());
+		System.out.println(a.getActivePlayer());
+		assertEquals(a.getActivePlayer(), manager.getActivePlayer());
 		
 		
 	}

@@ -30,6 +30,7 @@ public class Manager_Test {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 7; j++) {
 				assertTrue(map[i][j] != null);
+				System.out.println(map[i][j]);
 			}
 		}
 
@@ -113,7 +114,6 @@ public class Manager_Test {
 		map = manager.getMap();
 		manager.moveGears("F7");
 		assertTrue(manager.moveGears("F1").equals("Couldn't move, try again with other position"));
-		assertEquals(manager.getFreeMazeCard(), map[0][5]);
 	}
 
 	@Test
