@@ -221,17 +221,18 @@ public class Gameboard implements Serializable {
 					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
 					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
 					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
-				} else if (i == 0 && j == 0 || i == 0 && j == this.map[i].length - 1
-						|| i == this.map.length - 1 && j == this.map[i].length - 1
-						|| i == this.map.length - 1 && j == 0) {
+				} else if (i == 0 && j == 0) {
 					this.map[0][0].setNeighboring(this.map[1][0], Direction.east);
 					this.map[0][0].setNeighboring(this.map[0][1], Direction.south);
-					this.map[6][0].setNeighboring(this.map[5][0], Direction.west);
-					this.map[6][0].setNeighboring(this.map[6][1], Direction.south);
+				} else if (i == 0 && j == this.map[i].length - 1) {
 					this.map[0][6].setNeighboring(this.map[0][5], Direction.north);
 					this.map[0][6].setNeighboring(this.map[1][6], Direction.east);
+				} else if (i == this.map.length - 1 && j == this.map[i].length - 1) {
 					this.map[6][6].setNeighboring(this.map[6][5], Direction.north);
 					this.map[6][6].setNeighboring(this.map[5][6], Direction.west);
+				} else if (i == this.map.length - 1 && j == 0) {
+					this.map[6][0].setNeighboring(this.map[5][0], Direction.west);
+					this.map[6][0].setNeighboring(this.map[6][1], Direction.south);
 				} else if (i == 0 && j > 0 && j < this.map[i].length - 1) {
 					this.map[i][j].setNeighboring(this.map[i][j - 1], Direction.north);
 					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
@@ -296,7 +297,7 @@ public class Gameboard implements Serializable {
 				}
 				card.addFigures(this.map[1][6].getFigures());
 			}
-			
+
 			newFreeCard = getMapCard(1, 6);
 			for (int i = 0; i < this.map[1].length - 1; i++) {
 				for (Figure j : this.map[1][i].getFigures()) {
@@ -316,7 +317,7 @@ public class Gameboard implements Serializable {
 				}
 				card.addFigures(this.map[3][6].getFigures());
 			}
-			
+
 			newFreeCard = getMapCard(3, 6);
 			for (int i = 0; i < this.map[3].length - 1; i++) {
 				for (Figure j : this.map[3][i].getFigures()) {

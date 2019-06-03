@@ -540,7 +540,6 @@ public class FXMLController implements Initializable {
 			alert.setContentText("GameOver: " + activePlayer[0] + " won the game!");
 
 			alert.showAndWait();
-			manager = new Manager();
 			Parent pane = FXMLLoader.load(getClass().getResource("startpage.fxml"));
 			Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			primaryStage.setTitle("Java: 'Adventures in Info2'");
@@ -548,6 +547,7 @@ public class FXMLController implements Initializable {
 			pane.getStylesheets().add(styleCss);
 			primaryStage.setScene(new Scene(pane, 1600, 1000));
 			primaryStage.show();
+			manager = new Manager();
 
 		} else {
 
