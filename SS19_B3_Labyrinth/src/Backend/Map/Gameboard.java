@@ -221,18 +221,17 @@ public class Gameboard implements Serializable {
 					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
 					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
 					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
-				} else if (i == 0 && j == 0) {
+				} else if (i == 0 && j == 0 || i == 0 && j == this.map[i].length - 1
+						|| i == this.map.length - 1 && j == this.map[i].length - 1
+						|| i == this.map.length - 1 && j == 0) {
 					this.map[0][0].setNeighboring(this.map[1][0], Direction.east);
 					this.map[0][0].setNeighboring(this.map[0][1], Direction.south);
-				} else if (i == 0 && j == this.map[i].length - 1) {
-					this.map[0][6].setNeighboring(this.map[0][5], Direction.north);
-					this.map[0][6].setNeighboring(this.map[1][6], Direction.east);
-				} else if (i == this.map.length - 1 && j == this.map[i].length - 1) {
-					this.map[6][6].setNeighboring(this.map[6][5], Direction.north);
-					this.map[6][6].setNeighboring(this.map[5][6], Direction.west);
-				} else if (i == this.map.length - 1 && j == 0) {
 					this.map[6][0].setNeighboring(this.map[5][0], Direction.west);
 					this.map[6][0].setNeighboring(this.map[6][1], Direction.south);
+					this.map[0][6].setNeighboring(this.map[0][5], Direction.north);
+					this.map[0][6].setNeighboring(this.map[1][6], Direction.east);
+					this.map[6][6].setNeighboring(this.map[6][5], Direction.north);
+					this.map[6][6].setNeighboring(this.map[5][6], Direction.west);
 				} else if (i == 0 && j > 0 && j < this.map[i].length - 1) {
 					this.map[i][j].setNeighboring(this.map[i][j - 1], Direction.north);
 					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
@@ -255,6 +254,7 @@ public class Gameboard implements Serializable {
 
 	}
 
+
 	/**
 	 * Methode um die Figuren auf dem Spielfeld zu platzieren.
 	 * 
@@ -276,6 +276,8 @@ public class Gameboard implements Serializable {
 		}
 
 	}
+	
+	//Doppelte Spieler von FreeCard nehmen! danach sollte es gehen
 
 	/**
 	 * Methode um die Labyrinthkarten zu verschieben. gibt neue freecard nach jedem
@@ -286,7 +288,8 @@ public class Gameboard implements Serializable {
 	 * @return MazeCard
 	 */
 	public MazeCard moveGears(PositionsCard move, MazeCard card) {
-
+		
+		
 		MazeCard newFreeCard = null;
 		MazeCard[] safer = new MazeCard[7];
 		switch (move) {
@@ -435,6 +438,7 @@ public class Gameboard implements Serializable {
 				for (Figure i : this.map[6][3].getFigures()) {
 					i.setPos(new int[] { 0, 3 });
 				}
+				
 				card.addFigures(this.map[6][3].getFigures());
 			}
 			newFreeCard = getMapCard(6, 3);
@@ -477,6 +481,7 @@ public class Gameboard implements Serializable {
 					i.setPos(new int[] { 6, 1 });
 				}
 				card.addFigures(this.map[0][1].getFigures());
+				
 			}
 			newFreeCard = getMapCard(0, 1);
 			for (int i = this.map.length - 1; i > 0; i--) {
@@ -534,8 +539,12 @@ public class Gameboard implements Serializable {
 			break;
 		}
 
-		setAllNeighbours();
 		this.freeCard = newFreeCard;
+		this.freeCard.setNeighboring(null, Direction.north);
+		this.freeCard.setNeighboring(null, Direction.east);
+		this.freeCard.setNeighboring(null, Direction.south);
+		this.freeCard.setNeighboring(null, Direction.west);
+		setAllNeighbours();
 		return this.freeCard;
 
 	}
@@ -608,29 +617,36 @@ public class Gameboard implements Serializable {
 
 		if (old.getNeighboring(Direction.north) != null && old.getWall()[0] == 0
 				&& old.getNeighboring(Direction.north).getWall()[2] == 0) {
+
 			if (moveFigureWithArray(currentPos, new int[] { oldPos[0], oldPos[1] - 1 }, visited, figure)) {
 				return true;
 
 			}
 
 		}
+
 		if (old.getNeighboring(Direction.east) != null && old.getWall()[1] == 0
 				&& old.getNeighboring(Direction.east).getWall()[3] == 0) {
+
 			if (moveFigureWithArray(currentPos, new int[] { oldPos[0] + 1, oldPos[1] }, visited, figure)) {
 				return true;
 
 			}
 
 		}
+
 		if (old.getNeighboring(Direction.south) != null && old.getWall()[2] == 0
 				&& old.getNeighboring(Direction.south).getWall()[0] == 0) {
+
 			if (moveFigureWithArray(currentPos, new int[] { oldPos[0], oldPos[1] + 1 }, visited, figure)) {
 				return true;
 
 			}
 		}
+
 		if (old.getNeighboring(Direction.west) != null && old.getWall()[3] == 0
 				&& old.getNeighboring(Direction.west).getWall()[1] == 0) {
+
 			if (moveFigureWithArray(currentPos, new int[] { oldPos[0] - 1, oldPos[1] }, visited, figure)) {
 				return true;
 

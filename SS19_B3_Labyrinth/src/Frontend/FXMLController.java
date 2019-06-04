@@ -302,21 +302,20 @@ public class FXMLController implements Initializable {
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT (*.txt)", "*.txt");
 		fileCSV.getExtensionFilters().add(extFilter);
 		File file = fileCSV.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
-		if(file != null) {
+		if (file != null) {
 			this.manager.loadGame(file.toString(), "csv");
-		for (int i = 0; i < safe.length; i++) {
-			if (safe[i].equals("RED") || safe[i].equals("YELLOW") || safe[i].equals("GREEN")
-					|| safe[i].equals("BLUE")) {
-				manager.addPlayer(safe[i - 1], safe[i]);
-			}
+			for (int i = 0; i < safe.length; i++) {
+				if (safe[i].equals("RED") || safe[i].equals("YELLOW") || safe[i].equals("GREEN")
+						|| safe[i].equals("BLUE")) {
+					manager.addPlayer(safe[i - 1], safe[i]);
+				}
 
+			}
+			getMaze();
+			getFreeCard();
+			getActivePlayerTreasureCard();
+			getPlayers();
 		}
-		getMaze();
-		getFreeCard();
-		getActivePlayerTreasureCard();
-		getPlayers();
-		}
-		
 
 	}
 
@@ -510,16 +509,18 @@ public class FXMLController implements Initializable {
 		if (manager.moveFigure(position)) {
 
 			getMaze();
+			
 		} else {
 
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Error!");
 			alert.setHeaderText("");
-			alert.setContentText("You have to move gears first!");
+			alert.setContentText("You have to move gears first or cant move!");
 
 			alert.showAndWait();
 
 		}
+		
 
 	}
 
@@ -602,25 +603,7 @@ public class FXMLController implements Initializable {
 				getFreeCard();
 				getMaze();
 			}
-		} else if (button.equals(this.A4move)) {
-
-			move = manager.moveGears("A4");
-			if (move.equals("Couldn't move, try again with other position")) {
-				Alert alert = new Alert(AlertType.WARNING);
-				alert.setTitle("Error!");
-				alert.setHeaderText("");
-				alert.setContentText(move);
-
-				alert.showAndWait();
-			} else {
-				StackPane[] gears = new StackPane[] { this.A4, this.B4, this.C4, this.D4, this.E4, this.F4, this.G4 };
-				for (int i = 0; i < gears.length; i++) {
-					gears[i].getChildren().clear();
-				}
-				getFreeCard();
-				getMaze();
-			}
-		} else if (button.equals(this.A6move)) {
+		}else if (button.equals(this.A6move)) {
 
 			move = manager.moveGears("A6");
 			if (move.equals("Couldn't move, try again with other position")) {
