@@ -13,7 +13,8 @@ public class LabyrinthFXML extends Application {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("startpage.fxml"));
 		primaryStage.setTitle("Java: 'Adventures in Info2'");
-		primaryStage.setScene(new Scene(root, 1600, 1000));
+		primaryStage.setScene(new Scene(root));
+		primaryStage.setFullScreen(true);
 		String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
 		root.getStylesheets().add(styleCss);
 		primaryStage.show();

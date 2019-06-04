@@ -224,7 +224,8 @@ public class FXMLController implements Initializable {
 		primaryStage.setTitle("Java: 'Adventures in Info2'");
 		String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
 		pane.getStylesheets().add(styleCss);
-		primaryStage.setScene(new Scene(pane, 1600, 1000));
+		primaryStage.setScene(new Scene(pane));
+		primaryStage.setFullScreen(true);
 		primaryStage.show();
 
 	}
@@ -251,7 +252,8 @@ public class FXMLController implements Initializable {
 
 		} else {
 
-			primaryStage.setScene(new Scene(pane, 1600, 1000));
+			primaryStage.setScene(new Scene(pane));
+			primaryStage.setFullScreen(true);
 			getMaze();
 			getFreeCard();
 			getActivePlayerTreasureCard();
@@ -302,7 +304,6 @@ public class FXMLController implements Initializable {
 			safed = safed + safe[i];
 		}
 		safe = safed.split(";");
-		System.out.println(Arrays.toString(safe));
 		FileChooser fileCSV = new FileChooser();
 		fileCSV.setInitialDirectory(directory);
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT (*.txt)", "*.txt");
@@ -545,6 +546,7 @@ public class FXMLController implements Initializable {
 
 			getActivePlayerTreasureCard();
 			getPlayers();
+			
 		} else if (endRound.equals("GameOver: " + activePlayer[0] + " won the game!")) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Congratulation" + activePlayer[0]);

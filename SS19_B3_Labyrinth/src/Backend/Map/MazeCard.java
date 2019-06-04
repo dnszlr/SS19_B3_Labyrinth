@@ -25,7 +25,7 @@ public abstract class MazeCard implements Serializable {
 	/**
 	 * Konstruktor der Klasse MazeCard
 	 * 
-	 * @param          int[] wall
+	 * @param int[]    wall
 	 * @param Color    color
 	 * @param Treasure treasure
 	 * @param MazeCard
@@ -211,13 +211,13 @@ public abstract class MazeCard implements Serializable {
 	 */
 	public boolean isStartFromFigure() {
 		boolean result = false;
-		if (this instanceof CurveCard) {
-			for (Figure i : figures) {
-				if (this.getColor().equals(i.getColor())) {
-					result = true;
-				}
+
+		for (Figure i : figures) {
+			if (this.getColor().equals(i.getColor())) {
+				result = true;
 			}
 		}
+
 		return result;
 	}
 
@@ -228,11 +228,10 @@ public abstract class MazeCard implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		
 
 		String MazeCard = getClass().getSimpleName() + ";" + getWall()[0] + ";" + getWall()[1] + ";" + getWall()[2]
 				+ ";" + getWall()[3] + ";" + "" + getColor() + ";" + "" + getTreasure() + ";";
-		for(Figure i : figures) {
+		for (Figure i : figures) {
 			MazeCard = MazeCard + i.getColor() + ";";
 		}
 		return MazeCard;

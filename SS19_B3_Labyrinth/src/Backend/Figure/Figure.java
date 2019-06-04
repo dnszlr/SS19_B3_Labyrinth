@@ -153,7 +153,7 @@ public class Figure implements Serializable {
 
 	public boolean isAllFound() {
 		boolean result = false;
-		if (cardstack.isAllFound() && this.treasureCard == null) {
+		if (cardstack.isAllFound()) {
 			result = true;
 		}
 

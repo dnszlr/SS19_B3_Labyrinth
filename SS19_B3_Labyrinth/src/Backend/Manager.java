@@ -320,8 +320,12 @@ public class Manager implements Communication, Serializable {
 		boolean result = false;
 		if (position[0] <= 6 && position[0] >= 0 && position[1] <= 6 && position[1] >= 0
 				&& this.isPlaceMazeCard == true) {
-			if (this.gameboard.moveFigure(position, this.players.getActivePlayer().getPos(), this.players.getActivePlayer())) {
-				this.gameboard.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1]).removeFigure(this.players.getActivePlayer());
+			if (this.gameboard.moveFigure(position, this.players.getActivePlayer().getPos(),
+					this.players.getActivePlayer())) {
+				this.gameboard
+						.getMapCard(this.players.getActivePlayer().getPos()[0],
+								this.players.getActivePlayer().getPos()[1])
+						.removeFigure(this.players.getActivePlayer());
 				this.gameboard.getMapCard(position[0], position[1]).addFigure(this.players.getActivePlayer());
 				this.players.getActivePlayer().setPos(position);
 				this.players.getActivePlayer().getTreasureCard()
@@ -344,8 +348,10 @@ public class Manager implements Communication, Serializable {
 		String result = "notWon";
 		if (this.players.getActivePlayer().isAllFound() && this.gameboard
 				.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1])
-				.isStartFromFigure()) {
+				.getColor().equals(this.players.getActivePlayer().getColor())) {
 			result = this.players.getActivePlayer().getName();
+		} else if (this.players.getActivePlayer().isAllFound()) {
+			result = "Get back to your startpoint";
 		}
 		return result;
 	}
@@ -358,20 +364,25 @@ public class Manager implements Communication, Serializable {
 	@Override
 	public String endRound() {
 		String result = "You have to move the gears once per round!";
-		if (this.isMoveFigur == true) {
-			if (this.players.getActivePlayer().getTreasureCard().isFound()) {
-				this.players.getActivePlayer().isFound(players.getActivePlayer().getTreasureCard());
-				if (hasWon().equals(this.players.getActivePlayer().getName())) {
-					return "GameOver: " + this.players.getActivePlayer().getName() + " won the game!";
-				} else {
-					players.getActivePlayer().drawCard();
-				}
-
-			}
-			this.players.nextPlayer();
-			result = players.getActivePlayer().toString();
+		if (hasWon().equals(this.players.getActivePlayer().getName())) {
+			return "GameOver: " + this.players.getActivePlayer().getName() + " won the game!";
+		} else if (hasWon().equals("Get back to your startpoint")) {
 			this.isMoveFigur = false;
 			this.isPlaceMazeCard = false;
+			this.players.nextPlayer();
+			return hasWon();
+		} else {
+			if (this.isMoveFigur == true) {
+				if (this.players.getActivePlayer().getTreasureCard().isFound()) {
+					this.players.getActivePlayer().isFound(players.getActivePlayer().getTreasureCard());
+					players.getActivePlayer().drawCard();
+
+				}
+				this.players.nextPlayer();
+				result = "Next Round";
+				this.isMoveFigur = false;
+				this.isPlaceMazeCard = false;
+			}
 		}
 
 		return result;

@@ -214,46 +214,30 @@ public class Gameboard implements Serializable {
 	 */
 	private void setAllNeighbours() {
 
+		int low = 0;
+		int high = this.map.length - 1;
+
 		for (int i = 0; i < this.map.length; i++) {
 			for (int j = 0; j < this.map[i].length; j++) {
-				if (i > 0 && i < this.map.length - 1 && j > 0 && j < this.map[i].length - 1) {
+				
+				if (j != low) {
 					this.map[i][j].setNeighboring(this.map[i][j - 1], Direction.north);
-					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
+				}
+				if (j != high) {
 					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
-					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
-				} else if (i == 0 && j == 0 || i == 0 && j == this.map[i].length - 1
-						|| i == this.map.length - 1 && j == this.map[i].length - 1
-						|| i == this.map.length - 1 && j == 0) {
-					this.map[0][0].setNeighboring(this.map[1][0], Direction.east);
-					this.map[0][0].setNeighboring(this.map[0][1], Direction.south);
-					this.map[6][0].setNeighboring(this.map[5][0], Direction.west);
-					this.map[6][0].setNeighboring(this.map[6][1], Direction.south);
-					this.map[0][6].setNeighboring(this.map[0][5], Direction.north);
-					this.map[0][6].setNeighboring(this.map[1][6], Direction.east);
-					this.map[6][6].setNeighboring(this.map[6][5], Direction.north);
-					this.map[6][6].setNeighboring(this.map[5][6], Direction.west);
-				} else if (i == 0 && j > 0 && j < this.map[i].length - 1) {
-					this.map[i][j].setNeighboring(this.map[i][j - 1], Direction.north);
-					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
-					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
-				} else if (i > 0 && i < this.map.length - 1 && j == 0) {
-					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
-					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
-					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
-				} else if (i == this.map.length - 1 && j > 0 && j < this.map[i].length - 1) {
-					this.map[i][j].setNeighboring(this.map[i][j - 1], Direction.north);
-					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
-					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
-				} else if (i > 0 && i < this.map.length - 1 && j == this.map[i].length - 1) {
-					this.map[i][j].setNeighboring(this.map[i][j - 1], Direction.north);
-					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
+				}
+				if (i != low) {
 					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
 				}
+				if (i != high) {
+					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
+				}
+
 			}
+
 		}
 
 	}
-
 
 	/**
 	 * Methode um die Figuren auf dem Spielfeld zu platzieren.
@@ -276,8 +260,8 @@ public class Gameboard implements Serializable {
 		}
 
 	}
-	
-	//Doppelte Spieler von FreeCard nehmen! danach sollte es gehen
+
+	// Doppelte Spieler von FreeCard nehmen! danach sollte es gehen
 
 	/**
 	 * Methode um die Labyrinthkarten zu verschieben. gibt neue freecard nach jedem
@@ -288,9 +272,7 @@ public class Gameboard implements Serializable {
 	 * @return MazeCard
 	 */
 	public MazeCard moveGears(PositionsCard move, MazeCard card) {
-		
-		
-		MazeCard newFreeCard = null;
+
 		MazeCard[] safer = new MazeCard[7];
 		switch (move) {
 		case A2:
@@ -301,7 +283,7 @@ public class Gameboard implements Serializable {
 				card.addFigures(this.map[1][6].getFigures());
 			}
 
-			newFreeCard = getMapCard(1, 6);
+			this.freeCard = getMapCard(1, 6);
 			for (int i = 0; i < this.map[1].length - 1; i++) {
 				for (Figure j : this.map[1][i].getFigures()) {
 					j.setPos(new int[] { 1, i + 1 });
@@ -321,7 +303,7 @@ public class Gameboard implements Serializable {
 				card.addFigures(this.map[3][6].getFigures());
 			}
 
-			newFreeCard = getMapCard(3, 6);
+			this.freeCard = getMapCard(3, 6);
 			for (int i = 0; i < this.map[3].length - 1; i++) {
 				for (Figure j : this.map[3][i].getFigures()) {
 					j.setPos(new int[] { 3, i + 1 });
@@ -342,7 +324,7 @@ public class Gameboard implements Serializable {
 				card.addFigures(this.map[5][6].getFigures());
 			}
 
-			newFreeCard = getMapCard(5, 6);
+			this.freeCard = getMapCard(5, 6);
 			for (int i = 0; i < this.map[5].length - 1; i++) {
 				for (Figure j : this.map[5][i].getFigures()) {
 					j.setPos(new int[] { 5, i + 1 });
@@ -362,7 +344,7 @@ public class Gameboard implements Serializable {
 				card.addFigures(this.map[1][0].getFigures());
 			}
 
-			newFreeCard = getMapCard(1, 0);
+			this.freeCard = getMapCard(1, 0);
 			for (int i = this.map[1].length - 1; i > 0; i--) {
 				for (Figure j : this.map[1][i].getFigures()) {
 					j.setPos(new int[] { 1, i - 1 });
@@ -381,7 +363,7 @@ public class Gameboard implements Serializable {
 				card.addFigures(this.map[3][0].getFigures());
 			}
 
-			newFreeCard = getMapCard(3, 0);
+			this.freeCard = getMapCard(3, 0);
 			for (int i = this.map[3].length - 1; i > 0; i--) {
 				for (Figure j : this.map[3][i].getFigures()) {
 					j.setPos(new int[] { 3, i - 1 });
@@ -400,7 +382,7 @@ public class Gameboard implements Serializable {
 				card.addFigures(this.map[5][0].getFigures());
 			}
 
-			newFreeCard = getMapCard(5, 0);
+			this.freeCard = getMapCard(5, 0);
 			for (int i = this.map[5].length - 1; i > 0; i--) {
 				for (Figure j : this.map[5][i].getFigures()) {
 					j.setPos(new int[] { 5, i - 1 });
@@ -419,7 +401,7 @@ public class Gameboard implements Serializable {
 				}
 				card.addFigures(this.map[6][1].getFigures());
 			}
-			newFreeCard = getMapCard(6, 1);
+			this.freeCard = getMapCard(6, 1);
 			for (int i = 0; i < this.map.length - 1; i++) {
 				for (Figure j : this.map[i][1].getFigures()) {
 					j.setPos(new int[] { i + 1, 1 });
@@ -438,10 +420,10 @@ public class Gameboard implements Serializable {
 				for (Figure i : this.map[6][3].getFigures()) {
 					i.setPos(new int[] { 0, 3 });
 				}
-				
+
 				card.addFigures(this.map[6][3].getFigures());
 			}
-			newFreeCard = getMapCard(6, 3);
+			this.freeCard = getMapCard(6, 3);
 			for (int i = 0; i < this.map.length - 1; i++) {
 				for (Figure j : this.map[i][3].getFigures()) {
 					j.setPos(new int[] { i + 1, 3 });
@@ -461,7 +443,7 @@ public class Gameboard implements Serializable {
 				}
 				card.addFigures(this.map[6][5].getFigures());
 			}
-			newFreeCard = getMapCard(6, 5);
+			this.freeCard = getMapCard(6, 5);
 			for (int i = 0; i < this.map.length - 1; i++) {
 				for (Figure j : this.map[i][5].getFigures()) {
 					j.setPos(new int[] { i + 1, 5 });
@@ -481,9 +463,9 @@ public class Gameboard implements Serializable {
 					i.setPos(new int[] { 6, 1 });
 				}
 				card.addFigures(this.map[0][1].getFigures());
-				
+
 			}
-			newFreeCard = getMapCard(0, 1);
+			this.freeCard = getMapCard(0, 1);
 			for (int i = this.map.length - 1; i > 0; i--) {
 				for (Figure j : this.map[i][1].getFigures()) {
 					j.setPos(new int[] { i - 1, 1 });
@@ -504,7 +486,7 @@ public class Gameboard implements Serializable {
 				}
 				card.addFigures(this.map[0][3].getFigures());
 			}
-			newFreeCard = getMapCard(0, 3);
+			this.freeCard = getMapCard(0, 3);
 			for (int i = this.map.length - 1; i > 0; i--) {
 				for (Figure j : this.map[i][3].getFigures()) {
 					j.setPos(new int[] { i - 1, 3 });
@@ -524,7 +506,7 @@ public class Gameboard implements Serializable {
 				}
 				card.addFigures(this.map[0][5].getFigures());
 			}
-			newFreeCard = getMapCard(0, 5);
+			this.freeCard = getMapCard(0, 5);
 			for (int i = this.map.length - 1; i > 0; i--) {
 				for (Figure j : this.map[i][5].getFigures()) {
 					j.setPos(new int[] { i - 1, 5 });
@@ -539,13 +521,12 @@ public class Gameboard implements Serializable {
 			break;
 		}
 
-		this.freeCard = newFreeCard;
 		this.freeCard.setNeighboring(null, Direction.north);
 		this.freeCard.setNeighboring(null, Direction.east);
 		this.freeCard.setNeighboring(null, Direction.south);
 		this.freeCard.setNeighboring(null, Direction.west);
 		this.freeCard.removeFigures();
-		setAllNeighbours();
+
 		return this.freeCard;
 
 	}
@@ -605,6 +586,8 @@ public class Gameboard implements Serializable {
 	 * @return boolean
 	 */
 	private boolean moveFigureWithArray(int[] currentPos, int[] oldPos, int[][] visited, Figure figure) {
+
+		setAllNeighbours();
 
 		if (oldPos[0] == currentPos[0] && oldPos[1] == currentPos[1]) {
 			return true;
