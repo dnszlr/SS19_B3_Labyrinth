@@ -544,6 +544,7 @@ public class Gameboard implements Serializable {
 		this.freeCard.setNeighboring(null, Direction.east);
 		this.freeCard.setNeighboring(null, Direction.south);
 		this.freeCard.setNeighboring(null, Direction.west);
+		this.freeCard.removeFigures();
 		setAllNeighbours();
 		return this.freeCard;
 

@@ -297,30 +297,40 @@ public class FXMLController implements Initializable {
 		String s = currentRelativePath.toAbsolutePath().toString();
 		File directory = new File(s);
 		String[] safe = manager.getPlayers();
+		String safed = "";
+		for (int i = 0; i < safe.length; i++) {
+			safed = safed + safe[i];
+		}
+		safe = safed.split(";");
+		System.out.println(Arrays.toString(safe));
 		FileChooser fileCSV = new FileChooser();
 		fileCSV.setInitialDirectory(directory);
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT (*.txt)", "*.txt");
 		fileCSV.getExtensionFilters().add(extFilter);
 		File file = fileCSV.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
 		if (file != null) {
+			
 			this.manager.loadGame(file.toString(), "csv");
 			for (int i = 0; i < safe.length; i++) {
 				if (safe[i].equals("RED") || safe[i].equals("YELLOW") || safe[i].equals("GREEN")
 						|| safe[i].equals("BLUE")) {
-					manager.addPlayer(safe[i - 1], safe[i]);
+					this.manager.addPlayer(safe[i - 1], safe[i]);
+
 				}
 
 			}
-			getMaze();
+
 			getFreeCard();
 			getActivePlayerTreasureCard();
 			getPlayers();
+			getMaze();
 		}
 
 	}
 
 	@FXML
 	private void handleSaveButton(ActionEvent event) throws IOException {
+
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
 		File directory = new File(s);
@@ -331,11 +341,13 @@ public class FXMLController implements Initializable {
 		fileSave.getExtensionFilters().add(extFilterCSV);
 		fileSave.getExtensionFilters().add(extFilterSER);
 		File file = fileSave.showSaveDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
-		String path = file.getCanonicalPath().toLowerCase();
-		if (file != null && path.endsWith(".txt")) {
-			manager.saveGame(file.toString(), "csv");
-		} else if (file != null && path.endsWith(".ser")) {
-			manager.saveGame(file.toString(), "ser");
+		if (file != null) {
+			String path = file.getCanonicalPath().toLowerCase();
+			if (path.endsWith(".txt")) {
+				manager.saveGame(file.toString(), "csv");
+			} else if (path.endsWith(".ser")) {
+				manager.saveGame(file.toString(), "ser");
+			}
 		}
 
 	}
@@ -393,7 +405,7 @@ public class FXMLController implements Initializable {
 					treasure.setFitWidth(100.0);
 					mazePanes[i][j].getChildren().add(treasure);
 				}
-				if (line.length > 7) {
+				if (line.length > 6) {
 					for (int y = 7; y < line.length; y++) {
 						String getFigure = "Frontend/Images/Figures/" + "Figure" + line[y].toUpperCase() + ".png";
 						ImageView figure = new ImageView(getFigure);
@@ -509,7 +521,7 @@ public class FXMLController implements Initializable {
 		if (manager.moveFigure(position)) {
 
 			getMaze();
-			
+
 		} else {
 
 			Alert alert = new Alert(AlertType.WARNING);
@@ -520,7 +532,6 @@ public class FXMLController implements Initializable {
 			alert.showAndWait();
 
 		}
-		
 
 	}
 
@@ -603,7 +614,7 @@ public class FXMLController implements Initializable {
 				getFreeCard();
 				getMaze();
 			}
-		}else if (button.equals(this.A6move)) {
+		} else if (button.equals(this.A6move)) {
 
 			move = manager.moveGears("A6");
 			if (move.equals("Couldn't move, try again with other position")) {

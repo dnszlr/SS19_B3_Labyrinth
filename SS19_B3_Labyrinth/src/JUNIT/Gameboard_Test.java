@@ -156,35 +156,35 @@ public class Gameboard_Test {
 //		System.out.println(Arrays.toString(figure1.getPos()));
 //		System.out.println(Arrays.toString(figure2.getPos()));
 //
-		gameboard.getMapCard(0, 3).addFigure(figure1);
-		figure1.setPos(new int[] { 0, 3 });
-		gameboard.getMapCard(6, 3).addFigure(figure2);
-		figure2.setPos(new int[] { 6, 3 });
-		MazeCard D1 = gameboard.getMapCard(3, 3);
-		gameboard.moveGears(PositionsCard.D1, gameboard.getFreeCard());
-		assertEquals(D1, gameboard.getMapCard(4, 3));
-		System.out.println(Arrays.toString(figure1.getPos()));
-		System.out.println(Arrays.toString(figure2.getPos()));
-
-		gameboard.getMapCard(0, 5).addFigure(figure1);
-		figure1.setPos(new int[] { 0, 5 });
-		gameboard.getMapCard(6, 5).addFigure(figure2);
-		figure2.setPos(new int[] { 6, 5 });
-		MazeCard F1 = gameboard.getMapCard(3, 5);
-		gameboard.moveGears(PositionsCard.F1, gameboard.getFreeCard());
-		assertEquals(F1, gameboard.getMapCard(4, 5));
-		System.out.println(Arrays.toString(figure1.getPos()));
-		System.out.println(Arrays.toString(figure2.getPos()));
-
-		gameboard.getMapCard(0, 1).addFigure(figure1);
-		figure1.setPos(new int[] { 0, 1 });
-		gameboard.getMapCard(6, 1).addFigure(figure2);
-		figure2.setPos(new int[] { 6, 1 });
-		MazeCard B7 = gameboard.getMapCard(3, 1);
-		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
-		assertEquals(B7, gameboard.getMapCard(2, 1));
-		System.out.println(Arrays.toString(figure1.getPos()));
-		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.getMapCard(0, 3).addFigure(figure1);
+//		figure1.setPos(new int[] { 0, 3 });
+//		gameboard.getMapCard(6, 3).addFigure(figure2);
+//		figure2.setPos(new int[] { 6, 3 });
+//		MazeCard D1 = gameboard.getMapCard(3, 3);
+//		gameboard.moveGears(PositionsCard.D1, gameboard.getFreeCard());
+//		assertEquals(D1, gameboard.getMapCard(4, 3));
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//
+//		gameboard.getMapCard(0, 5).addFigure(figure1);
+//		figure1.setPos(new int[] { 0, 5 });
+//		gameboard.getMapCard(6, 5).addFigure(figure2);
+//		figure2.setPos(new int[] { 6, 5 });
+//		MazeCard F1 = gameboard.getMapCard(3, 5);
+//		gameboard.moveGears(PositionsCard.F1, gameboard.getFreeCard());
+//		assertEquals(F1, gameboard.getMapCard(4, 5));
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//
+//		gameboard.getMapCard(0, 1).addFigure(figure1);
+//		figure1.setPos(new int[] { 0, 1 });
+//		gameboard.getMapCard(6, 1).addFigure(figure2);
+//		figure2.setPos(new int[] { 6, 1 });
+//		MazeCard B7 = gameboard.getMapCard(3, 1);
+//		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
+//		assertEquals(B7, gameboard.getMapCard(2, 1));
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
 
 		gameboard.getMapCard(0, 3).addFigure(figure1);
 		figure1.setPos(new int[] { 0, 3 });
@@ -195,6 +195,10 @@ public class Gameboard_Test {
 		gameboard.moveGears(PositionsCard.D7, gameboard.getFreeCard());
 		assertEquals(D7, gameboard.getMapCard(2, 3));
 		assertEquals(free, gameboard.getMapCard(6, 3));
+		System.out.println(Arrays.toString(figure1.getPos()));
+		System.out.println(Arrays.toString(figure2.getPos()));
+		System.out.println(Arrays.toString(this.gameboard.getFreeCard().getFigures().toArray()));
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
 		System.out.println(Arrays.toString(figure1.getPos()));
 		System.out.println(Arrays.toString(figure2.getPos()));
 

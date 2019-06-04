@@ -17,7 +17,7 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
 	xmlns="http://javafx.com/javafx/3.5" styleClass="gameBackground">
 	<top>
-		<HBox fx:id="players" prefHeight="150.0" alignment="CENTER" spacing="25.0"/>
+		<HBox fx:id="players" prefHeight="50.0" alignment="CENTER" spacing="25.0"/>
 	</top>
 	<left>
 		<VBox prefWidth="400.0" alignment="CENTER" spacing="10.0">
@@ -45,7 +45,7 @@
 		</VBox>
 	</right>
 	<bottom>
-		<HBox prefHeight="150.0" alignment="CENTER" spacing="10.0">
+		<HBox prefHeight="150.0" alignment="TOP_CENTER" spacing="10.0">
 			<Button text="SaveGame" styleClass="FrontButton" onAction="#handleSaveButton"/> 
 			<Button text="LoadMap" styleClass="FrontButton" onAction="#handleCSVLoadButton"/>
 			<Button text="CloseGame" styleClass="FrontButton"

@@ -184,7 +184,7 @@ public abstract class MazeCard implements Serializable {
 	 */
 	public void removeFigures() {
 
-		figures.clear();
+		figures = new ArrayList<Figure>();
 
 	}
 
