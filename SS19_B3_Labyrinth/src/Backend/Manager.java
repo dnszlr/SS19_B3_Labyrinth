@@ -350,8 +350,6 @@ public class Manager implements Communication, Serializable {
 				.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1])
 				.getColor().equals(this.players.getActivePlayer().getColor())) {
 			result = this.players.getActivePlayer().getName();
-		} else if (this.players.getActivePlayer().isAllFound()) {
-			result = "Get back to your startpoint";
 		}
 		return result;
 	}
@@ -366,13 +364,14 @@ public class Manager implements Communication, Serializable {
 		String result = "You have to move the gears once per round!";
 		if (hasWon().equals(this.players.getActivePlayer().getName())) {
 			return "GameOver: " + this.players.getActivePlayer().getName() + " won the game!";
-		} else if (hasWon().equals("Get back to your startpoint")) {
-			this.isMoveFigur = false;
-			this.isPlaceMazeCard = false;
-			this.players.nextPlayer();
-			return hasWon();
 		} else {
-			if (this.isMoveFigur == true) {
+			if (this.players.getActivePlayer().isAllFound()) {
+				this.players.nextPlayer();
+				this.isMoveFigur = false;
+				this.isPlaceMazeCard = false;
+				result = "Get back to startPosition";
+
+			} else if (this.isMoveFigur == true) {
 				if (this.players.getActivePlayer().getTreasureCard().isFound()) {
 					this.players.getActivePlayer().isFound(players.getActivePlayer().getTreasureCard());
 					players.getActivePlayer().drawCard();
