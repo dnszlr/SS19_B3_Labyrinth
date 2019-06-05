@@ -309,11 +309,8 @@ public class FXMLController implements Initializable {
 			getFreeCard();
 			getActivePlayerTreasureCard();
 			getPlayers();
-			
 
 		}
-		
-
 
 	}
 
@@ -527,16 +524,11 @@ public class FXMLController implements Initializable {
 		String endRound = manager.endRound();
 		String[] activePlayer = this.manager.getActivePlayer().split(";");
 
-		if (!endRound.equals("You have to move the gears once per round!")) {
-
-			getActivePlayerTreasureCard();
-			getPlayers();
-
-		} else if (endRound.equals("GameOver: " + activePlayer[0] + " won the game!")) {
+		if (endRound.equals("won the game!")) {
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Congratulation" + activePlayer[0]);
+			alert.setTitle("");
 			alert.setHeaderText(null);
-			alert.setContentText("GameOver: " + activePlayer[0] + " won the game!");
+			alert.setContentText("Congratulations: " + activePlayer[0] + " you won the game!");
 
 			alert.showAndWait();
 			Parent pane = FXMLLoader.load(getClass().getResource("startpage.fxml"));
@@ -547,8 +539,12 @@ public class FXMLController implements Initializable {
 			primaryStage.setScene(new Scene(pane, 1600, 1000));
 			primaryStage.show();
 			manager = new Manager();
+		} else if (!endRound.equals("You have to move the gears once per round!")) {
 
-		} else {
+			getActivePlayerTreasureCard();
+			getPlayers();
+
+		} else{
 
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Error!");

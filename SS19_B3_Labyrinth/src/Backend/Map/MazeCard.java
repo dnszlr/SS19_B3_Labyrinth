@@ -212,10 +212,9 @@ public abstract class MazeCard implements Serializable {
 	public boolean isStartFromFigure() {
 		boolean result = false;
 
-		for (Figure i : figures) {
-			if (this.getColor().equals(i.getColor())) {
-				result = true;
-			}
+		
+		if(this.getFigures().size() == 1 && this.figures.get(0).getColor() == this.color) {
+			result = true;
 		}
 
 		return result;

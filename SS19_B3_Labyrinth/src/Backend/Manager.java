@@ -328,8 +328,10 @@ public class Manager implements Communication, Serializable {
 						.removeFigure(this.players.getActivePlayer());
 				this.gameboard.getMapCard(position[0], position[1]).addFigure(this.players.getActivePlayer());
 				this.players.getActivePlayer().setPos(position);
-				this.players.getActivePlayer().getTreasureCard()
-						.found(this.gameboard.getMapCard(position[0], position[1]).getTreasure());
+				if (this.players.getActivePlayer().getTreasureCard() != null) {
+					this.players.getActivePlayer().getTreasureCard().found(this.gameboard.getMapCard(position[0], position[1]).getTreasure());
+
+				}
 				result = true;
 
 			}
@@ -348,7 +350,7 @@ public class Manager implements Communication, Serializable {
 		String result = "notWon";
 		if (this.players.getActivePlayer().isAllFound() && this.gameboard
 				.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1])
-				.getColor().equals(this.players.getActivePlayer().getColor())) {
+				.isStartFromFigure()) {
 			result = this.players.getActivePlayer().getName();
 		}
 		return result;
@@ -363,9 +365,13 @@ public class Manager implements Communication, Serializable {
 	public String endRound() {
 		String result = "You have to move the gears once per round!";
 		if (hasWon().equals(this.players.getActivePlayer().getName())) {
-			return "GameOver: " + this.players.getActivePlayer().getName() + " won the game!";
+			return "won the game!";
 		} else {
 			if (this.players.getActivePlayer().isAllFound()) {
+				if (this.players.getActivePlayer().getTreasureCard().isFound()) {
+					this.players.getActivePlayer().isFound(players.getActivePlayer().getTreasureCard());
+
+				}
 				this.players.nextPlayer();
 				this.isMoveFigur = false;
 				this.isPlaceMazeCard = false;
