@@ -95,13 +95,88 @@ public class Gameboard_Test {
 		figure4.setPos(new int[] { 5, 5 });
 		gameboard.getMapCard(5, 5).addFigure(figure4);
 
-		MazeCard A2 = gameboard.getMapCard(1, 3);
-		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+
+//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+		
+//		gameboard.moveGears(PositionsCard.A6, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.A6, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.A6, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.A6, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.A6, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.A6, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.A6, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure2.getPos()));
+		
+//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+		
+//		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+//		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
+//		System.out.println(Arrays.toString(figure1.getPos()));
+//		System.out.println(Arrays.toString(figure2.getPos()));
+		
+
+		
+		
 		gameboard.moveGears(PositionsCard.F7, gameboard.getFreeCard());
 		gameboard.moveGears(PositionsCard.D7, gameboard.getFreeCard());
-//		assertEquals(A2, gameboard.getMapCard(1, 4));
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
-//		gameboard.moveGears(PositionsCard.G6, gameboard.getFreeCard());
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+		gameboard.moveGears(PositionsCard.G6, gameboard.getFreeCard());
 //		System.out.println(gameboard.getMapCard(1, 0).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 2).getFigures().toString());
@@ -109,11 +184,11 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(1, 4).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 6).getFigures().toString());
-//
-//		MazeCard A4 = gameboard.getMapCard(3, 3);
-//		gameboard.moveGears(PositionsCard.A4, gameboard.getFreeCard());
-//		assertEquals(A4, gameboard.getMapCard(3, 4));
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+
+		MazeCard A4 = gameboard.getMapCard(3, 3);
+		gameboard.moveGears(PositionsCard.A4, gameboard.getFreeCard());
+		assertEquals(A4, gameboard.getMapCard(3, 4));
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
 //		System.out.println(gameboard.getMapCard(3, 0).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(3, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(3, 2).getFigures().toString());
@@ -121,13 +196,13 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(3, 4).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(3, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(3, 6).getFigures().toString());
-//		gameboard.moveGears(PositionsCard.F7, gameboard.getFreeCard());
-//
-//		MazeCard A6 = gameboard.getMapCard(5, 3);
-//		gameboard.moveGears(PositionsCard.A6, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.G6, gameboard.getFreeCard());
-//		
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+		gameboard.moveGears(PositionsCard.F7, gameboard.getFreeCard());
+
+		MazeCard A6 = gameboard.getMapCard(5, 3);
+		gameboard.moveGears(PositionsCard.A6, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.G6, gameboard.getFreeCard());
+		
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
 //		System.out.println(gameboard.getMapCard(5, 0).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 2).getFigures().toString());
@@ -135,12 +210,12 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(5, 4).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 6).getFigures().toString());
-//		gameboard.moveGears(PositionsCard.D7, gameboard.getFreeCard());
-//		MazeCard G2 = gameboard.getMapCard(1, 3);
-//		gameboard.moveGears(PositionsCard.G2, gameboard.getFreeCard());
-//		
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
-//		gameboard.moveGears(PositionsCard.A4, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.D7, gameboard.getFreeCard());
+		MazeCard G2 = gameboard.getMapCard(1, 3);
+		gameboard.moveGears(PositionsCard.G2, gameboard.getFreeCard());
+		
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+		gameboard.moveGears(PositionsCard.A4, gameboard.getFreeCard());
 //		System.out.println(gameboard.getMapCard(1, 0).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 2).getFigures().toString());
@@ -148,11 +223,11 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(1, 4).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 6).getFigures().toString());
-//
-//		MazeCard G4 = gameboard.getMapCard(3, 3);
-//		gameboard.moveGears(PositionsCard.G4, gameboard.getFreeCard());
-//	
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+
+		MazeCard G4 = gameboard.getMapCard(3, 3);
+		gameboard.moveGears(PositionsCard.G4, gameboard.getFreeCard());
+	
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
 //		System.out.println(gameboard.getMapCard(3, 0).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(3, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(3, 2).getFigures().toString());
@@ -160,11 +235,11 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(3, 4).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(3, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(3, 6).getFigures().toString());
-//
-//		MazeCard G6 = gameboard.getMapCard(5, 3);
-//		gameboard.moveGears(PositionsCard.G6, gameboard.getFreeCard());
-//	
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+
+		MazeCard G6 = gameboard.getMapCard(5, 3);
+		gameboard.moveGears(PositionsCard.G6, gameboard.getFreeCard());
+	
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
 //		System.out.println(gameboard.getMapCard(5, 0).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 2).getFigures().toString());
@@ -172,11 +247,11 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(5, 4).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 6).getFigures().toString());
-//
-//		MazeCard B1 = gameboard.getMapCard(3, 1);
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//	
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+
+		MazeCard B1 = gameboard.getMapCard(3, 1);
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+	
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
 //		System.out.println(gameboard.getMapCard(0, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(2, 1).getFigures().toString());
@@ -184,13 +259,13 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(4, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(6, 1).getFigures().toString());
-//
-//		MazeCard D1 = gameboard.getMapCard(3, 3);
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.D1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//	
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+
+		MazeCard D1 = gameboard.getMapCard(3, 3);
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.D1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+	
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
 //		System.out.println(gameboard.getMapCard(0, 3).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 3).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(2, 3).getFigures().toString());
@@ -198,13 +273,13 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(4, 3).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 3).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(6, 3).getFigures().toString());
-//		gameboard.moveGears(PositionsCard.F7, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
-//
-//		MazeCard F1 = gameboard.getMapCard(3, 5);
-//		gameboard.moveGears(PositionsCard.F1, gameboard.getFreeCard());
-//
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+		gameboard.moveGears(PositionsCard.F7, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+
+		MazeCard F1 = gameboard.getMapCard(3, 5);
+		gameboard.moveGears(PositionsCard.F1, gameboard.getFreeCard());
+
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
 //		System.out.println(gameboard.getMapCard(0, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(2, 5).getFigures().toString());
@@ -212,11 +287,11 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(4, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(6, 5).getFigures().toString());
-//
-//		MazeCard B7 = gameboard.getMapCard(3, 1);
-//		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
-//
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+
+		MazeCard B7 = gameboard.getMapCard(3, 1);
+		gameboard.moveGears(PositionsCard.B7, gameboard.getFreeCard());
+
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
 //		System.out.println(gameboard.getMapCard(0, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(2, 1).getFigures().toString());
@@ -224,26 +299,26 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(4, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 1).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(6, 1).getFigures().toString());
-//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
-//
-//		MazeCard D7 = gameboard.getMapCard(3, 3);
-//		MazeCard free = gameboard.getFreeCard();
-//		gameboard.moveGears(PositionsCard.D7, gameboard.getFreeCard());
-//
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.A2, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+		gameboard.moveGears(PositionsCard.B1, gameboard.getFreeCard());
+
+		MazeCard D7 = gameboard.getMapCard(3, 3);
+		MazeCard free = gameboard.getFreeCard();
+		gameboard.moveGears(PositionsCard.D7, gameboard.getFreeCard());
+
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
 //		System.out.println(gameboard.getMapCard(0, 3).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 3).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(2, 3).getFigures().toString());
@@ -251,13 +326,13 @@ public class Gameboard_Test {
 //		System.out.println(gameboard.getMapCard(4, 3).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(5, 3).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(6, 3).getFigures().toString());
-//
-//		MazeCard F7 = gameboard.getMapCard(3, 5);
-//		gameboard.moveGears(PositionsCard.F7, gameboard.getFreeCard());
-//		assertEquals(F7, gameboard.getMapCard(2, 5));
-//		gameboard.moveGears(PositionsCard.D7, gameboard.getFreeCard());
-//		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
-//		gameboard.moveGears(PositionsCard.G4, gameboard.getFreeCard());
+
+		MazeCard F7 = gameboard.getMapCard(3, 5);
+		gameboard.moveGears(PositionsCard.F7, gameboard.getFreeCard());
+		assertEquals(F7, gameboard.getMapCard(2, 5));
+		gameboard.moveGears(PositionsCard.D7, gameboard.getFreeCard());
+		assertTrue(this.gameboard.getFreeCard().getFigures().size() == 0);
+		gameboard.moveGears(PositionsCard.G4, gameboard.getFreeCard());
 //		System.out.println(gameboard.getMapCard(0, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(1, 5).getFigures().toString());
 //		System.out.println(gameboard.getMapCard(2, 5).getFigures().toString());
@@ -270,7 +345,7 @@ public class Gameboard_Test {
 			for (int j = 0; j < 7; j++) {
 
 				System.out.println(i + "|" + j);
-				System.out.println(this.gameboard.getMapCard(i, j).getFigures().toString());
+//				System.out.println(this.gameboard.getMapCard(i, j).getFigures().toString());
 				System.out.println(this.gameboard.getMapCard(i, j).getNeighboring(Direction.north));
 				System.out.println(this.gameboard.getMapCard(i, j).getNeighboring(Direction.east));
 				System.out.println(this.gameboard.getMapCard(i, j).getNeighboring(Direction.south));

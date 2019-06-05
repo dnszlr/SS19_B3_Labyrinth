@@ -223,15 +223,31 @@ public class Gameboard implements Serializable {
 				if (j != low) {
 					this.map[i][j].setNeighboring(this.map[i][j - 1], Direction.north);
 				}
+				if(j == low) {
+					this.map[i][j].setNeighboring(null, Direction.north);
+				}
 				if (j != high) {
 					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
+				}
+				if(j == high) {
+					this.map[i][j].setNeighboring(null, Direction.south);
 				}
 				if (i != low) {
 					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
 				}
+				if(i == low) {
+					this.map[i][j].setNeighboring(null, Direction.west);
+				}
 				if (i != high) {
 					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
 				}
+				if(i == high) {
+					this.map[i][j].setNeighboring(null, Direction.east);
+				}
+				
+				
+				
+				
 
 			}
 
@@ -526,7 +542,7 @@ public class Gameboard implements Serializable {
 		this.freeCard.setNeighboring(null, Direction.south);
 		this.freeCard.setNeighboring(null, Direction.west);
 		this.freeCard.removeFigures();
-
+		setAllNeighbours();
 		return this.freeCard;
 
 	}
