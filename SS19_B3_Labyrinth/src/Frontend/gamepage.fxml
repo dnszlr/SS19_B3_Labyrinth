@@ -20,7 +20,7 @@
 		<HBox fx:id="players" prefHeight="50.0" alignment="CENTER" spacing="25.0"/>
 	</top>
 	<left>
-		<VBox prefWidth="400.0" alignment="CENTER" spacing="10.0">
+		<VBox prefWidth="300.0" alignment="CENTER" spacing="10.0">
 			<Label fx:id="activePlayer" styleClass="Header" />
 			<StackPane fx:id="activePlayerTreasureCard">
 
@@ -31,7 +31,7 @@
 		</VBox>
 	</left>
 	<right>
-		<VBox prefWidth="400.0" alignment="CENTER" spacing="10.0">
+		<VBox prefWidth="300.0" alignment="CENTER" spacing="10.0">
 			<Button fx:id="EndRound" text="EndRound" styleClass="FrontButton"
 				prefHeight="50.0" prefWidth="175.0" onMouseClicked="#handleEndRound"/>
 			<StackPane fx:id="freeMazeCard">
@@ -45,7 +45,7 @@
 		</VBox>
 	</right>
 	<bottom>
-		<HBox prefHeight="150.0" alignment="TOP_CENTER" spacing="10.0">
+		<HBox prefHeight="150.0" alignment="CENTER" spacing="10.0">
 			<Button text="SaveGame" styleClass="FrontButton" onAction="#handleSaveButton"/> 
 			<Button text="LoadMap" styleClass="FrontButton" onAction="#handleCSVLoadButton"/>
 			<Button text="CloseGame" styleClass="FrontButton"

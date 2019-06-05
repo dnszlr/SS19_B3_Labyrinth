@@ -39,6 +39,15 @@
 	-fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 1.0), 5.0, 0.0, 0.0, 1.0);
 }
 
+.Players {
+	-fx-font-family: "Courier New";
+	-fx-text-fill: linear-gradient(PaleGoldenRod, LimeGreen);
+	-fx-font-size: 25.0px;
+	-fx-font-weight: bold;
+	-fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 1.0), 5.0, 0.0, 0.0, 1.0);
+}
+
+
 .RedPlayer {
 	-fx-background-radius: 50.0px;
 	-fx-background-color: rgb(233.0, 78.0, 78.0);

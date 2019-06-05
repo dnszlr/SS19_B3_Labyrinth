@@ -21,6 +21,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -224,8 +225,7 @@ public class FXMLController implements Initializable {
 		primaryStage.setTitle("Java: 'Adventures in Info2'");
 		String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
 		pane.getStylesheets().add(styleCss);
-		primaryStage.setScene(new Scene(pane));
-		primaryStage.setFullScreen(true);
+		primaryStage.setScene(new Scene(pane, 1400, 900));
 		primaryStage.show();
 
 	}
@@ -252,8 +252,7 @@ public class FXMLController implements Initializable {
 
 		} else {
 
-			primaryStage.setScene(new Scene(pane));
-			primaryStage.setFullScreen(true);
+			primaryStage.setScene(new Scene(pane, 1400, 900));
 			getMaze();
 			getFreeCard();
 			getActivePlayerTreasureCard();
@@ -282,7 +281,7 @@ public class FXMLController implements Initializable {
 			primaryStage.setTitle("Java: 'Adventures in Info2'");
 			String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
 			pane.getStylesheets().add(styleCss);
-			primaryStage.setScene(new Scene(pane, 1600, 1000));
+			primaryStage.setScene(new Scene(pane, 1400, 900));
 			this.manager.loadGame(file.toString(), "serialization");
 			getMaze();
 			getFreeCard();
@@ -298,34 +297,23 @@ public class FXMLController implements Initializable {
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
 		File directory = new File(s);
-		String[] safe = manager.getPlayers();
-		String safed = "";
-		for (int i = 0; i < safe.length; i++) {
-			safed = safed + safe[i];
-		}
-		safe = safed.split(";");
 		FileChooser fileCSV = new FileChooser();
 		fileCSV.setInitialDirectory(directory);
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT (*.txt)", "*.txt");
 		fileCSV.getExtensionFilters().add(extFilter);
 		File file = fileCSV.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
 		if (file != null) {
-			
+
 			this.manager.loadGame(file.toString(), "csv");
-			for (int i = 0; i < safe.length; i++) {
-				if (safe[i].equals("RED") || safe[i].equals("YELLOW") || safe[i].equals("GREEN")
-						|| safe[i].equals("BLUE")) {
-					this.manager.addPlayer(safe[i - 1], safe[i]);
-
-				}
-
-			}
-
+			getMaze();
 			getFreeCard();
 			getActivePlayerTreasureCard();
 			getPlayers();
-			getMaze();
+			
+
 		}
+		
+
 
 	}
 
@@ -389,27 +377,27 @@ public class FXMLController implements Initializable {
 				mazePanes[i][j].getChildren().add(ground);
 				String[] line = maze[i][j].split(";");
 				String walls = "Frontend/Images/Walls/" + line[1] + line[2] + line[3] + line[4] + ".png";
-				ImageView wall = new ImageView(walls);
+				ImageView wall = new ImageView(new Image(walls));
 				wall.setFitHeight(100.0);
 				wall.setFitWidth(100.0);
 				mazePanes[i][j].getChildren().add(wall);
 				if (!line[5].equals("null")) {
-					String getColor = "Frontend/Images/Colors/" + line[5].toUpperCase() + ".png";
-					ImageView color = new ImageView(getColor);
+					String getColor = "Frontend/Images/Colors/" + line[5] + ".png";
+					ImageView color = new ImageView(new Image(getColor));
 					color.setFitHeight(100.0);
 					color.setFitWidth(100.0);
 					mazePanes[i][j].getChildren().add(color);
 				} else if (!line[6].equals("null")) {
-					String getTreasure = "Frontend/Images/Treasures/" + line[6].toUpperCase() + ".png";
-					ImageView treasure = new ImageView(getTreasure);
+					String getTreasure = "Frontend/Images/Treasures/" + line[6] + ".png";
+					ImageView treasure = new ImageView(new Image(getTreasure));
 					treasure.setFitHeight(100.0);
 					treasure.setFitWidth(100.0);
 					mazePanes[i][j].getChildren().add(treasure);
 				}
 				if (line.length > 6) {
 					for (int y = 7; y < line.length; y++) {
-						String getFigure = "Frontend/Images/Figures/" + "Figure" + line[y].toUpperCase() + ".png";
-						ImageView figure = new ImageView(getFigure);
+						String getFigure = "Frontend/Images/Figures/" + "Figure" + line[y] + ".png";
+						ImageView figure = new ImageView(new Image(getFigure));
 						figure.setFitHeight(100.0);
 						figure.setFitWidth(100.0);
 						mazePanes[i][j].getChildren().add(figure);
@@ -435,8 +423,8 @@ public class FXMLController implements Initializable {
 				}
 			}
 			Label label = new Label();
-			label.setText("| " + player[0] + " - " + "CardsFound:" + foundCards + " |");
-			label.getStyleClass().add("Header");
+			label.setText("| " + player[0] + " - " + "Found:" + foundCards + " |");
+			label.getStyleClass().add("Players");
 			this.players.getChildren().add(label);
 		}
 
@@ -453,19 +441,19 @@ public class FXMLController implements Initializable {
 		this.freeMazeCard.getChildren().add(ground);
 		for (int i = 0; i < line.length; i++) {
 			String walls = "Frontend/Images/Walls/" + line[1] + line[2] + line[3] + line[4] + ".png";
-			ImageView wall = new ImageView(walls);
+			ImageView wall = new ImageView(new Image(walls, true));
 			wall.setFitHeight(100.0);
 			wall.setFitWidth(100.0);
 			this.freeMazeCard.getChildren().add(wall);
 			if (!line[5].equals("null")) {
-				String getColor = "Frontend/Images/Colors/" + line[5].toUpperCase() + ".png";
-				ImageView color = new ImageView(getColor);
+				String getColor = "Frontend/Images/Colors/" + line[5] + ".png";
+				ImageView color = new ImageView(new Image(getColor));
 				color.setFitHeight(100.0);
 				color.setFitWidth(100.0);
 				this.freeMazeCard.getChildren().add(color);
 			} else if (!line[6].equals("null")) {
-				String getTreasure = "Frontend/Images/Treasures/" + line[6].toUpperCase() + ".png";
-				ImageView treasure = new ImageView(getTreasure);
+				String getTreasure = "Frontend/Images/Treasures/" + line[6] + ".png";
+				ImageView treasure = new ImageView(new Image(getTreasure));
 				treasure.setFitHeight(100.0);
 				treasure.setFitWidth(100.0);
 				this.freeMazeCard.getChildren().add(treasure);
@@ -487,8 +475,8 @@ public class FXMLController implements Initializable {
 		cardBack.setFitWidth(200.0);
 		this.activePlayerTreasureCard.getChildren().clear();
 		this.activePlayerTreasureCard.getChildren().add(cardBack);
-		String getTreasure = "Frontend/Images/Treasures/" + line[0].toUpperCase() + ".png";
-		ImageView treasure = new ImageView(getTreasure);
+		String getTreasure = "Frontend/Images/Treasures/" + line[0] + ".png";
+		ImageView treasure = new ImageView(new Image(getTreasure));
 		treasure.setFitHeight(250.0);
 		treasure.setFitWidth(200.0);
 		this.activePlayerTreasureCard.getChildren().add(treasure);
@@ -496,17 +484,14 @@ public class FXMLController implements Initializable {
 	}
 
 	@FXML
-	private void handlehideShow() {
+	private void handlehideShow(MouseEvent event) {
 
-		this.hideShow.setOnMouseClicked(event -> {
+		if (this.activePlayerTreasureCard.getChildren().size() == 1) {
+			getActivePlayerTreasureCard();
+		} else {
+			this.activePlayerTreasureCard.getChildren().remove(1);
+		}
 
-			if (this.activePlayerTreasureCard.getChildren().size() == 1) {
-				getActivePlayerTreasureCard();
-			} else {
-				this.activePlayerTreasureCard.getChildren().remove(1);
-			}
-
-		});
 	}
 
 	@FXML
@@ -528,7 +513,7 @@ public class FXMLController implements Initializable {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Error!");
 			alert.setHeaderText("");
-			alert.setContentText("You have to move gears first or cant move!");
+			alert.setContentText("Can't move!");
 
 			alert.showAndWait();
 
@@ -546,7 +531,7 @@ public class FXMLController implements Initializable {
 
 			getActivePlayerTreasureCard();
 			getPlayers();
-			
+
 		} else if (endRound.equals("GameOver: " + activePlayer[0] + " won the game!")) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Congratulation" + activePlayer[0]);
