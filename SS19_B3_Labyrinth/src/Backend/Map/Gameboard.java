@@ -603,7 +603,7 @@ public class Gameboard implements Serializable {
 	 */
 	private boolean moveFigureWithArray(int[] currentPos, int[] oldPos, int[][] visited, Figure figure) {
 
-		setAllNeighbours();
+		
 
 		if (oldPos[0] == currentPos[0] && oldPos[1] == currentPos[1]) {
 			return true;

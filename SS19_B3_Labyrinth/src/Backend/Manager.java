@@ -329,7 +329,8 @@ public class Manager implements Communication, Serializable {
 				this.gameboard.getMapCard(position[0], position[1]).addFigure(this.players.getActivePlayer());
 				this.players.getActivePlayer().setPos(position);
 				if (this.players.getActivePlayer().getTreasureCard() != null) {
-					this.players.getActivePlayer().getTreasureCard().found(this.gameboard.getMapCard(position[0], position[1]).getTreasure());
+					this.players.getActivePlayer().getTreasureCard()
+							.found(this.gameboard.getMapCard(position[0], position[1]).getTreasure());
 
 				}
 				result = true;
@@ -402,26 +403,33 @@ public class Manager implements Communication, Serializable {
 	@Override
 	public String saveGame(String path, String type) throws IOException {
 		String saver = null;
+		DataAccess save;
 
 		switch (type) {
-		case "serialization":
-			DataAccessSER saveSER = new DataAccessSER();
-
-			saveSER.writeToFile(Manager.this, path);
+		case "ser":
+			save = new DataAccessSER();
+			save.writeToFile(Manager.this, path);
 			saver = "Game saved successfully!";
 
 			break;
 
 		case "csv":
-			DataAccessCSV saveCSV = new DataAccessCSV();
-
-			saveCSV.writeToFile(this.gameboard, path);
+			save = new DataAccessCSV();
+			save.writeToFile(this.gameboard, path);
 			saver = "Game saved successfully!";
 
 			break;
+			
+			
+		case "json":
+			save = new DataAccessJSON();
+			save.writeToFile(this.players, path);
+			saver = "Game saved successfully!";
+			break;
 		}
 
-		return saver;
+	return saver;
+
 	}
 
 	/**
@@ -436,7 +444,7 @@ public class Manager implements Communication, Serializable {
 		String loader = "Game could not be loaded";
 		DataAccess load;
 		switch (type) {
-		case "serialization":
+		case "ser":
 
 			load = new DataAccessSER();
 			Manager deSer = (Manager) load.readFile(path);
@@ -458,9 +466,14 @@ public class Manager implements Communication, Serializable {
 
 			break;
 
+		case "json":
+			load = new DataAccessJSON();
+
+			break;
 		}
 
 		return loader;
+
 	}
 
 	/**

@@ -45,9 +45,10 @@
 		</VBox>
 	</right>
 	<bottom>
-		<HBox prefHeight="150.0" alignment="CENTER" spacing="10.0">
+		<HBox prefHeight="75.0" alignment="CENTER" spacing="10.0">
 			<Button text="SaveGame" styleClass="FrontButton" onAction="#handleSaveButton"/> 
 			<Button text="LoadMap" styleClass="FrontButton" onAction="#handleCSVLoadButton"/>
+			<Button text="LoadFigure" styleClass="FrontButton" onAction="#handleJSONLoadButton"/>
 			<Button text="CloseGame" styleClass="FrontButton"
 				onAction="#handleCloseButton" />
 		</HBox>

@@ -282,7 +282,7 @@ public class FXMLController implements Initializable {
 			String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
 			pane.getStylesheets().add(styleCss);
 			primaryStage.setScene(new Scene(pane, 1400, 900));
-			this.manager.loadGame(file.toString(), "serialization");
+			this.manager.loadGame(file.toString(), "ser");
 			getMaze();
 			getFreeCard();
 			getActivePlayerTreasureCard();
@@ -299,12 +299,34 @@ public class FXMLController implements Initializable {
 		File directory = new File(s);
 		FileChooser fileCSV = new FileChooser();
 		fileCSV.setInitialDirectory(directory);
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT (*.txt)", "*.txt");
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV (*.csv)", "*.csv");
 		fileCSV.getExtensionFilters().add(extFilter);
 		File file = fileCSV.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
 		if (file != null) {
 
 			this.manager.loadGame(file.toString(), "csv");
+			getMaze();
+			getFreeCard();
+			getActivePlayerTreasureCard();
+			getPlayers();
+
+		}
+
+	}
+	
+	@FXML
+	private void handleJSONLoadButton(ActionEvent event) throws ClassNotFoundException, IOException {
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		File directory = new File(s);
+		FileChooser fileCSV = new FileChooser();
+		fileCSV.setInitialDirectory(directory);
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("JSON (*.json)", "*.json");
+		fileCSV.getExtensionFilters().add(extFilter);
+		File file = fileCSV.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
+		if (file != null) {
+
+			this.manager.loadGame(file.toString(), "json");
 			getMaze();
 			getFreeCard();
 			getActivePlayerTreasureCard();
@@ -322,17 +344,21 @@ public class FXMLController implements Initializable {
 		File directory = new File(s);
 		FileChooser fileSave = new FileChooser();
 		fileSave.setInitialDirectory(directory);
-		FileChooser.ExtensionFilter extFilterCSV = new FileChooser.ExtensionFilter("TXT (*.txt)", "*.txt");
+		FileChooser.ExtensionFilter extFilterCSV = new FileChooser.ExtensionFilter("CSV (*.csv)", "*.csv");
 		FileChooser.ExtensionFilter extFilterSER = new FileChooser.ExtensionFilter("SER (*.ser)", "*.ser");
+		FileChooser.ExtensionFilter extFilterJSON = new FileChooser.ExtensionFilter("JSON (*.json)", "*.json");
 		fileSave.getExtensionFilters().add(extFilterCSV);
 		fileSave.getExtensionFilters().add(extFilterSER);
+		fileSave.getExtensionFilters().add(extFilterJSON);
 		File file = fileSave.showSaveDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
 		if (file != null) {
 			String path = file.getCanonicalPath().toLowerCase();
-			if (path.endsWith(".txt")) {
+			if (path.endsWith(".csv")) {
 				manager.saveGame(file.toString(), "csv");
 			} else if (path.endsWith(".ser")) {
 				manager.saveGame(file.toString(), "ser");
+			}else if(path.endsWith(".json")) {
+				manager.saveGame(file.toString(), "json");
 			}
 		}
 

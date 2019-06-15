@@ -9,8 +9,8 @@ import Backend.Map.Gameboard;
 
 public class DataAccessCSV_Test {
 
-	Gameboard csvBoard;
-	DataAccessCSV CSV;
+	private Gameboard csvBoard;
+	private DataAccessCSV CSV;
 
 	@Before
 	public void initialize() throws Exception {
@@ -30,7 +30,7 @@ public class DataAccessCSV_Test {
 	@Test
 	public void testReadFromFile() throws ClassNotFoundException, IOException {
 		
-		Gameboard load =  (Gameboard) CSV.readFile("unitCSVTest.txt");
+		Gameboard load =  (Gameboard) CSV.readFile("unitCSVTest.csv");
 		System.out.println(load.toString());
 		assertEquals(load.getMapCard(5, 4).toString(), csvBoard.getMapCard(5, 4).toString());
 

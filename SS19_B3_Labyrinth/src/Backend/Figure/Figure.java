@@ -34,6 +34,14 @@ public class Figure implements Serializable {
 		this.color = color;
 		this.pos = color.getPos();
 	}
+	
+	public Figure(String name, Color color, int[] pos) {
+
+		this.cardstack = new CardsStack();
+		this.name = name;
+		this.color = color;
+		this.pos = pos;
+	}
 
 	/**
 	 * Getter für das Attribut name.
