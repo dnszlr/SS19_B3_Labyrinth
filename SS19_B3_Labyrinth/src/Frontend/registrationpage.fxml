@@ -8,11 +8,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.CheckBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.FXMLController" xmlns="http://javafx.com/javafx/3.5" alignment="TOP_CENTER" styleClass="startPage" spacing="150.0">
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.FXMLController" xmlns="http://javafx.com/javafx/3.5" alignment="TOP_CENTER" styleClass="startPage" spacing="50.0">
 		<children>
 			<Label styleClass="Header" fx:id="Header" text="Java:'Adventures in Info2'" alignment="CENTER" prefHeight="350.0"/>
-			<Button styleClass="FrontButton" fx:id="MazeButton" text="Enter the Maze" prefHeight="75.0" prefWidth="175.0" alignment="CENTER"  textAlignment="CENTER" onAction="#handleMazeButton"/>	
+			<Button styleClass="FrontButton" fx:id="MazeButton" text="Enter the Maze" prefHeight="75.0" prefWidth="175.0" alignment="CENTER"  textAlignment="CENTER" onAction="#handleMazeButton"/>
+			<Button text="LoadFigures" styleClass="FrontButton" prefHeight="75.0" prefWidth="175.0" alignment="CENTER"  textAlignment="CENTER" onAction="#handleJSONLoadButton"/>
 		</children>
 		<HBox spacing="75.0" alignment="BOTTOM_CENTER" >
 			<VBox spacing="10.0" alignment="CENTER">
@@ -32,5 +34,10 @@
 				<TextField promptText="Enter Player Name!" fx:id="BlueField" disable="true"/>
 			</VBox>
 		</HBox>
-	
+		<HBox spacing="200.0" alignment="BOTTOM_CENTER" >
+			<CheckBox fx:id="RedKI" alignment="CENTER"></CheckBox>
+			<CheckBox fx:id="YellowKI" alignment="CENTER"></CheckBox>
+			<CheckBox fx:id="GreenKI" alignment="CENTER"></CheckBox>
+			<CheckBox fx:id="BlueKI" alignment="CENTER"></CheckBox>
+		</HBox>
 </VBox>

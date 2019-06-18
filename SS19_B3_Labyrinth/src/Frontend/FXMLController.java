@@ -1,5 +1,6 @@
 package Frontend;
 
+import javafx.scene.control.CheckBox;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -63,6 +64,14 @@ public class FXMLController implements Initializable {
 	private Button BluePlayer;
 	@FXML
 	private TextField BlueField;
+	@FXML
+	private CheckBox RedKI;
+	@FXML
+	private CheckBox YellowKI;
+	@FXML
+	private CheckBox GreenKI;
+	@FXML
+	private CheckBox BlueKI;
 
 	// gameController
 	@FXML
@@ -257,6 +266,7 @@ public class FXMLController implements Initializable {
 			getFreeCard();
 			getActivePlayerTreasureCard();
 			getPlayers();
+			checkIfKITurn();
 			primaryStage.show();
 		}
 
@@ -313,7 +323,7 @@ public class FXMLController implements Initializable {
 		}
 
 	}
-	
+
 	@FXML
 	private void handleJSONLoadButton(ActionEvent event) throws ClassNotFoundException, IOException {
 		Path currentRelativePath = Paths.get("");
@@ -326,7 +336,16 @@ public class FXMLController implements Initializable {
 		File file = fileCSV.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
 		if (file != null) {
 
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("gamepage.fxml"));
+			loader.setController(this);
+			Parent pane = loader.load();
+			Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			primaryStage.setTitle("Java: 'Adventures in Info2'");
+			String styleCss = LabyrinthFXML.class.getResource("Style.css").toExternalForm();
+			pane.getStylesheets().add(styleCss);
+			primaryStage.setScene(new Scene(pane, 1400, 900));
 			this.manager.loadGame(file.toString(), "json");
+			manager.startGame();
 			getMaze();
 			getFreeCard();
 			getActivePlayerTreasureCard();
@@ -357,7 +376,7 @@ public class FXMLController implements Initializable {
 				manager.saveGame(file.toString(), "csv");
 			} else if (path.endsWith(".ser")) {
 				manager.saveGame(file.toString(), "ser");
-			}else if(path.endsWith(".json")) {
+			} else if (path.endsWith(".json")) {
 				manager.saveGame(file.toString(), "json");
 			}
 		}
@@ -368,19 +387,39 @@ public class FXMLController implements Initializable {
 
 		if (this.RedField.isDisable() == false && !this.RedField.getText().equals("null")
 				&& this.RedField.getText().length() > 0) {
-			manager.addPlayer(RedField.getText(), "RED");
+
+			if (this.RedKI.isSelected()) {
+				manager.addKI(RedField.getText(), "RED");
+			} else {
+				manager.addPlayer(RedField.getText(), "RED");
+			}
 		}
 		if (this.YellowField.isDisable() == false && !this.YellowField.getText().equals("null")
 				&& this.YellowField.getText().length() > 0) {
-			manager.addPlayer(YellowField.getText(), "YELLOW");
+
+			if (this.YellowKI.isSelected()) {
+				manager.addKI(YellowField.getText(), "YELLOW");
+			} else {
+				manager.addPlayer(YellowField.getText(), "YELLOW");
+			}
 		}
 		if (this.GreenField.isDisable() == false && !this.GreenField.getText().equals("null")
 				&& this.GreenField.getText().length() > 0) {
-			manager.addPlayer(GreenField.getText(), "GREEN");
+
+			if (this.GreenKI.isSelected()) {
+				manager.addKI(GreenField.getText(), "GREEN");
+			} else {
+				manager.addPlayer(GreenField.getText(), "GREEN");
+			}
 		}
 		if (this.BlueField.isDisable() == false && !this.BlueField.getText().equals("null")
 				&& this.BlueField.getText().length() > 0) {
-			manager.addPlayer(BlueField.getText(), "BLUE");
+
+			if (this.BlueKI.isSelected()) {
+				manager.addKI(BlueField.getText(), "BLUE");
+			} else {
+				manager.addPlayer(BlueField.getText(), "Blue");
+			}
 		}
 
 	}
@@ -514,7 +553,18 @@ public class FXMLController implements Initializable {
 		} else {
 			this.activePlayerTreasureCard.getChildren().remove(1);
 		}
+	}
 
+	private void checkIfKITurn() {
+
+		if (manager.checkBotsTurn()) {
+			manager.KIRound();
+			getFreeCard();
+			getMaze();
+			this.EndRound.fire();
+		}
+		
+		
 	}
 
 	@FXML
@@ -537,7 +587,6 @@ public class FXMLController implements Initializable {
 			alert.setTitle("Error!");
 			alert.setHeaderText("");
 			alert.setContentText("Can't move!");
-
 			alert.showAndWait();
 
 		}
@@ -569,8 +618,9 @@ public class FXMLController implements Initializable {
 
 			getActivePlayerTreasureCard();
 			getPlayers();
+			checkIfKITurn();
 
-		} else{
+		} else {
 
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Error!");

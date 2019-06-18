@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import Backend.Cards.ObjectCard;
 import Backend.Figure.Figure;
 import Backend.Map.Gameboard;
+import Backend.Map.MazeCard;
 import Interface.Communication;
 import Interface.DataAccess;
 
@@ -101,7 +103,13 @@ public class Manager implements Communication, Serializable {
 	 */
 	@Override
 	public String getActivePlayerTreasureCard() {
-		String activePlayerTreasureCard = this.players.getActivePlayer().getTreasureCard().toString();
+
+		String activePlayerTreasureCard = this.players.getActivePlayer().getColor().toString();
+
+		if (this.players.getActivePlayer().getTreasureCard() != null) {
+			activePlayerTreasureCard = this.players.getActivePlayer().getTreasureCard().toString();
+		}
+
 		return activePlayerTreasureCard;
 	}
 
@@ -154,15 +162,36 @@ public class Manager implements Communication, Serializable {
 	}
 
 	/**
+	 * Methode um eine KI dem Spiel hinzuzufügen
+	 */
+	@Override
+	public String addKI(String name, String color) { // ??
+
+		String addPlayer = "Name can't be null or color name must be red, yellow, green or blue";
+		if (name != null && (color.toLowerCase().equals("red") || color.toLowerCase().equals("blue")
+				|| color.toLowerCase().equals("yellow") || color.toLowerCase().equals("green"))) {
+			Color playerColor = Color.valueOf(color);
+			Figure newPlayer = new Figure(name, playerColor);
+			newPlayer.setKI(true);
+			if (this.players.addFigure(newPlayer)) {
+				addPlayer = newPlayer.toString();
+			} else {
+				addPlayer = "No duplicated colors allowed!";
+			}
+		}
+		return addPlayer;
+	}
+
+	/**
 	 * Methode um das Spiel zu starten.
 	 * 
 	 * @return String
 	 */
 	@Override
 	public String startGame() {
+		
 		String startGame = null;
-
-		if (this.players.getActivePlayer() != null) {
+		if (this.players.getActivePlayer() != null && this.players.getActivePlayer().getTreasureCard() == null) {
 			for (Treasure i : Treasure.values()) {
 				this.objectCards.add(new ObjectCard(i));
 			}
@@ -187,7 +216,8 @@ public class Manager implements Communication, Serializable {
 			gameboard.placeFigures(participants);
 
 			startGame = getMap() + ";" + objectCards.toString();
-		} else {
+			
+		}else {
 			startGame = "Please add Players befor you start the game";
 		}
 
@@ -322,10 +352,7 @@ public class Manager implements Communication, Serializable {
 				&& this.isPlaceMazeCard == true) {
 			if (this.gameboard.moveFigure(position, this.players.getActivePlayer().getPos(),
 					this.players.getActivePlayer())) {
-				this.gameboard
-						.getMapCard(this.players.getActivePlayer().getPos()[0],
-								this.players.getActivePlayer().getPos()[1])
-						.removeFigure(this.players.getActivePlayer());
+				this.gameboard.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1]).removeFigure(this.players.getActivePlayer());
 				this.gameboard.getMapCard(position[0], position[1]).addFigure(this.players.getActivePlayer());
 				this.players.getActivePlayer().setPos(position);
 				if (this.players.getActivePlayer().getTreasureCard() != null) {
@@ -369,7 +396,8 @@ public class Manager implements Communication, Serializable {
 			return "won the game!";
 		} else {
 			if (this.players.getActivePlayer().isAllFound()) {
-				if (this.players.getActivePlayer().getTreasureCard().isFound()) {
+				if (this.players.getActivePlayer().getTreasureCard() != null
+						&& this.players.getActivePlayer().getTreasureCard().isFound()) {
 					this.players.getActivePlayer().isFound(players.getActivePlayer().getTreasureCard());
 
 				}
@@ -392,6 +420,118 @@ public class Manager implements Communication, Serializable {
 		}
 
 		return result;
+	}
+
+	/**
+	 * Methode zur Steuerung der KI.
+	 * 
+	 */
+	@Override
+	public void KIRound() {
+
+		String[][] copy = getMap();
+		int[] pos = null;
+		String search;
+
+		ArrayList<PositionsCard> move = new ArrayList<PositionsCard>();
+		for (PositionsCard i : PositionsCard.values()) {
+			move.add(i);
+		}
+		if (this.players.getActivePlayer().getTreasureCard() != null) {
+
+			search = this.players.getActivePlayer().getTreasureCard().toString().split(";")[0];
+
+			for (int i = 0; i < copy.length; i++) {
+				for (int j = 0; j < copy[i].length; j++) {
+					String[] split = copy[i][j].split(";");
+					if (split[6].equals(search)) {
+						pos = new int[] { i, j };
+					}
+				}
+			}
+			if (pos == null) {
+				pos = this.players.getActivePlayer().getPos();
+			}
+
+		} else {
+			pos = this.players.getActivePlayer().getColor().getPos();
+
+		}
+		if (KIMove(pos, move, 0, 0)) {
+			moveFigure(pos);
+		} else {
+			int random = (int) (Math.random() * (move.size() - 1));
+			if (checkMoveGears(move.get(random))) {
+				moveGears(move.get(random).toString());
+			} else if (random % 2 == 0) {
+				moveGears(move.get(random + 1).toString());
+			} else {
+				moveGears(move.get(random - 1).toString());
+			}
+			ArrayList<int[]> possible = new ArrayList<int[]>();
+			for (int i = 0; i < 7; i++) {
+				for (int j = 0; j < 7; j++) {
+					if (this.gameboard.moveFigure(new int[] { i, j }, this.players.getActivePlayer().getPos(),
+							this.players.getActivePlayer())) {
+						possible.add(new int[] { i, j });
+					}
+				}
+			}
+			int randomWay = (int) (Math.random() * (possible.size() - 1));
+
+			moveFigure(possible.get(randomWay));
+
+		}
+	}
+
+	/**
+	 * Methode zur Bewegung der KI
+	 * 
+	 * @param destination
+	 * @param move
+	 * @param index
+	 * @return int
+	 */
+	private boolean KIMove(int[] destination, ArrayList<PositionsCard> move, int index, int rotate) { // ??
+
+		if (index + 1 > move.size() - 1) {
+			return false;
+		}
+		if (checkMoveGears(move.get(index)) == false) {
+
+			index = index + 1;
+		}
+		this.gameboard.moveGears(move.get(index), this.gameboard.getFreeCard());
+		if (this.gameboard.moveFigure(destination, this.players.getActivePlayer().getPos(),
+				this.players.getActivePlayer())) {
+			if (index % 2 == 0) {
+				this.gameboard.moveGears(move.get(index + 1), this.gameboard.getFreeCard());
+			} else {
+				this.gameboard.moveGears(move.get(index - 1), this.gameboard.getFreeCard());
+			}
+			moveGears(move.get(index).toString());
+			return true;
+
+		} else {
+			if (index % 2 == 0) {
+				this.gameboard.moveGears(move.get(index + 1), this.gameboard.getFreeCard());
+			} else {
+				this.gameboard.moveGears(move.get(index - 1), this.gameboard.getFreeCard());
+			}
+			this.gameboard.getFreeCard().rotateLeft();
+			if (rotate < 3) {
+				if (KIMove(destination, move, index, rotate = rotate + 1)) {
+					return true;
+				}
+			} else {
+				if (KIMove(destination, move, index = index + 1, 0)) {
+					return true;
+				}
+			}
+
+		}
+
+		return false;
 	}
 
 	/**
@@ -419,16 +559,15 @@ public class Manager implements Communication, Serializable {
 			saver = "Game saved successfully!";
 
 			break;
-			
-			
+
 		case "json":
 			save = new DataAccessJSON();
-			save.writeToFile(this.players, path);
+			save.writeToFile(this.getPlayers(), path);
 			saver = "Game saved successfully!";
 			break;
 		}
 
-	return saver;
+		return saver;
 
 	}
 
@@ -468,6 +607,8 @@ public class Manager implements Communication, Serializable {
 
 		case "json":
 			load = new DataAccessJSON();
+			this.players = (RingBufferPlayers) load.readFile(path);
+			loader = "Game successfully loaded!";
 
 			break;
 		}
@@ -504,6 +645,12 @@ public class Manager implements Communication, Serializable {
 			}
 		}
 		return rotateGear;
+	}
+
+	@Override
+	public boolean checkBotsTurn() { // ??
+
+		return players.getActivePlayer().getKI();
 	}
 
 }

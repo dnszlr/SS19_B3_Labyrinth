@@ -219,35 +219,31 @@ public class Gameboard implements Serializable {
 
 		for (int i = 0; i < this.map.length; i++) {
 			for (int j = 0; j < this.map[i].length; j++) {
-				
+
 				if (j != low) {
 					this.map[i][j].setNeighboring(this.map[i][j - 1], Direction.north);
 				}
-				if(j == low) {
+				if (j == low) {
 					this.map[i][j].setNeighboring(null, Direction.north);
 				}
 				if (j != high) {
 					this.map[i][j].setNeighboring(this.map[i][j + 1], Direction.south);
 				}
-				if(j == high) {
+				if (j == high) {
 					this.map[i][j].setNeighboring(null, Direction.south);
 				}
 				if (i != low) {
 					this.map[i][j].setNeighboring(this.map[i - 1][j], Direction.west);
 				}
-				if(i == low) {
+				if (i == low) {
 					this.map[i][j].setNeighboring(null, Direction.west);
 				}
 				if (i != high) {
 					this.map[i][j].setNeighboring(this.map[i + 1][j], Direction.east);
 				}
-				if(i == high) {
+				if (i == high) {
 					this.map[i][j].setNeighboring(null, Direction.east);
 				}
-				
-				
-				
-				
 
 			}
 
@@ -263,15 +259,8 @@ public class Gameboard implements Serializable {
 	public void placeFigures(Figure[] figures) {
 
 		for (int i = 0; i < figures.length; i++) {
-			if (figures[i].getColor().equals(this.getMapCard(0, 0).getColor())) {
-				this.getMapCard(0, 0).addFigure(figures[i]);
-			} else if (figures[i].getColor().equals(this.getMapCard(6, 0).getColor())) {
-				this.getMapCard(6, 0).addFigure(figures[i]);
-			} else if (figures[i].getColor().equals(this.getMapCard(6, 6).getColor())) {
-				this.getMapCard(6, 6).addFigure(figures[i]);
-			} else if (figures[i].getColor().equals(this.getMapCard(0, 6).getColor())) {
-				this.getMapCard(0, 6).addFigure(figures[i]);
-			}
+
+			this.getMapCard(figures[i].getPos()[0], figures[i].getPos()[1]).addFigure(figures[i]);
 
 		}
 
@@ -602,8 +591,6 @@ public class Gameboard implements Serializable {
 	 * @return boolean
 	 */
 	private boolean moveFigureWithArray(int[] currentPos, int[] oldPos, int[][] visited, Figure figure) {
-
-		
 
 		if (oldPos[0] == currentPos[0] && oldPos[1] == currentPos[1]) {
 			return true;

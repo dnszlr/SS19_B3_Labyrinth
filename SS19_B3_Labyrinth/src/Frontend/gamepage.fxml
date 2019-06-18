@@ -17,7 +17,8 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
 	xmlns="http://javafx.com/javafx/3.5" styleClass="gameBackground">
 	<top>
-		<HBox fx:id="players" prefHeight="50.0" alignment="CENTER" spacing="25.0"/>
+		<HBox fx:id="players" prefHeight="50.0" alignment="CENTER"
+			spacing="25.0" />
 	</top>
 	<left>
 		<VBox prefWidth="300.0" alignment="CENTER" spacing="10.0">
@@ -32,8 +33,9 @@
 	</left>
 	<right>
 		<VBox prefWidth="300.0" alignment="CENTER" spacing="10.0">
-			<Button fx:id="EndRound" text="EndRound" styleClass="FrontButton"
-				prefHeight="50.0" prefWidth="175.0" onMouseClicked="#handleEndRound"/>
+			<Button fx:id="EndRound" text="EndRound"
+				styleClass="FrontButton" prefHeight="50.0" prefWidth="175.0"
+				onMouseClicked="#handleEndRound" />
 			<StackPane fx:id="freeMazeCard">
 			</StackPane>
 			<Button fx:id="rotateLeft" text="RotateCardLeft"
@@ -46,9 +48,10 @@
 	</right>
 	<bottom>
 		<HBox prefHeight="75.0" alignment="CENTER" spacing="10.0">
-			<Button text="SaveGame" styleClass="FrontButton" onAction="#handleSaveButton"/> 
-			<Button text="LoadMap" styleClass="FrontButton" onAction="#handleCSVLoadButton"/>
-			<Button text="LoadFigure" styleClass="FrontButton" onAction="#handleJSONLoadButton"/>
+			<Button text="SaveGame" styleClass="FrontButton"
+				onAction="#handleSaveButton" />
+			<Button text="LoadMap" styleClass="FrontButton"
+				onAction="#handleCSVLoadButton" />
 			<Button text="CloseGame" styleClass="FrontButton"
 				onAction="#handleCloseButton" />
 		</HBox>
@@ -58,7 +61,7 @@
 			<children>
 				<Button fx:id="A2move" text="A2" GridPane.columnIndex="2"
 					GridPane.rowIndex="0" prefWidth="100.0" styleClass="FrontButton"
-					onAction="#moveGears"/>
+					onAction="#moveGears" />
 				<Button fx:id="A4move" text="A4" GridPane.columnIndex="4"
 					GridPane.rowIndex="0" prefWidth="100.0" styleClass="FrontButton"
 					onAction="#moveGears" />
@@ -75,199 +78,248 @@
 					GridPane.rowIndex="8" prefWidth="100.0" styleClass="FrontButton"
 					onAction="#moveGears" />
 				<StackPane fx:id="A1" GridPane.columnIndex="1"
-					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="A2" GridPane.columnIndex="2"
-					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="A3" GridPane.columnIndex="3"
-					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="A4" GridPane.columnIndex="4"
-					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="A5" GridPane.columnIndex="5"
-					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="A6" GridPane.columnIndex="6"
-					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="A7" GridPane.columnIndex="7"
-					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="1" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="B1" GridPane.columnIndex="1"
-					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="B2" GridPane.columnIndex="2"
-					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="B3" GridPane.columnIndex="3"
-					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="B4" GridPane.columnIndex="4"
-					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="B5" GridPane.columnIndex="5"
-					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="B6" GridPane.columnIndex="6"
-					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="B7" GridPane.columnIndex="7"
-					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="2" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="C1" GridPane.columnIndex="1"
-					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="C2" GridPane.columnIndex="2"
-					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="C3" GridPane.columnIndex="3"
-					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="C4" GridPane.columnIndex="4"
-					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="C5" GridPane.columnIndex="5"
-					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="C6" GridPane.columnIndex="6"
-					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="C7" GridPane.columnIndex="7"
-					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="3" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="D1" GridPane.columnIndex="1"
-					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="D2" GridPane.columnIndex="2"
-					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="D3" GridPane.columnIndex="3"
-					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="D4" GridPane.columnIndex="4"
-					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="D5" GridPane.columnIndex="5"
-					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="D6" GridPane.columnIndex="6"
-					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="D7" GridPane.columnIndex="7"
-					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="4" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="E1" GridPane.columnIndex="1"
-					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="E2" GridPane.columnIndex="2"
-					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="E3" GridPane.columnIndex="3"
-					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="E4" GridPane.columnIndex="4"
-					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="E5" GridPane.columnIndex="5"
-					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="E6" GridPane.columnIndex="6"
-					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="E7" GridPane.columnIndex="7"
-					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="5" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="F1" GridPane.columnIndex="1"
-					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="F2" GridPane.columnIndex="2"
-					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="F3" GridPane.columnIndex="3"
-					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="F4" GridPane.columnIndex="4"
-					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="F5" GridPane.columnIndex="5"
-					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="F6" GridPane.columnIndex="6"
-					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="F7" GridPane.columnIndex="7"
-					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="6" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="G1" GridPane.columnIndex="1"
-					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="G2" GridPane.columnIndex="2"
-					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="G3" GridPane.columnIndex="3"
-					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="G4" GridPane.columnIndex="4"
-					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="G5" GridPane.columnIndex="5"
-					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="G6" GridPane.columnIndex="6"
-					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<StackPane fx:id="G7" GridPane.columnIndex="7"
-					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure" styleClass="field">
+					GridPane.rowIndex="7" onMouseClicked="#handleMoveFigure"
+					styleClass="field">
 
 				</StackPane>
 				<Button fx:id="B1move" text="B1" GridPane.columnIndex="0"

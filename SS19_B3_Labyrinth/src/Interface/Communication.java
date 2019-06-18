@@ -37,5 +37,11 @@ public interface Communication {
 	public String getFreeMazeCard();
 	
 	public String rotateGear(String direction);
+	
+	public void KIRound(); // ??
+
+	boolean checkBotsTurn(); //??
+
+	String addKI(String name, String color); //??
 
 }

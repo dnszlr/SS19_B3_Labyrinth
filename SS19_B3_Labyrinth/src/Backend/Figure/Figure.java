@@ -19,6 +19,7 @@ public class Figure implements Serializable {
 	private Color color;
 	private ObjectCard treasureCard;
 	private CardsStack cardstack;
+	private boolean KI;
 
 	/**
 	 * Konstruktor der Klasse Figure.
@@ -33,6 +34,7 @@ public class Figure implements Serializable {
 		this.name = name;
 		this.color = color;
 		this.pos = color.getPos();
+		this.KI = false;
 	}
 	
 	public Figure(String name, Color color, int[] pos) {
@@ -41,6 +43,7 @@ public class Figure implements Serializable {
 		this.name = name;
 		this.color = color;
 		this.pos = pos;
+		this.KI = false;
 	}
 
 	/**
@@ -55,11 +58,28 @@ public class Figure implements Serializable {
 	}
 
 	/**
+	 * Setter um eine KI zu erstellen.
+	 * @param KI
+	 */
+	
+	public void setKI(boolean KI) {
+		
+		this.KI = KI;
+	}
+	/**
+	 * Getter für das Attribut KI.
+	 * 
+	 * @return boolean
+	 */
+	public boolean getKI() {
+		
+		return this.KI;
+	}
+	/**
 	 * Getter für das Attribut color.
 	 * 
 	 * @return Color
 	 */
-
 	public Color getColor() {
 
 		return this.color;
