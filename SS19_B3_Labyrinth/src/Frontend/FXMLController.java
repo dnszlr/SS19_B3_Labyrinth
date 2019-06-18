@@ -345,7 +345,6 @@ public class FXMLController implements Initializable {
 			pane.getStylesheets().add(styleCss);
 			primaryStage.setScene(new Scene(pane, 1400, 900));
 			this.manager.loadGame(file.toString(), "json");
-			manager.startGame();
 			getMaze();
 			getFreeCard();
 			getActivePlayerTreasureCard();
@@ -558,6 +557,7 @@ public class FXMLController implements Initializable {
 	private void checkIfKITurn() {
 
 		if (manager.checkBotsTurn()) {
+			
 			manager.KIRound();
 			getFreeCard();
 			getMaze();
