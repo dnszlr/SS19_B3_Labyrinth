@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+
 import Backend.Cards.ObjectCard;
 import Backend.Figure.Figure;
 import Backend.Map.Gameboard;
@@ -189,7 +191,7 @@ public class Manager implements Communication, Serializable {
 	 */
 	@Override
 	public String startGame() {
-		
+
 		String startGame = null;
 		if (this.players.getActivePlayer() != null && this.players.getActivePlayer().getTreasureCard() == null) {
 			for (Treasure i : Treasure.values()) {
@@ -216,8 +218,8 @@ public class Manager implements Communication, Serializable {
 			gameboard.placeFigures(participants);
 
 			startGame = getMap() + ";" + objectCards.toString();
-			
-		}else {
+
+		} else {
 			startGame = "Please add Players befor you start the game";
 		}
 
@@ -352,7 +354,10 @@ public class Manager implements Communication, Serializable {
 				&& this.isPlaceMazeCard == true) {
 			if (this.gameboard.moveFigure(position, this.players.getActivePlayer().getPos(),
 					this.players.getActivePlayer())) {
-				this.gameboard.getMapCard(this.players.getActivePlayer().getPos()[0], this.players.getActivePlayer().getPos()[1]).removeFigure(this.players.getActivePlayer());
+				this.gameboard
+						.getMapCard(this.players.getActivePlayer().getPos()[0],
+								this.players.getActivePlayer().getPos()[1])
+						.removeFigure(this.players.getActivePlayer());
 				this.gameboard.getMapCard(position[0], position[1]).addFigure(this.players.getActivePlayer());
 				this.players.getActivePlayer().setPos(position);
 				if (this.players.getActivePlayer().getTreasureCard() != null) {
@@ -460,7 +465,7 @@ public class Manager implements Communication, Serializable {
 		if (KIMove(pos, move, 0, 0)) {
 			moveFigure(pos);
 		} else {
-			int random = (int) (Math.random() * (move.size() - 1));
+			int random = new Random().nextInt(move.size());
 			if (checkMoveGears(move.get(random))) {
 				moveGears(move.get(random).toString());
 			} else if (random % 2 == 0) {
@@ -477,7 +482,8 @@ public class Manager implements Communication, Serializable {
 					}
 				}
 			}
-			int randomWay = (int) (Math.random() * (possible.size() - 1));
+			int randomWay = new Random().nextInt(possible.size());
+			System.out.println(randomWay);
 
 			moveFigure(possible.get(randomWay));
 
@@ -494,12 +500,16 @@ public class Manager implements Communication, Serializable {
 	 */
 	private boolean KIMove(int[] destination, ArrayList<PositionsCard> move, int index, int rotate) { // ??
 
-		if (index + 1 > move.size() - 1) {
+		if (index == move.size()) {
 			return false;
 		}
 		if (checkMoveGears(move.get(index)) == false) {
+			if (index < move.size() - 1) {
+				index = index + 1;
+			} else {
+				return false;
+			}
 
-			index = index + 1;
 		}
 		this.gameboard.moveGears(move.get(index), this.gameboard.getFreeCard());
 		if (this.gameboard.moveFigure(destination, this.players.getActivePlayer().getPos(),
