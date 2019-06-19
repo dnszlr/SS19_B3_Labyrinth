@@ -1,18 +1,14 @@
 package Backend;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
 import Backend.Cards.ObjectCard;
 import Backend.Figure.Figure;
 import Backend.Map.Gameboard;
-import Backend.Map.MazeCard;
 import Interface.Communication;
 import Interface.DataAccess;
 
@@ -434,24 +430,25 @@ public class Manager implements Communication, Serializable {
 	@Override
 	public void KIRound() {
 
-		
-
 		ArrayList<PositionsCard> move = new ArrayList<PositionsCard>();
 		for (PositionsCard i : PositionsCard.values()) {
 			move.add(i);
 		}
-		
+
 		if (KIMove(move, 0, 0)) {
-			moveFigure(searchPosition(this.players.getActivePlayer().getTreasureCard().toString()));
-			
+			moveFigure(searchPosition());
+
 		} else {
 			int random = new Random().nextInt(move.size());
 			if (checkMoveGears(move.get(random))) {
 				moveGears(move.get(random).toString());
-			} else if (random % 2 == 0) {
-				moveGears(move.get(random + 1).toString());
 			} else {
-				moveGears(move.get(random - 1).toString());
+				if (random % 2 == 0) {
+					moveGears(move.get(random + 1).toString());
+				} else {
+					moveGears(move.get(random - 1).toString());
+				}
+
 			}
 			ArrayList<int[]> possible = new ArrayList<int[]>();
 			for (int i = 0; i < 7; i++) {
@@ -477,7 +474,7 @@ public class Manager implements Communication, Serializable {
 	 * @param index
 	 * @return int
 	 */
-	private boolean KIMove(ArrayList<PositionsCard> move, int index, int rotate) { // ??
+	private boolean KIMove(ArrayList<PositionsCard> move, int index, int rotate) {
 
 		if (index == move.size()) {
 			return false;
@@ -491,7 +488,7 @@ public class Manager implements Communication, Serializable {
 
 		}
 		this.gameboard.moveGears(move.get(index), this.gameboard.getFreeCard());
-		int[] destination = searchPosition(this.players.getActivePlayer().getTreasureCard().toString());
+		int[] destination = searchPosition();
 		if (this.gameboard.moveFigure(destination, this.players.getActivePlayer().getPos(),
 				this.players.getActivePlayer())) {
 			if (index % 2 == 0) {
@@ -523,19 +520,19 @@ public class Manager implements Communication, Serializable {
 
 		return false;
 	}
-	
+
 	/**
 	 * Methode um das Zielfeld der KI zu bestimmen
 	 */
-	
-	private int[] searchPosition(String search) {
-		
+
+	private int[] searchPosition() {
+
 		String[][] copy = getMap();
 		int[] pos = null;
 
 		if (this.players.getActivePlayer().getTreasureCard() != null) {
 
-			search = this.players.getActivePlayer().getTreasureCard().toString().split(";")[0];
+			String search = this.players.getActivePlayer().getTreasureCard().toString().split(";")[0];
 
 			for (int i = 0; i < copy.length; i++) {
 				for (int j = 0; j < copy[i].length; j++) {
@@ -675,7 +672,7 @@ public class Manager implements Communication, Serializable {
 	}
 
 	@Override
-	public boolean checkBotsTurn() { // ??
+	public boolean checkBotsTurn() {
 
 		return players.getActivePlayer().getKI();
 	}
