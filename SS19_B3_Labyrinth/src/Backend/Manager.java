@@ -434,14 +434,105 @@ public class Manager implements Communication, Serializable {
 	@Override
 	public void KIRound() {
 
-		String[][] copy = getMap();
-		int[] pos = null;
-		String search;
+		
 
 		ArrayList<PositionsCard> move = new ArrayList<PositionsCard>();
 		for (PositionsCard i : PositionsCard.values()) {
 			move.add(i);
 		}
+		
+		if (KIMove(move, 0, 0)) {
+			moveFigure(searchPosition(this.players.getActivePlayer().getTreasureCard().toString()));
+			
+		} else {
+			int random = new Random().nextInt(move.size());
+			if (checkMoveGears(move.get(random))) {
+				moveGears(move.get(random).toString());
+			} else if (random % 2 == 0) {
+				moveGears(move.get(random + 1).toString());
+			} else {
+				moveGears(move.get(random - 1).toString());
+			}
+			ArrayList<int[]> possible = new ArrayList<int[]>();
+			for (int i = 0; i < 7; i++) {
+				for (int j = 0; j < 7; j++) {
+					if (this.gameboard.moveFigure(new int[] { i, j }, this.players.getActivePlayer().getPos(),
+							this.players.getActivePlayer())) {
+						possible.add(new int[] { i, j });
+					}
+				}
+			}
+			int randomWay = new Random().nextInt(possible.size());
+
+			moveFigure(possible.get(randomWay));
+
+		}
+	}
+
+	/**
+	 * Methode zur Bewegung der KI
+	 * 
+	 * @param destination
+	 * @param move
+	 * @param index
+	 * @return int
+	 */
+	private boolean KIMove(ArrayList<PositionsCard> move, int index, int rotate) { // ??
+
+		if (index == move.size()) {
+			return false;
+		}
+		if (checkMoveGears(move.get(index)) == false) {
+			if (index < move.size() - 1) {
+				index = index + 1;
+			} else {
+				return false;
+			}
+
+		}
+		this.gameboard.moveGears(move.get(index), this.gameboard.getFreeCard());
+		int[] destination = searchPosition(this.players.getActivePlayer().getTreasureCard().toString());
+		if (this.gameboard.moveFigure(destination, this.players.getActivePlayer().getPos(),
+				this.players.getActivePlayer())) {
+			if (index % 2 == 0) {
+				this.gameboard.moveGears(move.get(index + 1), this.gameboard.getFreeCard());
+			} else {
+				this.gameboard.moveGears(move.get(index - 1), this.gameboard.getFreeCard());
+			}
+			moveGears(move.get(index).toString());
+			return true;
+
+		} else {
+			if (index % 2 == 0) {
+				this.gameboard.moveGears(move.get(index + 1), this.gameboard.getFreeCard());
+			} else {
+				this.gameboard.moveGears(move.get(index - 1), this.gameboard.getFreeCard());
+			}
+			this.gameboard.getFreeCard().rotateLeft();
+			if (rotate < 3) {
+				if (KIMove(move, index, rotate = rotate + 1)) {
+					return true;
+				}
+			} else {
+				if (KIMove(move, index = index + 1, 0)) {
+					return true;
+				}
+			}
+
+		}
+
+		return false;
+	}
+	
+	/**
+	 * Methode um das Zielfeld der KI zu bestimmen
+	 */
+	
+	private int[] searchPosition(String search) {
+		
+		String[][] copy = getMap();
+		int[] pos = null;
+
 		if (this.players.getActivePlayer().getTreasureCard() != null) {
 
 			search = this.players.getActivePlayer().getTreasureCard().toString().split(";")[0];
@@ -462,86 +553,7 @@ public class Manager implements Communication, Serializable {
 			pos = this.players.getActivePlayer().getColor().getPos();
 
 		}
-		if (KIMove(pos, move, 0, 0)) {
-			moveFigure(pos);
-		} else {
-			int random = new Random().nextInt(move.size());
-			if (checkMoveGears(move.get(random))) {
-				moveGears(move.get(random).toString());
-			} else if (random % 2 == 0) {
-				moveGears(move.get(random + 1).toString());
-			} else {
-				moveGears(move.get(random - 1).toString());
-			}
-			ArrayList<int[]> possible = new ArrayList<int[]>();
-			for (int i = 0; i < 7; i++) {
-				for (int j = 0; j < 7; j++) {
-					if (this.gameboard.moveFigure(new int[] { i, j }, this.players.getActivePlayer().getPos(),
-							this.players.getActivePlayer())) {
-						possible.add(new int[] { i, j });
-					}
-				}
-			}
-			int randomWay = new Random().nextInt(possible.size());
-			System.out.println(randomWay);
-
-			moveFigure(possible.get(randomWay));
-
-		}
-	}
-
-	/**
-	 * Methode zur Bewegung der KI
-	 * 
-	 * @param destination
-	 * @param move
-	 * @param index
-	 * @return int
-	 */
-	private boolean KIMove(int[] destination, ArrayList<PositionsCard> move, int index, int rotate) { // ??
-
-		if (index == move.size()) {
-			return false;
-		}
-		if (checkMoveGears(move.get(index)) == false) {
-			if (index < move.size() - 1) {
-				index = index + 1;
-			} else {
-				return false;
-			}
-
-		}
-		this.gameboard.moveGears(move.get(index), this.gameboard.getFreeCard());
-		if (this.gameboard.moveFigure(destination, this.players.getActivePlayer().getPos(),
-				this.players.getActivePlayer())) {
-			if (index % 2 == 0) {
-				this.gameboard.moveGears(move.get(index + 1), this.gameboard.getFreeCard());
-			} else {
-				this.gameboard.moveGears(move.get(index - 1), this.gameboard.getFreeCard());
-			}
-			moveGears(move.get(index).toString());
-			return true;
-
-		} else {
-			if (index % 2 == 0) {
-				this.gameboard.moveGears(move.get(index + 1), this.gameboard.getFreeCard());
-			} else {
-				this.gameboard.moveGears(move.get(index - 1), this.gameboard.getFreeCard());
-			}
-			this.gameboard.getFreeCard().rotateLeft();
-			if (rotate < 3) {
-				if (KIMove(destination, move, index, rotate = rotate + 1)) {
-					return true;
-				}
-			} else {
-				if (KIMove(destination, move, index = index + 1, 0)) {
-					return true;
-				}
-			}
-
-		}
-
-		return false;
+		return pos;
 	}
 
 	/**
