@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 import Backend.Manager;
 import Interface.Communication;
@@ -345,6 +344,7 @@ public class FXMLController implements Initializable {
 			pane.getStylesheets().add(styleCss);
 			primaryStage.setScene(new Scene(pane, 1400, 900));
 			this.manager.loadGame(file.toString(), "json");
+			this.manager.startGame();
 			getMaze();
 			getFreeCard();
 			getActivePlayerTreasureCard();
@@ -417,7 +417,7 @@ public class FXMLController implements Initializable {
 			if (this.BlueKI.isSelected()) {
 				manager.addKI(BlueField.getText(), "BLUE");
 			} else {
-				manager.addPlayer(BlueField.getText(), "Blue");
+				manager.addPlayer(BlueField.getText(), "BLUE");
 			}
 		}
 

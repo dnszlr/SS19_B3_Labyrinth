@@ -627,14 +627,7 @@ public class Manager implements Communication, Serializable {
 		case "json":
 			load = new DataAccessJSON();
 			this.players = (RingBufferPlayers) load.readFile(path);
-			Figure[] participants = new Figure[getPlayers().length];
-			for (int i = 0; i < participants.length; i++) {
-				participants[i] = this.players.nextPlayer();
-			}
-			this.gameboard.placeFigures(participants);
 			loader = "Game successfully loaded!";
-
-			break;
 		}
 
 		return loader;
