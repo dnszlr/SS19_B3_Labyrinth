@@ -10,7 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.CheckBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.FXMLController" xmlns="http://javafx.com/javafx/3.5" alignment="TOP_CENTER" styleClass="startPage" spacing="50.0">
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="Frontend.FXMLController" xmlns="http://javafx.com/javafx/3.5" alignment="TOP_CENTER" styleClass="startPage" spacing="35.0">
 		<children>
 			<Label styleClass="Header" fx:id="Header" text="Java:'Adventures in Info2'" alignment="CENTER" prefHeight="350.0"/>
 			<Button styleClass="FrontButton" fx:id="MazeButton" text="Enter the Maze" prefHeight="75.0" prefWidth="175.0" alignment="CENTER"  textAlignment="CENTER" onAction="#handleMazeButton"/>
@@ -34,7 +34,10 @@
 				<TextField promptText="Enter Player Name!" fx:id="BlueField" disable="true"/>
 			</VBox>
 		</HBox>
-		<HBox spacing="200.0" alignment="BOTTOM_CENTER" >
+		<HBox alignment="CENTER">
+			<Label fx:id="activePlayer" text="Click to register computer opponent" styleClass="Header" />
+		</HBox>
+		<HBox spacing="200.0" alignment="CENTER" >
 			<CheckBox fx:id="RedKI" alignment="CENTER"></CheckBox>
 			<CheckBox fx:id="YellowKI" alignment="CENTER"></CheckBox>
 			<CheckBox fx:id="GreenKI" alignment="CENTER"></CheckBox>

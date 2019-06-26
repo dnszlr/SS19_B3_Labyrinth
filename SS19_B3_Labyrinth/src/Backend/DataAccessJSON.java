@@ -58,9 +58,7 @@ public class DataAccessJSON implements DataAccess {
 				buffer.addFigure(temp);
 			}
 
-		} catch (
-
-		ParseException e) {
+		} catch (ParseException e) {
 			e.printStackTrace();
 		} finally {
 			parser.reset();
